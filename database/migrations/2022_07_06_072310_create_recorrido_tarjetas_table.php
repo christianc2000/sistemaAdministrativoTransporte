@@ -21,8 +21,8 @@ class CreateRecorridoTarjetasTable extends Migration
 
             $table->timestamps();
 
-            $table->integer('id_tarjeta')->unsigned();
-            $table->foreign('id_tarjeta')->on('tarjetas')->references('id')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_tarjeta');
+            $table->foreign('id_tarjeta')->on('tarjetas')->references('id');
         });
     }
 

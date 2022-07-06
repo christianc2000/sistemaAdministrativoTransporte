@@ -19,10 +19,10 @@ class CreateChoferMicrosTable extends Migration
             $table->date('fecha_baja');
             $table->timestamps();
 
-            $table->integer('id_chofer')->unsigned();
-            $table->integer('id_micro')->unsigned();
-            $table->foreign('id_chofer')->on('chofers')->references('id')->onUpdate('cascade');
-            $table->foreign('id_micro')->on('micros')->references('id')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_chofer');
+            $table->unsignedBigInteger('id_micro');
+            $table->foreign('id_chofer')->on('chofers')->references('id');
+            $table->foreign('id_micro')->on('micros')->references('id');
         });
     }
 

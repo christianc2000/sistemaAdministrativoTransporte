@@ -20,11 +20,11 @@ class CreateDuenioLineasTable extends Migration
             $table->date('fecha');
 
             $table->timestamps();
-            $table->integer('id_duenio')->unsigned();
-            $table->integer('id_linea')->unsigned();
+            $table->unsignedBigInteger('id_duenio');
+            $table->unsignedBigInteger('id_linea');
 
-            $table->foreign('id_duenio')->on('duenios')->references('id')->onUpdate('cascade');
-            $table->foreign('id_linea')->on('lineas')->references('id')->onUpdate('cascade');
+            $table->foreign('id_duenio')->on('duenios')->references('id');
+            $table->foreign('id_linea')->on('lineas')->references('id');
         });
     }
 

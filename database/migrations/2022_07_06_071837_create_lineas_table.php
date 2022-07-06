@@ -21,11 +21,11 @@ class CreateLineasTable extends Migration
 
             $table->timestamps();
 
-            $table->integer('id_institucion')->unsigned();
-            $table->integer('id_admin_institucion')->unsigned();
+            $table->unsignedBigInteger('id_institucion');
+            $table->unsignedBigInteger('id_admin_institucion');
 
-            $table->foreign('id_institucion')->on('institucions')->references('id')->onUpdate('cascade');
-            $table->foreign('id_admin_institucion')->on('administrador_institucions')->references('id')->onUpdate('cascade');
+            $table->foreign('id_institucion')->on('institucions')->references('id');
+            $table->foreign('id_admin_institucion')->on('administrador_institucions')->references('id');
         });
     }
 

@@ -20,8 +20,8 @@ class CreateInstitucionsTable extends Migration
             $table->integer('telefono');
             $table->timestamps();
 
-            $table->integer('id_administrador')->unsigned();
-            $table->foreign('id_administrador')->on('administradors')->references('id')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_administrador');
+            $table->foreign('id_administrador')->references('id')->on('administradors');
         });
     }
 

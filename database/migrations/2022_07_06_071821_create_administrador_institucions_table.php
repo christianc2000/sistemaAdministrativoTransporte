@@ -17,8 +17,8 @@ class CreateAdministradorInstitucionsTable extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->integer('id_institucion')->unsigned();
-            $table->foreign('id_institucion')->on('institucions')->references('id')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_institucion');
+            $table->foreign('id_institucion')->on('institucions')->references('id');
         });
     }
 

@@ -19,10 +19,10 @@ class CreatePermisoTarjetasTable extends Migration
             $table->integer('nro_interno');
             $table->timestamps();
 
-            $table->integer('id_chofer')->unsigned();
-            $table->integer('id_tarjeta')->unsigned();
-            $table->foreign('id_chofer')->on('chofers')->references('id')->onUpdate('cascade');
-            $table->foreign('id_tarjeta')->on('tarjetas')->references('id')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_chofer');
+            $table->unsignedBigInteger('id_tarjeta');
+            $table->foreign('id_chofer')->on('chofers')->references('id');
+            $table->foreign('id_tarjeta')->on('tarjetas')->references('id');
         });
     }
 

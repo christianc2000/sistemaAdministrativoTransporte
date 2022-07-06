@@ -18,10 +18,10 @@ class CreateChoferRequisitosTable extends Migration
             $table->boolean('presenta');
             $table->timestamps();
 
-            $table->integer('id_chofer')->unsigned();
-            $table->integer('id_requisito')->unsigned();
-            $table->foreign('id_chofer')->on('chofers')->references('id')->onUpdate('cascade');
-            $table->foreign('id_requisito')->on('requisitos')->references('id')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_chofer');
+            $table->unsignedBigInteger('id_requisito');
+            $table->foreign('id_chofer')->on('chofers')->references('id');
+            $table->foreign('id_requisito')->on('requisitos')->references('id');
         });
     }
 

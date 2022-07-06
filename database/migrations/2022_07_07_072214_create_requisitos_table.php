@@ -19,8 +19,8 @@ class CreateRequisitosTable extends Migration
 
             $table->timestamps();
 
-            $table->integer('id_linea')->unsigned();
-            $table->foreign('id_linea')->on('lineas')->references('id')->onUpdate('cascade');
+            $table->unsignedBigInteger('id_linea');
+            $table->foreign('id_linea')->on('lineas')->references('id');
         });
     }
 
