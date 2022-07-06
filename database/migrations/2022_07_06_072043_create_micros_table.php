@@ -24,6 +24,9 @@ class CreateMicrosTable extends Migration
             $table->integer('fecha_baja');
            
             $table->timestamps();
+            $table->integer('id_permiso_linea')->unsigned();
+
+            $table->foreign('id_permiso_linea')->on('permiso_lineas')->references('id')->onUpdate('cascade');
         });
     }
 

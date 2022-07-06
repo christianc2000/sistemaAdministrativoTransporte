@@ -20,6 +20,12 @@ class CreateLineasTable extends Migration
             $table->string('sede');
 
             $table->timestamps();
+
+            $table->integer('id_institucion')->unsigned();
+            $table->integer('id_admin_institucion')->unsigned();
+
+            $table->foreign('id_institucion')->on('institucions')->references('id')->onUpdate('cascade');
+            $table->foreign('id_admin_institucion')->on('administrador_institucions')->references('id')->onUpdate('cascade');
         });
     }
 

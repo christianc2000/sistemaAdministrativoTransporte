@@ -18,7 +18,11 @@ class CreateRecorridoTarjetasTable extends Migration
             $table->integer('nro_recorrido');
             $table->date('hora_partida');
             $table->date('hora_llegada');
+
             $table->timestamps();
+
+            $table->integer('id_tarjeta')->unsigned();
+            $table->foreign('id_tarjeta')->on('tarjetas')->references('id')->onUpdate('cascade');
         });
     }
 

@@ -17,6 +17,12 @@ class CreatePermisoLineasTable extends Migration
             $table->id();
             $table->boolean('activo');
             $table->timestamps();
+
+            $table->integer('id_linea')->unsigned();
+            $table->integer('id_duenio')->unsigned();
+
+            $table->foreign('id_linea')->on('lineas')->references('id')->onUpdate('cascade');
+            $table->foreign('id_duenio')->on('duenios')->references('id')->onUpdate('cascade');
         });
     }
 

@@ -16,7 +16,11 @@ class CreateRequisitosTable extends Migration
         Schema::create('requisitos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+
             $table->timestamps();
+
+            $table->integer('id_linea')->unsigned();
+            $table->foreign('id_linea')->on('lineas')->references('id')->onUpdate('cascade');
         });
     }
 

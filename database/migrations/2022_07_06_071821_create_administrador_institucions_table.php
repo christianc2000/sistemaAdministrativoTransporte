@@ -16,6 +16,9 @@ class CreateAdministradorInstitucionsTable extends Migration
         Schema::create('administrador_institucions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->integer('id_institucion')->unsigned();
+            $table->foreign('id_institucion')->on('institucions')->references('id')->onUpdate('cascade');
         });
     }
 

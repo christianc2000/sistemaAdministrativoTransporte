@@ -19,6 +19,9 @@ class CreateInstitucionsTable extends Migration
             $table->string('direccion');
             $table->integer('telefono');
             $table->timestamps();
+
+            $table->integer('id_administrador')->unsigned();
+            $table->foreign('id_administrador')->on('administradors')->references('id')->onUpdate('cascade');
         });
     }
 
