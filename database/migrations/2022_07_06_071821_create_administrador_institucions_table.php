@@ -14,11 +14,12 @@ class CreateAdministradorInstitucionsTable extends Migration
     public function up()
     {
         Schema::create('administrador_institucions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-
+            $table->unsignedBigInteger('user_id')->primary();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('id_institucion');
             $table->foreign('id_institucion')->on('institucions')->references('id');
+            $table->timestamps();
+
         });
     }
 

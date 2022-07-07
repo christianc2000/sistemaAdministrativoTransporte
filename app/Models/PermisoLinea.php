@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PermisoLinea extends Model
 {
     use HasFactory;
+    protected $guarded=['id','created_at','updated_at'];
     public function linea(){
-        return $this->belongsTo(Linea::class, 'id_linea');
+        return $this->belongsTo(Lineas::class, 'id_linea');
     }
 
     public function duenio(){

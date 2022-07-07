@@ -8,11 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class AdministradorInstitucion extends Model
 {
     use HasFactory;
-    public function institucion(){
+    protected $guarded = ['created_at', 'updated_at'];
+    public function institucion()
+    {
         return $this->belongsTo(Institucion::class, 'id_institucion');
     }
 
-    public function lineas(){
-        return $this->hasMany(Lineas::class, 'id');
+    public function lineas()
+    {
+        return $this->hasMany(Linea::class, 'id');
+    }
+    //relación inversa de 1 a 1
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

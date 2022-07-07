@@ -14,13 +14,10 @@ class CreateChofersTable extends Migration
     public function up()
     {
         Schema::create('chofers', function (Blueprint $table) {
-            $table->id();
-            $table->string('ci');
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->integer('telefono');
+            $table->unsignedBigInteger('user_id')->primary()->unique();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('direccion');
             $table->boolean('activo');
-           
             $table->timestamps();
         });
     }
