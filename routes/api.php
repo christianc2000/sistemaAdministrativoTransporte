@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ChoferController;
 use App\Http\Controllers\Api\DueniosController;
 use App\Http\Controllers\Api\InstitucionController;
 use App\Http\Controllers\Api\LineaController;
+use App\Http\Controllers\Api\MicroController;
 use App\Http\Controllers\Api\PermisoLineaController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -37,6 +38,7 @@ Route::apiResource('institucion',InstitucionController::class);
 Route::apiResource('users',UserController::class);
 Route::apiResource('duenio',DueniosController::class);
 Route::apiResource('permiso-linea',PermisoLineaController::class);
+Route::apiResource('micro',MicroController::class);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
