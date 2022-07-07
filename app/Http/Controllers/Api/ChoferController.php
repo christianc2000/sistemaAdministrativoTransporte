@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chofer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChoferController extends Controller
@@ -43,8 +44,9 @@ class ChoferController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'direccion'=>'required|string',
-            'activo' => 'required|boolean'
+            'direccion' => 'required|string',
+            'activo' => 'required|boolean',
+            'user_id' => 'required'
         ]);
         $chofer = Chofer::create($request->all());
         return response()->json([
@@ -63,10 +65,9 @@ class ChoferController extends Controller
     public function show($id)
     {
 
-        $chofer = Chofer::all()->find($id);
-       // $chofer = Chofer::FindOrFail($id);
-        //return $chofer;
-        if (isset($chofer)) {
+        $user = User::all()->find($id);
+        if (isset($user)) {
+            $chofer = Chofer::all()->where('user_id', $user->id)->first();
             return response()->json([
                 "status" => 1,
                 "msg" => "Chofer encontrado exitosamente!",
@@ -75,7 +76,7 @@ class ChoferController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo, chofer con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo, chofer con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }
@@ -101,12 +102,13 @@ class ChoferController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'direccion'=>'required|string',
+            'direccion' => 'required|string',
             'activo' => 'required|boolean',
+            'user_id' => 'required'
         ]);
-
-        $chofer = Chofer::all()->find($id);
-        if (isset($chofer)) {
+        $user = User::all()->find($id);
+        if (isset($user)) {
+            $chofer = Chofer::all()->where('user_id', $user->id)->first();
             $chofer->update($request->all());
             return response()->json([
                 "status" => 1,
@@ -116,7 +118,7 @@ class ChoferController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la actualización, chofer con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo en la actualización, chofer con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }
@@ -129,7 +131,7 @@ class ChoferController extends Controller
      */
     public function destroy($id)
     {
-        $chofer = Chofer::all()->find($id);
+        /*$chofer = Chofer::all()->find($id);
         if (isset($chofer)) {
             $chofer->delete();
             return response()->json([
@@ -140,8 +142,8 @@ class ChoferController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la eliminación, chofer con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo en la eliminación, chofer con id=" . $id . " no existe en la base de datos!",
             ], 404);
-        }
+        }*/
     }
 }

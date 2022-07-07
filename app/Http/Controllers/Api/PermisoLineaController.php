@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\PermisoLinea;
 use Illuminate\Http\Request;
 
 class PermisoLineaController extends Controller
@@ -14,7 +15,12 @@ class PermisoLineaController extends Controller
      */
     public function index()
     {
-        //
+        $permisos = PermisoLinea::all();
+        return response()->json([
+            'status' => 1,
+            'msg' => "Lista de Permisos registrados",
+            'data' => $permisos
+        ]);
     }
 
     /**
@@ -35,7 +41,17 @@ class PermisoLineaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'activo' => 'required|boolean',
+            'id_linea' => 'required|integer',
+            'id_duenio' => 'required|integer'
+        ]);
+        $permiso = PermisoLinea::create($request->all());
+        return response()->json([
+            "status" => 1,
+            "msg" => "Permiso registrado exitosamente!",
+            "data" => $permiso,
+        ]);
     }
 
     /**
@@ -46,7 +62,21 @@ class PermisoLineaController extends Controller
      */
     public function show($id)
     {
-        //
+        $permiso = PermisoLinea::all()->find($id);
+        // $chofer = Chofer::FindOrFail($id);
+        //return $chofer;
+        if (isset($permiso)) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Permiso encontrado exitosamente!",
+                "data" => $permiso,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo, permiso con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -69,7 +99,25 @@ class PermisoLineaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'activo' => 'required|boolean',
+            'id_linea' => 'required|integer',
+            'id_duenio' => 'required|integer'
+        ]);
+        $permiso = PermisoLinea::all()->find($id);
+        if (isset($permiso)) {
+            $permiso->update($request->all());
+            return response()->json([
+                "status" => 1,
+                "msg" => "Permiso actualizado exitosamente!",
+                "data" => $permiso,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la actualización, permiso con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -80,6 +128,19 @@ class PermisoLineaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $permiso = PermisoLinea::all()->find($id);
+        if (isset($permiso)) {
+            $permiso->delete();
+            return response()->json([
+                "status" => 1,
+                "msg" => "Permiso eliminado exitosamente!",
+                "data" => $permiso,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la eliminación, permiso con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 }

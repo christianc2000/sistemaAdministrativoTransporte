@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Micros;
 use Illuminate\Http\Request;
 
 class MicroController extends Controller
@@ -14,7 +15,12 @@ class MicroController extends Controller
      */
     public function index()
     {
-        //
+        $micros = Micros::all();
+        return response()->json([
+            'status' => 1,
+            'msg' => "Lista de Micros registrados",
+            'data' => $micros
+        ]);
     }
 
     /**
@@ -35,7 +41,22 @@ class MicroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nro_interno' => 'required|numeric',
+            'placa' => 'required|string',
+            'modelo' => 'required|string',
+            'cant_asiento' => 'required|numeric',
+            'foto.*'   =>  'image|mimes:jpg,jpeg,bmp,png|max:2048|nullable',
+            'fecha_asignacion' => 'required',
+            'fecha_baja' => 'required',
+            'id_permiso_linea' => 'required'
+        ]);
+        $micro = Micros::create($request->all());
+        return response()->json([
+            "status" => 1,
+            "msg" => "Micro registrado exitosamente!",
+            "data" => $micro,
+        ]);
     }
 
     /**

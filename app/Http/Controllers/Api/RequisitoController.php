@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Requisitos;
 use Illuminate\Http\Request;
 
 class RequisitoController extends Controller
@@ -14,7 +15,12 @@ class RequisitoController extends Controller
      */
     public function index()
     {
-        //
+        $requisitos = Requisitos::all();
+        return response()->json([
+            'status' => 1,
+            'msg' => "Lista de Requisitos registrados",
+            'data' => $requisitos
+        ]);
     }
 
     /**
@@ -35,7 +41,16 @@ class RequisitoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string',
+            'id_linea' => 'required|integer'
+        ]);
+        $requisito = Requisitos::create($request->all());
+        return response()->json([
+            "status" => 1,
+            "msg" => "Requisito registrado exitosamente!",
+            "data" => $requisito,
+        ]);
     }
 
     /**
@@ -46,7 +61,20 @@ class RequisitoController extends Controller
      */
     public function show($id)
     {
-        //
+        $requisito = Requisitos::all()->find($id);
+
+        if (isset($requisito)) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Requisito encontrado exitosamente!",
+                "data" => $requisito,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo, requisito con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -69,7 +97,24 @@ class RequisitoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string',
+            'id_linea' => 'required|integer'
+        ]);
+        $requisito = Requisitos::all()->find($id);
+        if (isset($requisito)) {
+            $requisito->update($request->all());
+            return response()->json([
+                "status" => 1,
+                "msg" => "Requisito actualizado exitosamente!",
+                "data" => $requisito,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la actualización, requisito con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -80,6 +125,19 @@ class RequisitoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $requisito = Requisitos::all()->find($id);
+        if (isset($requisito)) {
+            $requisito->delete();
+            return response()->json([
+                "status" => 1,
+                "msg" => "Requisito eliminado exitosamente!",
+                "data" => $requisito,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la eliminación, requisito con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 }

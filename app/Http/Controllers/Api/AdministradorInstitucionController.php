@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdministradorInstitucion;
 use Illuminate\Http\Request;
 
 class AdministradorInstitucionController extends Controller
@@ -14,7 +15,13 @@ class AdministradorInstitucionController extends Controller
      */
     public function index()
     {
-        //
+        $admIns = AdministradorInstitucion::all();
+        return response()->json([
+            'status' => 1,
+            'msg' => "Lista de administradores de Institucion registrados",
+            'data' => $admIns
+
+        ]);
     }
 
     /**

@@ -29,22 +29,22 @@ class DatabaseSeeder extends Seeder
         $this->call(ChoferRequisitoSeeder::class);
         $this->call(ChoferMicroSeeder::class);
         $this->call(TarjetaSeeder::class);
-        $this->call(RecorridoSeeder::class);
         $this->call(PermisoTarjetaSeeder::class);
+        $this->call(RecorridoTarjetaSeeder::class);
         /*   $this->call([AdministradorSeeder::class, 
-                    DuenioSeeder::class, 
-                    ChoferSeeder::class, 
-                    TarjetaSeeder::class,
-                    InstitucionSeeder::class,
-                    AdministradorInstitucionSeeder::class,
-                    LineaSeeder::class,
-                    DuenioLineaSeeder::class,
-                    PermisoLineaSeeder::class,
-                    MicroSeeder::class,
-                    ChoferMicroSeeder::class,
-                    PermisoTarjetaSeeder::class,
+                    DuenioSeeder::class, x
+                    ChoferSeeder::class, x
+                    TarjetaSeeder::class, x
+                    InstitucionSeeder::class, x
+                    AdministradorInstitucionSeeder::class, x
+                    LineaSeeder::class, x
+                    DuenioLineaSeeder::class, x
+                    PermisoLineaSeeder::class, x
+                    MicroSeeder::class, x
+                    ChoferMicroSeeder::class, x
+                    PermisoTarjetaSeeder::class, x
                     RecorridoTarjetaSeeder::class,
-                    RequisitoSeeder::class,
-                    ChoferRequisitoSeeder::class]);*/
+                    RequisitoSeeder::class, x
+                    ChoferRequisitoSeeder::class]); x*/
     }
 }

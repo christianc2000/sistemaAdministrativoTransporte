@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Administrador;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdministradorController extends Controller
@@ -42,14 +43,7 @@ class AdministradorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-        ]);
-        $admin = Administrador::create($request->all());
-        return response()->json([
-            "status" => 1,
-            "msg" => "Administrador registrado exitosamente!",
-            "data" => $admin,
-        ]);
+        
     }
 
     /**
@@ -83,7 +77,7 @@ class AdministradorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -94,6 +88,6 @@ class AdministradorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
