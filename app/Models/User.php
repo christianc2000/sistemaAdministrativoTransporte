@@ -20,13 +20,13 @@ class User extends Authenticatable
     protected $guarded=['id','created_at','updated_at'];
     //relación de herencia de uno a uno
     public function chofer(){
-       return $this->hasOne(Chofer::class,'id');
+       return $this->hasOne(Chofer::class);
     }
     public function administrador(){
-        return $this->hasOne(Administrador::class,'id');
+        return $this->hasOne(Administrador::class);
      }
      public function administradorInstitucion(){
-        return $this->hasOne(AdministradorInstitucion::class,'id');
+        return $this->hasOne(AdministradorInstitucion::class);
      }
     
 

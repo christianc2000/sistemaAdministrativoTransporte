@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AdministradorInstitucion extends Model
 {
     use HasFactory;
-    protected $guarded = ['created_at', 'updated_at'];
+    protected $guarded = ['id','created_at', 'updated_at'];
     public function institucion()
     {
         return $this->belongsTo(Institucion::class, 'id_institucion');
@@ -21,6 +21,6 @@ class AdministradorInstitucion extends Model
     //relación inversa de 1 a 1
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 }

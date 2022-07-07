@@ -14,7 +14,8 @@ class CreateChofersTable extends Migration
     public function up()
     {
         Schema::create('chofers', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->primary()->unique();
+            $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('direccion');
             $table->boolean('activo');

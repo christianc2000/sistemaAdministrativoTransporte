@@ -18,10 +18,9 @@ class CreateInstitucionsTable extends Migration
             $table->string('nombre');
             $table->string('direccion');
             $table->integer('telefono');
-            $table->timestamps();
-
             $table->unsignedBigInteger('id_administrador');
             $table->foreign('id_administrador')->references('id')->on('administradors');
+            $table->timestamps();
         });
     }
 

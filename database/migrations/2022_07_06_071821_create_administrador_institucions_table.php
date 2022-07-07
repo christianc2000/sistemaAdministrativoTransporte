@@ -14,7 +14,8 @@ class CreateAdministradorInstitucionsTable extends Migration
     public function up()
     {
         Schema::create('administrador_institucions', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->primary();
+            $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('id_institucion');
             $table->foreign('id_institucion')->on('institucions')->references('id');

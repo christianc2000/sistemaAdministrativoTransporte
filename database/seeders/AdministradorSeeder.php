@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Administrador;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AdministradorSeeder extends Seeder
 {

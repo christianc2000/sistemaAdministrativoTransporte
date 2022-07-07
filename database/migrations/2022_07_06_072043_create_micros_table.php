@@ -16,12 +16,12 @@ class CreateMicrosTable extends Migration
         Schema::create('micros', function (Blueprint $table) {
             $table->id();
             $table->integer('nro_interno');
-            $table->integer('placa');
-            $table->integer('modelo');
+            $table->string('placa');
+            $table->string('modelo');
             $table->integer('cant_asiento');
-            $table->integer('foto');
-            $table->integer('fecha_asignacion');
-            $table->integer('fecha_baja');
+            $table->string('foto');
+            $table->date('fecha_asignacion');
+            $table->date('fecha_baja')->nullable();
            
             $table->timestamps();
             $table->unsignedBigInteger('id_permiso_linea');

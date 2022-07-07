@@ -15,10 +15,36 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        $this->call(AdministradorSeeder::class);
-        $this->call(ChoferSeeder::class);
+        $this->call(UserSeeder::class); //user y administrador
         $this->call(InstitucionSeeder::class);
         $this->call(AdministradorInstitucionSeeder::class);
+        $this->call(ChoferSeeder::class);
         $this->call(LineasSeeder::class);
+        $this->call(RequisitoSeeder::class);
+        $this->call(DuenioSeeder::class);
+
+        $this->call(DuenioLineaSeeder::class);
+        $this->call(PermisoLineaSeeder::class);
+        $this->call(MicroSeeder::class);
+        $this->call(ChoferRequisitoSeeder::class);
+        $this->call(ChoferMicroSeeder::class);
+        $this->call(TarjetaSeeder::class);
+        $this->call(RecorridoSeeder::class);
+        $this->call(PermisoTarjetaSeeder::class);
+        /*   $this->call([AdministradorSeeder::class, 
+                    DuenioSeeder::class, 
+                    ChoferSeeder::class, 
+                    TarjetaSeeder::class,
+                    InstitucionSeeder::class,
+                    AdministradorInstitucionSeeder::class,
+                    LineaSeeder::class,
+                    DuenioLineaSeeder::class,
+                    PermisoLineaSeeder::class,
+                    MicroSeeder::class,
+                    ChoferMicroSeeder::class,
+                    PermisoTarjetaSeeder::class,
+                    RecorridoTarjetaSeeder::class,
+                    RequisitoSeeder::class,
+                    ChoferRequisitoSeeder::class]);*/
     }
 }

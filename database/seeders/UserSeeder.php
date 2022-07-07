@@ -17,12 +17,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $u=User::create(
+        //ADMINISTRADORES
+        $u = User::create(
             [
                 'ci' => '9821212',
                 'password' => bcrypt('12345678'),
-                'nombre' => 'christian',
-                'apellido' => 'mamani',
+                'nombre' => 'Christian',
+                'apellido' => 'Mamani',
                 'sexo' => 'M',
                 'fecha_nac' => '2000-01-04',
                 'telefono' => 77376902,
@@ -31,31 +32,94 @@ class UserSeeder extends Seeder
             ]
         );
         Administrador::create([
-            'user_id'=>$u->id
+            'user_id' => $u->id
         ]);
-        $u=User::create([
-            'ci' => '11123213',
+        $u = User::create(
+            [
+                'ci' => '32219232',
+                'password' => bcrypt('12345678'),
+                'nombre' => 'Cristian',
+                'apellido' => 'Nina',
+                'sexo' => 'M',
+                'fecha_nac' => '1999-02-23',
+                'telefono' => 74376902,
+                'email' => 'cris@gmail.com',
+                'tipo' => 'A',
+            ]
+        );
+        Administrador::create([
+            'user_id' => $u->id
+        ]);
+        $u = User::create(
+            [
+                'ci' => '2389542',
+                'password' => bcrypt('12345678'),
+                'nombre' => 'Junior',
+                'apellido' => 'Llanos',
+                'sexo' => 'M',
+                'fecha_nac' => '1998-11-24',
+                'telefono' => 76239823,
+                'email' => 'junior@gmail.com',
+                'tipo' => 'A',
+            ]
+        );
+        Administrador::create([
+            'user_id' => $u->id
+        ]);
+        $u = User::create(
+            [
+                'ci' => '4239542',
+                'password' => bcrypt('12345678'),
+                'nombre' => 'Rister',
+                'apellido' => 'rister',
+                'sexo' => 'M',
+                'fecha_nac' => '1999-09-03',
+                'telefono' => 76239832,
+                'email' => 'rister@gmail.com',
+                'tipo' => 'A',
+            ]
+        );
+        Administrador::create([
+            'user_id' => $u->id
+        ]);
+        //ADMINISTRADORES DE INSTITUCIÓN
+        $u = User::create([
+            'ci' => '87872333',
             'password' => bcrypt('12345678'),
             'nombre' => 'Madeleine',
             'apellido' => 'Vasquez',
             'sexo' => 'F',
-            'fecha_nac' => '2002-01-27',
+            'fecha_nac' => '2004-01-27',
             'telefono' => 77232232,
             'email' => 'made@gmail.com',
             'tipo' => 'I',
         ]);
-        AdministradorInstitucion::create($u->id);
-        $u=User::create([
-            'ci' => '3223232',
+        
+
+        $u = User::create([
+            'ci' => '1211233',
             'password' => bcrypt('12345678'),
-            'nombre' => 'Juan',
-            'apellido' => 'Ortiz',
+            'nombre' => 'Cesar',
+            'apellido' => 'Ortuño',
             'sexo' => 'M',
-            'fecha_nac' => '1990-05-04',
-            'telefono' => 74334223,
-            'email' => 'juan@gmail.com',
-            'tipo' => 'C',
+            'fecha_nac' => '1999-01-27',
+            'telefono' => 77223332,
+            'email' => 'cesar@gmail.com',
+            'tipo' => 'I',
         ]);
-        Chofer::create($u->id);
+        
+
+        $u = User::create([
+            'ci' => '81111233',
+            'password' => bcrypt('12345678'),
+            'nombre' => 'Ruben',
+            'apellido' => 'Suarez',
+            'sexo' => 'M',
+            'fecha_nac' => '1993-01-27',
+            'telefono' => 77362232,
+            'email' => 'ruben@gmail.com',
+            'tipo' => 'I',
+        ]);
+        
     }
 }

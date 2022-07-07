@@ -26,6 +26,6 @@ class Chofer extends Model
     //relación inversa de 1 a 1
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 }
