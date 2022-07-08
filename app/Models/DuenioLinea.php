@@ -9,4 +9,11 @@ class DuenioLinea extends Model
 {
     use HasFactory;
     protected $guarded=['id','created_at','updated_at'];
+
+    public function duenio(){
+      return $this->belongsTo(Duenio::class,'id_duenio');
+    }
+    public function linea(){
+        return $this->belongsTo(Lineas::class,'id_linea');
+    }
 }

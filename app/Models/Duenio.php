@@ -12,7 +12,7 @@ class Duenio extends Model
     public function permiso_lineas(){
         return $this->hasMany(PermisoLinea::class, 'id');
     }
-    public function lineas(){
-        return $this->belongsToMany(Lineas::class, 'duenio_lineas');
+    public function duenioLineas(){
+        return $this->hasMany(DuenioLinea::class, 'id');
     }
 }

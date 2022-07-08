@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ChoferMicro;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -56,6 +57,9 @@ class ChoferMicroSeeder extends Seeder
             'id_chofer' => 10,
             'id_micro' => 4] 
           ];
-          DB::table('chofer_micros')->insert($data);
+          foreach ($data as $d) {
+            ChoferMicro::create($d);
+          }
+         // DB::table('chofer_micros')->insert($data);
     }
 }

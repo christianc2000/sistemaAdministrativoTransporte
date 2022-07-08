@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PermisoLinea;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -46,6 +47,9 @@ class PermisoLineaSeeder extends Seeder
             'id_linea' => 10,
             'id_duenio' => 5]
           ];
-          DB::table('permiso_lineas')->insert($data);
+          foreach ($data as $d) {
+            PermisoLinea::create($d);
+        }
+          //DB::table('permiso_lineas')->insert($data);
     }
 }

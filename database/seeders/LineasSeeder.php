@@ -87,6 +87,9 @@ class LineasSeeder extends Seeder
                 'id_admin_institucion' => 3
             ]
         ];
-        DB::table('lineas')->insert($data);
+        foreach ($data as $d) {
+            Lineas::create($d);
+        }
+        //DB::table('lineas')->insert($data);
     }
 }

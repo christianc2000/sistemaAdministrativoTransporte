@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PermisoTarjetaController extends Controller
+class ChoferTarjetaController extends Controller
 {
     /**
      * Display a listing of the resource.

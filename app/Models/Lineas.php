@@ -21,11 +21,11 @@ class Lineas extends Model
         return $this->hasMany(Requisitos::class, 'id');
     }
 
-    public function permiso_lineas(){
+    public function permisoLineas(){
         return $this->hasMany(PermisoLinea::class, 'id');
     }
-
-    public function duenios(){
-        return $this->belongsToMany(Duenio::class, 'duenio_lineas');
+    
+    public function duenioLineas(){
+        return $this->hasMany(DuenioLinea::class, 'id');
     }
 }

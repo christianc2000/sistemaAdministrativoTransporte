@@ -13,7 +13,7 @@ class Requisitos extends Model
         return $this->belongsTo(Lineas::class, 'id_linea');
     }
 
-    public function chofers(){
-        return $this->belongsToMany(Chofer::class, 'chofer_requisitos');
+    public function choferRequisitos(){
+        return $this->hasMany(ChoferRequisitos::class, 'id');
     }
 }

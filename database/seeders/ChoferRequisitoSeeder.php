@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ChoferRequisitos;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -115,6 +116,9 @@ class ChoferRequisitoSeeder extends Seeder
             'id_chofer' => 3,
             'id_requisito' => 37]
           ];
-          DB::table('chofer_requisitos')->insert($data);
+          foreach ($data as $d) {
+              ChoferRequisitos::create($d);
+          }
+          //DB::table('chofer_requisitos')->insert($data);
     }
 }

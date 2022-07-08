@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RecorridoTarjeta;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -96,7 +97,10 @@ class RecorridoTarjetaSeeder extends Seeder
             'hora_llegada' => '2022/07/07 11:40',
             'id_tarjeta' => 10]
           ];
-          DB::table('recorrido_tarjetas')->insert($data);
+          foreach ($data as $d) {
+            RecorridoTarjeta::create($d);
+        }
+          //DB::table('recorrido_tarjetas')->insert($data);
   
     }
 }

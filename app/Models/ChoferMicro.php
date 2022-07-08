@@ -9,4 +9,11 @@ class ChoferMicro extends Model
 {
     use HasFactory;
     protected $guarded=['id','created_at','updated_at'];
+    //relación inversa de 1 a muchos
+    public function chofer(){
+        return $this->belongsTo(Chofer::class,'id_chofer');
+    }
+    public function micro(){
+        return $this->belongsTo(Micros::class,'id_micro');
+    }
 }

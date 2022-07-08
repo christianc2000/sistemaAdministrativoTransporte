@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DuenioLinea;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -84,6 +85,9 @@ class DuenioLineaSeeder extends Seeder
             'id_duenio' => 10,
             'id_linea' => 5]
           ];
-          DB::table('duenio_lineas')->insert($data);
+          foreach ($data as $d) {
+            DuenioLinea::create($d);
+          }
+          //DB::table('duenio_lineas')->insert($data);
     }
 }

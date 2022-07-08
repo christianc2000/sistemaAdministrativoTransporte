@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Tarjeta extends Model
 {
     use HasFactory;
-    protected $guarded=['id','created_at','updated_at'];
-    public function recorridos(){
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+    public function recorridoTarjetas()
+    {
         return $this->hasMany(RecorridoTarjeta::class, 'id');
     }
 
-    public function chofers(){
-        return $this->belongsToMany(Chofer::class, 'permiso_tarjetas');
+    public function choferTarjetas()
+    {
+        return $this->hasMany(ChoferTarjeta::class,'id');
     }
+    
 }

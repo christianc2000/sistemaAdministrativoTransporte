@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Requisitos;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -92,6 +93,9 @@ class RequisitoSeeder extends Seeder
 
             
           ];
-          DB::table('requisitos')->insert($data);
+          foreach ($data as $d) {
+            Requisitos::create($d);
+        }
+          //DB::table('requisitos')->insert($data);
     }
 }

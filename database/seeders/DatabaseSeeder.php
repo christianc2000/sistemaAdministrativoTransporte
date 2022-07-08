@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ChoferRequisitoSeeder::class);
         $this->call(ChoferMicroSeeder::class);
         $this->call(TarjetaSeeder::class);
-        $this->call(PermisoTarjetaSeeder::class);
+        //$this->call(PermisoTarjetaSeeder::class);
+        $this->call(ChoferTarjetaSeeder::class);
         $this->call(RecorridoTarjetaSeeder::class);
         /*   $this->call([AdministradorSeeder::class, 
                     DuenioSeeder::class, x

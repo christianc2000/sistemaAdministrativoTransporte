@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Duenio;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -107,6 +108,9 @@ class DuenioSeeder extends Seeder
                 'telefono' => 65913010
             ]
         ];
-        DB::table('duenios')->insert($data);
+        foreach ($data as $d) {
+            Duenio::create($d);
+        }
+        // DB::table('duenios')->insert($data);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePermisoTarjetasTable extends Migration
+class CreateChoferTarjetasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreatePermisoTarjetasTable extends Migration
      */
     public function up()
     {
-        Schema::create('permiso_tarjetas', function (Blueprint $table) {
+        Schema::create('chofer_tarjetas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
             $table->integer('nro_interno');
-            $table->timestamps();
-
             $table->unsignedBigInteger('id_chofer');
             $table->unsignedBigInteger('id_tarjeta');
             $table->foreign('id_chofer')->on('chofers')->references('id');
             $table->foreign('id_tarjeta')->on('tarjetas')->references('id');
+            $table->timestamps();
         });
     }
 
@@ -33,6 +32,6 @@ class CreatePermisoTarjetasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permiso_tarjetas');
+        Schema::dropIfExists('chofer_tarjetas');
     }
 }
