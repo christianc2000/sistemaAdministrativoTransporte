@@ -43,17 +43,7 @@ class ChoferController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'direccion' => 'required|string',
-            'activo' => 'required|boolean',
-            'user_id' => 'required'
-        ]);
-        $chofer = Chofer::create($request->all());
-        return response()->json([
-            "status" => 1,
-            "msg" => "Chofer registrado exitosamente!",
-            "data" => $chofer,
-        ]);
+        
     }
 
     /**
@@ -65,13 +55,12 @@ class ChoferController extends Controller
     public function show($id)
     {
 
-        $user = User::all()->find($id);
+        $chofer=Chofer::all()->find($id);
         if (isset($user)) {
-            $chofer = Chofer::all()->where('user_id', $user->id)->first();
             return response()->json([
                 "status" => 1,
                 "msg" => "Chofer encontrado exitosamente!",
-                "data" => $chofer,
+                "data" => $chofer . $chofer->user,
             ]);
         } else {
             return response()->json([
@@ -106,9 +95,8 @@ class ChoferController extends Controller
             'activo' => 'required|boolean',
             'user_id' => 'required'
         ]);
-        $user = User::all()->find($id);
+        $chofer=Chofer::all()->find($id);
         if (isset($user)) {
-            $chofer = Chofer::all()->where('user_id', $user->id)->first();
             $chofer->update($request->all());
             return response()->json([
                 "status" => 1,

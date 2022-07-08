@@ -9,6 +9,7 @@ use App\Models\Chofer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -58,6 +59,7 @@ class UserController extends Controller
             'tipo' => 'required|string|max:1', //A=Administrador, I=AdministradorInstitucion, C=Conductor
             'direccion' => 'string|nullable',
             'activo' => 'boolean|nullable',
+            'foto' =>  'mimes:jpg,jpeg,bmp,png|max:2048|nullable',
             'id_institucion' => 'integer|nullable'
 
         ]);
@@ -72,6 +74,12 @@ class UserController extends Controller
         $user->telefono = $request->telefono;
         $user->email = $request->email;
         $user->tipo = $request->tipo;
+        if ($request->hasFile('image')) {
+            $folder = "public/imagenes/perfil";
+            $imagen = $request->file('image')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
+            $url = Storage::url($imagen);
+            $user->foto = $url;
+        }
         $user->save();
         if ($request->tipo == "A" || $request->tipo == "I") {
 
@@ -171,6 +179,7 @@ class UserController extends Controller
             'telefono' => 'required|numeric',
             'email' => 'required|email',
             'tipo' => 'required|string|max:1', //A=Administrador, I=AdministradorInstitucion, C=Conductor
+            'foto' =>  'mimes:jpg,jpeg,bmp,png|max:2048|nullable',
         ]);
 
         $user = User::all()->find($id);

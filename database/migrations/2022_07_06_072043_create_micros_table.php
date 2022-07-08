@@ -22,11 +22,9 @@ class CreateMicrosTable extends Migration
             $table->string('foto')->nullable();
             $table->date('fecha_asignacion');
             $table->date('fecha_baja')->nullable();
-           
-            $table->timestamps();
             $table->unsignedBigInteger('id_permiso_linea');
-
             $table->foreign('id_permiso_linea')->on('permiso_lineas')->references('id');
+            $table->timestamps();
         });
     }
 

@@ -16,7 +16,7 @@ class CreateChoferMicrosTable extends Migration
         Schema::create('chofer_micros', function (Blueprint $table) {
             $table->id();
             $table->date('fecha_asig');
-            $table->date('fecha_baja');
+            $table->date('fecha_baja')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('id_chofer');
