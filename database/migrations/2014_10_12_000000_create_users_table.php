@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('fecha_nac');
             $table->integer('telefono');
             $table->string('email')->unique();
+            $table->string('foto')->nullable();
             $table->string('tipo',1); //A=Administrador,I=AdministradorInstitución,C=Chofer
             $table->timestamps();
         });
