@@ -91,13 +91,14 @@ class ChoferController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'direccion' => 'required|string',
+            'direccion' => 'nullable|string',
             'activo' => 'required|boolean',
-            'user_id' => 'required'
+            'user_id' => 'nullable'
         ]);
         $chofer=Chofer::all()->find($id);
-        if (isset($user)) {
+        if (isset($chofer)) {
             $chofer->update($request->all());
+            $chofer=Chofer::all()->find($chofer->id);
             return response()->json([
                 "status" => 1,
                 "msg" => "Chofer actualizado exitosamente!",

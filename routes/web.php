@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LineasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +21,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/linea',[LineasController::class,'index'])->name('linea.index');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

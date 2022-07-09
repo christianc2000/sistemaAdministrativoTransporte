@@ -4,12 +4,17 @@ use App\Http\Controllers\Api\AdministradorController;
 use App\Http\Controllers\Api\AdministradorInstitucionController;
 use App\Http\Controllers\Api\ChoferController;
 use App\Http\Controllers\Api\ChoferMicroController;
+use App\Http\Controllers\Api\ChoferRequisitoController;
 use App\Http\Controllers\Api\DueniosController;
 use App\Http\Controllers\Api\InstitucionController;
 use App\Http\Controllers\Api\LineaController;
 use App\Http\Controllers\Api\MicroController;
 use App\Http\Controllers\Api\PermisoLineaController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ChoferTarjetaController;
+use App\Http\Controllers\Api\DuenioLineaController;
+use App\Http\Controllers\Api\RecorridoTarjetaController;
+use App\Http\Controllers\Api\TarjetaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,11 +41,17 @@ Route::delete('chofer/{id}',[ChoferController::class,'destroy']);
 
 Route::apiResource('linea',LineaController::class);
 Route::apiResource('institucion',InstitucionController::class);
-Route::apiResource('users',UserController::class);
+Route::apiResource('user',UserController::class);
 Route::apiResource('duenio',DueniosController::class);
 Route::apiResource('permiso-linea',PermisoLineaController::class);
 Route::apiResource('micro',MicroController::class);
 Route::apiResource('chofer-micro',ChoferMicroController::class);
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::apiResource('chofer-requisito',ChoferRequisitoController::class);
+Route::apiResource('chofer-tarjeta',ChoferTarjetaController::class);
+Route::apiResource('duenio-linea',DuenioLineaController::class);
+Route::apiResource('tarjeta',TarjetaController::class);
+Route::apiResource('recorrido',RecorridoTarjetaController::class);
+
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/

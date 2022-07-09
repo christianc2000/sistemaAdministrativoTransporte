@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tarjeta;
 use Illuminate\Http\Request;
 
 class TarjetaController extends Controller
@@ -14,7 +15,12 @@ class TarjetaController extends Controller
      */
     public function index()
     {
-        //
+        $tarjetas = Tarjeta::all();
+        return response()->json([
+            'status' => 1,
+            'msg' => "Lista de Tarjetas registrados",
+            'data' => $tarjetas
+        ]);
     }
 
     /**
@@ -35,7 +41,15 @@ class TarjetaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            
+        ]);
+        $tarjeta = Tarjeta::create($request->all());
+        return response()->json([
+            "status" => 1,
+            "msg" => "Tarjeta registrado exitosamente!",
+            "data" => $tarjeta,
+        ]);
     }
 
     /**
@@ -46,7 +60,20 @@ class TarjetaController extends Controller
      */
     public function show($id)
     {
-        //
+        $tarjeta = Tarjeta::all()->find($id);
+
+        if (isset($tarjeta)) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Tarjeta encontrado exitosamente!",
+                "data" => $tarjeta,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo, tarjeta con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -80,6 +107,19 @@ class TarjetaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tarjeta = Tarjeta::all()->find($id);
+        if (isset($tarjeta)) {
+            $tarjeta->delete();
+            return response()->json([
+                "status" => 1,
+                "msg" => "Tarjeta eliminado exitosamente!",
+                "data" => $tarjeta,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la eliminación, tarjeta con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 }

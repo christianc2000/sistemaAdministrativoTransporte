@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChoferTarjeta;
 use Illuminate\Http\Request;
 
 class ChoferTarjetaController extends Controller
@@ -14,7 +15,12 @@ class ChoferTarjetaController extends Controller
      */
     public function index()
     {
-        //
+        $choferTarjetas = ChoferTarjeta::all();
+        return response()->json([
+            "status" => 1,
+            "msg" => "Lista de chofer-tarjeta",
+            "data" => $choferTarjetas
+        ]);
     }
 
     /**
@@ -35,7 +41,18 @@ class ChoferTarjetaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'fecha' => 'required|date',
+            'nro_interno' => 'required|integer',
+            'id_chofer' => 'required|integer',
+            'id_tarjeta' => 'required|integer'
+        ]);
+        $choferTarjeta = ChoferTarjeta::create($request->all());
+        return response()->json([
+            "status" => 1,
+            "msg" => "Chofer-tarjeta registrado exitosamente",
+            "data" => $choferTarjeta,
+        ]);
     }
 
     /**
@@ -46,7 +63,19 @@ class ChoferTarjetaController extends Controller
      */
     public function show($id)
     {
-        //
+        $choferTarjeta = ChoferTarjeta::all()->find($id);
+        if (isset($choferTarjeta)) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Chofer-tarjeta encontrado exitosamente",
+                "data" => $choferTarjeta
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo, chofer-tarjeta con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -69,7 +98,27 @@ class ChoferTarjetaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'fecha' => 'required|date',
+            'nro_interno' => 'required|integer',
+            'id_chofer' => 'nullable|integer',
+            'id_tarjeta' => 'nullable|integer'
+        ]);
+        $choferTarjeta = ChoferTarjeta::all()->find($id);
+
+        if (isset($choferTarjeta)) {
+            $choferTarjeta->update($request->all());
+            return response()->json([
+                "status" => 1,
+                "msg" => "Chofer-tarjeta actualizado exitosamente",
+                "data" => $choferTarjeta,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la actualización, chofer-tarjeta con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -80,6 +129,19 @@ class ChoferTarjetaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $choferTarjeta = ChoferTarjeta::all()->find($id);
+        if (isset($choferTarjeta)) {
+            $choferTarjeta->delete();
+            return response()->json([
+                "status" => 1,
+                "msg" => "Chofer-tarjeta eliminado exitosamente!",
+                "data" => $choferTarjeta,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la eliminación, chofer-tarjeta con id=".$id." no existe en la base de datos!",
+            ], 404);
+        }
     }
 }

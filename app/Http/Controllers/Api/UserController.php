@@ -63,7 +63,6 @@ class UserController extends Controller
             'id_institucion' => 'integer|nullable'
 
         ]);
-
         $user = new User();
         $user->ci = $request->ci;
         $user->password = Hash::make($request->password);
@@ -74,11 +73,14 @@ class UserController extends Controller
         $user->telefono = $request->telefono;
         $user->email = $request->email;
         $user->tipo = $request->tipo;
-        if ($request->hasFile('image')) {
-            $folder = "public/imagenes/perfil";
-            $imagen = $request->file('image')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
+        if ($request->hasFile('foto')) {
+
+            $folder = "public/perfil";
+            $imagen = $request->file('foto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
             $url = Storage::url($imagen);
             $user->foto = $url;
+        } else {
+            return "no entra";
         }
         $user->save();
         if ($request->tipo == "A" || $request->tipo == "I") {
@@ -193,6 +195,20 @@ class UserController extends Controller
             $user->telefono = $request->telefono;
             $user->email = $request->email;
             $user->tipo = $request->tipo;
+            
+    
+            if ($request->hasFile('foto')) {
+                $folder = "public/perfil";
+                if ($user->image != null) { //si entra es para actualizar su foto borrando la que tenía, si no tenía entonces no entra
+                  
+                    Storage::delete($user->foto);
+                }
+                $imagen = $request->file('foto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
+                $url = Storage::url($imagen);
+                $user->image = $url;
+            } else {
+                return "no entra";
+            }
             $user->save();
             return response()->json([
                 "status" => 1,

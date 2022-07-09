@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Duenio;
+use App\Models\DuenioLinea;
 use Illuminate\Http\Request;
 
 class DuenioLineaController extends Controller
@@ -15,7 +16,12 @@ class DuenioLineaController extends Controller
      */
     public function index()
     {
-        
+        $duenioLineas = DuenioLinea::all();
+        return response()->json([
+            "status" => 1,
+            "msg" => "Lista de dueño-líneas",
+            "data" => $duenioLineas
+        ]);
     }
 
     /**
@@ -36,7 +42,18 @@ class DuenioLineaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'aporte'=>'required',
+            'fecha'=>'required|date',
+            'id_duenio'=>'required|integer',
+            'id_linea'=>'required|integer',
+        ]);
+        $duenioLinea = DuenioLinea::create($request->all());
+        return response()->json([
+            "status" => 1,
+            "msg" => "Duenio-linea registrado exitosamente",
+            "data" => $duenioLinea,
+        ]);
     }
 
     /**
@@ -47,7 +64,19 @@ class DuenioLineaController extends Controller
      */
     public function show($id)
     {
-        //
+        $duenioLinea = DuenioLinea::all()->find($id);
+        if (isset($duenioLinea)) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Dueño-línea encontrado exitosamente",
+                "data" => $duenioLinea
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo, dueño-línea con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -70,7 +99,27 @@ class DuenioLineaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'aporte'=>'required',
+            'fecha'=>'required|date',
+            'id_duenio'=>'nullable|integer',
+            'id_linea'=>'nullable|integer'
+        ]);
+        $duenioLinea = DuenioLinea::all()->find($id);
+
+        if (isset($duenioLinea)) {
+            $duenioLinea->update($request->all());
+            return response()->json([
+                "status" => 1,
+                "msg" => "Dueño-línea actualizado exitosamente",
+                "data" => $duenioLinea,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la actualización, dueño-línea con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -81,6 +130,19 @@ class DuenioLineaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $duenioLinea = DuenioLinea::all()->find($id);
+        if (isset($duenioLinea)) {
+            $duenioLinea->delete();
+            return response()->json([
+                "status" => 1,
+                "msg" => "Dueño-línea eliminado exitosamente!",
+                "data" => $duenioLinea,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la eliminación, dueño-línea con id=".$id." no existe en la base de datos!",
+            ], 404);
+        }
     }
 }

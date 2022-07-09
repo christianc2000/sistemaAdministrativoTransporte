@@ -51,7 +51,7 @@ class ChoferMicroController extends Controller
         $choferMicro = ChoferMicro::create($request->all());
         return response()->json([
             "status" => 1,
-            "msg" => "Micro registrado exitosamente al chofer",
+            "msg" => "Chofer-micro registrado exitosamente",
             "data" => $choferMicro,
         ]);
     }
@@ -68,13 +68,13 @@ class ChoferMicroController extends Controller
         if (isset($choferMicro)) {
             return response()->json([
                 "status" => 1,
-                "msg" => "chofer del micro encontrado exitosamente",
+                "msg" => "Chofer-micro encontrado exitosamente",
                 "data" => $choferMicro
             ]);
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo, chofer y su micro con id=" . $id . " no existe en la base de datos!",
+                "msg" => "Fallo, chofer-micro con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }
@@ -116,13 +116,13 @@ class ChoferMicroController extends Controller
             $choferMicro->update($request->all());
             return response()->json([
                 "status" => 1,
-                "msg" => "Micro del chofer actualizado exitosamente",
+                "msg" => "Chofer-micro actualizado exitosamente",
                 "data" => $choferMicro,
             ]);
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la actualización, micro de chofer con id=" . $id . " no existe en la base de datos!",
+                "msg" => "Fallo en la actualización, chofer-micro con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }
@@ -140,13 +140,13 @@ class ChoferMicroController extends Controller
             $choferMicro->delete();
             return response()->json([
                 "status" => 1,
-                "msg" => "chofer eliminado del micro exitosamente!",
+                "msg" => "chofer-micro eliminado exitosamente!",
                 "data" => $choferMicro,
             ]);
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la eliminación, chofer micro con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo en la eliminación, chofer-micro con id=".$id." no existe en la base de datos!",
             ], 404);
         }
     }

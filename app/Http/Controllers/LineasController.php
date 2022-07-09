@@ -14,7 +14,9 @@ class LineasController extends Controller
      */
     public function index()
     {
-        //
+        $lineas=Lineas::all();
+        
+        return view('inicio.foto',compact('lineas'));
     }
 
     /**

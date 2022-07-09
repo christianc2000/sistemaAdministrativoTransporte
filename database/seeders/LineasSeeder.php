@@ -22,7 +22,7 @@ class LineasSeeder extends Seeder
                 'sede' => 'Av. Los Tajibos Calle Los Ceibos',
                 'id_institucion' => 1,
                 'id_admin_institucion' => 1,
-                'foto' => 'public/lineas/linea1.png',
+                'foto' => 'lineas/linea1.png',
             ],
             [
                 'nrolinea' => 2,
@@ -30,7 +30,7 @@ class LineasSeeder extends Seeder
                 'sede' => 'Av. Mariscal Santa Cruz paralela a la Calle 3 de Mayo',
                 'id_institucion' => 3,
                 'id_admin_institucion' => 2,
-                'foto' => 'public/lineas/linea2.png',
+                'foto' => 'lineas/linea2.png',
             ],
             [
                 'nrolinea' => 5,
@@ -38,7 +38,7 @@ class LineasSeeder extends Seeder
                 'sede' => 'Paralela a la Av. Radial 17 1/2 ',
                 'id_institucion' => 2,
                 'id_admin_institucion' => 3,
-                'foto' => 'public/lineas/linea5.png',
+                'foto' => 'lineas/linea5.png',
             ],
             [
                 'nrolinea' => 8,
@@ -46,7 +46,7 @@ class LineasSeeder extends Seeder
                 'sede' => '8vo Anillo Av. G77',
                 'id_institucion' => 3,
                 'id_admin_institucion' => 2,
-                'foto' => 'public/lineas/linea8.png',
+                'foto' => 'lineas/linea8.png',
             ],
             [
                 'nrolinea' => 9,
@@ -54,7 +54,7 @@ class LineasSeeder extends Seeder
                 'sede' => '4to Anillo sobre la Av. Busch y Calle 5',
                 'id_institucion' => 3,
                 'id_admin_institucion' => 2,
-                'foto' => 'public/lineas/linea9.png',
+                'foto' => 'lineas/linea9.png',
             ],
             [
                 'nrolinea' => 10,
@@ -62,7 +62,7 @@ class LineasSeeder extends Seeder
                 'sede' => 'Paralela a la Av. Radial 10 Calle Tristan Roca',
                 'id_institucion' => 2,
                 'id_admin_institucion' => 3,
-                'foto' => 'public/lineas/linea10.png',
+                'foto' => 'lineas/linea10.png',
             ],
             [
                 'nrolinea' => 11,
@@ -70,7 +70,7 @@ class LineasSeeder extends Seeder
                 'sede' => 'Plan 3000 Avenida Arroyito',
                 'id_institucion' => 1,
                 'id_admin_institucion' => 1,
-                'foto' => 'public/lineas/linea11.png',
+                'foto' => 'lineas/linea11.png',
             ],
             [
                 'nrolinea' => 16,
@@ -78,7 +78,7 @@ class LineasSeeder extends Seeder
                 'sede' => '5to Anillo Av. Radial 13 Calle Ameutaunao',
                 'id_institucion' => 2,
                 'id_admin_institucion' => 3,
-                'foto' => 'public/lineas/linea16.png',
+                'foto' => 'lineas/linea16.png',
             ],
             [
                 'nrolinea' => 17,
@@ -86,7 +86,7 @@ class LineasSeeder extends Seeder
                 'sede' => 'Avenida Viedma y Teniente Walter Vega',
                 'id_institucion' => 2,
                 'id_admin_institucion' => 3,
-                'foto' => 'public/lineas/linea17.png',
+                'foto' => 'lineas/linea17.png',
             ],
             [
                 'nrolinea' => 18,
@@ -94,7 +94,7 @@ class LineasSeeder extends Seeder
                 'sede' => 'Avenida Viedma y Teniente Walter Vega',
                 'id_institucion' => 2,
                 'id_admin_institucion' => 3,
-                'foto' => 'public/lineas/linea18.png',
+                'foto' => 'lineas/linea18.png',
             ]
         ];
         foreach ($data as $d) {
