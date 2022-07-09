@@ -21,7 +21,6 @@ class MicroSeeder extends Seeder
                 'placa' => 'QWS125',
                 'modelo' => 'Toyota 2018',
                 'cant_asiento' => 20,
-                'foto' => '.jpg',
                 'fecha_asignacion' => '2022/05/01',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 1
@@ -31,7 +30,6 @@ class MicroSeeder extends Seeder
                 'placa' => '123QZX',
                 'modelo' => 'Coaster',
                 'cant_asiento' => 22,
-                'foto' => '.png',
                 'fecha_asignacion' => '2022/05/04',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 2
@@ -41,7 +39,6 @@ class MicroSeeder extends Seeder
                 'placa' => 'WXS456',
                 'modelo' => 'Toyota 2016',
                 'cant_asiento' => 20,
-                'foto' => '.png',
                 'fecha_asignacion' => '2022/05/02',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 3
@@ -51,7 +48,6 @@ class MicroSeeder extends Seeder
                 'placa' => 'GFS154',
                 'modelo' => 'Toyota 2018',
                 'cant_asiento' => 20,
-                'foto' => '.jpg',
                 'fecha_asignacion' => '2022/05/01',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 4
@@ -61,7 +57,6 @@ class MicroSeeder extends Seeder
                 'placa' => 'TRS450',
                 'modelo' => 'Toyota 2020',
                 'cant_asiento' => 25,
-                'foto' => '.jpg',
                 'fecha_asignacion' => '2022/05/03',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 5
@@ -71,7 +66,6 @@ class MicroSeeder extends Seeder
                 'placa' => '664GHT',
                 'modelo' => 'Toyota',
                 'cant_asiento' => 22,
-                'foto' => '.png',
                 'fecha_asignacion' => '2022/05/02',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 6
@@ -81,7 +75,6 @@ class MicroSeeder extends Seeder
                 'placa' => '632-QWS',
                 'modelo' => 'Toyota 2018',
                 'cant_asiento' => 20,
-                'foto' => '.jpg',
                 'fecha_asignacion' => '2022/05/01',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 7
@@ -91,7 +84,6 @@ class MicroSeeder extends Seeder
                 'placa' => 'LSN216',
                 'modelo' => 'Toyota',
                 'cant_asiento' => 20,
-                'foto' => '.jpg',
                 'fecha_asignacion' => '2022/05/05',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 8
@@ -101,7 +93,6 @@ class MicroSeeder extends Seeder
                 'placa' => '5613hj',
                 'modelo' => 'Toyota Coaster',
                 'cant_asiento' => 18,
-                'foto' => '.jpg',
                 'fecha_asignacion' => '2022/05/06',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 9
@@ -111,7 +102,6 @@ class MicroSeeder extends Seeder
                 'placa' => 'dsg513',
                 'modelo' => 'Toyota Coaster',
                 'cant_asiento' => 20,
-                'foto' => '.jpg',
                 'fecha_asignacion' => '2022/05/01',
                 'fecha_baja' =>  '2023/12/12',
                 'id_permiso_linea' => 10

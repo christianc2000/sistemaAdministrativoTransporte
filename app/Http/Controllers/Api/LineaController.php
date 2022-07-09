@@ -133,6 +133,7 @@ class LineaController extends Controller
     {
         $linea = Lineas::all()->find($id);
         if (isset($linea)) {
+            $linea->delete();
             return response()->json([
                 "status" => 1,
                 "msg" => "Línea eliminado exitosamente!",

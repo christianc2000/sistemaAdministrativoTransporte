@@ -19,7 +19,6 @@ class CreateMicrosTable extends Migration
             $table->string('placa');
             $table->string('modelo');
             $table->integer('cant_asiento');
-            $table->string('foto')->nullable();
             $table->date('fecha_asignacion');
             $table->date('fecha_baja')->nullable();
             $table->unsignedBigInteger('id_permiso_linea');

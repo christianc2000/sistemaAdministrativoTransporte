@@ -46,11 +46,12 @@ class MicroController extends Controller
             'placa' => 'required|string',
             'modelo' => 'required|string',
             'cant_asiento' => 'required|numeric',
-            'foto.*'   =>  'image|mimes:jpg,jpeg,bmp,png|max:2048|nullable',
+            //'foto.*'   =>  'image|mimes:jpg,jpeg,bmp,png|max:2048|nullable',
             'fecha_asignacion' => 'required',
             'fecha_baja' => 'required',
             'id_permiso_linea' => 'required'
         ]);
+       
         $micro = Micros::create($request->all());
         return response()->json([
             "status" => 1,

@@ -64,14 +64,14 @@ class ChoferMicroController extends Controller
      */
     public function show($id)
     {
-        $choferMicro=ChoferMicro::all()->find($id);
-        if(isset($choferMicro)){
+        $choferMicro = ChoferMicro::all()->find($id);
+        if (isset($choferMicro)) {
             return response()->json([
-             "status"=>1,
-             "msg"=>"chofer del micro encontrado exitosamente",
-             "data"=>$choferMicro
+                "status" => 1,
+                "msg" => "chofer del micro encontrado exitosamente",
+                "data" => $choferMicro
             ]);
-        }else{
+        } else {
             return response()->json([
                 "status" => 0,
                 "msg" => "Fallo, chofer y su micro con id=" . $id . " no existe en la base de datos!",
@@ -100,28 +100,24 @@ class ChoferMicroController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'fecha_asig' => 'required|date',
+            'fecha_asig' => 'nullable|date',
             'fecha_baja' => 'date|nullable',
-            'id_chofer' => 'required|numeric',
-            'id_micro' => 'required|numeric',
+            'id_chofer' => 'nullable|numeric',
+            'id_micro' => 'nullable|numeric',
         ]);
         $choferMicro = ChoferMicro::all()->find($id);
+
         if (isset($choferMicro)) {
-            $choferMicro->update($request->all());
-            if ($choferMicro->fecha_baja!=null) {
-                $micro = $choferMicro->micro;
-                $permiso = PermisoLinea::all()->find($micro->permisoLinea->id);
-                return $permiso;
-                $permiso->activo = 0;
+            if (empty($choferMicro->fecha_baja)&&isset($request->fecha_baja)) {
+                $permiso = PermisoLinea::all()->find($choferMicro->micro->permisoLinea->id);
+                $permiso->activo = false; //colocar en inactivo el permiso cuando un chofer no lo ocupa;
                 $permiso->save();
-                $chofer=$choferMicro->chofer;
-                $chofer->activo=0;
-                $chofer->save();
             }
+            $choferMicro->update($request->all());
             return response()->json([
                 "status" => 1,
                 "msg" => "Micro del chofer actualizado exitosamente",
-                "data" => $choferMicro->micro->permisoLinea,
+                "data" => $choferMicro,
             ]);
         } else {
             return response()->json([
@@ -139,6 +135,19 @@ class ChoferMicroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $choferMicro = ChoferMicro::all()->find($id);
+        if (isset($choferMicro)) {
+            $choferMicro->delete();
+            return response()->json([
+                "status" => 1,
+                "msg" => "chofer eliminado del micro exitosamente!",
+                "data" => $choferMicro,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la eliminación, chofer micro con id=".$id." no existe en la base de datos!",
+            ], 404);
+        }
     }
 }

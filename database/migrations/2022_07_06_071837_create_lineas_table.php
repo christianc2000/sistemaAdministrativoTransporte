@@ -18,12 +18,10 @@ class CreateLineasTable extends Migration
             $table->integer('nrolinea');
             $table->integer('telefono');
             $table->string('sede');
-
-            $table->timestamps();
-
+            $table->string('foto')->nullable();
             $table->unsignedBigInteger('id_institucion');
             $table->unsignedBigInteger('id_admin_institucion');
-
+            $table->timestamps();
             $table->foreign('id_institucion')->on('institucions')->references('id');
             $table->foreign('id_admin_institucion')->on('administrador_institucions')->references('id');
         });
