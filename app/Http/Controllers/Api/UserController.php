@@ -202,10 +202,11 @@ class UserController extends Controller
     }
     public function profile()
     {
+        $user=User::all()->find(auth()->user()->id);
         return response()->json([
             "status" => 1,
             "msg" => "Acerca del perfil de usuario",
-            "data" => auth()->user()
+            "data" => $user
         ]);
     }
 

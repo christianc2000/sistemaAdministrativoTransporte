@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Chofer;
 use App\Models\ChoferRequisitos;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChoferRequisitoController extends Controller
@@ -16,12 +17,16 @@ class ChoferRequisitoController extends Controller
      */
     public function index()
     {
-        $choferRequisitos=ChoferRequisitos::all();
+        $user = auth()->user();
+        $user = User::all()->find($user->id);
+        $chofer = $user->chofer;
+        //if (isset($chofer)) {
         return response()->json([
             "status" => 1,
             "msg" => "Lista de chofer-requisitos",
-            "data" => $choferRequisitos
+            "data" => $chofer->choferRequisitos
         ]);
+        //} 
     }
 
     /**
@@ -43,11 +48,19 @@ class ChoferRequisitoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'presenta'=>'required|boolean',
-            'id_chofer'=>'required|integer',
-            'id_requisito'=>'required|integer',
+            'presenta' => 'required|boolean',
+            'id_requisito' => 'required|integer',
         ]);
-        $choferRequisito=ChoferRequisitos::create($request->all());
+        $user = auth()->user();
+        $user = User::all()->find($user->id);
+        $chofer = $user->chofer;
+
+        $choferRequisito = new ChoferRequisitos();
+        $choferRequisito->presenta = $request->presenta;
+        $choferRequisito->id_chofer = $chofer->id;
+        $choferRequisito->id_requisito = $request->id_requisito;
+        $choferRequisito->save();
+
         return response()->json([
             "status" => 1,
             "msg" => "Chofer-requisito registrado exitosamente",
@@ -99,14 +112,22 @@ class ChoferRequisitoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'presenta'=>'required|boolean',
-            'id_chofer'=>'nullable|integer',
-            'id_requisito'=>'nullable|integer',
+            'presenta' => 'required|boolean',
+
+            'id_requisito' => 'nullable|integer',
         ]);
         $choferRequisito = ChoferRequisitos::all()->find($id);
 
+        $user = auth()->user();
+        $user = User::all()->find($user->id);
+        $chofer = $user->chofer;
+
         if (isset($choferRequisito)) {
-            $choferRequisito->update($request->all());
+            $choferRequisito->presenta = $request->presenta;
+            $choferRequisito->id_chofer = $chofer->id;
+            $choferRequisito->id_requisito = $request->id_requisito;
+            $choferRequisito->save();
+            
             return response()->json([
                 "status" => 1,
                 "msg" => "Chofer-requisito actualizado exitosamente",
@@ -139,7 +160,7 @@ class ChoferRequisitoController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la eliminación, chofer-requisito con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo en la eliminación, chofer-requisito con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }

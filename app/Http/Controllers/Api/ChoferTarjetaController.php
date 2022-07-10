@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ChoferTarjeta;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChoferTarjetaController extends Controller
@@ -15,11 +16,13 @@ class ChoferTarjetaController extends Controller
      */
     public function index()
     {
-        $choferTarjetas = ChoferTarjeta::all();
+        $user = auth()->user();
+        $user = User::all()->find($user->id);
+        $chofer = $user->chofer;
         return response()->json([
             "status" => 1,
             "msg" => "Lista de chofer-tarjeta",
-            "data" => $choferTarjetas
+            "data" => $chofer->choferTarjetas
         ]);
     }
 
