@@ -28,10 +28,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('admin',[AdministradorController::class,'index']);
-Route::get('admin-institucion',[AdministradorInstitucionController::class,'index']);
-Route::get('chofer',[ChoferController::class,'index']);
-Route::put('chofer/{id}',[ChoferController::class,'update']);//id del usuario que tiene
+
+Route::get('admin', [AdministradorController::class, 'index']);
+Route::get('admin-institucion', [AdministradorInstitucionController::class, 'index']);
+Route::get('chofer', [ChoferController::class, 'index']);
+Route::put('chofer/{id}', [ChoferController::class, 'update']); //id del usuario que tiene
 /*Route::post('chofer',[ChoferController::class,'store']);
 Route::put('chofer/{id}',[ChoferController::class,'update']);
 Route::get('chofer/{id}',[ChoferController::class,'show']);
@@ -39,10 +40,17 @@ Route::delete('chofer/{id}',[ChoferController::class,'destroy']);
 */
 
 
-Route::apiResource('linea',LineaController::class);
-Route::apiResource('institucion',InstitucionController::class);
-Route::apiResource('user',UserController::class);
-Route::apiResource('duenio',DueniosController::class);
+
+//**********usuario */
+//Route::apiResource('user',UserController::class);
+
+Route::post('register', [UserController::class, 'register']);
+Route::post('login', [UserController::class, 'login']);
+Route::get('login', [UserController::class, 'loginget'])->name('api.v1.login');
+
+
+//***************** */
+/*Route::apiResource('duenio',DueniosController::class);
 Route::apiResource('permiso-linea',PermisoLineaController::class);
 Route::apiResource('micro',MicroController::class);
 Route::apiResource('chofer-micro',ChoferMicroController::class);
@@ -51,7 +59,24 @@ Route::apiResource('chofer-tarjeta',ChoferTarjetaController::class);
 Route::apiResource('duenio-linea',DuenioLineaController::class);
 Route::apiResource('tarjeta',TarjetaController::class);
 Route::apiResource('recorrido',RecorridoTarjetaController::class);
+*/
+Route::group(['middleware' => ["auth:sanctum"]], function () {
+    Route::get('profile', [UserController::class, 'profile']);
+    Route::put('editProfile', [UserController::class, 'profile']);
+    Route::get('logout', [UserController::class, 'logout']);
 
+    Route::apiResource('linea', LineaController::class);
+    Route::apiResource('institucion', InstitucionController::class);
+    Route::apiResource('duenio', DueniosController::class);
+    Route::apiResource('permiso-linea', PermisoLineaController::class);
+    Route::apiResource('micro', MicroController::class);
+    Route::apiResource('chofer-micro', ChoferMicroController::class);
+    Route::apiResource('chofer-requisito', ChoferRequisitoController::class);
+    Route::apiResource('chofer-tarjeta', ChoferTarjetaController::class);
+    Route::apiResource('duenio-linea', DuenioLineaController::class);
+    Route::apiResource('tarjeta', TarjetaController::class);
+    Route::apiResource('recorrido', RecorridoTarjetaController::class);
+});
 /*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });*/

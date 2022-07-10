@@ -8,6 +8,7 @@ use App\Models\AdministradorInstitucion;
 use App\Models\Chofer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,7 +46,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
             'ci' => 'required|unique:users',
@@ -83,6 +84,8 @@ class UserController extends Controller
             return "no entra";
         }
         $user->save();
+        $us = User::all()->find($user->id);
+        $token = $user->createToken("auth_token")->plainTextToken;
         if ($request->tipo == "A" || $request->tipo == "I") {
 
             if ($user->tipo == "A") {
@@ -95,6 +98,8 @@ class UserController extends Controller
                     "status" => 1,
                     "msg" => "Usuario Administrador global registrado exitosamente!",
                     "data" => $user,
+                    "access_token" => $token,
+                    "token_type" => "Bearer"
                 ]);
             } else {
                 AdministradorInstitucion::create([
@@ -105,6 +110,8 @@ class UserController extends Controller
                     "status" => 1,
                     "msg" => "Usuario Administrador de institución registrado exitosamente!",
                     "data" => $user,
+                    "access_token" => $token,
+                    "token_type" => "Bearer"
                 ]);
             }
         } else if ($request->tipo = "C") {
@@ -117,6 +124,8 @@ class UserController extends Controller
                 "status" => 1,
                 "msg" => "Usuario chofer registrado exitosamente!",
                 "data" => $user,
+                "access_token" => $token,
+                "token_type" => "Bearer"
             ]);
         } else {
             return response()->json([
@@ -150,7 +159,116 @@ class UserController extends Controller
             ], 404);
         }
     }
+    public function login(Request $request)
+    {
+        $request->validate([
+            'ci' => 'required|string',
+            'password' => 'required'
+        ]);
 
+        $user = User::where('ci', '=', $request->ci)->first();
+        if (isset($user->id)) {
+
+            if (Hash::check($request->password, $user->password)) {
+                //creamos el token
+                $token = $user->createToken("auth_token")->plainTextToken;
+                //si está todo ok
+                return response()->json([
+                    "status" => 1,
+                    "msg" => "¡Usuario logueado exitosamente!",
+                    "access_token" => $token,
+                    "token_type" => "Bearer",
+                    "data" => $user
+                ]);
+            } else {
+                return response()->json([
+                    "status" => 0,
+                    "msg" => "La password es incorrecta"
+                ], 404);
+            }
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Usuario no registrado"
+            ], 404);
+        }
+    }
+    public function loginget(Request $request)
+    {
+        return response()->json([
+            "status" => 0,
+            "msg" => "Necesita logguearse"
+        ]);
+    }
+    public function profile()
+    {
+        return response()->json([
+            "status" => 1,
+            "msg" => "Acerca del perfil de usuario",
+            "data" => auth()->user()
+        ]);
+    }
+
+    public function editProfile(Request $request)
+    {
+
+        $request->validate([
+            'ci' => 'required',
+            'password' => 'required|confirmed',
+            'nombre' => 'required|string|max:40',
+            'apellido' => 'required|string|max:40',
+            'sexo' => 'required|string|max:1',
+            'fecha_nac' => 'required|date',
+            'telefono' => 'required|numeric',
+            'email' => 'required|email',
+            'tipo' => 'required|string|max:1', //A=Administrador, I=AdministradorInstitucion, C=Conductor
+            'foto' =>  'mimes:jpg,jpeg,bmp,png|max:2048|nullable',
+        ]);
+
+        $u = Auth::user();
+        $user = User::all()->find($u->id);
+
+        $user->ci = $request->ci;
+        $user->password = Hash::make($request->password);
+        $user->nombre = $request->nombre;
+        $user->apellido = $request->apellido;
+        $user->sexo = $request->sexo;
+        $user->fecha_nac = $request->fecha_nac;
+        $user->telefono = $request->telefono;
+        $user->email = $request->email;
+        $user->tipo = $request->tipo;
+
+
+        if ($request->hasFile('foto')) {
+            $folder = "public/perfil";
+            if ($user->image != null) { //si entra es para actualizar su foto borrando la que tenía, si no tenía entonces no entra
+
+                Storage::delete($user->foto);
+            }
+            $imagen = $request->file('foto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
+            $url = Storage::url($imagen);
+            $user->image = $url;
+        } else {
+            return "no entra";
+        }
+        $user->save();
+        return response()->json([
+            "status" => 1,
+            "msg" => "Usuario actualizado exitosamente!",
+            "data" => $user,
+        ]);
+    }
+    public function logout()
+    {
+        $user = auth()->user();
+
+        auth()->user()->tokens()->delete();
+        return response()->json([
+            "status" => 1,
+            "msg" => "Cierre de Sesión",
+            "data" => $user
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -195,12 +313,12 @@ class UserController extends Controller
             $user->telefono = $request->telefono;
             $user->email = $request->email;
             $user->tipo = $request->tipo;
-            
-    
+
+
             if ($request->hasFile('foto')) {
                 $folder = "public/perfil";
                 if ($user->image != null) { //si entra es para actualizar su foto borrando la que tenía, si no tenía entonces no entra
-                  
+
                     Storage::delete($user->foto);
                 }
                 $imagen = $request->file('foto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
