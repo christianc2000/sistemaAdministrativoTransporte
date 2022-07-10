@@ -202,7 +202,7 @@ class UserController extends Controller
     }
     public function profile()
     {
-        $user=User::all()->find(auth()->user()->id);
+        $user = User::all()->find(auth()->user()->id);
         return response()->json([
             "status" => 1,
             "msg" => "Acerca del perfil de usuario",
@@ -224,6 +224,8 @@ class UserController extends Controller
             'email' => 'required|email',
             'tipo' => 'required|string|max:1', //A=Administrador, I=AdministradorInstitucion, C=Conductor
             'foto' =>  'mimes:jpg,jpeg,bmp,png|max:2048|nullable',
+            'direccion' => 'nullable|string',
+            'activo' => 'nullable|boolean'
         ]);
 
         $u = Auth::user();
@@ -249,14 +251,19 @@ class UserController extends Controller
             $imagen = $request->file('foto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
             $url = Storage::url($imagen);
             $user->image = $url;
-        } else {
-            return "no entra";
         }
         $user->save();
+        if ($user->tipo == "C") {
+            $chofer = Chofer::all()->find($user->chofer->id);
+            $chofer->direccion = $request->direccion;
+            $chofer->activo = $request->activo;
+            $chofer->save();
+        }
+
         return response()->json([
             "status" => 1,
             "msg" => "Usuario actualizado exitosamente!",
-            "data" => $user,
+            "data" => $user. $user->chofer,
         ]);
     }
     public function logout()

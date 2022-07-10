@@ -47,10 +47,20 @@ class ChoferTarjetaController extends Controller
         $request->validate([
             'fecha' => 'required|date',
             'nro_interno' => 'required|integer',
-            'id_chofer' => 'required|integer',
+
             'id_tarjeta' => 'required|integer'
         ]);
-        $choferTarjeta = ChoferTarjeta::create($request->all());
+        $user = auth()->user();
+        $user = User::all()->find($user->id);
+        $chofer = $user->chofer;
+
+        $choferTarjeta = new ChoferTarjeta();
+        $choferTarjeta->fecha = $request->fecha;
+        $choferTarjeta->nro_interno = $request->nro_interno;
+        $choferTarjeta->id_chofer = $chofer->id;
+        $choferTarjeta->id_tarjeta = $request->id_tarjeta;
+        $choferTarjeta->save();
+        
         return response()->json([
             "status" => 1,
             "msg" => "Chofer-tarjeta registrado exitosamente",
@@ -143,7 +153,7 @@ class ChoferTarjetaController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la eliminación, chofer-tarjeta con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo en la eliminación, chofer-tarjeta con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }

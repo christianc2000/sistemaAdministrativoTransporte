@@ -62,7 +62,7 @@ Route::apiResource('recorrido',RecorridoTarjetaController::class);
 */
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('profile', [UserController::class, 'profile']);
-    Route::put('editProfile', [UserController::class, 'profile']);
+    Route::put('editProfile', [UserController::class, 'editProfile']);
     Route::get('logout', [UserController::class, 'logout']);
 
     Route::apiResource('linea', LineaController::class);
