@@ -43,8 +43,8 @@ class PermisoLineaController extends Controller
     {
         $request->validate([
             'activo' => 'required|boolean',
-            'id_linea' => 'required|integer',
-            'id_duenio' => 'required|integer'
+            'linea_id' => 'required|integer',
+            'duenio_id' => 'required|integer'
         ]);
         $permiso = PermisoLinea::create($request->all());
         return response()->json([
@@ -101,8 +101,8 @@ class PermisoLineaController extends Controller
     {
         $request->validate([
             'activo' => 'required|boolean',
-            'id_linea' => 'required|integer',
-            'id_duenio' => 'required|integer'
+            'linea_id' => 'required|integer',
+            'duenio_id' => 'required|integer'
         ]);
         $permiso = PermisoLinea::all()->find($id);
         if (isset($permiso)) {

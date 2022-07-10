@@ -47,11 +47,11 @@ class MicroController extends Controller
             'modelo' => 'required|string',
             'cant_asiento' => 'required|numeric',
             //'foto.*'   =>  'image|mimes:jpg,jpeg,bmp,png|max:2048|nullable',
-            'fecha_asignacion' => 'required',
-            'fecha_baja' => 'required',
-            'id_permiso_linea' => 'required'
+            'fecha_asignacion' => 'nullable|date',
+            'fecha_baja' => 'nullable|date',
+            'permiso_linea_id' => 'required'
         ]);
-       
+
         $micro = Micros::create($request->all());
         return response()->json([
             "status" => 1,
@@ -68,7 +68,21 @@ class MicroController extends Controller
      */
     public function show($id)
     {
-        //
+        $micro = Micros::all()->find($id);
+        // $chofer = Chofer::FindOrFail($id);
+        //return $chofer;
+        if (isset($micro)) {
+            return response()->json([
+                "status" => 1,
+                "msg" => "Micro encontrado exitosamente!",
+                "data" => $micro,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo, micro con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -91,7 +105,31 @@ class MicroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nro_interno' => 'required|numeric',
+            'placa' => 'required|string',
+            'modelo' => 'required|string',
+            'cant_asiento' => 'required|numeric',
+            //'foto.*'   =>  'image|mimes:jpg,jpeg,bmp,png|max:2048|nullable',
+            'fecha_asignacion' => 'nullable|date',
+            'fecha_baja' => 'nullable|date',
+            'permiso_linea_id' => 'required|integer'
+        ]);
+
+        $micro = Micros::all()->find($id);
+        if (isset($micro)) {
+            $micro->update($request->all());
+            return response()->json([
+                "status" => 1,
+                "msg" => "Micro actualizado exitosamente!",
+                "data" => $micro,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la actualización, micro con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 
     /**
@@ -102,6 +140,19 @@ class MicroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $micro = Micros::all()->find($id);
+        if (isset($micro)) {
+            $micro->delete();
+            return response()->json([
+                "status" => 1,
+                "msg" => "Micro eliminado exitosamente!",
+                "data" => $micro,
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Fallo en la eliminación, micro con id=" . $id . " no existe en la base de datos!",
+            ], 404);
+        }
     }
 }

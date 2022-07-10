@@ -23,7 +23,7 @@ class AdministradorInstitucionSeeder extends Seeder
             AdministradorInstitucion::create(
                 [
                     'user_id' => $u->id,
-                    'id_institucion' => $i
+                    'institucion_id' => $i
                 ]
             );
             $i++;

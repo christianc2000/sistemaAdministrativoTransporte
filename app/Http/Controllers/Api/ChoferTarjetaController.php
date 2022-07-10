@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chofer;
 use App\Models\ChoferTarjeta;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,9 +17,9 @@ class ChoferTarjetaController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $user = User::all()->find($user->id);
-        $chofer = $user->chofer;
+
+        $user = User::all()->find(auth()->user()->id);
+        $chofer = Chofer::all()->find($user->chofer->id);
         return response()->json([
             "status" => 1,
             "msg" => "Lista de chofer-tarjeta",
@@ -48,7 +49,7 @@ class ChoferTarjetaController extends Controller
             'fecha' => 'required|date',
             'nro_interno' => 'required|integer',
 
-            'id_tarjeta' => 'required|integer'
+            'tarjeta_id' => 'required|integer'
         ]);
         $user = auth()->user();
         $user = User::all()->find($user->id);
@@ -57,10 +58,10 @@ class ChoferTarjetaController extends Controller
         $choferTarjeta = new ChoferTarjeta();
         $choferTarjeta->fecha = $request->fecha;
         $choferTarjeta->nro_interno = $request->nro_interno;
-        $choferTarjeta->id_chofer = $chofer->id;
-        $choferTarjeta->id_tarjeta = $request->id_tarjeta;
+        $choferTarjeta->chofer_id = $chofer->id;
+        $choferTarjeta->tarjeta_id = $request->tarjeta_id;
         $choferTarjeta->save();
-        
+
         return response()->json([
             "status" => 1,
             "msg" => "Chofer-tarjeta registrado exitosamente",
@@ -114,13 +115,23 @@ class ChoferTarjetaController extends Controller
         $request->validate([
             'fecha' => 'required|date',
             'nro_interno' => 'required|integer',
-            'id_chofer' => 'nullable|integer',
-            'id_tarjeta' => 'nullable|integer'
+            'tarjeta_id' => 'nullable|integer'
         ]);
+
         $choferTarjeta = ChoferTarjeta::all()->find($id);
 
+        $user = auth()->user();
+        $user = User::all()->find($user->id);
+        $chofer = $user->chofer;
+
         if (isset($choferTarjeta)) {
-            $choferTarjeta->update($request->all());
+
+            $choferTarjeta->fecha = $request->fecha;
+            $choferTarjeta->nro_interno = $request->nro_interno;
+            $choferTarjeta->chofer_id = $chofer->id;
+            $choferTarjeta->tarjeta_id = $request->tarjeta_id;
+            $choferTarjeta->save();
+
             return response()->json([
                 "status" => 1,
                 "msg" => "Chofer-tarjeta actualizado exitosamente",

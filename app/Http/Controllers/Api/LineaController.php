@@ -43,13 +43,13 @@ class LineaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nrolinea'=>'required|integer|unique:lineas',
-            'telefono'=>'required|integer',
-            'sede'=>'required|string', //lugar de la sede
-            'id_institucion'=>'required|integer',
-            'id_admin_institucion'=>'required|required',
+            'nrolinea' => 'required|integer|unique:lineas',
+            'telefono' => 'required|integer',
+            'sede' => 'required|string', //lugar de la sede
+            'institucion_id' => 'required|integer',
+            'administrador_institucion_id' => 'required|required',
         ]);
-        $linea=Lineas::create($request->all());
+        $linea = Lineas::create($request->all());
         return response()->json([
             "status" => 1,
             "msg" => "Línea registrado exitosamente!",
@@ -75,7 +75,7 @@ class LineaController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo, línea con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo, línea con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }
@@ -101,11 +101,11 @@ class LineaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nrolinea'=>'required|integer',
-            'telefono'=>'required|integer',
-            'sede'=>'required|string', //lugar de la sede
-            'id_institucion'=>'required|integer',
-            'id_admin_institucion'=>'required|integer',
+            'nrolinea' => 'required|integer',
+            'telefono' => 'required|integer',
+            'sede' => 'required|string', //lugar de la sede
+            'institucion_id' => 'required|integer',
+            'administrador_institucion_id' => 'required|required',
         ]);
         $linea = Lineas::all()->find($id);
         if (isset($linea)) {
@@ -118,7 +118,7 @@ class LineaController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la actualización, línea con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo en la actualización, línea con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }
@@ -142,7 +142,7 @@ class LineaController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la eliminación, línea con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo en la eliminación, línea con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }

@@ -16,10 +16,9 @@ class CreateChoferRequisitosTable extends Migration
         Schema::create('chofer_requisitos', function (Blueprint $table) {
             $table->id();
             $table->boolean('presenta');
-            $table->unsignedBigInteger('id_chofer');
-            $table->unsignedBigInteger('id_requisito');
-            $table->foreign('id_chofer')->on('chofers')->references('id');
-            $table->foreign('id_requisito')->on('requisitos')->references('id');
+            
+            $table->foreignId('chofer_id')->references('id')->on('chofers');
+            $table->foreignId('requisito_id')->references('id')->on('requisitos');
             $table->timestamps();
 
         });

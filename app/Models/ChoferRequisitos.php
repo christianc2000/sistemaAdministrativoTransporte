@@ -12,9 +12,9 @@ class ChoferRequisitos extends Model
 
     //relación inversa de 1 a muchos
     public function chofer(){
-        return $this->belongsTo(Chofer::class,'id_chofer');
+        return $this->belongsTo(Chofer::class);
     }
     public function requisito(){
-        return $this->belongsTo(Requisitos::class,'id_requisito');
+        return $this->belongsTo(Requisitos::class);
     }
 }

@@ -11,12 +11,12 @@ class AdministradorInstitucion extends Model
     protected $guarded = ['id','created_at', 'updated_at'];
     public function institucion()
     {
-        return $this->belongsTo(Institucion::class, 'id_institucion');
+        return $this->belongsTo(Institucion::class);
     }
 
     public function lineas()
     {
-        return $this->hasMany(Linea::class, 'id');
+        return $this->hasMany(Linea::class);
     }
     //relación inversa de 1 a 1
     public function user()

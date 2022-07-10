@@ -17,10 +17,9 @@ class CreateChoferTarjetasTable extends Migration
             $table->id();
             $table->date('fecha');
             $table->integer('nro_interno');
-            $table->unsignedBigInteger('id_chofer');
-            $table->unsignedBigInteger('id_tarjeta');
-            $table->foreign('id_chofer')->on('chofers')->references('id');
-            $table->foreign('id_tarjeta')->on('tarjetas')->references('id');
+
+            $table->foreignId('chofer_id')->references('id')->on('chofers');
+            $table->foreignId('tarjeta_id')->references('id')->on('tarjetas');
             $table->timestamps();
         });
     }

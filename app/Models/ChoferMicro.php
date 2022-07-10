@@ -11,9 +11,9 @@ class ChoferMicro extends Model
     protected $guarded=['id','created_at','updated_at'];
     //relación inversa de 1 a muchos
     public function chofer(){
-        return $this->belongsTo(Chofer::class,'id_chofer');
+        return $this->belongsTo(Chofer::class);
     }
     public function micro(){
-        return $this->belongsTo(Micros::class,'id_micro');
+        return $this->belongsTo(Micros::class);
     }
 }

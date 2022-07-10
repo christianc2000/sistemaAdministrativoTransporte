@@ -17,12 +17,12 @@ class CreateChoferMicrosTable extends Migration
             $table->id();
             $table->date('fecha_asig');
             $table->date('fecha_baja')->nullable();
+
+            $table->foreignId('chofer_id')->references('id')->on('chofers');
+            $table->foreignId('micro_id')->references('id')->on('micros');
+
             $table->timestamps();
 
-            $table->unsignedBigInteger('id_chofer');
-            $table->unsignedBigInteger('id_micro');
-            $table->foreign('id_chofer')->on('chofers')->references('id');
-            $table->foreign('id_micro')->on('micros')->references('id');
         });
     }
 

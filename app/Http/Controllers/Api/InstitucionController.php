@@ -46,7 +46,7 @@ class InstitucionController extends Controller
             'nombre' => 'required|string|max:40',
             'direccion' => 'required|string|max:30',
             'telefono' => 'required|numeric',
-            'id_administrador' => 'required|integer'
+            'administrador_id' => 'required|integer'
         ]);
         $institucion = Institucion::create($request->all());
         return response()->json([
@@ -103,7 +103,7 @@ class InstitucionController extends Controller
             'nombre' => 'required|string|max:40',
             'direccion' => 'required|string|max:30',
             'telefono' => 'required|numeric',
-            'id_administrador' => 'required|integer'
+            'administrador_id' => 'required|integer'
         ]);
         $institucion = Institucion::all()->find($id);
         if (isset($institucion)) {

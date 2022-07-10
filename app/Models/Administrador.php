@@ -11,7 +11,7 @@ class Administrador extends Model
     protected $guarded = ['id','created_at', 'updated_at'];
     public function institucion()
     {
-        return $this->hasMany(Institucion::class, 'id');
+        return $this->hasMany(Institucion::class);
     }
     //relación inversa de 1 a 1
     public function user()

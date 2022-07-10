@@ -16,13 +16,11 @@ class CreatePermisoLineasTable extends Migration
         Schema::create('permiso_lineas', function (Blueprint $table) {
             $table->id();
             $table->boolean('activo');
+            
+            $table->foreignId('linea_id')->references('id')->on('lineas');
+            $table->foreignId('duenio_id')->references('id')->on('duenios');
+
             $table->timestamps();
-
-            $table->unsignedBigInteger('id_linea');
-            $table->unsignedBigInteger('id_duenio');
-
-            $table->foreign('id_linea')->on('lineas')->references('id');
-            $table->foreign('id_duenio')->on('duenios')->references('id');
         });
     }
 
