@@ -17,8 +17,7 @@ class ChoferController extends Controller
     public function index()
     {
         $user=auth()->user();
-        return $user;
-        $chofer=Chofer::all()->find($user->chofers->id);
+        $chofer=Chofer::all()->find($user->chofer->id);
         return response()->json([
             'status' => 1,
             'msg' => "datos chofer",
