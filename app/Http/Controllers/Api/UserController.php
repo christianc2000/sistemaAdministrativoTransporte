@@ -255,15 +255,18 @@ class UserController extends Controller
         $user->save();
         if ($user->tipo == "C") {
             $chofer = Chofer::all()->find($user->chofer->id);
+           
             $chofer->direccion = $request->direccion;
             $chofer->activo = $request->activo;
+            
             $chofer->save();
         }
 
         return response()->json([
             "status" => 1,
             "msg" => "Usuario actualizado exitosamente!",
-            "data" => $user. $user->chofer,
+            "data" => $user,
+            "chofer" => Chofer::all()->find($user->chofer->id)
         ]);
     }
     public function logout()
