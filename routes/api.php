@@ -44,10 +44,10 @@ Route::delete('chofer/{id}',[ChoferController::class,'destroy']);
 //**********usuario */
 //Route::apiResource('user',UserController::class);
 
-Route::post('register', [UserController::class, 'register']);
+Route::post('register', [UserController::class, 'register'])->name('api.v1.register');
 Route::post('login', [UserController::class, 'login']);
 Route::get('login', [UserController::class, 'loginget'])->name('api.v1.login');
-
+Route::get('user-all',[UserController::class,'index'])->name('api.v1.user');;
 
 //***************** */
 /*Route::apiResource('duenio',DueniosController::class);
