@@ -16,11 +16,13 @@ class ChoferController extends Controller
      */
     public function index()
     {
-        $chofers = Chofer::all();
+        $user=auth()->user();
+        return $user;
+        $chofer=Chofer::all()->find($user->chofers->id);
         return response()->json([
             'status' => 1,
-            'msg' => "Lista de Choferes registrados",
-            'data' => $chofers
+            'msg' => "datos chofer",
+            'data' => $chofer
 
         ]);
     }

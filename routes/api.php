@@ -64,7 +64,10 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('profile', [UserController::class, 'profile']);
     Route::put('editProfile', [UserController::class, 'editProfile']);
     Route::get('logout', [UserController::class, 'logout']);
-
+    Route::get('admin', [AdministradorController::class, 'index']);
+    Route::get('admin-institucion', [AdministradorInstitucionController::class, 'index']);
+    Route::get('chofer', [ChoferController::class, 'index']);
+    Route::put('chofer/{id}', [ChoferController::class, 'update']); //id del usuario que tiene
     Route::apiResource('linea', LineaController::class);
     Route::apiResource('institucion', InstitucionController::class);
     Route::apiResource('duenio', DueniosController::class);

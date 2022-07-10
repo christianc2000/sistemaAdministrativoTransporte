@@ -206,7 +206,7 @@ class UserController extends Controller
         return response()->json([
             "status" => 1,
             "msg" => "Acerca del perfil de usuario",
-            "data" => $user
+            "data" => $user,
         ]);
     }
 
