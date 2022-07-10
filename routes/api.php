@@ -49,17 +49,6 @@ Route::post('login', [UserController::class, 'login']);
 Route::get('login', [UserController::class, 'loginget'])->name('api.v1.login');
 Route::get('user-all',[UserController::class,'index'])->name('api.v1.user');;
 
-//***************** */
-/*Route::apiResource('duenio',DueniosController::class);
-Route::apiResource('permiso-linea',PermisoLineaController::class);
-Route::apiResource('micro',MicroController::class);
-Route::apiResource('chofer-micro',ChoferMicroController::class);
-Route::apiResource('chofer-requisito',ChoferRequisitoController::class);
-Route::apiResource('chofer-tarjeta',ChoferTarjetaController::class);
-Route::apiResource('duenio-linea',DuenioLineaController::class);
-Route::apiResource('tarjeta',TarjetaController::class);
-Route::apiResource('recorrido',RecorridoTarjetaController::class);
-*/
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('profile', [UserController::class, 'profile']);
     Route::put('editProfile', [UserController::class, 'editProfile']);

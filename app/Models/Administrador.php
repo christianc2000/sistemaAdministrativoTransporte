@@ -9,7 +9,7 @@ class Administrador extends Model
 {
     use HasFactory;
     protected $guarded = ['id','created_at', 'updated_at'];
-    public function institucion()
+    public function institucions()
     {
         return $this->hasMany(Institucion::class);
     }

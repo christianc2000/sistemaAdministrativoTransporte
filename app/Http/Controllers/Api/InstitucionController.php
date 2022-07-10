@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Institucion;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InstitucionController extends Controller
@@ -15,11 +16,13 @@ class InstitucionController extends Controller
      */
     public function index()
     {
-        $institucions = Institucion::all();
+        $user = User::all()->find(auth()->user()->id);
+        $admin = $user->administrador;
+
         return response()->json([
             'status' => 1,
             'msg' => "Lista de Instituciones registrados",
-            'data' => $institucions
+            'data' => $admin->institucions
 
         ]);
     }
@@ -46,9 +49,16 @@ class InstitucionController extends Controller
             'nombre' => 'required|string|max:40',
             'direccion' => 'required|string|max:30',
             'telefono' => 'required|numeric',
-            'administrador_id' => 'required|integer'
         ]);
-        $institucion = Institucion::create($request->all());
+        $user = User::all()->find(auth()->user()->id);
+        $admin = $user->administrador;
+
+        $institucion = new Institucion();
+        $institucion->nombre = $request->nombre;
+        $institucion->direccion = $request->direccion;
+        $institucion->telefono = $request->telefono;
+        $institucion->administrador_id = $admin->id;
+        $institucion->save();
         return response()->json([
             "status" => 1,
             "msg" => "Institucion registrada exitosamente!",
@@ -74,7 +84,7 @@ class InstitucionController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo, institución con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo, institución con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }
@@ -103,11 +113,14 @@ class InstitucionController extends Controller
             'nombre' => 'required|string|max:40',
             'direccion' => 'required|string|max:30',
             'telefono' => 'required|numeric',
-            'administrador_id' => 'required|integer'
         ]);
+
         $institucion = Institucion::all()->find($id);
         if (isset($institucion)) {
-            $institucion->update($request->all());
+            $institucion->nombre = $request->nombre;
+            $institucion->direccion = $request->direccion;
+            $institucion->telefono = $request->telefono;
+            $institucion->save();
             return response()->json([
                 "status" => 1,
                 "msg" => "Institución actualizada exitosamente!",
@@ -116,7 +129,7 @@ class InstitucionController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la actualización, institución con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo en la actualización, institución con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }
@@ -140,7 +153,7 @@ class InstitucionController extends Controller
         } else {
             return response()->json([
                 "status" => 0,
-                "msg" => "Fallo en la actualización, institución con id=".$id." no existe en la base de datos!",
+                "msg" => "Fallo en la actualización, institución con id=" . $id . " no existe en la base de datos!",
             ], 404);
         }
     }
