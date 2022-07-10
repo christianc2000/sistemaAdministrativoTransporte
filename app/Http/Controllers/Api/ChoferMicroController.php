@@ -114,7 +114,7 @@ class ChoferMicroController extends Controller
         $request->validate([
             'fecha_asig' => 'nullable|date',
             'fecha_baja' => 'date|nullable',
-            'id_micro' => 'nullable|numeric',
+            'micro_id' => 'nullable|numeric',
         ]);
         $choferMicro = ChoferMicro::all()->find($id);
 
