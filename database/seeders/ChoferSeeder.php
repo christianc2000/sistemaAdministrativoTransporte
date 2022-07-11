@@ -26,6 +26,7 @@ class ChoferSeeder extends Seeder
                 'telefono' => 77214590,
                 'email' => 'pedroa@gmail.com',
                 'tipo' => 'C',
+                'foto' => 'chofer\chofer1.png'
             ],
             [
                 'ci' => '11343562',

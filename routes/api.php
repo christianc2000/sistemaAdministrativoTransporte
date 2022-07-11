@@ -47,7 +47,7 @@ Route::delete('chofer/{id}',[ChoferController::class,'destroy']);
 Route::post('register', [UserController::class, 'register'])->name('api.v1.register');
 Route::post('login', [UserController::class, 'login']);
 Route::get('login', [UserController::class, 'loginget'])->name('api.v1.login');
-Route::get('user-all',[UserController::class,'index'])->name('api.v1.user');;
+Route::get('user-all', [UserController::class, 'index'])->name('api.v1.user');;
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('profile', [UserController::class, 'profile']);
@@ -57,6 +57,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('admin-institucion', [AdministradorInstitucionController::class, 'index']);
     Route::get('chofer', [ChoferController::class, 'index']);
     Route::put('chofer/{id}', [ChoferController::class, 'update']); //id del usuario que tiene
+    Route::get('chofer-micros', [ChoferController::class, 'choferMicros']);
+
     Route::apiResource('linea', LineaController::class);
     Route::apiResource('institucion', InstitucionController::class);
     Route::apiResource('duenio', DueniosController::class);

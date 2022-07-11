@@ -18,7 +18,8 @@
 <body>
     <div class="card">
         <div class="card-body">
-            @foreach ($lineas as $l)
+            @foreach ($chofer as $l)
+            {{$l->id}}
                 <img src={{$l->foto}} alt="">
             @endforeach
         </div>

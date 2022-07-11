@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lineas;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LineasController extends Controller
@@ -14,9 +15,8 @@ class LineasController extends Controller
      */
     public function index()
     {
-        $lineas=Lineas::all();
-        
-        return view('inicio.foto',compact('lineas'));
+        /*$chofer=User::all()->where('tipo','C');
+        return view('inicio.foto',compact('chofer'));*/
     }
 
     /**
