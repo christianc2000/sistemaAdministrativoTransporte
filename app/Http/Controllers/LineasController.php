@@ -15,8 +15,8 @@ class LineasController extends Controller
      */
     public function index()
     {
-        /*$chofer=User::all()->where('tipo','C');
-        return view('inicio.foto',compact('chofer'));*/
+        $chofer=User::all()->where('tipo','C');
+        return view('inicio.foto',compact('chofer'));
     }
 
     /**
