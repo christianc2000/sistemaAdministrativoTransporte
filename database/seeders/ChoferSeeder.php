@@ -133,7 +133,8 @@ class ChoferSeeder extends Seeder
             Chofer::create([
                 'user_id' => $u->id,
                 'direccion' => 'sin direccion',
-                'activo' => 1
+                'activo' => 1,
+                'categoria_licencia'=>'C'
             ]);
         }
     }

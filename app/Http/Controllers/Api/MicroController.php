@@ -79,7 +79,6 @@ class MicroController extends Controller
                 "status" => 1,
                 "msg" => "Micro encontrado exitosamente!",
                 "data" => $micro,
-                "foto" => "http://ec2-18-228-190-183.sa-east-1.compute.amazonaws.com/".$linea->foto
             ]);
         } else {
             return response()->json([
