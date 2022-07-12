@@ -19,7 +19,9 @@ class ChoferRequisitoController extends Controller
     {
         $user = auth()->user();
         $user = User::all()->find($user->id);
-        $chofer = $user->chofer;
+
+        $chofer = Chofer::all()->find($user->chofer->id);
+        
         //if (isset($chofer)) {
         return response()->json([
             "status" => 1,
@@ -49,7 +51,7 @@ class ChoferRequisitoController extends Controller
     {
         $request->validate([
             'presenta' => 'required|boolean',
-            'id_requisito' => 'required|integer',
+            'requisito_id' => 'required|integer',
         ]);
         $user = auth()->user();
         $user = User::all()->find($user->id);
@@ -57,8 +59,8 @@ class ChoferRequisitoController extends Controller
 
         $choferRequisito = new ChoferRequisitos();
         $choferRequisito->presenta = $request->presenta;
-        $choferRequisito->id_chofer = $chofer->id;
-        $choferRequisito->id_requisito = $request->id_requisito;
+        $choferRequisito->chofer_id = $chofer->id;
+        $choferRequisito->requisito_id = $request->requisito_id;
         $choferRequisito->save();
 
         return response()->json([
@@ -114,7 +116,7 @@ class ChoferRequisitoController extends Controller
         $request->validate([
             'presenta' => 'required|boolean',
 
-            'id_requisito' => 'nullable|integer',
+            'requisito_id' => 'nullable|integer',
         ]);
         $choferRequisito = ChoferRequisitos::all()->find($id);
 
@@ -124,10 +126,10 @@ class ChoferRequisitoController extends Controller
 
         if (isset($choferRequisito)) {
             $choferRequisito->presenta = $request->presenta;
-            $choferRequisito->id_chofer = $chofer->id;
-            $choferRequisito->id_requisito = $request->id_requisito;
+            $choferRequisito->chofer_id = $chofer->id;
+            $choferRequisito->requisito_id = $request->requisito_id;
             $choferRequisito->save();
-            
+
             return response()->json([
                 "status" => 1,
                 "msg" => "Chofer-requisito actualizado exitosamente",

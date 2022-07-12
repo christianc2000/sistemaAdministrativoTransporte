@@ -61,7 +61,8 @@ class UserController extends Controller
             'direccion' => 'string|nullable',
             'activo' => 'boolean|nullable',
             'foto' =>  'mimes:jpg,jpeg,bmp,png|max:2048|nullable',
-            'id_institucion' => 'integer|nullable'
+            'institucion_id' => 'integer|nullable',
+            'categoria_licencia' => 'string|nullable'
 
         ]);
         $user = new User();
@@ -104,7 +105,7 @@ class UserController extends Controller
             } else {
                 AdministradorInstitucion::create([
                     'user_id' => $user->id,
-                    'id_institucion' => $request->id_institucion
+                    'institucion_id' => $request->institucion_id
                 ]);
                 return response()->json([
                     "status" => 1,
@@ -118,7 +119,8 @@ class UserController extends Controller
             $chofer = Chofer::create([
                 'user_id' => $user->id,
                 'direccion' => $request->direccion,
-                'activo' => $request->activo
+                'activo' => $request->activo,
+                'categoria_licencia' => $request->categoria_licencia
             ]);
             return response()->json([
                 "status" => 1,
@@ -225,7 +227,8 @@ class UserController extends Controller
             'tipo' => 'required|string|max:1', //A=Administrador, I=AdministradorInstitucion, C=Conductor
             'foto' =>  'mimes:jpg,jpeg,bmp,png|max:2048|nullable',
             'direccion' => 'nullable|string',
-            'activo' => 'nullable|boolean'
+            'activo' => 'nullable|boolean',
+            'categoria_licencia' => 'string|nullable'
         ]);
 
         $u = Auth::user();
@@ -255,10 +258,10 @@ class UserController extends Controller
         $user->save();
         if ($user->tipo == "C") {
             $chofer = Chofer::all()->find($user->chofer->id);
-           
+
             $chofer->direccion = $request->direccion;
             $chofer->activo = $request->activo;
-            
+            $chofer->licencia = $request->categoria_licencia;
             $chofer->save();
         }
 

@@ -10,22 +10,22 @@ class Lineas extends Model
     use HasFactory;
     protected $guarded=['id','created_at','updated_at'];
     public function institucion(){
-        return $this->belongsTo(Institucion::class, 'id_institucion');
+        return $this->belongsTo(Institucion::class);
     }
 
     public function administradorInstitucion(){
-        return $this->belongsTo(AdministradorInstitucion::class, 'id_admin_institucion');
+        return $this->belongsTo(AdministradorInstitucion::class);
     }
 
     public function requisitos(){
-        return $this->hasMany(Requisitos::class, 'id');
+        return $this->hasMany(Requisitos::class);
     }
 
     public function permisoLineas(){
-        return $this->hasMany(PermisoLinea::class, 'id');
+        return $this->hasMany(PermisoLinea::class);
     }
     
     public function duenioLineas(){
-        return $this->hasMany(DuenioLinea::class, 'id');
+        return $this->hasMany(DuenioLinea::class);
     }
 }

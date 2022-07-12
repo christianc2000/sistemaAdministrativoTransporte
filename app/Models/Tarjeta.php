@@ -11,12 +11,12 @@ class Tarjeta extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
     public function recorridoTarjetas()
     {
-        return $this->hasMany(RecorridoTarjeta::class, 'id');
+        return $this->hasMany(RecorridoTarjeta::class);
     }
 
     public function choferTarjetas()
     {
-        return $this->hasMany(ChoferTarjeta::class,'id');
+        return $this->hasMany(ChoferTarjeta::class);
     }
     
 }

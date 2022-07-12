@@ -43,7 +43,7 @@ class RequisitoController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string',
-            'id_linea' => 'required|integer'
+            'linea_id' => 'required|integer'
         ]);
         $requisito = Requisitos::create($request->all());
         return response()->json([
@@ -99,7 +99,7 @@ class RequisitoController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string',
-            'id_linea' => 'required|integer'
+            'linea_id' => 'required|integer'
         ]);
         $requisito = Requisitos::all()->find($id);
         if (isset($requisito)) {

@@ -26,6 +26,7 @@ class ChoferSeeder extends Seeder
                 'telefono' => 77214590,
                 'email' => 'pedroa@gmail.com',
                 'tipo' => 'C',
+                'foto' => 'chofer\chofer1.png'
             ],
             [
                 'ci' => '11343562',
@@ -132,7 +133,8 @@ class ChoferSeeder extends Seeder
             Chofer::create([
                 'user_id' => $u->id,
                 'direccion' => 'sin direccion',
-                'activo' => 1
+                'activo' => 1,
+                'categoria_licencia'=>'C'
             ]);
         }
     }

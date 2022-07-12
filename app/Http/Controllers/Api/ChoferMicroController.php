@@ -48,7 +48,7 @@ class ChoferMicroController extends Controller
         $request->validate([
             'fecha_asig' => 'required|date',
             'fecha_baja' => 'date|nullable',
-            'id_micro' => 'required|numeric',
+            'micro_id' => 'required|numeric',
         ]);
         $user = auth()->user();
         $user = User::all()->find($user->id);
@@ -57,8 +57,8 @@ class ChoferMicroController extends Controller
         $choferMicro = new ChoferMicro();
         $choferMicro->fecha_asig = $request->fecha_asig;
         $choferMicro->fecha_baja = $request->fecha_baja;
-        $choferMicro->id_chofer = $chofer->id;
-        $choferMicro->id_micro = $request->id_micro;
+        $choferMicro->chofer_id = $chofer->id;
+        $choferMicro->micro_id = $request->micro_id;
         $choferMicro->save();
 
         return response()->json([
@@ -114,7 +114,7 @@ class ChoferMicroController extends Controller
         $request->validate([
             'fecha_asig' => 'nullable|date',
             'fecha_baja' => 'date|nullable',
-            'id_micro' => 'nullable|numeric',
+            'micro_id' => 'nullable|numeric',
         ]);
         $choferMicro = ChoferMicro::all()->find($id);
 
@@ -130,8 +130,8 @@ class ChoferMicroController extends Controller
             }
             $choferMicro->fecha_asig = $request->fecha_asig;
             $choferMicro->fecha_baja = $request->fecha_baja;
-            $choferMicro->id_chofer = $chofer->id;
-            $choferMicro->id_micro = $request->id_micro;
+            $choferMicro->chofer_id = $chofer->id;
+            $choferMicro->micro_id = $request->micro_id;
             $choferMicro->save();
 
             return response()->json([

@@ -10,14 +10,14 @@ class Institucion extends Model
     use HasFactory;
     protected $guarded=['id','created_at','updated_at'];
     public function administrador(){
-        return $this->belongsTo(Administrador::class, 'id_administrador');
+        return $this->belongsTo(Administrador::class);
     }
 
     public function administradorInstitucions(){
-        return $this->hasMany(AdministradorInstitucion::class, 'id');
+        return $this->hasMany(AdministradorInstitucion::class);
     }
 
     public function lineas(){
-        return $this->hasMany(Lineas::class, 'id');
+        return $this->hasMany(Lineas::class);
     }
 }

@@ -19,10 +19,11 @@ class CreateMicrosTable extends Migration
             $table->string('placa');
             $table->string('modelo');
             $table->integer('cant_asiento');
-            $table->date('fecha_asignacion');
+            $table->date('fecha_asignacion')->nullable();
             $table->date('fecha_baja')->nullable();
-            $table->unsignedBigInteger('id_permiso_linea');
-            $table->foreign('id_permiso_linea')->on('permiso_lineas')->references('id');
+
+            $table->foreignId('permiso_linea_id')->references('id')->on('permiso_lineas');
+
             $table->timestamps();
         });
     }

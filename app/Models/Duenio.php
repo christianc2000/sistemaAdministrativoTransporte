@@ -10,9 +10,9 @@ class Duenio extends Model
     use HasFactory;
     protected $guarded=['id','created_at','updated_at'];
     public function permiso_lineas(){
-        return $this->hasMany(PermisoLinea::class, 'id');
+        return $this->hasMany(PermisoLinea::class);
     }
     public function duenioLineas(){
-        return $this->hasMany(DuenioLinea::class, 'id');
+        return $this->hasMany(DuenioLinea::class);
     }
 }

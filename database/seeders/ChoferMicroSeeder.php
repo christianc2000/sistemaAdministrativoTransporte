@@ -8,48 +8,68 @@ use Illuminate\Support\Facades\DB;
 
 class ChoferMicroSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        $data = [
-            ['fecha_asig' => '2022/05/01',
-            'id_chofer' => 1,
-            'id_micro' => 5],
-            ['fecha_asig' => '2022/05/04',
-            'id_chofer' => 2,
-            'id_micro' => 1],
-            ['fecha_asig' => '2022/05/02',
-            'id_chofer' => 3,
-            'id_micro' => 10],
-            ['fecha_asig' => '2022/05/01',
-            'id_chofer' => 4,
-            'id_micro' => 3],
-            ['fecha_asig' => '2022/05/03',
-            'id_chofer' => 6,
-            'id_micro' => 2],
-            ['fecha_asig' => '2022/05/02',
-            'id_chofer' => 7,
-            'id_micro' => 7],
-            ['fecha_asig' => '2022/05/01',
-            'id_chofer' => 8,
-            'id_micro' => 9],
-            ['fecha_asig' => '2022/05/05',
-            'id_chofer' => 5,
-            'id_micro' => 8],
-            ['fecha_asig' => '2022/05/06',
-            'id_chofer' => 9,
-            'id_micro' => 6],
-            ['fecha_asig' => '2022/05/01',
-            'id_chofer' => 10,
-            'id_micro' => 4] 
-          ];
-          foreach ($data as $d) {
-            ChoferMicro::create($d);
-          }
-         // DB::table('chofer_micros')->insert($data);
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    $data = [
+      [
+        'fecha_asig' => '2022/05/01',
+        'chofer_id' => 1,
+        'micro_id' => 5
+      ],
+      [
+        'fecha_asig' => '2022/05/04',
+        'chofer_id' => 2,
+        'micro_id' => 1
+      ],
+      [
+        'fecha_asig' => '2022/05/02',
+        'chofer_id' => 3,
+        'micro_id' => 10
+      ],
+      [
+        'fecha_asig' => '2022/05/01',
+        'chofer_id' => 4,
+        'micro_id' => 3
+      ],
+      [
+        'fecha_asig' => '2022/05/03',
+        'chofer_id' => 6,
+        'micro_id' => 2
+      ],
+      [
+        'fecha_asig' => '2022/05/02',
+        'chofer_id' => 7,
+        'micro_id' => 7
+      ],
+      [
+        'fecha_asig' => '2022/05/01',
+        'chofer_id' => 8,
+        'micro_id' => 9
+      ],
+      [
+        'fecha_asig' => '2022/05/05',
+        'chofer_id' => 5,
+        'micro_id' => 8
+      ],
+      [
+        'fecha_asig' => '2022/05/06',
+        'chofer_id' => 9,
+        'micro_id' => 6
+      ],
+      [
+        'fecha_asig' => '2022/05/01',
+        'chofer_id' => 10,
+        'micro_id' => 4
+      ]
+    ];
+    foreach ($data as $d) {
+      ChoferMicro::create($d);
     }
+    // DB::table('chofer_micros')->insert($data);
+  }
 }

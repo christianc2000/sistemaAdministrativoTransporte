@@ -11,9 +11,9 @@ class DuenioLinea extends Model
     protected $guarded=['id','created_at','updated_at'];
 
     public function duenio(){
-      return $this->belongsTo(Duenio::class,'id_duenio');
+      return $this->belongsTo(Duenio::class);
     }
     public function linea(){
-        return $this->belongsTo(Lineas::class,'id_linea');
+        return $this->belongsTo(Lineas::class);
     }
 }

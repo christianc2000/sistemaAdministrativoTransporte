@@ -45,8 +45,8 @@ class DuenioLineaController extends Controller
         $request->validate([
             'aporte'=>'required',
             'fecha'=>'required|date',
-            'id_duenio'=>'required|integer',
-            'id_linea'=>'required|integer',
+            'duenio_id'=>'required|integer',
+            'linea_id'=>'required|integer',
         ]);
         $duenioLinea = DuenioLinea::create($request->all());
         return response()->json([
@@ -102,8 +102,8 @@ class DuenioLineaController extends Controller
         $request->validate([
             'aporte'=>'required',
             'fecha'=>'required|date',
-            'id_duenio'=>'nullable|integer',
-            'id_linea'=>'nullable|integer'
+            'duenio_id'=>'nullable|integer',
+            'linea_id'=>'nullable|integer'
         ]);
         $duenioLinea = DuenioLinea::all()->find($id);
 

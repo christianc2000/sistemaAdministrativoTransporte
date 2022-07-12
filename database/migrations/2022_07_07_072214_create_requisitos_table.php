@@ -17,10 +17,10 @@ class CreateRequisitosTable extends Migration
             $table->id();
             $table->string('nombre');
 
+            $table->foreignId('linea_id')->references('id')->on('lineas');
+
             $table->timestamps();
 
-            $table->unsignedBigInteger('id_linea');
-            $table->foreign('id_linea')->on('lineas')->references('id');
         });
     }
 

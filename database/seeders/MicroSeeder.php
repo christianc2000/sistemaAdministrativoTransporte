@@ -22,8 +22,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota 2018',
                 'cant_asiento' => 20,
                 'fecha_asignacion' => '2022/05/01',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 1
+                'permiso_linea_id' => 1
             ],
             [
                 'nro_interno' => 30,
@@ -31,8 +30,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Coaster',
                 'cant_asiento' => 22,
                 'fecha_asignacion' => '2022/05/04',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 2
+                'permiso_linea_id' => 2
             ],
             [
                 'nro_interno' => 06,
@@ -40,8 +38,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota 2016',
                 'cant_asiento' => 20,
                 'fecha_asignacion' => '2022/05/02',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 3
+                'permiso_linea_id' => 3
             ],
             [
                 'nro_interno' => 10,
@@ -49,8 +46,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota 2018',
                 'cant_asiento' => 20,
                 'fecha_asignacion' => '2022/05/01',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 4
+                'permiso_linea_id' => 4
             ],
             [
                 'nro_interno' => 12,
@@ -58,8 +54,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota 2020',
                 'cant_asiento' => 25,
                 'fecha_asignacion' => '2022/05/03',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 5
+                'permiso_linea_id' => 5
             ],
             [
                 'nro_interno' => 18,
@@ -67,8 +62,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota',
                 'cant_asiento' => 22,
                 'fecha_asignacion' => '2022/05/02',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 6
+                'permiso_linea_id' => 6
             ],
             [
                 'nro_interno' => 22,
@@ -76,8 +70,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota 2018',
                 'cant_asiento' => 20,
                 'fecha_asignacion' => '2022/05/01',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 7
+                'permiso_linea_id' => 7
             ],
             [
                 'nro_interno' => 4,
@@ -85,8 +78,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota',
                 'cant_asiento' => 20,
                 'fecha_asignacion' => '2022/05/05',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 8
+                'permiso_linea_id' => 8
             ],
             [
                 'nro_interno' => 9,
@@ -94,8 +86,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota Coaster',
                 'cant_asiento' => 18,
                 'fecha_asignacion' => '2022/05/06',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 9
+                'permiso_linea_id' => 9
             ],
             [
                 'nro_interno' => 11,
@@ -103,8 +94,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota Coaster',
                 'cant_asiento' => 20,
                 'fecha_asignacion' => '2022/05/01',
-                'fecha_baja' =>  '2023/12/12',
-                'id_permiso_linea' => 10
+                'permiso_linea_id' => 10
             ]
         ];
         foreach ($data as $d) {

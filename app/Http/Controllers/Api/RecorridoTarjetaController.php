@@ -45,7 +45,7 @@ class RecorridoTarjetaController extends Controller
             'nro_recorrido'=>'required|integer',
             'hora_partida'=>'required',
             'hora_llegada'=>'required',
-            'id_tarjeta'=>'required|integer'
+            'tarjeta_id'=>'required|integer'
         ]);
         $recorrido = RecorridoTarjeta::create($request->all());
         return response()->json([
@@ -103,7 +103,7 @@ class RecorridoTarjetaController extends Controller
             'nro_recorrido'=>'required|integer',
             'hora_partida'=>'required',
             'hora_llegada'=>'required',
-            'id_tarjeta'=>'nullable'
+            'tarjeta_id'=>'required|integer'
         ]);
         $recorrido = RecorridoTarjeta::all()->find($id);
         if (isset($recorrido)) {

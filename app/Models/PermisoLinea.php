@@ -10,14 +10,14 @@ class PermisoLinea extends Model
     use HasFactory;
     protected $guarded=['id','created_at','updated_at'];
     public function linea(){
-        return $this->belongsTo(Lineas::class, 'id_linea');
+        return $this->belongsTo(Lineas::class);
     }
 
     public function duenio(){
-        return $this->belongsTo(Duenio::class, 'id_duenio');
+        return $this->belongsTo(Duenio::class);
     }
 
     public function micros(){
-        return $this->hasMany(Micros::class, 'id');
+        return $this->hasMany(Micros::class);
     }
 }

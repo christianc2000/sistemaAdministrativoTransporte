@@ -12,10 +12,10 @@ class ChoferTarjeta extends Model
     //relacion inversa de 1 a muchos
     public function chofer()
     {
-        return $this->belongsTo(Chofer::class,'id_chofer');
+        return $this->belongsTo(Chofer::class);
     }
     public function tarjeta()
     {
-        return $this->belongsTo(Tarjeta::class,'id_tarjeta');
+        return $this->belongsTo(Tarjeta::class);
     }
 }

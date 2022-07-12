@@ -19,92 +19,98 @@ class ChoferTarjetaSeeder extends Seeder
             [
                 'fecha' => '2022/07/06',
                 'nro_interno' => 18,
-                'id_chofer' => 9,
-                'id_tarjeta' => 1
+                'chofer_id' => 9,
+                'tarjeta_id' => 1
             ],
             [
                 'fecha' => '2022/07/06',
                 'nro_interno' => 12,
-                'id_chofer' => 1,
-                'id_tarjeta' => 2
+                'chofer_id' => 1,
+                'tarjeta_id' => 2
             ],
             [
                 'fecha' => '2022/07/06',
                 'nro_interno' => 11,
-                'id_chofer' => 3,
-                'id_tarjeta' => 3
+                'chofer_id' => 3,
+                'tarjeta_id' => 3
             ],
             [
                 'fecha' => '2022/07/06',
                 'nro_interno' => 22,
-                'id_chofer' => 7,
-                'id_tarjeta' => 4
+                'chofer_id' => 7,
+                'tarjeta_id' => 4
             ],
             [
                 'fecha' => '2022/07/06',
                 'nro_interno' => 30,
-                'id_chofer' => 6,
-                'id_tarjeta' => 5
+                'chofer_id' => 6,
+                'tarjeta_id' => 5
             ],
             [
                 'fecha' => '2022/07/06',
                 'nro_interno' => 6,
-                'id_chofer' => 4,
-                'id_tarjeta' => 6
+                'chofer_id' => 4,
+                'tarjeta_id' => 6
             ],
             [
                 'fecha' => '2022/07/06',
                 'nro_interno' => 10,
-                'id_chofer' => 10,
-                'id_tarjeta' => 7
+                'chofer_id' => 10,
+                'tarjeta_id' => 7
             ],
             [
                 'fecha' => '2022/07/07',
                 'nro_interno' => 15,
-                'id_chofer' => 2,
-                'id_tarjeta' => 8
+                'chofer_id' => 2,
+                'tarjeta_id' => 8
             ],
             [
                 'fecha' => '2022/07/07',
                 'nro_interno' => 9,
-                'id_chofer' => 8,
-                'id_tarjeta' => 9
+                'chofer_id' => 8,
+                'tarjeta_id' => 9
             ],
             [
                 'fecha' => '2022/07/07',
                 'nro_interno' => 4,
-                'id_chofer' => 5,
-                'id_tarjeta' => 10
+                'chofer_id' => 5,
+                'tarjeta_id' => 10
+            ],
+            [
+                'fecha' => '2022/07/07',
+                'nro_interno' => 45,
+                'chofer_id' => 5,
+                'tarjeta_id' => 12
             ],
             [
                 'fecha' => '2022/07/07',
                 'nro_interno' => 12,
-                'id_chofer' => 1,
-                'id_tarjeta' => 11
+                'chofer_id' => 1,
+                'tarjeta_id' => 11
             ],
             [
                 'fecha' => '2022/07/07',
                 'nro_interno' => 11,
-                'id_chofer' => 3,
-                'id_tarjeta' => 12
+                'chofer_id' => 3,
+                'tarjeta_id' => 12
             ],
             [
                 'fecha' => '2022/07/07',
                 'nro_interno' => 30,
-                'id_chofer' => 6,
-                'id_tarjeta' => 13
+                'chofer_id' => 6,
+                'tarjeta_id' => 13
             ],
             [
                 'fecha' => '2022/07/07',
                 'nro_interno' => 10,
-                'id_chofer' => 10,
-                'id_tarjeta' => 14
+                'chofer_id' => 10,
+                'tarjeta_id' => 14
             ],
             [
                 'fecha' => '2022/07/07',
                 'nro_interno' => 18,
-                'id_chofer' => 9,
-                'id_tarjeta' => 15
+                'chofer_id' => 9,
+                'tarjeta_id' => 15
             ]
         ];
         foreach ($data as $d) {
