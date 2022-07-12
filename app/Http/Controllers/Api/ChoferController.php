@@ -38,6 +38,8 @@ class ChoferController extends Controller
             ->select("micros.id","micros.nro_interno", "micros.placa", "micros.modelo", "micros.cant_asiento", "micros.fecha_asignacion", "chofer_micros.fecha_asig", "chofer_micros.fecha_baja")
             ->get();
 
+        $micros=collect($micros);
+
         return response()->json(
             [
                 "status" => 1,
