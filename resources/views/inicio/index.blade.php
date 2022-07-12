@@ -163,7 +163,7 @@
                         </div>
                         <div class="col-md-preffix-1 col-sm-6">
                             <div class="image-wrap image-wrap-right image-wrap-1">
-                                <img src="{{ asset('imagen/page-01_img01.png') }}" width="938" height="609"
+                                <img src="{{ asset('imagen/l18.jpg') }}" width="938" height="609"
                                     alt="">
                             </div>
                         </div>
