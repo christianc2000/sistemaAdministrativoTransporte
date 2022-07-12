@@ -35,7 +35,7 @@ class ChoferController extends Controller
         $chofer = Chofer::all()->find($user->chofer->id);
         $micros = Micros::join("chofer_micros", "chofer_micros.micro_id", "=", "micros.id")
             ->where('chofer_micros.chofer_id', '=', $chofer->id)
-            ->select("micros.nro_interno", "micros.placa", "micros.modelo", "micros.cant_asiento", "micros.fecha_asignacion", "chofer_micros.fecha_asig", "chofer_micros.fecha_baja")
+            ->select("micros.id","micros.nro_interno", "micros.placa", "micros.modelo", "micros.cant_asiento", "micros.fecha_asignacion", "chofer_micros.fecha_asig", "chofer_micros.fecha_baja")
             ->get();
 
         return response()->json(
