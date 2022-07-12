@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chofer;
+use App\Models\ChoferMicro;
 use App\Models\Micros;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -33,13 +34,20 @@ class ChoferController extends Controller
         $user = auth()->user();
 
         $chofer = Chofer::all()->find($user->chofer->id);
-        $micros = Micros::join("chofer_micros", "chofer_micros.micro_id", "=", "micros.id")
+        $micros=new Collection();
+       /* $micros = Micros::join("chofer_micros", "chofer_micros.micro_id", "=", "micros.id")
+           ->join("micro")
             ->where('chofer_micros.chofer_id', '=', $chofer->id)
             ->select("micros.id","micros.nro_interno", "micros.placa", "micros.modelo", "micros.cant_asiento", "micros.fecha_asignacion", "chofer_micros.fecha_asig", "chofer_micros.fecha_baja")
             ->get();
 
         $micros=collect($micros);
-
+*/
+        foreach ($chofer->choferMicros as $cm) {
+             $cm=ChoferMicro::all()->find($cm->id);
+             $cm->micro->permisoLinea->linea;
+             $micros->push($cm);
+        }
         return response()->json(
             [
                 "status" => 1,
