@@ -3,7 +3,7 @@
 
 <head>
     <!-- Site Title -->
-    <title>Home</title>
+    <title>Inicio</title>
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport"
         content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -13,6 +13,8 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link href='{{ asset('css/css.css') }}' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c489186dbb.js" crossorigin="anonymous"></script>
 
     <!--[if lt IE 10]>
   <script src="js/html5shiv.min.js"></script>
@@ -53,7 +55,7 @@
                                 <span class="brand-name">
                                     GPS
                                 </span>
-                                <span class="brand-slogan">Vehicle Tracking System </span>
+                                <span class="brand-slogan">Sistema De Información Geográfica</span>
                             </a>
                             <!-- END RD Navbar Brand -->
                         </div>
@@ -61,61 +63,6 @@
 
                         <div class="rd-navbar-nav-wrap">
 
-                            <!-- RD Navbar Nav -->
-                            <ul class="rd-navbar-nav">
-                                <li class="active">
-                                    <a href="index.html">Home</a>
-                                </li>
-                                <li>
-                                    <a href="index-1.html">About</a>
-
-
-                                </li>
-                                <li>
-                                    <a href="index-2.html">Services</a>
-                                    <!-- RD Navbar Dropdown -->
-                                    <ul class="rd-navbar-dropdown">
-                                        <li>
-                                            <a href="#">Vehicle Security</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Vehicle monitoring</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Home Security</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Control</a>
-                                            <ul class="rd-navbar-dropdown">
-                                                <li>
-                                                    <a href='#'>Home Security</a>
-                                                </li>
-                                                <li>
-                                                    <a href='#'>Control</a>
-                                                </li>
-                                                <li>
-                                                    <a href='#'>Vehicle Security</a>
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li>
-                                            <a href="#">Train monitoring</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Personal Tracking </a>
-                                        </li>
-                                    </ul>
-                                    <!-- END RD Navbar Dropdown -->
-                                </li>
-                                <li>
-                                    <a href="index-3.html">Gallery</a>
-                                </li>
-                                <li>
-                                    <a href="index-4.html">Contacts</a>
-                                </li>
-                            </ul>
-                            <!-- END RD Navbar Nav -->
                         </div>
 
                         <a href="{{ route('login') }}" class="log">login</a>
@@ -163,8 +110,7 @@
                         </div>
                         <div class="col-md-preffix-1 col-sm-6">
                             <div class="image-wrap image-wrap-right image-wrap-1">
-                                <img src="{{ asset('imagen/l18.jpg') }}" width="938" height="609"
-                                    alt="">
+                                <img src="{{ asset('imagen/l18.jpg') }}" width="938" height="609" alt="">
                             </div>
                         </div>
                     </div>
@@ -210,35 +156,27 @@
             <!--  Discover advanced -->
             <section class="well well-3 bg-alabster">
                 <div class="container text-center">
-                    <h2> Discover advanced
-                        <span class="heading-3">GPS tracking features</span>
+                    <h2> Descubra las funcionalidades
+                        <span class="heading-3">Geolocalización</span>
                     </h2>
                     <div class="row text-md-left row-xs-center offset-1 flow-offset-2">
                         <div class="col-sm-6 col-md-4">
                             <span class="icon icon-xl icon-primary material-icons-map"></span>
-                            <h5>GPS vehicle tracking</h5>
-                            <p>We offer the best professional tool
-                                for GPS vehicle tracking and fleet
-                                management. A small GPS tracker
-                                containing GPS receiver and GPRS. </p>
-                            <a href="#" class="btn btn-sm btn-default">Learn more</a>
+                            <h5>Mapa De Santa Cruz</h5>
+                            <p>Explora los anillos de santa cruz con las rutas de los microbuses disponibles</p>
+                            <a href="#" class="btn btn-sm btn-default">Ver mas</a>
                         </div>
                         <div class="col-sm-6 col-md-4">
-                            <span class="icon icon-xl icon-primary material-icons-local_shipping "></span>
-                            <h5>CANbus data reading</h5>
-                            <p>Modern trucks implement an electronic data communication protocol called CANBus/J1939.
-                                This protocol
-                                allows
-                                external equipment to be used.</p>
-                            <a href="#" class="btn btn-sm btn-default">Learn more</a>
+                            <span class="icon icon-xl icon-primary material-icons-directions_bus "></span>
+                            <h5>MicroBuses A Tu Alcance</h5>
+                            <p>Explora el mapa con origen a santa cruz y vizualiza las rutas y coordenadas en tiempo real de los microbuses cerca de ti</p>
+                            <a href="#" class="btn btn-sm btn-default">Ver mas</a>
                         </div>
                         <div class="col-sm-6 col-md-4">
                             <span class="icon icon-xl icon-primary material-icons-timer "></span>
-                            <h5>Integrated navigation</h5>
-                            <p>Would you like to integrate our system with a popular navigator? Do you need to
-                                communicate with your
-                                drivers in a simple, clear and economic way? </p>
-                            <a href="#" class="btn btn-sm btn-default">Learn more</a>
+                            <h5>Tiempo y Distancia</h5>
+                            <p>Obten el tiempo y la distancia de los microbus o linea que esperas en tiempo real</p>
+                            <a href="#" class="btn btn-sm btn-default">Ver mas</a>
                         </div>
                     </div>
                 </div>
@@ -265,66 +203,7 @@
             </section>
             <!-- END Complete fleet -->
 
-            <!-- Testimonials -->
-            <section class="well well-5">
-                <div class="container text-center">
-                    <h2 class="text-secondary">Testimonials</h2>
-                    <div class="row row-xs-center row-md-left text-sm-left offset-3">
-                        <div class="col-sm-8 col-md-6 col-lg-5">
-                            <blockquote class="quote">
-                                <div class="box-sm">
-                                    <div class="box__left inset-2">
-                                        <img src="images/page-01_img04.jpg" width="131" height="131"
-                                            alt="" class="round">
-                                    </div>
-                                    <div class="box__body">
-                                        <p>
-                                            <q>
-                                                Thanks a lot for the quick
-                                                response. I was really impressed,
-                                                your solution is excellent!! Your
-                                                competence is justified!!</q>
-                                        </p>
-                                        <h5>
-                                            <cite>
-                                                Adam Smith
-                                            </cite>
-                                        </h5>
-                                        <div class="small text-secondary">Driver</div>
-                                    </div>
-                                </div>
 
-                            </blockquote>
-                        </div>
-                        <div class="col-sm-8 col-md-6 col-lg-preffix-1 col-lg-6 offset-2">
-                            <blockquote class="quote">
-                                <div class="box-sm">
-                                    <div class="box__left inset-2">
-                                        <img src="images/page-01_img05.jpg" width="131" height="131"
-                                            alt="" class="round">
-                                    </div>
-                                    <div class="box__body">
-                                        <p class="inset-3">
-                                            <q> I just don't know how to
-                                                describe your services... They are
-                                                extraordinary! I am quite happy with them! Just keep up going this way!
-                                            </q>
-                                        </p>
-                                        <h5>
-                                            <cite>
-                                                Tom Cooper
-                                            </cite>
-                                        </h5>
-                                        <div class="small text-secondary">Driver</div>
-                                    </div>
-                                </div>
-
-                            </blockquote>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- END Testimonials -->
 
             <section class="well well-6 bg-primary">
                 <div class="container text-center ">
