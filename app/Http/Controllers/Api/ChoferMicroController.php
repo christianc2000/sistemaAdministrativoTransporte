@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chofer;
 use App\Models\ChoferMicro;
 use App\Models\Micros;
 use App\Models\PermisoLinea;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class ChoferMicroController extends Controller
@@ -27,7 +29,17 @@ class ChoferMicroController extends Controller
             "data" => $chofer->choferMicros
         ]);
     }
-
+public function lineasUsers(){
+    $choferM=ChoferMicro::all()->where('fecha_baja',null);
+    $ch = new Collection();
+    foreach ($choferM as $cm ) {
+        $choferMicro=ChoferMicro::all()->find($cm->id);
+        $choferMicro->chofer->user;
+        $choferMicro->micro->permisoLinea->linea;
+        $ch->push($choferMicro);
+    }
+    return $ch;
+}
     /**
      * Show the form for creating a new resource.
      *
@@ -53,7 +65,9 @@ class ChoferMicroController extends Controller
         ]);
         $user = auth()->user();
         $user = User::all()->find($user->id);
-        $chofer = $user->chofer;
+        $chofer = Chofer::all()->find($user->chofer->id);
+        $chofer->activo=true;
+        $chofer->save();
 
         $choferMicro = new ChoferMicro();
         $choferMicro->fecha_asig = $request->fecha_asig;
@@ -96,6 +110,7 @@ class ChoferMicroController extends Controller
             ], 404);
         }
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -126,13 +141,15 @@ class ChoferMicroController extends Controller
 
         $user = auth()->user();
         $user = User::all()->find($user->id);
-        $chofer = $user->chofer;
+        $chofer = Chofer::all()->find($user->chofer->id);
 
         if (isset($choferMicro)) {
-            if (empty($choferMicro->fecha_baja) && isset($request->fecha_baja)) {
+            if (isset($request->fecha_baja)) {
                 $permiso = PermisoLinea::all()->find($choferMicro->micro->permisoLinea->id);
                 $permiso->activo = false; //colocar en inactivo el permiso cuando un chofer no lo ocupa;
                 $permiso->save();
+                $chofer->activo=false;
+                $chofer->save();
             }
             
             $choferMicro->fecha_asig = $request->fecha_asig;

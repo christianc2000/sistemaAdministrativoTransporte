@@ -31,6 +31,7 @@ class ChoferController extends Controller
 
         ]);
     }
+
     public function choferMicros()
     {
         $user = auth()->user();
@@ -50,6 +51,7 @@ class ChoferController extends Controller
             $cm->micro->permisoLinea->linea;
             $micros->push($cm);
         }
+        
         return response()->json(
             [
                 "status" => 1,

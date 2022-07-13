@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\ChoferTarjetaController;
 use App\Http\Controllers\Api\DuenioLineaController;
 use App\Http\Controllers\Api\RecorridoTarjetaController;
 use App\Http\Controllers\Api\TarjetaController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,6 +49,7 @@ Route::post('register', [UserController::class, 'register'])->name('api.v1.regis
 Route::post('login', [UserController::class, 'login']);
 Route::get('login', [UserController::class, 'loginget'])->name('api.v1.login');
 Route::get('user-all', [UserController::class, 'index'])->name('api.v1.user');;
+Route::get('lineas-users',[ChoferMicroController::class,'lineasUsers']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('profile', [UserController::class, 'profile']);
