@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Chofer;
 use App\Models\ChoferMicro;
 use App\Models\Micros;
+use App\Models\PermisoLinea;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class ChoferController extends Controller
     public function index()
     {
         $user = auth()->user();
+        
         $chofer = Chofer::all()->find($user->chofer->id);
         return response()->json([
             'status' => 1,
@@ -34,9 +36,9 @@ class ChoferController extends Controller
         $user = auth()->user();
 
         $chofer = Chofer::all()->find($user->chofer->id);
-        $micros=new Collection();
-       /* $micros = Micros::join("chofer_micros", "chofer_micros.micro_id", "=", "micros.id")
-           ->join("micro")
+        $micros = new Collection();
+        /* $micros = Micros::join("chofer_micros", "chofer_micros.micro_id", "=", "micros.id")
+          
             ->where('chofer_micros.chofer_id', '=', $chofer->id)
             ->select("micros.id","micros.nro_interno", "micros.placa", "micros.modelo", "micros.cant_asiento", "micros.fecha_asignacion", "chofer_micros.fecha_asig", "chofer_micros.fecha_baja")
             ->get();
@@ -44,9 +46,9 @@ class ChoferController extends Controller
         $micros=collect($micros);
 */
         foreach ($chofer->choferMicros as $cm) {
-             $cm=ChoferMicro::all()->find($cm->id);
-             $cm->micro->permisoLinea->linea;
-             $micros->push($cm);
+            $cm = ChoferMicro::all()->find($cm->id);
+            $cm->micro->permisoLinea->linea;
+            $micros->push($cm);
         }
         return response()->json(
             [
@@ -56,8 +58,32 @@ class ChoferController extends Controller
             ]
         );
     }
-    /**
-     * Show the form for creating a new resource.
+    public function lineaActiva()
+    {
+        $user = auth()->user();
+        $chofer = Chofer::all()->find($user->chofer->id);
+        
+        $cm=$chofer->choferMicros->where('fecha_baja',null)->first();
+        
+        if (isset($cm)){
+            $micro=Micros::all()->find($cm->micro_id);
+            $permiso=PermisoLinea::all()->find($micro->permiso_linea_id);
+
+            return response()->json([
+                "status"=>1,
+                "msg"=>"El chofer tiene micro activo",
+                "data"=>$permiso->linea
+            ]);
+        }else{
+            return response()->json([
+                "status"=>0,
+                "msg"=>"El chofer no tiene micro activo",
+            ],404);
+        }
+    
+       // $linea=Linea::all();
+    }
+    /* Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */

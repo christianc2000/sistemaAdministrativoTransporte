@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\ChoferMicro;
+use App\Models\Micros;
 use App\Models\PermisoLinea;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -60,6 +61,11 @@ class ChoferMicroController extends Controller
         $choferMicro->chofer_id = $chofer->id;
         $choferMicro->micro_id = $request->micro_id;
         $choferMicro->save();
+
+        $micro=Micros::all()->find($request->micro_id);
+        $permiso=PermisoLinea::all()->find($micro->permiso_linea_id);
+        $permiso->activo=true;
+        $permiso->save();
 
         return response()->json([
             "status" => 1,
@@ -128,6 +134,7 @@ class ChoferMicroController extends Controller
                 $permiso->activo = false; //colocar en inactivo el permiso cuando un chofer no lo ocupa;
                 $permiso->save();
             }
+            
             $choferMicro->fecha_asig = $request->fecha_asig;
             $choferMicro->fecha_baja = $request->fecha_baja;
             $choferMicro->chofer_id = $chofer->id;

@@ -58,6 +58,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('chofer', [ChoferController::class, 'index']);
     Route::put('chofer/{id}', [ChoferController::class, 'update']); //id del usuario que tiene
     Route::get('chofer-micros', [ChoferController::class, 'choferMicros']);
+    Route::get('linea-activa',[ChoferController::class,'lineaActiva']);
 
     Route::apiResource('linea', LineaController::class);
     Route::apiResource('institucion', InstitucionController::class);
