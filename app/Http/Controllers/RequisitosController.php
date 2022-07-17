@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Requisitos;
+use App\Models\Lineas;
 use Illuminate\Http\Request;
 
 class RequisitosController extends Controller
@@ -14,7 +15,8 @@ class RequisitosController extends Controller
      */
     public function index()
     {
-        //
+        $requisitos = Requisitos::all();
+        return view('Requisito.index')->with('requisitos', $requisitos);
     }
 
     /**
@@ -24,7 +26,8 @@ class RequisitosController extends Controller
      */
     public function create()
     {
-        //
+        $lineas = Lineas::all();
+        return view('Requisito.create')->with('lineas', $lineas);
     }
 
     /**
@@ -35,7 +38,13 @@ class RequisitosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requisitos = new Requisitos();
+        $requisitos->nombre = $request->get('nombre');
+        $requisitos->linea_id = $request->get('linea_id');
+
+        $requisitos->save();
+
+        return redirect('/requisitos');
     }
 
     /**
@@ -55,9 +64,10 @@ class RequisitosController extends Controller
      * @param  \App\Models\Requisitos  $requisitos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Requisitos $requisitos)
+    public function edit($id)
     {
-        //
+        $requisito = Requisitos::find($id);
+        return view('Requisito.edit')->with('requisito', $requisito);
     }
 
     /**
@@ -67,9 +77,15 @@ class RequisitosController extends Controller
      * @param  \App\Models\Requisitos  $requisitos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Requisitos $requisitos)
+    public function update(Request $request, $id)
     {
-        //
+        $requisito = Requisitos::find($id);
+        $requisito->nombre = $request->get('nombre');
+        $requisito->linea_id = $request->get('linea_id');
+
+        $requisito->save();
+
+        return redirect('/requisitos');
     }
 
     /**
@@ -78,8 +94,11 @@ class RequisitosController extends Controller
      * @param  \App\Models\Requisitos  $requisitos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Requisitos $requisitos)
+    public function destroy($id)
     {
-        //
+        $requisito = Requisitos::find($id);
+        $requisito->delete();
+
+        return redirect('/requisitos');
     }
 }
