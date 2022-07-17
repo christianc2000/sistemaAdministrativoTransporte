@@ -1,3 +1,4 @@
+@extends('adminlte::page')
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,6 +14,7 @@
     <title>Requisitos</title>
   </head>
   <body>
+  @section('content')
     <div class="container">
        <div class="card">
             <div class="card-header"> Requisitos </div>
@@ -61,6 +63,6 @@
         $('#requisitos').DataTable();
         });
     </script>
-   
+  @endsection 
   </body>
 </html>
