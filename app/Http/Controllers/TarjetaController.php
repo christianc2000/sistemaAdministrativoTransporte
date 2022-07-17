@@ -36,7 +36,7 @@ class TarjetaController extends Controller
      */
     public function store(Request $request)
     {
-        $tarjeta = new Requisitos();
+        $tarjeta = new Tarjeta();
 
         $tarjeta->save();
 

@@ -20,6 +20,7 @@
             <div class="card-header"> Recorridos </div>
             <div class="card-body">
                 <a href="recorridos/create" class="btn btn-primary">Crear Recorrido</a>
+                <a href="/tarjetas" class="btn btn-info">Ver Tarjetas</a>
                 <table id="recorridos" class="table table-striped mt-4" style="width:100%">
                     <thead>
                         <tr>

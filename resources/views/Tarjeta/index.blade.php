@@ -13,12 +13,18 @@
 
     <title>Tarjetas</title>
   </head>
+  @section('content')
   <body>
     <div class="container">
        <div class="card">
             <div class="card-header"> Tarjetas </div>
             <div class="card-body">
-                <button type="submit" class="btn btn-primary">Crear Tarjeta</button>
+                <form action="{{route ('tarjetas.store')}}" method="POST">
+                    @csrf
+                    <input type="hidden" id="h" name="h" value="">
+                    <a href="/recorridos" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>
+                    <button type="submit" class="btn btn-primary">Crear Tarjeta</button>
+                </form>
                 <div align='center'>
                 <table id="tarjetas" class="table table-striped table-bordered" style="width:70%">
                     <thead>
@@ -62,4 +68,5 @@
     </script>
    
   </body>
+  @endsection
 </html>
