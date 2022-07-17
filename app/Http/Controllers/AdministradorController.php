@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrador;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdministradorController extends Controller
 {
@@ -14,7 +16,10 @@ class AdministradorController extends Controller
      */
     public function index()
     {
-        //
+        $users = DB::table('users')
+                ->where('tipo', 'A')->get();
+
+        return view('Admin.user.index', compact('users'));
     }
 
     /**
@@ -24,7 +29,11 @@ class AdministradorController extends Controller
      */
     public function create()
     {
-        //
+        // $users = Persona::all();
+
+        // $roles = Role::all();
+
+        return view('admin.user.create');
     }
 
     /**
