@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RecorridoTarjeta;
+use App\Models\Tarjeta;
 use Illuminate\Http\Request;
 
 class RecorridoTarjetaController extends Controller
@@ -14,7 +15,8 @@ class RecorridoTarjetaController extends Controller
      */
     public function index()
     {
-        //
+        $recorridos = RecorridoTarjeta::all();
+        return view('Recorrido.index')->with('recorridos', $recorridos);
     }
 
     /**
@@ -24,7 +26,8 @@ class RecorridoTarjetaController extends Controller
      */
     public function create()
     {
-        //
+        $tarjetas = Tarjeta::all();
+        return view('Recorrido.create')->with('tarjetas', $tarjetas);
     }
 
     /**
@@ -35,7 +38,16 @@ class RecorridoTarjetaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recorrido = new RecorridoTarjeta();
+        $recorrido->nro_recorrido = $request->get('nro');
+        $recorrido->hora_partida = $request->get('partida');
+        $recorrido->hora_llegada = $request->get('llegada');
+        
+        $recorrido->tarjeta_id = $request->get('id_tarjeta');
+
+        $recorrido->save();
+
+        return redirect('/recorridos');
     }
 
     /**
@@ -55,9 +67,11 @@ class RecorridoTarjetaController extends Controller
      * @param  \App\Models\RecorridoTarjeta  $recorridoTarjeta
      * @return \Illuminate\Http\Response
      */
-    public function edit(RecorridoTarjeta $recorridoTarjeta)
+    public function edit($id)
     {
-        //
+        $tarjetas = Tarjeta::all();
+        $recorrido = RecorridoTarjeta::find($id);
+        return view('Recorrido.edit')->with(['recorrido'=> $recorrido, 'tarjetas'=>$tarjetas]);
     }
 
     /**
@@ -67,9 +81,17 @@ class RecorridoTarjetaController extends Controller
      * @param  \App\Models\RecorridoTarjeta  $recorridoTarjeta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecorridoTarjeta $recorridoTarjeta)
+    public function update(Request $request, $id)
     {
-        //
+        $recorrido = RecorridoTarjeta::find($id);
+        $recorrido->nro_recorrido = $request->get('nro');
+        $recorrido->hora_partida = $request->get('partida');
+        $recorrido->hora_llegada = $request->get('llegada');
+        $recorrido->tarjeta_id = $request->get('id_tarjeta');
+
+        $recorrido->save();
+
+        return redirect('/recorridos');
     }
 
     /**
@@ -78,8 +100,11 @@ class RecorridoTarjetaController extends Controller
      * @param  \App\Models\RecorridoTarjeta  $recorridoTarjeta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RecorridoTarjeta $recorridoTarjeta)
+    public function destroy($id)
     {
-        //
+        $recorrido = RecorridoTarjeta::find($id);
+        $recorrido->delete();
+
+        return redirect('/recorridos');
     }
 }

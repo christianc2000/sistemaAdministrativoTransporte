@@ -21,5 +21,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('requisitos', 'App\Http\Controllers\RequisitosController');
+
+Route::resource('tarjetas', 'App\Http\Controllers\TarjetaController');
+
+Route::resource('recorridos', 'App\Http\Controllers\RecorridoTarjetaController');
+
+Route::resource('chofertarjetas', 'App\Http\Controllers\ChoferTarjetaController');
+
 Route::get('/linea',[LineasController::class,'index'])->name('linea.index');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

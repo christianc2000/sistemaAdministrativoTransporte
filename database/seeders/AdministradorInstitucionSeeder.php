@@ -17,16 +17,28 @@ class AdministradorInstitucionSeeder extends Seeder
      */
     public function run()
     {
-        $users=User::all()->where('tipo','I');
-        $i=1;
+        $users = User::all()->where('tipo', 'I');
+        $i = 1;
         foreach ($users as $u) {
-            AdministradorInstitucion::create(
-                [
-                    'user_id' => $u->id,
-                    'institucion_id' => $i
-                ]
-            );
-            $i++;
+            if ($i < 4) {
+                AdministradorInstitucion::create(
+                    [
+                        'user_id' => $u->id,
+                        'institucion_id' => $i
+                    ]
+                );
+                $i++;
+            } else {
+                $i=1;
+                AdministradorInstitucion::create(
+                    [
+                        'user_id' => $u->id,
+                        'institucion_id' => $i
+                    ]
+                );
+            }
+
+            
         }
     }
 }
