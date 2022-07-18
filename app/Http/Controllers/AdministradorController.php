@@ -18,7 +18,7 @@ class AdministradorController extends Controller
     {
         $users = DB::table('users')
                 ->where('tipo', 'A')->get();
-
+        // return $users;
         return view('Admin.user.index', compact('users'));
     }
 
@@ -44,7 +44,27 @@ class AdministradorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $users = new User();
+        $users->ci = $request->get('ci');
+        $users->nombre = $request->get('name');
+        $users->apellido = $request->get('apellido');
+        $users->sexo = $request->get('sexo');
+        $users->fecha_nac = $request->get('fecha_nac');
+        $users->telefono = $request->get('telefono');
+        $users->password = bcrypt($request->get('password'));
+        $users->email = $request->get('email');
+        $users->tipo = 'A';
+        // $users->foto = $request->get('foto');
+        $users->save();
+        // $users->assignRole($request->rol); //crear rol
+        // $users->syncRoles($request->rol);//sincronizar rol
+        //    return redirect()->route('users.edit', $users)->with('info', 'Se asignó los roles correctamente');
+
+        // User::create($request->all());
+        $administradors= new administrador();
+        $administradors->user_id = $users->id;
+        $administradors->save();
+        return redirect()->route('administradors.index')->with('info', 'Se creó un nuevo usuario'); //redirige a la vista index de la carpeta cargo
     }
 
     /**
@@ -64,9 +84,12 @@ class AdministradorController extends Controller
      * @param  \App\Models\Administrador  $administrador
      * @return \Illuminate\Http\Response
      */
-    public function edit(Administrador $administrador)
+    public function edit($id)
     {
-        //
+        $users = DB::table('users')
+                ->where('id', $id)->first();
+        return view('admin.user.edit', compact('users'));
+        // return view('user.edit', compact('user', 'users'));        
     }
 
     /**
@@ -87,8 +110,17 @@ class AdministradorController extends Controller
      * @param  \App\Models\Administrador  $administrador
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Administrador $administrador)
+    public function destroy($id)
     {
-        //
+        // activity()->useLog('Usuario')->log('Eliminado')->subject();
+        // $lastActivity = Activity::all()->last();
+        // $lastActivity->subject_id = User::all()->last()->id;
+        // $lastActivity->save();
+
+        DB::table('administradors')->where('user_id', $id)->delete();
+
+        DB::table('users')->where('id', $id)->delete();
+
+        return redirect()->route('administradors.index')->with('info', 'Usuario eliminado');
     }
 }
