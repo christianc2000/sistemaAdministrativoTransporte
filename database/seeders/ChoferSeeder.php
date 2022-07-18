@@ -28,7 +28,7 @@ class ChoferSeeder extends Seeder
                 'tipo' => 'C',
                 'foto' => 'chofer\chofer1.png'
             ],
-            [
+            [/* Linea 1 */
                 'ci' => '11343562',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Carlos Eduardo',
@@ -39,7 +39,7 @@ class ChoferSeeder extends Seeder
                 'email' => 'carlos@gmail.com',
                 'tipo' => 'C'
             ],
-            [
+            [/* linea 18 */
                 'ci' => '7979979',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Cristian',
@@ -50,7 +50,7 @@ class ChoferSeeder extends Seeder
                 'email' => 'cristianp@gmail.com',
                 'tipo' => 'C'
             ],
-            [
+            [/* linea 8 */
                 'ci' => '7547260',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Efrain',
@@ -61,7 +61,7 @@ class ChoferSeeder extends Seeder
                 'email' => 'efrain@gmail.com',
                 'tipo' => 'C'
             ],
-            [
+            [/* linea 16 */
                 'ci' => '7210778',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Jose',
@@ -72,7 +72,7 @@ class ChoferSeeder extends Seeder
                 'email' => 'jose@gmail.com',
                 'tipo' => 'C'
             ],
-            [
+            [/* linea 5 */
                 'ci' => '9058074',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Misael',
@@ -83,7 +83,7 @@ class ChoferSeeder extends Seeder
                 'email' => 'misael@gmail.com',
                 'tipo' => 'C'
             ],
-            [
+            [/* linea 16 */
                 'ci' => '9628204',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Jhonatan',
@@ -94,7 +94,7 @@ class ChoferSeeder extends Seeder
                 'email' => 'jhonatan@gmail.com',
                 'tipo' => 'C'
             ],
-            [
+            [/* linea 17 */
                 'ci' => '12599786',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Julio Cesar',
