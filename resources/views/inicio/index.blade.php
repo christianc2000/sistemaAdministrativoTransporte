@@ -80,7 +80,7 @@
                         en Bus o Micro en la ciudad, conocer que línea puede tomar, donde esperar y que rutas le
                         conviene seguir, utilízala y ayúdanos a almentarla con tu experiencia</p>
                     <div class="btn-group">
-                        <a href="#" class="btn btn-md btn-secondary">Explorar</a>
+                        <a href="{{asset('Apps/AppUsuario.apk')}}" class="btn btn-md btn-secondary">Descargar</a>
                         {{-- <a href="#" class="btn btn-lg btn-default">Buy now!</a> --}}
                     </div>
                 </div>
@@ -93,7 +93,7 @@
         <main class="page-content">
 
             <!-- GPS tracking  -->
-            <section class="well well-1 bg-alabster">
+           {{--  <section class="well well-1 bg-alabster">
                 <div class="container text-center text-sm-left">
                     <div class="row">
                         <div class="col-sm-6 col-md-5">
@@ -115,12 +115,12 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
             <!-- END GPS tracking  -->
 
 
             <!--  Improve your safety -->
-            <section class="well  well-2 text-center">
+           {{--  <section class="well  well-2 text-center">
                 <div class="container">
                     <h2> Improve your safety
                         <span class="heading-3">on the road</span>
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> --}}
             <!-- END  Improve your safety -->
 
             <!--  Discover advanced -->
@@ -186,19 +186,11 @@
             <!-- Complete fleet -->
             <section class="well well-4 bg-image bg-image-1 bg-fixed">
                 <div class="container text-center">
-                    <h1>Complete fleet
-                        <span class="heading-3">management solution</span>
+                    <h1>Santa Cruz
+                        <span class="heading-3">Microbuses en tiempo real</span>
                     </h1>
-                    <p class="inset-1">Competition within the transport business is high and oil prices are still
-                        rising. The
-                        solution for
-                        profitability is to know how everything works, to drive more efficiently than the competition.
-                        GPS Vehicle
-                        Tracking System offers
-                        a comprehensive suite of solutions for professionals in the efficiency of freight transport by
-                        fleet
-                        monitoring and tracking </p>
-                    <a href="#" class="btn btn-md btn-primary">Learn more</a>
+                    <p class="inset-1">Experimenta la nueva tecnologia para el uso de localizacion de microbuses en tiempo real desde la palma de tus manos</p>
+                    <a href="{{asset('Apps/AppUsuario.apk')}}" class="btn btn-md btn-primary">Descargar App</a>
                 </div>
             </section>
             <!-- END Complete fleet -->
@@ -207,13 +199,9 @@
 
             <section class="well well-6 bg-primary">
                 <div class="container text-center ">
-                    <h3 class="text-white"><span class="text-bold big">GPS</span> Vehicle Tracking System </h3>
-                    <p class="inset-4">We represent the highest value GPS vehicle tracker and fleet tracking solution
-                        in the
-                        industry. Its proven functionality and
-                        rapid deployment easily scales whether you’re a small business or a large enterprise
-                        organization. </p>
-                    <a href="#" class="btn btn-lg btn-secondary">buy now!</a>
+                    <h3 class="text-white"><span class="text-bold big">GPS</span>Sistema De Información Geografica </h3>
+                    <p class="inset-4">Representamos el rastreador de Microbuses. Su funcionalidad comprobada y su rápida implementación escalan fácilmente ya sea una pequeña empresa o una gran organización empresarial. </p>
+                   {{--  <a href="#" class="btn btn-lg btn-secondary">buy now!</a> --}}
                 </div>
             </section>
         </main>
@@ -225,7 +213,7 @@
             <!-- END GPS Vehicle Tracking System -->
             <div class="container text-center">
                 <p class="copyright">
-                    GPS Vehicle Tracking System © <span id="copyright-year"></span>.
+                    GPS Sistema De Información Geografica © <span id="copyright-year"></span>.
                     <a href='index-5.html'>Privacy Policy</a>
                     <!-- {%FOOTER_LINK} -->
                 </p>
