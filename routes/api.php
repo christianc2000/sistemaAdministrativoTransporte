@@ -65,8 +65,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('chofer-micros', [ChoferController::class, 'choferMicros']);
     Route::get('linea-activa',[ChoferController::class,'lineaActiva']);
     /*******PROBLEMA */
-    Route::get('problema',[ProblemaController::class,'index'])->name('api.v1.problema.index');
-    Route::get('problema-micro-activo',[ProblemaController::class,'problemasMicroActivo'])->name('api.v1.problema.problemaMicroActivo');
+    Route::get('problema',[ProblemaController::class,'index'])->name('api.v1.problema.index'); //muestra todos los problemas que tiene el chofer logueado con sus micros
+    Route::get('problema-micro-activo',[ProblemaController::class,'problemasMicroActivo'])->name('api.v1.problema.problemaMicroActivo');//muestra todos lo problemas que tiene el chofer logueado con el micro que está usando
     Route::post('problema',[ProblemaController::class,'store'])->name('api.v1.problema.store');
     Route::put('problema/{id}',[ProblemaController::class,'update'])->name('api.v1.problema.put');
     Route::get('problema/{id}',[ProblemaController::class,'show'])->name('api.v1.problema.show');
