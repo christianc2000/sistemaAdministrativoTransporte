@@ -287,6 +287,21 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Recorrido',
+            'route'  => 'recorridos.index',
+            'icon' => 'fas fa-fw fa-road',
+        ],
+        [
+            'text' => 'Requisito',
+            'route'  => 'requisitos.index',
+            'icon' => 'fas fa-fw fa-check-square',
+        ],
+        [
+            'text' => 'Chofer Tarjeta',
+            'route'  => 'chofertarjetas.index',
+            'icon' => 'fas fa-fw fa-address-card',
+        ],
+        [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',

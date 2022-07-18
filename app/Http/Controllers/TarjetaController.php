@@ -14,7 +14,8 @@ class TarjetaController extends Controller
      */
     public function index()
     {
-        //
+        $tarjetas = Tarjeta::all();
+        return view('Tarjeta.index')->with('tarjetas', $tarjetas);
     }
 
     /**
@@ -35,7 +36,11 @@ class TarjetaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tarjeta = new Tarjeta();
+
+        $tarjeta->save();
+
+        return redirect('/tarjetas');
     }
 
     /**
@@ -78,8 +83,11 @@ class TarjetaController extends Controller
      * @param  \App\Models\Tarjeta  $tarjeta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tarjeta $tarjeta)
+    public function destroy($id)
     {
-        //
+        $tarjeta = Tarjeta::find($id);
+        $tarjeta->delete();
+
+        return redirect('/tarjetas');
     }
 }
