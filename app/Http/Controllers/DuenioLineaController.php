@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Duenio;
 use App\Models\DuenioLinea;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,14 @@ class DuenioLineaController extends Controller
      * @param  \App\Models\DuenioLinea  $duenioLinea
      * @return \Illuminate\Http\Response
      */
-    public function show(DuenioLinea $duenioLinea)
+    public function show($id)
     {
-        //
+        
+        $duenio=Duenio::all()->find($id);
+        $dueniolineas=DuenioLinea::where('duenio_id',$id)->get();
+        $linea=$duenio->duenioLineas->first()->linea;
+       
+        return view('Admin.user.aportes.show',compact('dueniolineas','duenio','linea'));
     }
 
     /**
@@ -55,9 +61,9 @@ class DuenioLineaController extends Controller
      * @param  \App\Models\DuenioLinea  $duenioLinea
      * @return \Illuminate\Http\Response
      */
-    public function edit(DuenioLinea $duenioLinea)
+    public function edit($id)
     {
-        //
+        return "pagar";
     }
 
     /**
@@ -69,7 +75,7 @@ class DuenioLineaController extends Controller
      */
     public function update(Request $request, DuenioLinea $duenioLinea)
     {
-        //
+        
     }
 
     /**

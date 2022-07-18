@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Duenio;
+use App\Models\DuenioLinea;
+use App\Models\Lineas;
 use Illuminate\Http\Request;
 
 class DuenioController extends Controller
@@ -14,7 +16,8 @@ class DuenioController extends Controller
      */
     public function index()
     {
-        //
+        $duenios = Duenio::all();
+        return view('Admin.user.duenios.index', compact('duenios'));
     }
 
     /**
@@ -24,7 +27,8 @@ class DuenioController extends Controller
      */
     public function create()
     {
-        //
+        $lineas = Lineas::all()->sortByDesc('nrolinea');
+        return view('Admin.user.duenios.create', compact('lineas'));
     }
 
     /**
@@ -35,7 +39,36 @@ class DuenioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ci' => 'required|string|unique:duenios',
+            'nombre' => 'required|string',
+            'apellido' => 'required|string',
+            'sexo' => 'required|string|max:1',
+            'fecha_nac' => 'required|date',
+            'email' => 'required|email|unique:duenios',
+            'telefono' => 'required|integer',
+            'linea_id' => 'required|integer'
+        ]);
+        $duenio = new Duenio();
+
+        $duenio->ci = $request->ci;
+        $duenio->nombre = $request->nombre;
+        $duenio->apellido = $request->apellido;
+        $duenio->sexo = $request->sexo;
+        $duenio->fecha_nac = $request->fecha_nac;
+        $duenio->email = $request->email;
+        $duenio->telefono = $request->telefono;
+        
+        $duenio->save();
+
+        $dl=DuenioLinea::create([
+            'linea_id'=>$request->linea_id,
+            'duenio_id'=>$duenio->id,
+            'aporte'=> 0,
+            'fecha'=> date(now())
+        ]);
+
+        return redirect()->route('admin.duenio.index');
     }
 
     /**

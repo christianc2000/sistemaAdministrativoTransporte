@@ -13,9 +13,10 @@ use App\Http\Controllers\Api\PermisoLineaController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ChoferTarjetaController;
 use App\Http\Controllers\Api\DuenioLineaController;
+use App\Http\Controllers\Api\ProblemaController;
 use App\Http\Controllers\Api\RecorridoTarjetaController;
 use App\Http\Controllers\Api\TarjetaController;
-
+use App\Models\Problema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,8 @@ Route::post('login', [UserController::class, 'login']);
 Route::get('login', [UserController::class, 'loginget'])->name('api.v1.login');
 Route::get('user-all', [UserController::class, 'index'])->name('api.v1.user');;
 Route::get('lineas-users',[ChoferMicroController::class,'lineasUsers']);
+//Route::get('problema/{id}',[ProblemaController::class,'index'])->name('api.v1.problema');
+
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('profile', [UserController::class, 'profile']);
@@ -61,7 +64,14 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::put('chofer/{id}', [ChoferController::class, 'update']); //id del usuario que tiene
     Route::get('chofer-micros', [ChoferController::class, 'choferMicros']);
     Route::get('linea-activa',[ChoferController::class,'lineaActiva']);
-
+    /*******PROBLEMA */
+    Route::get('problema',[ProblemaController::class,'index'])->name('api.v1.problema.index');
+    Route::get('problema-micro-activo',[ProblemaController::class,'problemasMicroActivo'])->name('api.v1.problema.problemaMicroActivo');
+    Route::post('problema',[ProblemaController::class,'store'])->name('api.v1.problema.store');
+    Route::put('problema/{id}',[ProblemaController::class,'update'])->name('api.v1.problema.put');
+    Route::get('problema/{id}',[ProblemaController::class,'show'])->name('api.v1.problema.show');
+    Route::delete('problema/{id}',[ProblemaController::class,'destroy'])->name('api.v1.problema.destroy');
+    /*************** */
     Route::apiResource('linea', LineaController::class);
     Route::apiResource('institucion', InstitucionController::class);
     Route::apiResource('duenio', DueniosController::class);

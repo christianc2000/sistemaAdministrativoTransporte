@@ -272,6 +272,16 @@ return [
 
         ],
         [
+            'text' => 'Líneas',
+            'url'  => 'admin/linea',
+            'icon' => 'fas fa-solid fa-bus'
+        ],
+        [
+            'text' => 'Dueños',
+            'url'  => 'admin/duenio',
+            'icon' => 'fas fa-solid fa-users'
+        ],
+        [
             'text' => 'profile',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',

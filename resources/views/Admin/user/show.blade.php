@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'CREAR VENTA')
+@section('title', 'MOSTRAR USUARIO')
 
 @section('content_header')
     <h1>Detalle de Usuario</h1>

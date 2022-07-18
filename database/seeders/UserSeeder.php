@@ -95,6 +95,17 @@ class UserSeeder extends Seeder
             'tipo' => 'I',
         ]);
         
+        $u = User::create([
+            'ci' => '81222333',
+            'password' => bcrypt('12345678'),
+            'nombre' => 'Karen',
+            'apellido' => 'Miranda',
+            'sexo' => 'F',
+            'fecha_nac' => '2000-01-12',
+            'telefono' => 72323242,
+            'email' => 'karen@gmail.com',
+            'tipo' => 'I',
+        ]);
 
         $u = User::create([
             'ci' => '1211233',

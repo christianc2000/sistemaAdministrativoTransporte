@@ -18,6 +18,12 @@ class ChoferMicroSeeder extends Seeder
     $data = [
       [
         'fecha_asig' => '2022/05/01',
+        'fecha_baja' => '2022/06/10',
+        'chofer_id' => 1,
+        'micro_id' => 5
+      ],
+      [
+        'fecha_asig' => '2022/07/01',
         'chofer_id' => 1,
         'micro_id' => 5
       ],
