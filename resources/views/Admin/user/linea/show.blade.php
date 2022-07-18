@@ -51,7 +51,55 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Crear Aporte</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                   <form action="{{route('admin.dueniolinea.store')}}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group row" style="margin-left: 5px">
+                            <label for="labelAporte" class="col-sm-2 col-form-label">Aporte</label>
+                            <div class="col-sm-10">
+                                <input name="aporte" type="number" step="0.01" class="form-control" id="aporte"
+                                    placeholder="Monto aporte" required>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin-left: 5px">
+                            <label for="labelFecha" class="col-sm-2 col-form-label">Fecha</label>
+                            <div class="col-sm-10">
+                                <input name="fecha" type="date" class="form-control" id="fecha" required>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin-left: 5px">
+                            <label for="labelLinea" class="col-sm-2 col-form-label">Linea</label>
+                            <div class="col-sm-10">
+                                <input name="linea_id" type="numeric" class="form-control" id="linea_id"
+                                    value="{{ $linea->nrolinea }}" readonly required>
+                            </div>
+                        </div>
+                        <div class="form-group row" style="margin-left: 5px">
+                            <label for="labelDescripcion" class="col-sm-2 col-form-label">Detalle</label>
+                            <div class="col-sm-10">
+                                <textarea name="descripcion" class="form-control" id="descripcion" cols="30" rows="5"></textarea>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="button btn-form"
+                            style="background: rgb(75, 204, 97)"><span>Registrar</span></button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <div class="card-body">
             <table id="tabla" class="table table-striped shadow-lg mt-4" style="width:100%">
