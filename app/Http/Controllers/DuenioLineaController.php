@@ -36,7 +36,28 @@ class DuenioLineaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           'aporte'=>'required|numeric',
+           'fecha'=>'required|date',
+           'descripcion'=>'required|string',
+           'linea_id'=>'required'
+        ]);
+       
+        $duenios=Duenio::join('duenio_lineas','duenios.id','=','duenio_lineas.duenio_id')
+        ->where('duenio_lineas.linea_id',$request->linea_id)
+        ->select('duenios.*')
+        ->groupBy('duenios.id')
+        ->get();
+        foreach ($duenios as $duenio) {
+            DuenioLinea::create([
+                'aporte'=>$request->aporte,
+                'fecha'=>$request->fecha,
+                'descripcion_aporte'=>$request->descripcion,
+                'linea_id'=>$request->linea_id,
+                'duenio_id'=>$duenio->id
+            ]);
+        }
+        return redirect()->route('admin.linea.show',$request->linea_id);
     }
 
     /**
@@ -51,7 +72,7 @@ class DuenioLineaController extends Controller
         $duenio=Duenio::all()->find($id);
         $dueniolineas=DuenioLinea::where('duenio_id',$id)->get();
         $linea=$duenio->duenioLineas->first()->linea;
-       
+        
         return view('Admin.user.aportes.show',compact('dueniolineas','duenio','linea'));
     }
 
@@ -73,9 +94,25 @@ class DuenioLineaController extends Controller
      * @param  \App\Models\DuenioLinea  $duenioLinea
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DuenioLinea $duenioLinea)
+    public function update(Request $request, $id)
     {
+ 
+        $request->validate([
+            'aporte'=>'nullable|numeric',
+            'fecha'=>'nullable|date',
+            'descripcion'=>'nullable|string',
+            'aporte_pagado'=>'required|numeric',
+            'linea_id'=>'required'
+         ]);
+         $dl=DuenioLinea::all()->find($id);
         
+         if(isset($dl)){
+               $dl->aporte_pagado=$request->aporte_pagado;
+               $dl->save();
+               return redirect()->route('admin.dueniolinea.show',$dl->duenio->id);
+         }else{
+            return "ERROR, dueñoo línea no existe";
+         }
     }
 
     /**

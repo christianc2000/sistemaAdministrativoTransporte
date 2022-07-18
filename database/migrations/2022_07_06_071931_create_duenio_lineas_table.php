@@ -18,7 +18,8 @@ class CreateDuenioLineasTable extends Migration
 
             $table->decimal('aporte');
             $table->date('fecha');
-
+            $table->text('descripcion_aporte')->nullable();
+            $table->decimal('aporte_pagado')->default(0);
             $table->foreignId('duenio_id')->references('id')->on('duenios');
             $table->foreignId('linea_id')->references('id')->on('lineas');
 

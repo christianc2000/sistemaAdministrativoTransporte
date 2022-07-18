@@ -4,26 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\AdministradorInstitucion;
 use App\Models\Duenio;
-use App\Models\DuenioLinea;
 use App\Models\Institucion;
-use App\Models\Lineas;
-use App\Models\User;
+use App\Models\Linea;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
-class LineasController extends Controller
+class LineaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         /* $chofer=User::all()->where('tipo','C');
         return view('inicio.foto',compact('chofer'));*/
-        $lineas = Lineas::all();
+        $lineas = Linea::all();
 
         return view('Admin.user.linea.index', compact('lineas'));
     }
@@ -65,7 +57,7 @@ class LineasController extends Controller
             'foto' =>  'required|mimes:jpg,jpeg,bmp,png|max:2048|nullable',
         ]);
 
-        $linea = new Lineas();
+        $linea = new Linea();
         $linea->nrolinea = $request->nrolinea;
         $linea->telefono = $request->telefono;
         $linea->sede = $request->sede;
@@ -92,7 +84,7 @@ class LineasController extends Controller
      */
     public function show($id)
     {
-        $linea = Lineas::all()->find($id);
+        $linea = Linea::all()->find($id);
 
         if (isset($linea)) {
             //**********aportes del duenio
@@ -124,7 +116,7 @@ class LineasController extends Controller
      */
     public function edit($id)
     {
-        $linea = Lineas::all()->find($id);
+        $linea = Linea::all()->find($id);
         $institucions = Institucion::all();
         $adminInstitucions = AdministradorInstitucion::join('users', 'users.id', '=', 'administrador_institucions.user_id')
             ->select('administrador_institucions.id', 'users.ci', 'users.nombre', 'administrador_institucions.institucion_id')
@@ -151,7 +143,7 @@ class LineasController extends Controller
             'foto' =>  'mimes:jpg,jpeg,bmp,png|max:2048|nullable',
         ]);
 
-        $linea = Lineas::all()->find($id);
+        $linea = Linea::all()->find($id);
         if (isset($linea)) {
             $linea->nrolinea = $request->nrolinea;
             $linea->telefono = $request->telefono;
@@ -185,7 +177,7 @@ class LineasController extends Controller
      */
     public function destroy($id)
     {
-        $linea = Lineas::all()->find($id);
+        $linea = Linea::all()->find($id);
         if (isset($linea)) {
             $linea->delete();
             return redirect()->route('admin.linea.index');

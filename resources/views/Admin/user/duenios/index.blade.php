@@ -19,6 +19,7 @@
                         <th scope="col">NOMBRE</th>
                         <th scope="col" style="text-align:center">SEXO</th>
                         <th scope="col" style="text-align:center">TELEFONO</th>
+                        <th scope="col">LINEA</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -30,6 +31,8 @@
                             <td scope="col">{{ $duenio->nombre }} {{ $duenio->apellido }}</td>
                             <td scope="col" style="text-align:center">{{ $duenio->sexo }}</td>
                             <td scope="col" style="text-align:center">{{ $duenio->telefono }}</td>
+                            
+                            <td scope="col">{{$lineas->find($duenio->duenioLineas->first()->linea_id)->nrolinea}}</td>
                             <td>
                                 <form action="{{ route('admin.duenio.destroy', $duenio->id) }}" method="POST">
                                     <a href="{{ route('admin.duenio.show', $duenio->id) }}"

@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(InstitucionSeeder::class);
         $this->call(AdministradorInstitucionSeeder::class);
         $this->call(ChoferSeeder::class);
-        $this->call(LineasSeeder::class);
+        $this->call(LineaSeeder::class);
         $this->call(RequisitoSeeder::class);
         $this->call(DuenioSeeder::class);
 

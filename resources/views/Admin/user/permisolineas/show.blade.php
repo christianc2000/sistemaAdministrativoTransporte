@@ -1,49 +1,32 @@
 @extends('adminlte::page')
 
-@section('title', 'Línea')
+@section('title', 'Permisos')
 
 @section('content_header')
-    <h1>LISTA DE LÍNEAS</h1>
+    <h1>Lista de Permiso de la línea {{$linea->nrolinea}}</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.linea.create') }}" class="btn btn-primary">Crear Línea</a>
+            <a href="{{ route('admin.linea.create') }}" class="btn btn-primary">Crear Permiso</a>
         </div>
         <div class="card-body">
             <table id="tabla" class="table table-striped shadow-lg mt-4" style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col">LÍNEA</th>
-                        <th scope="col">SEDE</th>
-                        <th scope="col">FOTO</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">ACTIVO</th>
+                        <th scope="col">DUEÑO</th>
+                        <th scope="col">ACCIONES</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($lineas as $linea)
+                    @foreach ($permisolineas as $plinea)
                         <tr>
-                            <td scope="col" style="text-align:center; font-weight: 900">{{ $linea->nrolinea }}</td>
-
-                            <td scope="col">{{ $linea->sede }}</td>
-                            <td scope="col"><img src="{{ asset($linea->foto) }}" alt="" width="130"
-                                    height="120"></td>
-                            <td>
-                                <form action="{{ route('admin.linea.destroy', $linea->id) }}" method="POST">
-                                    <a href="{{ route('admin.linea.show', $linea->id) }}"
-                                        class="btn btn-primary">Dueños</a>
-                                    <a href="{{ route('admin.permiso.show', $linea->id) }}"
-                                        class="btn btn-warning">Permisos</a>
-                                    <a href="{{ route('admin.linea.edit', $linea->id) }}"
-                                        class="btn btn-success">Editar</a>
-                                    @csrf
-                                    <!--metodo para añadir token a un formulario-->
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
-                            </td>
+                        
                         </tr>
                     @endforeach
 

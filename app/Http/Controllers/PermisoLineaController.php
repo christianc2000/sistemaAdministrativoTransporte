@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Linea;
+use App\Models\Lineas;
 use App\Models\PermisoLinea;
 use Illuminate\Http\Request;
 
@@ -44,9 +46,12 @@ class PermisoLineaController extends Controller
      * @param  \App\Models\PermisoLinea  $permisoLinea
      * @return \Illuminate\Http\Response
      */
-    public function show(PermisoLinea $permisoLinea)
-    {
-        //
+    public function show($id)
+    {//el id de la linea
+        $linea=Linea::all()->find($id);
+        $permisolineas=$linea->permisoLineas;
+
+        return view('Admin.user.permisolineas.show',compact('linea','permisolineas'));
     }
 
     /**
