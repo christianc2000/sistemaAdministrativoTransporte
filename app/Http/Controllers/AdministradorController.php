@@ -99,9 +99,33 @@ class AdministradorController extends Controller
      * @param  \App\Models\Administrador  $administrador
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Administrador $administrador)
+    public function update(Request $request, $ci)
     {
-        //
+        $user = User::find($ci);
+        $user->nombre = $request->get('name');
+        $user->apellido = $request->get('apellido');
+        $user->email = $request->get('email');
+        // $user->save();
+        // $user->syncRoles($request->rol); //sincronizar rol
+        $user->ci = $request->get('ci');
+        $user->nombre = $request->get('name');
+        $user->apellido = $request->get('apellido');
+        $user->sexo = $request->get('sexo');
+        $user->fecha_nac = $request->get('fecha_nac');
+        $user->telefono = $request->get('telefono');
+        
+        if ($request->password != 'xxxxxxxxx') {
+            $user->password = bcrypt($request->get('password'));
+        }
+        $user->email = $request->get('email');
+        // $users->foto = $request->get('foto');
+        $user->save();
+        // $users->assignRole($request->rol); //crear rol
+        // $users->syncRoles($request->rol);//sincronizar rol
+        //    return redirect()->route('users.edit', $users)->with('info', 'Se asignó los roles correctamente');
+
+
+        return redirect()->route('administradors.index')->with('info', 'Se editó el usuario correctamente');;
     }
 
     /**
