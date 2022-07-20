@@ -19,17 +19,25 @@
        <div class="card">
             <div class="card-header"> Recorridos </div>
             <div class="card-body">
-                <a href="recorridos/create" class="btn btn-primary">Crear Recorrido</a>
-                <a href="/tarjetas" class="btn btn-info">Ver Tarjetas</a>
-                <table id="recorridos" class="table table-striped mt-4" style="width:100%">
+                <div class="form-group">
+                    <a href="/recorridos" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>
+                </div>
+                <div class="col-sm-8">
+                    <h3 class="col-sm-20">Recorrido Tarjeta {{$tarjeta_id}}</h3>
+                    <div class="form-group row" style="margin-left: 5px">
+                        <label for="" class="col-sm-3 col-form-label">Número de interno: </label>
+                        <div class="col-sm-5">
+                            <label for="" class="col-form-label" style="font-weight: normal"><?php foreach($chofers as $chofer) { echo $chofer->nro_interno; }?></label>
+                        </div>
+                    </div>
+                </div>
+                <table id="tarjeta" class="table table-striped mt-4" style="width:100%">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th class="text-center">Nro. Recorrido</th>
                             <th>Hora Partida</th>
                             <th>Hora Llegada</th>
-                            <th>ID Tarjeta</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,37 +47,20 @@
                             <td class="text-center">{{$recorrido -> nro_recorrido}}</td>
                             <td>{{$recorrido -> hora_partida}}</td>
                             <td>{{$recorrido -> hora_llegada}}</td>
-                            <td>{{$recorrido -> tarjeta_id}}</td>
-                            <td>
-                                <form action="{{route ('recorridos.destroy', $recorrido -> id)}}" method="POST">
-                                
-                                <a href="/recorridos/{{$recorrido -> id}}/edit" class="btn btn-warning">Editar</a>
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger">Borrar</button>
-                                <a href="{{route ('recorridos.show', $recorrido -> tarjeta_id)}}" class="btn btn-info">Tarjeta</a>
-                                </form>
-                            </td>
                         </tr>
                     @endforeach
                     </tbody>
-                </table>
+                </table>             
             </div>
         </div>
 
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+   @stop
+  </body>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    
-    <script>
-        $(document).ready(function () {
-        $('#recorridos').DataTable();
-        });
-    </script>
-   @endsection
-  </body>
+
 </html>
