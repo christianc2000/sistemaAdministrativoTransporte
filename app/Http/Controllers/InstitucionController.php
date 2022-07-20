@@ -14,7 +14,9 @@ class InstitucionController extends Controller
      */
     public function index()
     {
-        //
+        $institucions = Institucion::all();
+        
+        return view('Admin.institucion.index', compact('institucions'));
     }
 
     /**
@@ -24,7 +26,7 @@ class InstitucionController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.institucion.create');
     }
 
     /**
@@ -35,7 +37,13 @@ class InstitucionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $institucion = new Institucion();
+        $institucion->nombre = $request->get('name');
+        $institucion->direccion = $request->get('direccion');
+        $institucion->telefono = $request->get('telefono');
+        $institucion->administrador_id = auth()->id();
+        $institucion->save();
+        return redirect()->route('institucions.index')->with('info', 'Se creó una nueva institucion'); //
     }
 
     /**
@@ -57,7 +65,7 @@ class InstitucionController extends Controller
      */
     public function edit(Institucion $institucion)
     {
-        //
+        return view('admin.institucion.edit', compact('institucion'));
     }
 
     /**
@@ -69,7 +77,13 @@ class InstitucionController extends Controller
      */
     public function update(Request $request, Institucion $institucion)
     {
-        //
+        $institucion->nombre= $request->get('name');
+        $institucion->direccion= $request->get('direccion');
+        $institucion->telefono= $request->get('telefono');
+
+        $institucion->save();
+        return redirect()->route('institucions.index')->with('info', 'Se Editó la institucion'); //
+
     }
 
     /**
@@ -80,6 +94,8 @@ class InstitucionController extends Controller
      */
     public function destroy(Institucion $institucion)
     {
-        //
+        $institucion->delete();
+        return redirect()->route('institucions.index')->with('info', 'Se eliminó la institucion'); //
+
     }
 }

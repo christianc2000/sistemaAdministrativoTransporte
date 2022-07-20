@@ -1,15 +1,33 @@
 @extends('adminlte::page')
 
-@section('title', 'EDITAR ADMINISTRADOR')
+@section('title', 'EDITAR ADMINISTRADOR INSTITUCION')
 
 @section('content_header')
-    <h1>Editar Administrador</h1>
+    <h1>Editar Administrador de institucion</h1>
 @stop
 
 @section('content')
-    <form action="{{ route('administradors.update', $users->id) }}" method="POST">
+    <form action="{{ route('administradorInstitucions.update', $users->id) }}" method="POST">
         @csrf
         @method('PUT')
+
+        <div class="mb-3">
+            <label for="" class="col-form-labelel">Seleccionar institucion que administrará</label>
+            <div></div>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="institucion_id">
+                {{-- <option selected>seleccionar Institucion</option> --}}
+                @foreach ($institucions as $institucion)
+                    {{-- <option value="{{$user->ci}}" >{{$user}} </option> --}}
+                    <option value="{{ $institucion->id }}" {{$adminIns->institucion_id==$institucion->id? ('selected'):('')}}>{{ $institucion->nombre }}</option>
+                @endforeach
+            </select>
+
+            @error('institucion_id')
+                <br>
+                <small>{{ $message }} </small>
+            @enderror
+        </div>
+
         <div class="mb-3">
             <label for="" class="col-form-labelel">C.I.</label>
             <input id="ci" name="ci" type="text" value="{{ $users->ci }}" required autofocus autocomplete="id"
@@ -110,7 +128,7 @@
             </div> --}}
 
         <!--asignar rol-->
-        <a href="{{ route('administradors.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
+        <a href="{{ route('administradorInstitucions.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
         <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
     </form>
 @stop

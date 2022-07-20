@@ -3,71 +3,38 @@
 @section('title', 'EDITAR ADMINISTRADOR')
 
 @section('content_header')
-    <h1>Editar Administrador</h1>
+    <h1>Editar Institucion</h1>
 @stop
 
 @section('content')
-    <form action="{{ route('administradors.update', $users->id) }}" method="POST">
+    <form action="{{ route('institucions.update', $institucion) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-3">
-            <label for="" class="col-form-labelel">C.I.</label>
-            <input id="ci" name="ci" type="text" value="{{ $users->ci }}" required autofocus autocomplete="id"
-                class="form-control" tabindex="1">
-        </div>
-        <div class="mb-3">
             <label for="" class="col-form-labelel">Nombre</label>
-            <input id="name" name="name" type="text" value="{{ $users->nombre }}" required autofocus autocomplete="name"
+            <input id="name" name="name" type="text" value="{{ $institucion->nombre }}" required autofocus autocomplete="name"
                 class="form-control" tabindex="1">
         </div>
         <div class="mb-3">
-            <label for="" class="col-form-labelel">Apellido</label>
-            <input id="apellido" name="apellido" type="text" value="{{ $users->apellido }}" required autofocus autocomplete="name"
+            <label for="" class="col-form-labelel">Direccion</label>
+            <input id="direccion" name="direccion" type="text" value="{{ $institucion->direccion }}" required autofocus autocomplete="name"
                 class="form-control" tabindex="1">
         </div>
-        <!--ERROR codigo-->
-        <div class="mb-3">
-            <label for="" class="col-form-labelel">Sexo</label>
-            <div></div>
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="sexo">
-                <option value="M" {{$users->sexo=='M'? ('selected'):('')}}>Masculino</option>
-                <option value="F" {{$users->sexo=='F'? ('selected'):('')}}>femenino</option>
-            </select>
-        </div>
+        
         <!--***************************************-->
-        <div class="mb-3">
-            <label for="" class="col-form-labelel">fecha de nacimiento</label>
-            <input id="fecha_nac" name="fecha_nac" type="date" step="any" value="{{ $users->fecha_nac }}" class="form-control"
-                tabindex="1" required autofocus autocomplete="fecha_nac">
-            @error('fecha_nac')
-                <br>
-                <small>{{ $message }} </small>
-            @enderror
-        </div>
+        
         <div class="mb-3">
             <label for="" class="col-form-label">Telefono</label>
-            <input id="telefono" name="telefono" type="number" class="form-control" tabindex="2" required autofocus value="{{ $users->telefono }}"
+            <input id="telefono" name="telefono" type="number" class="form-control" tabindex="2" required autofocus value="{{ $institucion->telefono }}"
                 autocomplete="telefono">
-            @error('email')
+            @error('telefono')
                 <br>
                 <small>*{{ $message }} </small>
             @enderror
         </div>
-        <div class="mb-3">
-            <label for="" class="col-form-label">Correo electronico</label>
-            <input id="email" name="email" type="email" value="{{ $users->email }}" required autofocus
-                autocomplete="email" class="form-control" tabindex="2">
-        </div>
-        <!--ERROR nombre-->
 
         <!--***************************************-->
-        <div class="mb-3">
-            <label for="" class="col-form-label">Contraseña</label>
-            <input id="precio" name="password" type="password" value="xxxxxxxxx" required autofocus autocomplete="precio"
-                class="form-control" tabindex="2">
-        </div>
-        <!--ERROR contraseña-->
-
+       
         <!--***************************************-->
 
         {{-- <div class="mb-3">
@@ -110,7 +77,7 @@
             </div> --}}
 
         <!--asignar rol-->
-        <a href="{{ route('administradors.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
+        <a href="{{ route('institucions.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
         <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
     </form>
 @stop

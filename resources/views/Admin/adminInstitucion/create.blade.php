@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'CREAR USUARIO')
+@section('title', 'CREAR ADMINISTRADOR DE INSTITUCION')
 
 @section('content_header')
-    <h1>Crear Administrador</h1>
+    <h1>Crear Administrador de institucion</h1>
 @stop
 
 @section('content')
-    <form action="{{ route('administradors.store') }}" method="POST">
+    <form action="{{ route('administradorInstitucions.store') }}" method="POST">
         @csrf
         @if (count($errors) > 0)
             <div class="alert alert-danger" rote="alert">
@@ -19,6 +19,23 @@
             </div>
 
         @endif
+        
+        <div class="mb-3">
+            <label for="" class="col-form-labelel">Seleccionar institucion</label>
+            <div></div>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="institucion_id">
+                {{-- <option selected>seleccionar Institucion</option> --}}
+                @foreach ($institucions as $institucion)
+                    {{-- <option value="{{$user->ci}}" >{{$user}} </option> --}}
+                    <option value="{{ $institucion->id }}">{{ $institucion->nombre }}</option>
+                @endforeach
+            </select>
+
+            @error('institucion_id')
+                <br>
+                <small>{{ $message }} </small>
+            @enderror
+        </div>
 
         <div class="mb-3">
             <label for="" class="col-form-labelel">ci</label>
@@ -135,7 +152,7 @@
         </div> --}}
 
         <!--asignar rol-->
-        <a href="{{ route('administradors.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
+        <a href="{{ route('administradorInstitucions.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
         <button type="submit" class="btn btn-outline-success" tabindex="4">Guardar</button>
     </form>
 @stop
