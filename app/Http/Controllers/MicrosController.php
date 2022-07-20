@@ -14,7 +14,8 @@ class MicrosController extends Controller
      */
     public function index()
     {
-        //
+        $micros=Micros::all();
+        return view('Admin.user.micros.index',compact('micros'));
     }
 
     /**

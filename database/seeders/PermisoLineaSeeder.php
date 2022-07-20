@@ -37,7 +37,7 @@ class PermisoLineaSeeder extends Seeder
         'duenio_id' => 10
       ],
       [
-        'activo' => 1,
+        'activo' => true,
         'linea_id' => 6,
         'duenio_id' => 1
       ],

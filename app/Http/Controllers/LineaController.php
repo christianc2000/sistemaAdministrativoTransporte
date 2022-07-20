@@ -102,6 +102,7 @@ class LineaController extends Controller
             ->groupBy('duenios.id.*')
             ->orderBy('duenios.id','asc')
             ->get();*/
+            
             return view('Admin.user.linea.show', compact('duenios', 'linea'));
         } else {
             return "ERROR, línea no existe en la base de datos";

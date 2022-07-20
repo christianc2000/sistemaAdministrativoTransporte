@@ -282,6 +282,11 @@ return [
             'icon' => 'fas fa-solid fa-users'
         ],
         [
+            'text' => 'Micros',
+            'url'  => 'admin/micro',
+            'icon' => 'fas fa-solid fa-bus-simple'
+        ],
+        [
             'text' => 'profile',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',

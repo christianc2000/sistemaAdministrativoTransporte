@@ -268,9 +268,7 @@
                // $("#formulario").attr("action",route);
             });
 
-            $(".btn-form").on('click', function() {
-                
-            });
+            
         });
     </script>
     <script>

@@ -16,7 +16,7 @@
                     <label for="inputCI" class="col-sm-2 col-form-label">Carnet de Identidad</label>
                     <div class="col-sm-10">
                         <input name="ci" type="number" min="0" class="form-control" id="ci"
-                            placeholder="Carnet de identidad">
+                            placeholder="Carnet de identidad" value="{{ old('ci') }}">
                         @error('ci')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -27,7 +27,7 @@
                     <label for="inputNOMBRE" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
                         <input name="nombre" type="text" class="form-control" id="nombre"
-                            placeholder="Nombre del dueño">
+                            placeholder="Nombre del dueño" value="{{ old('nombre') }}">
                         @error('nombre')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -38,7 +38,7 @@
                     <label for="inputAPELLIDO" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">
                         <input name="apellido" type="text" class="form-control" id="apellido"
-                            placeholder="Apellido del dueño">
+                            placeholder="Apellido del dueño" value="{{ old('apellido') }}">
                         @error('apellido')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -48,12 +48,12 @@
                 <div class="form-group row">
                     <label for="inputSEXO" class="col-sm-2 col-form-label">Sexo</label>
                     <div class="col-sm-10">
-                        <select class="form-control" aria-label="Default select example" id="sexo" name="sexo">
+                        <select class="form-control" aria-label="Default select example" id="sexo" name="sexo" value="{{ old('sexo') }}">
                             <option value="" selected disabled>Seleccionar</option>
-                            <option value="M">
+                            <option value="M" {{ old('sexo') == "M" ? 'selected' : '' }}>
                                 Masculino
                             </option>
-                            <option value="F">
+                            <option value="F" {{ old('sexo') == "F" ? 'selected' : '' }}>
                                 Femenino
                             </option>
                         </select>
@@ -67,7 +67,7 @@
                     <label for="inputFECHANAC" class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
                     <div class="col-sm-10">
                         <input name="fecha_nac" type="date" class="form-control" id="fecha_nac"
-                            placeholder="Fecha de nacimiento">
+                            placeholder="Fecha de nacimiento" value="{{ old('fecha_nac') }}">
                         @error('fecha_nac')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -77,7 +77,7 @@
                 <div class="form-group row">
                     <label for="inputEMAIL" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input name="email" type="email" class="form-control" id="email" placeholder="Email">
+                        <input name="email" type="email" class="form-control" id="email" placeholder="Email" value="{{ old('email') }}">
                         @error('email')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -87,7 +87,7 @@
                 <div class="form-group row">
                     <label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono</label>
                     <div class="col-sm-10">
-                        <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Teléfono">
+                        <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Teléfono" value="{{ old('telefono') }}">
                         @error('telefono')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -97,10 +97,10 @@
                 <div class="form-group row">
                     <label for="inputLINEA" class="col-sm-2 col-form-label">Linea</label>
                     <div class="col-sm-10">
-                        <select class="form-control" aria-label="Default select example" id="linea_id" name="linea_id">
+                        <select class="form-control" aria-label="Default select example" id="linea_id" name="linea_id" value="{{ old('linea_id') }}">
                             <option value="" selected disabled>Seleccionar</option>
                             @foreach ($lineas as $linea)
-                                <option value="{{$linea->id}}">
+                                <option value="{{$linea->id}}" {{ old('linea_id') == $linea->id ? 'selected' : '' }}>
                                     {{$linea->nrolinea}}
                                 </option>
                             @endforeach
@@ -114,9 +114,9 @@
 
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="submit" class="btn btn-success" style="background: #008085; border:#008085">Guardar</button>
             </form>
-            <a href="{{ route('admin.duenio.index') }}" class="btn btn-danger">Cancelar</a>
+            <a href="{{ route('admin.duenio.index') }}" class="btn btn-danger" style="border: #B42C40">Cancelar</a>
         </div>
 
     </div>

@@ -3,7 +3,8 @@
 @section('title', 'Línea')
 
 @section('content_header')
-    <h1>LISTA DE PERMISOS DE LA LINEA {{ $linea->nrolinea }}</h1>
+    <h1>LISTA DE PERMISOS DEL DUENIO </h1>
+    <h2>{{ $duenio->nombre}} {{$duenio->apellido}} - Línea {{$linea->nrolinea}}</h2>
 @stop
 
 @section('content')
@@ -32,20 +33,7 @@
                     <form action="{{ route('admin.permiso.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
-                            <div class="form-group row" style="margin-left: 5px">
-                                <label for="labelAporte" class="col-sm-2 col-form-label">Dueño</label>
-                                <div class="col-sm-10">
-                                    <select name="duenio_id" id="duenio_id" class="form-control">
-                                        <option value="" selected disabled>Seleccionar</option>
-                                        @foreach ($duenios as $duenio)
-                                            <option value="{{ $duenio->id }}">
-                                                {{ $duenio->nombre }} {{ $duenio->apellido }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                            </div>
+                            
                             <div class="form-group row" style="margin-left: 5px">
                                 <label for="labelLinea" class="col-sm-2 col-form-label">Línea</label>
                                 <div class="col-sm-10">
@@ -69,7 +57,8 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">ACTIVO</th>
-                        <th scope="col">DUEÑO</th>
+                        <th scope="col">MICRO</th>
+                        <th scope="col">CHOFER</th>
                         <th scope="col">ACCIONES</th>
                     </tr>
                 </thead>
@@ -91,8 +80,11 @@
 
                                 </td>
                             @endif
-                            
-                            <td scope="col">{{$pl->duenio->nombre}} {{$pl->duenio->apellido}}</td>
+    
+                            <td scope="col">
+                                {{$pl->activo}}
+                            </td>
+                            <td scope="col">{{$pl->duenio->nombre}} {{$pl->duenio->apellido}}
                             <td>
                                 <form action="{{ route('admin.permiso.destroy', $pl->id) }}" method="POST">
                                     <div class="row ">
