@@ -93,12 +93,19 @@ class PermisoLineaController extends Controller
     public function showOne($id)
     { //el id de la linea
         $duenio = Duenio::all()->find($id);
+        
 
         $permisolineas =  PermisoLinea::where('duenio_id', $duenio->id)->get();
-        
+       
         $chofer_micros=ChoferMicro::where('fecha_baja',null)->get();
         // return $permisolineas;
-        $linea = Linea::all()->find($permisolineas[0]['linea_id']);
+        if ($permisolineas!=null){
+             $linea=$duenio->duenioLineas->first()->linea;
+          
+        }else{
+            $linea = Linea::all()->find($permisolineas[0]['linea_id']);
+        }
+      
 
         return view('Admin.user.permisolineas.showDuenio', compact('linea', 'permisolineas', 'duenio', 'chofer_micros'));
     }

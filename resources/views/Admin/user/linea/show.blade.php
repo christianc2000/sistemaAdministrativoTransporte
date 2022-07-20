@@ -29,6 +29,13 @@
                 </div>
                 <div class="col-sm-9">
                     <div class="form-group row" style="margin-left: 5px">
+                        <label for="labelLinea" class="col-sm-2 col-form-label">Linea</label>
+                        <div class="col-sm-10">
+                            <label for="linea" class="col-form-label"
+                                style="font-weight: normal">{{ $linea->nrolinea}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-left: 5px">
                         <label for="labelSede" class="col-sm-2 col-form-label">Sede</label>
                         <div class="col-sm-10">
                             <label for="sede" class="col-form-label"
