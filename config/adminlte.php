@@ -258,7 +258,7 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text'    => 'usuario administrador',
+            'text'    => 'usuarios',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
@@ -266,7 +266,16 @@ return [
                     'text' => ' Administrador global',
                     'url'  => 'admin/administradors',
                 ],
-                
+                [
+                    'icon' => 'fas fa-user-injured',
+                    'text' => ' Administrador de institucion',
+                    'url'  => 'admin/administradorInstitucions',
+                ],
+                [
+                    'icon' => 'fas fa-user-injured',
+                    'text' => ' Chofer',
+                    'url'  => 'admin/chofers',
+                ],
 
             ],
 
@@ -279,7 +288,12 @@ return [
         [
             'text' => 'Dueños',
             'url'  => 'admin/duenio',
-            'icon' => 'fas fa-solid fa-users'
+            'icon' => 'fas fa-solid fa-users',
+        ],
+        [
+            'icon' => 'fas fa-user-injured',
+            'text' => 'Instituciones',
+            'url'  => 'admin/institucions',
         ],
         [
             'text' => 'Micros',

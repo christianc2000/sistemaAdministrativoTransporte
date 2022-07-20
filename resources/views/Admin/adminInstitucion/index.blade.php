@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Administrador')
+@section('title', 'ADMINISTRADOR INSTITUCION')
 
 @section('content_header')
-    <h1>Lista de Administradores</h1>
+    <h1>Lista de Administradores de instituciones</h1>
 @stop
 
 @section('content')
@@ -14,7 +14,7 @@
         </div>
     @endif
 
-    <a href="{{ route('administradors.create') }}" class="btn btn-primary mb-4">CREAR</a>
+    <a href="{{ route('administradorInstitucions.create') }}" class="btn btn-primary mb-4">CREAR</a>
 
     <table id="users" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
         <thead class="bg-dark text-white">
@@ -36,9 +36,9 @@
                     <td>
 
 
-                        <form action="{{ route('administradors.destroy', $user->id) }}" method="POST">
+                        <form action="{{ route('administradorInstitucions.destroy', $user) }}" method="POST">
                             {{-- <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Asignar rol</a> --}}
-                            <a href="{{ route('administradors.edit', $user->id) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('administradorInstitucions.edit', $user) }}" class="btn btn-primary">Editar</a>
                             @csrf <!--metodo para añadir token a un formulario-->
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Eliminar</button>

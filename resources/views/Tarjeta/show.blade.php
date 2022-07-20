@@ -11,63 +11,48 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Tarjetas</title>
+    <title>Recorridos</title>
   </head>
-  @section('content')
   <body>
+  @section('content')
     <div class="container">
        <div class="card">
-            <div class="card-header"> Tarjetas </div>
+            <div class="card-header"> Tarjeta </div>
             <div class="card-body">
-                <form action="{{route ('tarjetas.store')}}" method="POST">
-                    @csrf
-                    <input type="hidden" id="h" name="h" value="">
+                <div class="form-group">
                     <a href="/recorridos" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>
-                    <button type="submit" class="btn btn-primary">Crear Tarjeta</button>
-                </form>
-                <div align='center'>
-                <table id="tarjetas" class="table table-striped table-bordered" style="width:70%">
+                </div>
+                <div class="col-sm-8">
+                    <h3 class="col-sm-20">ID Tarjeta {{$id}}</h3>
+                </div>
+                <table id="tarjeta" class="table table-striped mt-4" style="width:100%">
                     <thead>
                         <tr>
-                            <th class="text-center">ID</th>
-                            <th scope="col"class="text-center">Acciones</th>
+                            <th class="text-center">Nro. Recorrido</th>
+                            <th>Hora Partida</th>
+                            <th>Hora Llegada</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($tarjetas as $tarjeta)
                         <tr>
-                            <td class="text-center">{{$tarjeta -> id}}</td>
-                            <td class="text-center">
-                                <form action="{{route ('tarjetas.destroy', $tarjeta -> id)}}" method="POST">
-                             <!--   <a href="/tarjetas/{{$tarjeta -> id}}/edit" class="btn btn-warning">Editar</a>-->
-                                @csrf
-                                @method('delete')
-                                <a href="{{route ('tarjetas.show', $tarjeta -> id)}}" class="btn btn-info">Mostrar</a>
-                                <button type="submit" class="btn btn-danger">Borrar</button>
-                                </form>
-                            </td>
+                            <td class="text-center">{{$tarjeta -> nro_recorrido}}</td>
+                            <td>{{$tarjeta -> hora_partida}}</td>
+                            <td>{{$tarjeta -> hora_llegada}}</td>
                         </tr>
                     @endforeach
                     </tbody>
-                </table>
-                </div>
+                </table>             
             </div>
         </div>
 
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+   @stop
+  </body>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    
-    <script>
-        $(document).ready(function () {
-        $('#tarjetas').DataTable();
-        });
-    </script>
-   
-  </body>
-  @endsection
+
 </html>

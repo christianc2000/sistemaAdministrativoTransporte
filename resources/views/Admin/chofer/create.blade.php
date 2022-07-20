@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'CREAR USUARIO')
+@section('title', 'CREAR CHOFER')
 
 @section('content_header')
-    <h1>Crear Administrador</h1>
+    <h1>Crear chofer</h1>
 @stop
 
 @section('content')
-    <form action="{{ route('administradors.store') }}" method="POST">
+    <form action="{{ route('chofers.store') }}" method="POST">
         @csrf
         @if (count($errors) > 0)
             <div class="alert alert-danger" rote="alert">
@@ -19,6 +19,23 @@
             </div>
 
         @endif
+        
+        <div class="mb-3">
+            <label for="" class="col-form-labelel">Seleccionar Micro</label>
+            <div></div>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="micro_id">
+                <option value="">Indefinido</option>
+                @foreach ($micros as $micro)
+                    {{-- <option value="{{$user->ci}}" >{{$user}} </option> --}}
+                    <option value="{{ $micro->id }}">Placa: {{ $micro->placa }}    NRO.: {{ $micro->nro_interno }}</option>
+                @endforeach
+            </select>
+
+            @error('micro_id')
+                <br>
+                <small>{{ $message }} </small>
+            @enderror
+        </div>
 
         <div class="mb-3">
             <label for="" class="col-form-labelel">ci</label>
@@ -49,10 +66,10 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="" class="col-form-labelel">Sexo</label>
+            <label for="" class="col-form-labelel">Seleccionar sexo</label>
             <div></div>
             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="sexo">
-                <option selected>seleccionar sexo</option>
+                {{-- <option selected>seleccionar sexo</option> --}}
                 <option value="M">Masculino</option>
                 <option value="F">femenino</option>
             </select>
@@ -133,9 +150,32 @@
                 <small>*{{ $message }} </small>
             @enderror
         </div> --}}
+        <div class="mb-3">
+            <label for="" class="col-form-labelel">Direccion</label>
+            <input id="direccion" name="direccion" type="text" step="any" value="" class="form-control"
+                tabindex="1" required autofocus autocomplete="direccion">
+            @error('direccion')
+                <br>
+                <small>{{ $message }} </small>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="" class="col-form-labelel">Seleccionar categoria licencia</label>
+            <div></div>
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="cateLicen">
+                {{-- <option >seleccionar categoria</option> --}}
+                <option value="A"> Categoria A</option>
+                <option value="B">Categoria B</option>
+                <option value="C">Categoria C</option>
+            </select>
 
+            @error('cateLicen')
+                <br>
+                <small>{{ $message }} </small>
+            @enderror
+        </div>
         <!--asignar rol-->
-        <a href="{{ route('administradors.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
+        <a href="{{ route('chofers.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
         <button type="submit" class="btn btn-outline-success" tabindex="4">Guardar</button>
     </form>
 @stop

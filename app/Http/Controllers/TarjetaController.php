@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarjeta;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class TarjetaController extends Controller
@@ -49,9 +50,11 @@ class TarjetaController extends Controller
      * @param  \App\Models\Tarjeta  $tarjeta
      * @return \Illuminate\Http\Response
      */
-    public function show(Tarjeta $tarjeta)
+    public function show($id)
     {
-        //
+        $tarjetas = DB::table('recorrido_tarjetas')->select('id','nro_recorrido','hora_partida','hora_llegada')->where('tarjeta_id', $id)->get();
+        
+        return view('Tarjeta.show')->with(['tarjetas' => $tarjetas, 'id' => $id]);
     }
 
     /**

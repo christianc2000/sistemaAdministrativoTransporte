@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Administrador')
+@section('title', 'Instituciones')
 
 @section('content_header')
-    <h1>Lista de Administradores</h1>
+    <h1>Lista de Instituciones</h1>
 @stop
 
 @section('content')
@@ -14,31 +14,29 @@
         </div>
     @endif
 
-    <a href="{{ route('administradors.create') }}" class="btn btn-primary mb-4">CREAR</a>
+    <a href="{{ route('institucions.create') }}" class="btn btn-primary mb-4">CREAR</a>
 
     <table id="users" class="table table-striped table-bordered shadow-lg mt-3" style="width:100%">
         <thead class="bg-dark text-white">
             <tr>
-                <th scope="col">C. I.</th>
                 <th scope="col">NOMBRE</th>
-                <th scope="col">APELLIDO</th>
-                <th scope="col">EMAIL</th>
+                <th scope="col">DIRECCION</th>
+                <th scope="col">TELEFONO</th>
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
         <TBODY>
-            @foreach ($users as $user)
+            @foreach ($institucions as $institucion)
                 <tr>
-                    <td>{{ $user->ci }}</td>
-                    <td>{{ $user->nombre }}</td>
-                    <td>{{ $user->apellido }}</td>
-                    <td>{{ $user->email }}</td>
+                    <td>{{ $institucion->nombre }}</td>
+                    <td>{{ $institucion->direccion }}</td>
+                    <td>{{ $institucion->telefono }}</td>
                     <td>
 
 
-                        <form action="{{ route('administradors.destroy', $user->id) }}" method="POST">
+                        <form action="{{ route('institucions.destroy', $institucion) }}" method="POST">
                             {{-- <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Asignar rol</a> --}}
-                            <a href="{{ route('administradors.edit', $user->id) }}" class="btn btn-primary">Editar</a>
+                            <a href="{{ route('institucions.edit', $institucion) }}" class="btn btn-primary">Editar</a>
                             @csrf <!--metodo para añadir token a un formulario-->
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Eliminar</button>

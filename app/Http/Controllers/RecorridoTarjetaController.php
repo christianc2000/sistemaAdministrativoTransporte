@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RecorridoTarjeta;
 use App\Models\Tarjeta;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class RecorridoTarjetaController extends Controller
@@ -56,9 +57,12 @@ class RecorridoTarjetaController extends Controller
      * @param  \App\Models\RecorridoTarjeta  $recorridoTarjeta
      * @return \Illuminate\Http\Response
      */
-    public function show(RecorridoTarjeta $recorridoTarjeta)
+    public function show($tarjeta_id)
     {
-        //
+        $recorridos = DB::table('recorrido_tarjetas')->select('id','nro_recorrido','hora_partida','hora_llegada')->where('tarjeta_id', $tarjeta_id)->get();
+        $chofers = DB::table('chofer_tarjetas')->select('nro_interno')->where('tarjeta_id', $tarjeta_id)->get();
+
+        return view('Recorrido.show')->with(['recorridos' => $recorridos, 'tarjeta_id'=>$tarjeta_id, 'chofers'=>$chofers]);
     }
 
     /**

@@ -10,17 +10,27 @@ use App\Http\Controllers\LineaController;
 use App\Http\Controllers\LineasController;
 use App\Http\Controllers\MicrosController;
 use App\Http\Controllers\PermisoLineaController;
+use App\Http\Controllers\AdministradorInstitucionController;
+use App\Http\Controllers\ChoferController;
+use App\Http\Controllers\InstitucionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return ("hoal");
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::resource('administradors', AdministradorController::class);
+//Route::resource('administradors', AdministradorController::class);
 Route::resource('linea',LineaController::class)->names('admin.linea');
 Route::resource('duenio',DuenioController::class)->names('admin.duenio');
 Route::resource('dueniolinea',DuenioLineaController::class)->names('admin.dueniolinea');
-Route::post('duniolinea-one',[DuenioLineaController::class,'storeOne'])->name('admin.dueniolinea.storeOne');
+
+Route::post('dueniolinea-one',[DuenioLineaController::class,'storeOne'])->name('admin.dueniolinea.storeOne');
 Route::resource('permiso',PermisoLineaController::class)->names('admin.permiso'); //en el metodo show mandará el id de la linea
 Route::get('permiso-duenio/{id}',[PermisoLineaController::class,'showOne'])->name('admin.permiso.showOne');
 Route::resource('micro',MicrosController::class)->names('admin.micro');
+Route::resource('permiso',PermisoLineaController::class)->names('admin.permiso'); //en el metodo show mandará el id de la linea
+
+Route::resource('administradors', AdministradorController::class);
+Route::resource('institucions', InstitucionController::class);
+Route::resource('administradorInstitucions', AdministradorInstitucionController::class);
+Route::resource('chofers', ChoferController::class);
