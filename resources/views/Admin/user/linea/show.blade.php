@@ -77,8 +77,12 @@
                             <div class="form-group row" style="margin-left: 5px">
                                 <label for="labelAporte" class="col-sm-2 col-form-label">Aporte</label>
                                 <div class="col-sm-10">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Bs</span>
+                                        <span class="input-group-text">0.00</span>
                                     <input name="aporte" type="number" step="0.01" class="form-control" id="aporte"
-                                        placeholder="Monto aporte" required>
+                                        placeholder="Monto aporte" aria-label="Dollar amount (with dot and two decimal places)" required>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row" style="margin-left: 5px">
@@ -126,8 +130,12 @@
                             <div class="form-group row" style="margin-left: 5px">
                                 <label for="labelAporte" class="col-sm-2 col-form-label">Aporte</label>
                                 <div class="col-sm-10">
-                                    <input name="aporte" type="number" step="0.01" class="form-control"
-                                        id="aporte" placeholder="Monto aporte" required>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">Bs</span>
+                                        <span class="input-group-text">0.00</span>
+                                        <input name="aporte" type="number" step="0.01" class="form-control"
+                                            id="aporte" placeholder="Monto aporte" aria-label="Dollar amount (with dot and two decimal places)" required>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group row" style="margin-left: 5px">

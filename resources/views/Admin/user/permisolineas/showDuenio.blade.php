@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1>LISTA DE PERMISOS DEL DUENIO </h1>
-    <h2>{{ $duenio->nombre}} {{$duenio->apellido}} - Línea {{$linea->nrolinea}}</h2>
+    <h2>{{ $duenio->nombre }} {{ $duenio->apellido }} - Línea {{ $linea->nrolinea }}</h2>
 @stop
 
 @section('content')
@@ -16,12 +16,17 @@
                         style="background: #00d8c1; ">
                         <span>Crear Permiso</span>
                     </button>
-
+                </div>
+                <div class="col-sm-4" style="text-align: center">
+                    <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#modalMicroOne"
+                        style="background: #009AAC; ">
+                        <span>Asignar Permiso</span>
+                    </button>
                 </div>
             </div>
 
         </div>
-        <!-- Modal APORTE-ONE -->
+        <!-- Modal PERMISO-ONE -->
         <div class="modal fade" id="modalPermisoOne" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -30,15 +35,66 @@
                         <h5 class="modal-title" id="staticBackdropLabel">Crear Permiso</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin.permiso.store') }}" method="POST">
+                    <form action="{{ route('admin.permiso.storeOne') }}" method="POST">
                         @csrf
                         <div class="modal-body">
-                            
+                            <div class="form-group row" style="margin-left: 5px">
+                                <label for="labelLinea" class="col-sm-2 col-form-label">Duenio</label>
+                                <div class="col-sm-10">
+                                    <label for="labelDuenio" class="col-sm-12 col-form-label"
+                                        style="font-weight: normal">{{ $duenio->nombre }}
+                                        {{ $duenio->apellido }}</label>
+                                    <input name="duenio_id" type="numeric" class="form-control" id="duenio_id"
+                                        value="{{ $duenio->id }}" hidden>
+                                </div>
+
+                            </div>
                             <div class="form-group row" style="margin-left: 5px">
                                 <label for="labelLinea" class="col-sm-2 col-form-label">Línea</label>
                                 <div class="col-sm-10">
+                                    <label for="labellinea" class="col-sm-12 col-form-label"
+                                        style="font-weight: normal">{{ $linea->nrolinea }}</label>
                                     <input name="linea_id" type="numeric" class="form-control" id="linea_id"
-                                        value="{{ $linea->nrolinea }}" readonly required>
+                                        value="{{ $linea->id }}" hidden>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="button btn-form"
+                                style="background: rgb(75, 204, 97)"><span>Asignar Permiso</span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal ASIGNAR PERMISO AL MICRO-ONE -->
+        <div class="modal fade" id="modalMicroOne" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">ASIGNAR PERMISO</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="formulario" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div class="form-group row" style="margin-left: 5px">
+                                <label for="labelPermiso" class="col-sm-4 col-form-label">Seleccionar Permiso</label>
+                                <div class="col-sm-8">
+                                    <select name="permiso_id" id="permiso_id" class="form-control">
+                                        <option value="" selected disabled>Seleccionar</option>
+                                        @foreach ($permisolineas as $pl)
+                                            @if (!$pl->activo)
+                                                <option value="{{ $pl->id }}" name="{{ $pl }}">
+                                                    Permiso - {{ $pl->id }} - linea {{ $linea->nrolinea }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -56,8 +112,9 @@
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
+                        <th scope="col">FECHA</th>
                         <th scope="col">ACTIVO</th>
-                        <th scope="col">MICRO</th>
+                        <th scope="col">PLACA MICRO</th>
                         <th scope="col">CHOFER</th>
                         <th scope="col">ACCIONES</th>
                     </tr>
@@ -66,8 +123,8 @@
 
                     @foreach ($permisolineas as $pl)
                         <tr>
-                            <td scope="col" style="text-align:center; font-weight: 900">{{ $pl->id }}</td>
-
+                            <td scope="col" style=" font-weight: 900">{{ $pl->id }}</td>
+                            <td scope="col">{{ $pl->created_at }}</td>
                             @if ($pl->activo)
                                 {{-- bandera es true significa que todo está en orden --}}
                                 <td scope="col" style="text-align:center">
@@ -80,22 +137,46 @@
 
                                 </td>
                             @endif
-    
+
                             <td scope="col">
-                                {{$pl->activo}}
+
+                                @if ($pl->microActivo->first() != null)
+                                    {{ $pl->microActivo->first()->placa }}
+                                @else
+                                    Sin micro
+                                @endif
+
                             </td>
-                            <td scope="col">{{$pl->duenio->nombre}} {{$pl->duenio->apellido}}
+                            <td scope="col">
+                                @if ($pl->microActivo->first() != null)
+                                    @if ($pl->microActivo->first()->choferMicros != null)
+                                        {{ $pl->microActivo->first()->choferMicros->first()->chofer->user->nombre }}
+                                    @else
+                                        Sin Chofer
+                                    @endif
+                                @else
+                                    Sin Chofer
+                                @endif
+
+                                {{-- @if ($pl->microActivo->first()->choferMicros != null)
+                                 
+                                @else
+                                    Sin Chofer
+                                @endif --}}
                             <td>
                                 <form action="{{ route('admin.permiso.destroy', $pl->id) }}" method="POST">
                                     <div class="row ">
-                                        <a href="{{ route('admin.permiso.update', $pl->id) }}"
-                                            class="btn btn-primary col-sm-6 mb-2"
-                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Asignar</a>
-
+                                        @if ($pl->microActivo->first()!=null)
+                                        <a href="{{ route('admin.micro.baja',$pl->microActivo->first()->id) }}"><button type="button" class="btn btn-primary col-sm-3" >Dar de baja micro</button></a>
+                                        @else
+                                            
+                                        @endif
+                                     
+                                        <a href=""><button type="button" class="btn btn-warning col-sm-3">Dar de baja Chofer</button></a>
                                         @csrf
                                         <!--metodo para añadir token a un formulario-->
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger col-sm-6 mb-2"
+                                        <button type="submit" class="btn btn-danger col-sm-4"
                                             style="width: 90px; margin-left: 5px ">Eliminar</button>
                                     </div>
                                 </form>

@@ -20,4 +20,9 @@ class PermisoLinea extends Model
     public function micros(){
         return $this->hasMany(Micros::class);
     }
+
+    public function microActivo(){
+        $micros=$this->hasMany(Micro::class);
+        return $micros->where('fecha_baja',null);
+    }
 }

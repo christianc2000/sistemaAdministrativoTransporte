@@ -17,7 +17,7 @@
                     <tr>
                         <th scope="col" style="width: 200px ;text-align:center">NRO INTERNO</th>
                         <th scope="col" style="width: 200px ;text-align:center">PLACA</th>
-                        <th scope="col" style="width: 200px ;text-align:center">MODELO</th>
+                        <th scope="col" style="width: 150px ;text-align:center">MODELO</th>
                         <th scope="col" style="width: 200px ;text-align:center">DUEÑO</th>
                         <th scope="col" style="width: 200px ;text-align:center">ESTADO</th>
                         <th scope="col" style="width: 200px ;text-align:center">ACCIONES</th>
@@ -27,30 +27,26 @@
 
                     @foreach ($micros as $micro)
                         <tr>
-                            <td scope="col" style="text-align:center; font-weight: 900">{{$micro->nro_interno}}</td>
-                            <td scope="col" style="text-align:center; font-weight: 900">{{$micro->placa}}</td>
-                            <td scope="col" style="text-align:center">{{$micro->modelo}}</td>
+                            <td scope="col" style="text-align:center; font-weight: 900">{{ $micro->nro_interno }}</td>
+                            <td scope="col" style="text-align:center; font-weight: 900">{{ $micro->placa }}</td>
+                            <td scope="col">{{ $micro->modelo }}</td>
                             <td scope="col">xd</td>
-                           
-                                @if ($micro->fecha_baja!=null)
-                                {{-- bandera es true significa que todo está en orden --}}
-                                <td scope="col" style="text-align:center">
-                                    <div style="border-radius: 4em; background: rgb(224, 128, 128);">Deshabilitad</div>
-                                </td>
-                            @else
-                                <td scope="col" style="text-align:center">
-                                    <div style="border-radius: 4em; background: rgb(151, 245, 182; ">Habilitado</div>
-                                </td>
-                            @endif
-                           
-                            
+                            <td scope="col" style="text-align:center">
+                                @if (isset($micro->fecha_baja))
+                                    {{-- bandera es true significa que todo está en orden --}}
+                                    <div style="border-radius: 4em; background: rgb(224, 128, 128);">Deshabilitado</div>
+                                @else
+                                    <div style="border-radius: 4em; background: rgb(151, 245, 182);">Habilitado</div>
+                                @endif
+                            </td>
+
                             <td scope="col">
                                 <form action="{{ route('admin.linea.destroy', $micro->id) }}" method="POST">
                                     <div class="row ">
                                         <a href="{{ route('admin.micro.show', $micro->id) }}"
                                             class="btn btn-primary col-sm-6 mb-2"
                                             style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Mostrar</a>
-                                      
+
                                     </div>
                                     <div class="row">
                                         <a href="{{ route('admin.micro.edit', $micro->id) }}"
@@ -81,7 +77,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style type="text/css">
         .container-img {
             display: flex;

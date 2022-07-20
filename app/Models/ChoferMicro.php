@@ -14,7 +14,7 @@ class ChoferMicro extends Model
         return $this->belongsTo(Chofer::class);
     }
     public function micro(){
-        return $this->belongsTo(Micros::class);
+        return $this->belongsTo(Micro::class);
     }
     //relación de 1 a mucho
     public function problemas(){

@@ -115,7 +115,7 @@
                 <div class="form-group row">
                     <label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono</label>
                     <div class="col-sm-10">
-                        <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Teléfono" value="{{ old('fecha') }}">
+                        <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Teléfono" value="{{ old('telefono') }}">
                         @error('telefono')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror

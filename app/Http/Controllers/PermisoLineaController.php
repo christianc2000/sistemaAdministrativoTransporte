@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChoferMicro;
 use App\Models\Duenio;
 use App\Models\Linea;
 use App\Models\Lineas;
@@ -45,18 +46,27 @@ class PermisoLineaController extends Controller
             'duenio_id' => 'nullable|numeric'
         ]);
         if ($request->duenio_id != null) {
-            PermisoLinea::create([
+            $pl = PermisoLinea::create([
                 'duenio_id' => $request->duenio_id,
                 'linea_id' => $request->linea_id
             ]);
-        } else {
-            PermisoLinea::create([
+        }
+        return redirect()->route('admin.permiso.show', $request->linea_id);
+    }
+    public function storeOne(Request $request)
+    {
+        $request->validate([
+            'linea_id' => 'required|numeric',
+            'duenio_id' => 'required|numeric'
+        ]);
+      
+            $pl = PermisoLinea::create([
+                'duenio_id' => $request->duenio_id,
                 'linea_id' => $request->linea_id
             ]);
-        }
-        return redirect()->route('admin.permiso.show',$request->linea_id);
+       
+        return redirect()->route('admin.permiso.showOne', $request->duenio_id);
     }
-
     /**
      * Display the specified resource.
      *
@@ -67,9 +77,8 @@ class PermisoLineaController extends Controller
     public function show($id)
     { //el id de la linea
         $linea = Linea::all()->find($id);
-        $permisolineas = PermisoLinea::where('linea_id',$linea->id)->get();
-        
-     
+        $permisolineas = PermisoLinea::where('linea_id', $linea->id)->get();
+
         $duenios = Duenio::join('duenio_lineas', 'duenios.id', '=', 'duenio_lineas.duenio_id')
             ->join('lineas', 'lineas.id', 'duenio_lineas.linea_id')
             ->where('duenio_lineas.linea_id', $linea->id)
@@ -80,16 +89,18 @@ class PermisoLineaController extends Controller
 
         return view('Admin.user.permisolineas.show', compact('linea', 'permisolineas', 'duenios'));
     }
-//MOSTRAR TODOS LOS PERMISOS PERTENECIENTES AL ID DE UN DUEÑO
-public function showOne($id)
+    //MOSTRAR TODOS LOS PERMISOS PERTENECIENTES AL ID DE UN DUEÑO
+    public function showOne($id)
     { //el id de la linea
         $duenio = Duenio::all()->find($id);
-       
-       $permisolineas= $duenio->permisoLineas;
-      // return $permisolineas;
-       $linea=Linea::all()->find($permisolineas[0]['linea_id']);
-       
-        return view('Admin.user.permisolineas.showDuenio', compact('linea', 'permisolineas', 'duenio'));
+
+        $permisolineas =  PermisoLinea::where('duenio_id', $duenio->id)->get();
+        
+        $chofer_micros=ChoferMicro::where('fecha_baja',null)->get();
+        // return $permisolineas;
+        $linea = Linea::all()->find($permisolineas[0]['linea_id']);
+
+        return view('Admin.user.permisolineas.showDuenio', compact('linea', 'permisolineas', 'duenio', 'chofer_micros'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -109,9 +120,9 @@ public function showOne($id)
      * @param  \App\Models\PermisoLinea  $permisoLinea
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PermisoLinea $permisoLinea)
+    public function update(Request $request, $id)
     {
-        //
+        return $request->all();
     }
 
     /**
