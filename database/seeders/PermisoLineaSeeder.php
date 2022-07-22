@@ -17,26 +17,26 @@ class PermisoLineaSeeder extends Seeder
   {
     $data = [
       [
+        'activo' => true,
+        'linea_id' => 1,
+        'duenio_id' => 1
+      ],
+      [
+        'activo' => true,
+        'linea_id' => 1,
+        'duenio_id' => 1
+      ],
+      [
+        'activo' => true,
+        'linea_id' => 1,
+        'duenio_id' => 2
+      ],
+      [
         'activo' => 1,
         'linea_id' => 1,
-        'duenio_id' => 3
+        'duenio_id' => 2
       ],
-      [
-        'activo' => 1,
-        'linea_id' => 3,
-        'duenio_id' => 6
-      ],
-      [
-        'activo' => 1,
-        'linea_id' => 4,
-        'duenio_id' => 7
-      ],
-      [
-        'activo' => 1,
-        'linea_id' => 5,
-        'duenio_id' => 10
-      ],
-      [
+     /* [
         'activo' => true,
         'linea_id' => 6,
         'duenio_id' => 1
@@ -65,7 +65,7 @@ class PermisoLineaSeeder extends Seeder
         'activo' => 1,
         'linea_id' => 10,
         'duenio_id' => 5
-      ]
+      ]*/
     ];
     foreach ($data as $d) {
       PermisoLinea::create($d);

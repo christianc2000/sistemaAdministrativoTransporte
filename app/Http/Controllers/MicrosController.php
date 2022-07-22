@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChoferMicro;
 use App\Models\Duenio;
 use App\Models\Micro;
 use App\Models\Micros;
@@ -66,7 +67,7 @@ class MicrosController extends Controller
             ]);
             $permiso->activo = true;
             $permiso->save();
-            return $micro;
+            return redirect()->route('admin.micro.index');
         } else {
             return "no tiene permiso";
         }
@@ -107,15 +108,28 @@ class MicrosController extends Controller
     }
     public function darBajaMicro($id)
     {
-        $micro=Micro::all()->find($id);
-        $permiso=PermisoLinea::all()->find($micro->permisoLinea->id);
-        $permiso->activo=false;
-        $permiso->save();
-        $micro->fecha_baja=now();
-        $cm=$micro->choferMicros->where('fecha_baja',null)->first();
-        $cm->fecha_baja=now();
-        $cm->save();
 
+        $micro = Micro::all()->find($id);
+
+        $duenio = $micro->permisoLinea->duenio;
+
+        $micro->fecha_baja = date(now());
+        $micro->save();
+
+        $permiso = PermisoLinea::all()->find($micro->permisoLinea->id);
+        $permiso->activo = false;
+        $permiso->save();
+
+
+        $cm = $micro->choferMicros->where('fecha_baja', null)->first();
+        if (isset($cm)) {
+            $cm = ChoferMicro::all()->find($cm->id);
+            $cm->fecha_baja = date(now());
+
+            $cm->save();
+        }
+
+        return redirect()->route('admin.permiso.showOne', $duenio->id);
     }
 
     public function update(Request $request, $id)

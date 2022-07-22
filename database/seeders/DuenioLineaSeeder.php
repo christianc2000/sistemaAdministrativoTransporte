@@ -17,20 +17,22 @@ class DuenioLineaSeeder extends Seeder
   {
     $data = [
       [
-        'aporte' => 1530,
+        'aporte' => 500,
         'fecha' => '2022/05/03',
-        'aporte_pagado'=>1530,
+        'descripcion_aporte'=>"Aporte inicial",
+        'aporte_pagado'=>500,
         'duenio_id' => 1,
-        'linea_id' => 6
+        'linea_id' => 1
       ],
       [
-        'aporte' => 1650,
+        'aporte' => 500,
         'fecha' => '2022/06/05',
-        'aporte_pagado' => 1650,
-        'duenio_id' => 1,
-        'linea_id' => 6
+        'descripcion_aporte'=>"Aporte inicial",
+        'aporte_pagado' => 500,
+        'duenio_id' => 2,
+        'linea_id' => 1
       ],
-      [
+      /*[
         'aporte' => 1180,
         'fecha' => '2022/06/30',
         'aporte_pagado' => 1180,
@@ -133,7 +135,7 @@ class DuenioLineaSeeder extends Seeder
         'aporte_pagado' => 1570,
         'duenio_id' => 10,
         'linea_id' => 5
-      ]
+      ]*/
     ];
     foreach ($data as $d) {
       DuenioLinea::create($d);

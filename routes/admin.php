@@ -11,8 +11,10 @@ use App\Http\Controllers\LineasController;
 use App\Http\Controllers\MicrosController;
 use App\Http\Controllers\PermisoLineaController;
 use App\Http\Controllers\AdministradorInstitucionController;
+use App\Http\Controllers\BackController;
 use App\Http\Controllers\ChoferController;
 use App\Http\Controllers\InstitucionController;
+use App\Models\PermisoLinea;
 
 Route::get('/', function () {
     return ("hola");
@@ -25,13 +27,17 @@ Route::resource('dueniolinea',DuenioLineaController::class)->names('admin.duenio
 
 Route::resource('duenio',DuenioController::class)->names('admin.duenio');
 Route::post('dueniolinea-one',[DuenioLineaController::class,'storeOne'])->name('admin.dueniolinea.storeOne');
+Route::get('duenio-micro/{id}',[DuenioController::class,'micros'])->name('admin.duenio.micro');
+
 Route::resource('permiso',PermisoLineaController::class)->names('admin.permiso'); //en el metodo show mandará el id de la linea
+Route::get('permiso-asignar/{id}',[PermisoLineaController::class,'asignarPermiso'])->name('admin.permiso.asignarMicro');
 Route::get('permiso-duenio/{id}',[PermisoLineaController::class,'showOne'])->name('admin.permiso.showOne');
 Route::resource('micro',MicrosController::class)->names('admin.micro');
 Route::resource('permiso',PermisoLineaController::class)->names('admin.permiso'); //en el metodo show mandará el id de la linea
 Route::post('permiso-duenio',[PermisoLineaController::class,'storeOne'])->name('admin.permiso.storeOne');
 Route::put('permiso-micro/{id}',[MicrosController::class,'asignarPermiso'])->name('admin.micro.asignarPermiso');
-Route::get('micro-baja/{id}',[MicroController::class,'darBajaMicro'])->name('admin.micro.baja');
+Route::get('micro-baja/{id}',[MicrosController::class,'darBajaMicro'])->name('admin.micro.baja');
+Route::get('micro-chofer-baja/{id}',[MicrosController::class,'darBajaChofer'])->name('admin.micro.chofer-baja');
 
 Route::resource('administradors', AdministradorController::class);
 Route::resource('institucions', InstitucionController::class);

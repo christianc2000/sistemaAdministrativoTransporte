@@ -46,16 +46,18 @@ class MicroSeeder extends Seeder
                 'placa' => 'GFS154',
                 'modelo' => 'Toyota 2018',
                 'cant_asiento' => 20,
-                'fecha_asignacion' => '2022/05/01',
-                'permiso_linea_id' => 4
+                'fecha_asignacion' => '2022/04/01',
+                'fecha_baja' => '2022/05/01',
+                'permiso_linea_id' => 3
             ],
             [
                 'nro_interno' => 12,
                 'placa' => 'TRS450',
                 'modelo' => 'Toyota 2020',
                 'cant_asiento' => 25,
-                'fecha_asignacion' => '2022/05/03',
-                'permiso_linea_id' => 5
+                'fecha_asignacion' => '2022/03/03',
+                'fecha_baja' => '2022/05/02',
+                'permiso_linea_id' => 4
             ],
             [
                 'nro_interno' => 18,
@@ -63,9 +65,9 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota',
                 'cant_asiento' => 22,
                 'fecha_asignacion' => '2022/05/02',
-                'permiso_linea_id' => 6
+                'permiso_linea_id' => 4
             ],
-            [
+           /* [
                 'nro_interno' => 22,
                 'placa' => '632-QWS',
                 'modelo' => 'Toyota 2018',
@@ -96,7 +98,7 @@ class MicroSeeder extends Seeder
                 'cant_asiento' => 20,
                 'fecha_asignacion' => '2022/05/01',
                 'permiso_linea_id' => 10
-            ]
+            ]*/
         ];
         foreach ($data as $d) {
             Micro::create($d);

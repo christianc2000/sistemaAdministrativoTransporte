@@ -59,12 +59,12 @@ class PermisoLineaController extends Controller
             'linea_id' => 'required|numeric',
             'duenio_id' => 'required|numeric'
         ]);
-      
-            $pl = PermisoLinea::create([
-                'duenio_id' => $request->duenio_id,
-                'linea_id' => $request->linea_id
-            ]);
-       
+
+        $pl = PermisoLinea::create([
+            'duenio_id' => $request->duenio_id,
+            'linea_id' => $request->linea_id
+        ]);
+
         return redirect()->route('admin.permiso.showOne', $request->duenio_id);
     }
     /**
@@ -93,19 +93,18 @@ class PermisoLineaController extends Controller
     public function showOne($id)
     { //el id de la linea
         $duenio = Duenio::all()->find($id);
-        
+
 
         $permisolineas =  PermisoLinea::where('duenio_id', $duenio->id)->get();
-       
-        $chofer_micros=ChoferMicro::where('fecha_baja',null)->get();
+
+        $chofer_micros = ChoferMicro::where('fecha_baja', null)->get();
         // return $permisolineas;
-        if ($permisolineas!=null){
-             $linea=$duenio->duenioLineas->first()->linea;
-          
-        }else{
+        if ($permisolineas != null) {
+            $linea = $duenio->duenioLineas->first()->linea;
+        } else {
             $linea = Linea::all()->find($permisolineas[0]['linea_id']);
         }
-      
+
 
         return view('Admin.user.permisolineas.showDuenio', compact('linea', 'permisolineas', 'duenio', 'chofer_micros'));
     }
@@ -131,7 +130,24 @@ class PermisoLineaController extends Controller
     {
         return $request->all();
     }
+    public function asignarPermiso($id)
+    {
+        $permiso = PermisoLinea::all()->find($id);
+        $duenio = $permiso->duenio;
+        $linea=$permiso->linea;
+        $permisos = $duenio->permisoLineas;
+        $micros = new Collection();
 
+        foreach ($permisos as $perm) {
+            if ($perm->micros->first() != null) {
+               foreach ($perm->micros as $micro) {
+                   $micros->push($micro);
+               }
+            }
+        }
+       
+        return view('Admin.user.permisolineas.asignarMicro',compact('linea','duenio','permiso','micros'));
+    }
     /**
      * Remove the specified resource from storage.
      *

@@ -23,6 +23,15 @@
                         <span>Asignar Permiso</span>
                     </button>
                 </div>
+
+                <div class="col-sm-4" style="text-align: center">
+                    <a href="{{route('admin.duenio.micro',$duenio->id)}}">
+                        <button type="button" class="button"
+                        style="background: #f4511e; ">
+                        <span>Micros</span>
+                    </button>
+                    </a>
+                </div>
             </div>
 
         </div>
@@ -149,8 +158,8 @@
                             </td>
                             <td scope="col">
                                 @if ($pl->microActivo->first() != null)
-                                    @if ($pl->microActivo->first()->choferMicros != null)
-                                        {{ $pl->microActivo->first()->choferMicros->first()->chofer->user->nombre }}
+                                    @if ($pl->microActivo->first()->choferMicros->first() != null)
+                                    {{ $pl->microActivo->first()->choferMicros->first()->chofer->user->nombre}}
                                     @else
                                         Sin Chofer
                                     @endif
@@ -167,12 +176,10 @@
                                 <form action="{{ route('admin.permiso.destroy', $pl->id) }}" method="POST">
                                     <div class="row ">
                                         @if ($pl->microActivo->first()!=null)
-                                        <a href="{{ route('admin.micro.baja',$pl->microActivo->first()->id) }}"><button type="button" class="btn btn-primary col-sm-3" >Dar de baja micro</button></a>
-                                        @else
-                                            
+                                        <a href="{{ route('admin.micro.baja',$pl->microActivo->first()->id) }}" class="col-sm-4"><button type="button" class="btn btn-primary" >Dar de baja micro</button></a>
                                         @endif
                                      
-                                        <a href=""><button type="button" class="btn btn-warning col-sm-3">Dar de baja Chofer</button></a>
+                                        <a href="{{ route('admin.micro.chofer-baja',$pl->microActivo->first()->id) }}" class="col-sm-4"><button type="button" class="btn btn-warning">Dar de baja Chofer</button></a>
                                         @csrf
                                         <!--metodo para añadir token a un formulario-->
                                         @method('delete')

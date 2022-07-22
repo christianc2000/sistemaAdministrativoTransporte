@@ -74,11 +74,14 @@
                     <div class="form-group row">
                         <label for="inputDuenio" class="col-sm-2 col-form-label">Dueños</label>
                         <div class="col-sm-10">
+                            <div class="boton-duenio" hidden>
+                                <a href="{{ route('admin.duenio.create')}}" class="btn btn-primary">Crear Dueño</a>
+                            </div>
                             <select class="form-control my-2" aria-label="Default select example" id="duenio_id"
                                 name="duenio_id">
                                 <option value="" selected disabled>Seleccionar</option>
                                 @foreach ($duenios as $duenio)
-                                    @if ($duenio->permisoLineas->where('activo', false)->first()!=null)
+                                    @if ($duenio->permisoLineas->where('activo', false)->first() != null)
                                         <option value="{{ $duenio->id }}"
                                             {{ old('duenio_id') == $duenio->id ? 'selected' : '' }}>
                                             {{ $duenio->ci }} - {{ $duenio->nombre }} {{ $duenio->apellido }} -
@@ -99,7 +102,10 @@
         <div class="card-footer">
             <button type="submit" class="btn btn-success">Guardar</button>
             </form>
-            <a href="{{ route('admin.linea.index') }}" class="btn btn-danger">Cancelar</a>
+            <a href="{{ url()->previous() }}">
+                <button type="button" class="btn btn-dark">Retroceder</button>
+            </a>
+
         </div>
 
     </div>
@@ -138,6 +144,14 @@
             mes = String(date.getMonth() + 1).padStart(2, '0');
             dia = String(date.getDate()).padStart(2, '0');
             $("#fecha_asignacion").val(anio + '-' + mes + '-' + dia);
+
+            n = $('#duenio_id option').length;
+            if (n == 1) {
+                $('.boton-duenio').attr('hidden', false);
+            } else {
+                $('.boton-duenio').attr('hidden', true);
+            }
+
 
         });
     </script>

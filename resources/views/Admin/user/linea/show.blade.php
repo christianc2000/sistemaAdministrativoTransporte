@@ -32,7 +32,7 @@
                         <label for="labelLinea" class="col-sm-2 col-form-label">Linea</label>
                         <div class="col-sm-10">
                             <label for="linea" class="col-form-label"
-                                style="font-weight: normal">{{ $linea->nrolinea}}</label>
+                                style="font-weight: normal">{{ $linea->nrolinea }}</label>
                         </div>
                     </div>
                     <div class="form-group row" style="margin-left: 5px">
@@ -87,8 +87,9 @@
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Bs</span>
                                         <span class="input-group-text">0.00</span>
-                                    <input name="aporte" type="number" step="0.01" class="form-control" id="aporte"
-                                        placeholder="Monto aporte" aria-label="Dollar amount (with dot and two decimal places)" required>
+                                        <input name="aporte" type="number" step="0.01" class="form-control"
+                                            id="aporte" placeholder="Monto aporte"
+                                            aria-label="Dollar amount (with dot and two decimal places)" required>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +142,8 @@
                                         <span class="input-group-text">Bs</span>
                                         <span class="input-group-text">0.00</span>
                                         <input name="aporte" type="number" step="0.01" class="form-control"
-                                            id="aporte" placeholder="Monto aporte" aria-label="Dollar amount (with dot and two decimal places)" required>
+                                            id="aporte" placeholder="Monto aporte"
+                                            aria-label="Dollar amount (with dot and two decimal places)" required>
                                     </div>
                                 </div>
                             </div>
@@ -155,8 +157,11 @@
                                 <label for="labelLinea" class="col-sm-2 col-form-label">Linea</label>
                                 <div class="col-sm-10">
                                     <input name="linea_id" type="numeric" class="form-control" id="linea_id"
-                                        value="{{ $linea->nrolinea }}" readonly required>
+                                        value="{{ $linea->id }}" hidden>
+                                    <label for="" class="form-control" style="font-weight: normal"
+                                        readonly>{{ $linea->nrolinea }}</label>
                                 </div>
+
                             </div>
                             <div class="form-group row" style="margin-left: 5px">
                                 <label for="labelLinea" class="col-sm-2 col-form-label">Dueño</label>

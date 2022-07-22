@@ -50,7 +50,9 @@
                                 <label for="labelLinea" class="col-sm-2 col-form-label">Línea</label>
                                 <div class="col-sm-10">
                                     <input name="linea_id" type="numeric" class="form-control" id="linea_id"
-                                        value="{{ $linea->nrolinea }}" readonly required>
+                                        value="{{ $linea->id }}" hidden>
+                                    <label for="" class="form-control" style="font-weight: normal"
+                                        readonly>{{ $linea->nrolinea }}</label>
                                 </div>
                             </div>
                         </div>
@@ -96,9 +98,9 @@
                             <td>
                                 <form action="{{ route('admin.permiso.destroy', $pl->id) }}" method="POST">
                                     <div class="row ">
-                                        <a href="{{ route('admin.permiso.update', $pl->id) }}"
+                                        <a href="{{ route('admin.permiso.asignarMicro', $pl->id) }}"
                                             class="btn btn-primary col-sm-6 mb-2"
-                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Asignar</a>
+                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Asignar Micro</a>
 
                                         @csrf
                                         <!--metodo para añadir token a un formulario-->

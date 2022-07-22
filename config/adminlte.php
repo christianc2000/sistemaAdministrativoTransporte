@@ -281,6 +281,11 @@ return [
 
         ],
         [
+            'icon' => 'fas fa-user-injured',
+            'text' => 'Instituciones',
+            'url'  => 'admin/institucions',
+        ],
+        [
             'text' => 'Líneas',
             'url'  => 'admin/linea',
             'icon' => 'fas fa-solid fa-bus'
@@ -290,11 +295,7 @@ return [
             'url'  => 'admin/duenio',
             'icon' => 'fas fa-solid fa-users',
         ],
-        [
-            'icon' => 'fas fa-user-injured',
-            'text' => 'Instituciones',
-            'url'  => 'admin/institucions',
-        ],
+        
         [
             'text' => 'Micros',
             'url'  => 'admin/micro',
