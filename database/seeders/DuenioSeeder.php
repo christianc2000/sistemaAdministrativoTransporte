@@ -35,7 +35,7 @@ class DuenioSeeder extends Seeder
                 'email' => 'barrero_luis@gmail.com',
                 'telefono' => 71035681
             ],
-           /* [
+            [
                 'ci' => '6476758',
                 'nombre' => 'Ivan',
                 'apellido' => 'Encinas Guzman',
@@ -106,7 +106,7 @@ class DuenioSeeder extends Seeder
                 'fecha_nac' => '1985/04/16',
                 'email' => 'romerofelix@hotmail.com',
                 'telefono' => 65913010
-            ]*/
+            ]
         ];
         foreach ($data as $d) {
             Duenio::create($d);

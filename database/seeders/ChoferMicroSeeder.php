@@ -18,38 +18,36 @@ class ChoferMicroSeeder extends Seeder
     $data = [
       [
         'fecha_asig' => '2022/05/01',
-        //'fecha_baja' => '2022/06/10',
+        'fecha_baja' => '2022/06/10',
         'chofer_id' => 1,
-        'micro_id' => 1
-      ],
-      [
-        'fecha_asig' => '2022/07/01',
-        'chofer_id' => 2,
-        'micro_id' => 2
-      ],
-      [
-        'fecha_asig' => '2022/05/04',
-        'chofer_id' => 3,
-        'micro_id' => 3
-      ],
-      [
-        'fecha_asig' => '2022/03/02',
-        'fecha_baja' => '2022/05/02',
-        'chofer_id' => 4,
-        'micro_id' => 4
-      ],
-      [
-        'fecha_asig' => '2022/05/03',
-        'chofer_id' => 4,
         'micro_id' => 5
       ],
       [
-        'fecha_asig' => '2022/03/03',
-        'fecha_baja' => '2022/05/02',
-        'chofer_id' => 3,
-        'micro_id' => 6
+        'fecha_asig' => '2022/07/01',
+        'chofer_id' => 1,
+        'micro_id' => 5
       ],
-      /*[
+      [
+        'fecha_asig' => '2022/05/04',
+        'chofer_id' => 2,
+        'micro_id' => 1
+      ],
+      [
+        'fecha_asig' => '2022/05/02',
+        'chofer_id' => 3,
+        'micro_id' => 10
+      ],
+      [
+        'fecha_asig' => '2022/05/01',
+        'chofer_id' => 4,
+        'micro_id' => 3
+      ],
+      [
+        'fecha_asig' => '2022/05/03',
+        'chofer_id' => 6,
+        'micro_id' => 2
+      ],
+      [
         'fecha_asig' => '2022/05/02',
         'chofer_id' => 7,
         'micro_id' => 7
@@ -73,7 +71,7 @@ class ChoferMicroSeeder extends Seeder
         'fecha_asig' => '2022/05/01',
         'chofer_id' => 10,
         'micro_id' => 4
-      ]*/
+      ]
     ];
     foreach ($data as $d) {
       ChoferMicro::create($d);
