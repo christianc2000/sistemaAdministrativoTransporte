@@ -178,9 +178,7 @@
                                         @if ($pl->microActivo->first()!=null)
                                         <a href="{{ route('admin.micro.baja',$pl->microActivo->first()->id) }}" class="col-sm-4"><button type="button" class="btn btn-primary" >Dar de baja micro</button></a>
                                         @endif
-                                     
-                                        <a href="{{ route('admin.micro.chofer-baja',$pl->microActivo->first()->id) }}" class="col-sm-4"><button type="button" class="btn btn-warning">Dar de baja Chofer</button></a>
-                                        @csrf
+                                      @csrf
                                         <!--metodo para añadir token a un formulario-->
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger col-sm-4"
