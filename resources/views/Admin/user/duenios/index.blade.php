@@ -32,7 +32,14 @@
                             <td scope="col" style="text-align:center">{{ $duenio->sexo }}</td>
                             <td scope="col" style="text-align:center">{{ $duenio->telefono }}</td>
                             
-                            <td scope="col">{{$lineas->find($duenio->duenioLineas->first()->linea_id)->nrolinea}}</td>
+                            <td scope="col">
+                                @if ($duenio->duenioLineas->first()!=null)
+                                    {{$duenio->duenioLineas->first()->linea->nrolinea}}
+                                @else
+                                    
+                                @endif
+                               
+                            </td>
                             <td>
                                 <form action="{{ route('admin.duenio.destroy', $duenio->id) }}" method="POST">
                                     <a href="{{ route('admin.duenio.show', $duenio->id) }}"
