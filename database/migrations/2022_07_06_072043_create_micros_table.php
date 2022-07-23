@@ -21,8 +21,8 @@ class CreateMicrosTable extends Migration
             $table->integer('cant_asiento');
             $table->date('fecha_asignacion')->nullable();
             $table->date('fecha_baja')->nullable();
-
-            $table->foreignId('permiso_linea_id')->references('id')->on('permiso_lineas');
+            $table->unsignedBigInteger('permiso_linea_id')->nullable();
+            $table->foreign('permiso_linea_id')->references('id')->on('permiso_lineas');
 
             $table->timestamps();
         });

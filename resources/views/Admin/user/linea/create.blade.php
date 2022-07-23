@@ -16,7 +16,7 @@
                     <label for="inputLínea" class="col-sm-2 col-form-label">Línea</label>
                     <div class="col-sm-10">
                         <input name="nrolinea" type="number" min="0" class="form-control" id="nroLinea"
-                            placeholder="Número de línea">
+                            placeholder="Número de línea" value="{{ old('nrolinea') }}">
                         @error('nrolinea')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -33,7 +33,8 @@
                                 name="institucion_id">
                                 <option value="" selected disabled>Seleccionar</option>
                                 @foreach ($institucions as $institucion)
-                                    <option value="{{ $institucion->id }}">
+                                    <option value="{{ $institucion->id }}"
+                                        {{ old('institucion_id') == $institucion->id ? 'selected' : '' }}>
                                         {{ $institucion->nombre }}
                                     </option>
                                 @endforeach
@@ -104,7 +105,7 @@
                     <label for="inputSede" class="col-sm-2 col-form-label">Dirección Sede</label>
                     <div class="col-sm-10">
                         <input name="sede" type="text" class="form-control" id="sede"
-                            placeholder="Dirección de la sede de la línea">
+                            placeholder="Dirección de la sede de la línea" value="{{ old('sede') }}">
                         @error('sede')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -114,7 +115,7 @@
                 <div class="form-group row">
                     <label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono</label>
                     <div class="col-sm-10">
-                        <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Teléfono">
+                        <input name="telefono" type="number" class="form-control" id="telefono" placeholder="Teléfono" value="{{ old('telefono') }}">
                         @error('telefono')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -161,6 +162,15 @@
         $(document).ready(function() {
             //llenado de los administrador_institucion de cada institucion
             select = [];
+            id = $("#institucion_id").val();
+            $("#ai" + id).prop('hidden', false);
+            select.push(id);
+            $('.selectAI').each(function() {
+                idSelect = $(this).attr('id');
+                if (idSelect != "administrador_institucion_id" + select[select.length - 1]) {
+                    $(this).val("");
+                }
+            })
             $(".adminins").each(function() {
                 //adminInst = $(this).children(":selected").attr("name");
                 adminInst = $(this).attr("name");
@@ -172,10 +182,14 @@
                     nombre = element['nombre'] + " - " + element['ci']
                     //console.log(element['nombre']);
                     //console.log(index+1);
-                    let option = $('<option />', {
+                    
+                    let option = '<option value=' + element['id'] +
+                        '{{ old("administrador_institucion_id'+id+'") == "'+element['id']+'" ? 'selected' : '' }}>' +
+                        nombre + '</option>';
+                 /*   let option = $('<option />', {
                         text: nombre,
                         value: element['id'],
-                    });
+                    });*/
                     //   console.log(option);
                     $('#administrador_institucion_id' + id).append(option);
                     //$('select[name=administrador_institucion_id'+id+']').append(option);

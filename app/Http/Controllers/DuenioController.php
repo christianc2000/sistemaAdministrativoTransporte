@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chofer;
 use App\Models\Duenio;
 use App\Models\DuenioLinea;
 use App\Models\Lineas;
+use App\Models\Micro;
+use App\Models\PermisoLinea;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class DuenioController extends Controller
@@ -17,8 +21,24 @@ class DuenioController extends Controller
     public function index()
     {
         $duenios = Duenio::all();
-        $lineas=Lineas::all();
-        return view('Admin.user.duenios.index', compact('duenios','lineas'));
+        $lineas = Lineas::all();
+        return view('Admin.user.duenios.index', compact('duenios', 'lineas'));
+    }
+    public function micros($id)
+    {
+        $duenio = Duenio::all()->find($id);
+
+        $linea = $duenio->duenioLineas->first()->linea;
+        $permisos = $duenio->permisoLineas;
+        $micros = new Collection();
+        foreach ($permisos as $permiso) {
+            $microsp = $permiso->micros;
+            foreach ($microsp as $micro) {
+                $micros->push($micro);
+            }
+        }
+
+        return view('Admin.user.duenios.micros', compact('duenio', 'linea', 'micros'));
     }
 
     /**
@@ -59,14 +79,14 @@ class DuenioController extends Controller
         $duenio->fecha_nac = $request->fecha_nac;
         $duenio->email = $request->email;
         $duenio->telefono = $request->telefono;
-        
+
         $duenio->save();
 
-        $dl=DuenioLinea::create([
-            'linea_id'=>$request->linea_id,
-            'duenio_id'=>$duenio->id,
-            'aporte'=> 0,
-            'fecha'=> date(now())
+        $dl = DuenioLinea::create([
+            'linea_id' => $request->linea_id,
+            'duenio_id' => $duenio->id,
+            'aporte' => 0,
+            'fecha' => date(now())
         ]);
 
         return redirect()->route('admin.duenio.index');
@@ -78,9 +98,28 @@ class DuenioController extends Controller
      * @param  \App\Models\Duenio  $duenio
      * @return \Illuminate\Http\Response
      */
-    public function show(Duenio $duenio)
+    public function show($id)
     {
-        //
+        $duenio = Duenio::all()->find($id);
+        $linea = $duenio->duenioLineas->first()->linea;
+        $permisos = $duenio->permisoLineas;
+        $chofers= new Collection();
+        if ($permisos->first() != null) {
+            foreach ($permisos as $permiso) {
+                $m = $permiso->microActivo->first();
+                $m = Micro::all()->find($m->id);
+                
+                $mic=$m->choferMicros->where('fecha_baja',null)->first();
+                
+                if ($mic != null) {
+                    $chof=$m->choferMicros->first();
+                    $chof=Chofer::all()->find($chof->id);
+                    $chofers->push($chof);   
+                } 
+            }
+        }
+        
+        return  view('Admin.user.duenios.chofer',compact('chofers','duenio','linea'));
     }
 
     /**

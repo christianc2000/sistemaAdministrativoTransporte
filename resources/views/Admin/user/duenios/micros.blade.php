@@ -3,56 +3,46 @@
 @section('title', 'Mostrar Linea')
 
 @section('content_header')
-    <h1>Dueños</h1>
+    <h1>Micro - {{ $duenio->nombre }} {{ $duenio->apellido }} - Línea {{ $linea->nrolinea }}</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.duenio.create') }}" class="btn btn-primary">Crear Dueño</a>
+            <a href="{{ route('admin.micro.create') }}" class="btn btn-primary">Crear Micro</a>
         </div>
         <div class="card-body">
             <table id="tabla" class="table table-striped shadow-lg mt-4" style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col" style="text-align:center">CI</th>
-                        <th scope="col">NOMBRE</th>
-                        <th scope="col" style="text-align:center">SEXO</th>
-                        <th scope="col" style="text-align:center">TELEFONO</th>
-                        <th scope="col">LINEA</th>
+                        <th scope="col" style="text-align:center">PLACA</th>
+                        <th scope="col">MODELO</th>
+                        <th scope="col" style="text-align:center">FECHA ASIGNACIÓN</th>
+                        <th scope="col" style="text-align:center">ESTADO</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($duenios as $duenio)
+                    @foreach ($micros as $micro)
                         <tr>
-                            <td scope="col" style="text-align:center; font-weight: 900">{{ $duenio->ci }}</td>
-                            <td scope="col">{{ $duenio->nombre }} {{ $duenio->apellido }}</td>
-                            <td scope="col" style="text-align:center">{{ $duenio->sexo }}</td>
-                            <td scope="col" style="text-align:center">{{ $duenio->telefono }}</td>
-                            
-                            <td scope="col">
-                                @if ($duenio->duenioLineas->first()!=null)
-                                    {{$duenio->duenioLineas->first()->linea->nrolinea}}
-                                @else
-                                    
-                                @endif
-                               
-                            </td>
-                            <td>
-                                <form action="{{ route('admin.duenio.destroy', $duenio->id) }}" method="POST">
-                                    <a href="{{ route('admin.duenio.show', $duenio->id) }}"
-                                        class="btn btn-primary">choferes</a>
-                                   
-                                    <a href="{{route('admin.dueniolinea.show',$duenio->id)}}" class="btn btn-warning">Aportes</a>
+                            <td scope="col" style="text-align:center; font-weight: 900">{{ $micro->placa }}</td>
+                            <td scope="col">{{ $micro->modelo }}</td>
+                            <td scope="col" style="text-align:center">{{ $micro->fecha_asignacion }}</td>
 
-                                    <a href="{{route('admin.permiso.showOne',$duenio->id)}}" class="btn btn-secondary">Permiso</a>
-                                    @csrf
-                                    <!--metodo para añadir token a un formulario-->
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
+                            @if ($micro->fecha_baja==null)
+                                {{-- bandera es true significa que todo está en orden --}}
+                                <td scope="col" style="text-align:center">
+                                    <div style="border-radius: 4em; background: rgb(224, 128, 128)">Inactivo</div>
+                                </td>
+                            @else
+                                <td scope="col" style="text-align:center">
+                                    <div style="border-radius: 4em; background: rgb(151, 245, 182)">Activo</div>
+                                </td>
+                            @endif
+
+                            <td>
+                                <button class="btn btn-danger">Eliminar</button>
                             </td>
                         </tr>
                     @endforeach
@@ -60,6 +50,7 @@
                 </tbody>
             </table>
         </div>
+        
 
     </div>
 @stop
@@ -119,5 +110,4 @@
             });
         });
     </script>
-
 @stop

@@ -3,13 +3,13 @@
 @section('title', 'Mostrar Linea')
 
 @section('content_header')
-    <h1>Dueños</h1>
+    <h1>Choferes - {{ $duenio->nombre }} {{ $duenio->apellido }} - Línea {{ $linea->nrolinea }}</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.duenio.create') }}" class="btn btn-primary">Crear Dueño</a>
+            
         </div>
         <div class="card-body">
             <table id="tabla" class="table table-striped shadow-lg mt-4" style="width:100%">
@@ -17,42 +17,21 @@
                     <tr>
                         <th scope="col" style="text-align:center">CI</th>
                         <th scope="col">NOMBRE</th>
-                        <th scope="col" style="text-align:center">SEXO</th>
-                        <th scope="col" style="text-align:center">TELEFONO</th>
-                        <th scope="col">LINEA</th>
+                        <th scope="col" style="text-align:center">MICRO</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach ($duenios as $duenio)
+                    @foreach ($chofers as $chofer)
                         <tr>
-                            <td scope="col" style="text-align:center; font-weight: 900">{{ $duenio->ci }}</td>
-                            <td scope="col">{{ $duenio->nombre }} {{ $duenio->apellido }}</td>
-                            <td scope="col" style="text-align:center">{{ $duenio->sexo }}</td>
-                            <td scope="col" style="text-align:center">{{ $duenio->telefono }}</td>
-                            
-                            <td scope="col">
-                                @if ($duenio->duenioLineas->first()!=null)
-                                    {{$duenio->duenioLineas->first()->linea->nrolinea}}
-                                @else
-                                    
-                                @endif
-                               
-                            </td>
-                            <td>
-                                <form action="{{ route('admin.duenio.destroy', $duenio->id) }}" method="POST">
-                                    <a href="{{ route('admin.duenio.show', $duenio->id) }}"
-                                        class="btn btn-primary">choferes</a>
-                                   
-                                    <a href="{{route('admin.dueniolinea.show',$duenio->id)}}" class="btn btn-warning">Aportes</a>
+                            <td scope="col" >{{ $chofer->user->ci }}</td>
+                            <td scope="col">{{ $chofer->user->nombre }} {{$chofer->user->apellido}}</td>
+                            <td scope="col">{{ $chofer->choferMicros->where('fecha_baja',null)->first()->micro->placa }}</td>
 
-                                    <a href="{{route('admin.permiso.showOne',$duenio->id)}}" class="btn btn-secondary">Permiso</a>
-                                    @csrf
-                                    <!--metodo para añadir token a un formulario-->
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                </form>
+                           
+                            <td>
+                                <button class="btn btn-danger">Eliminar</button>
                             </td>
                         </tr>
                     @endforeach
@@ -60,6 +39,7 @@
                 </tbody>
             </table>
         </div>
+        
 
     </div>
 @stop
@@ -119,5 +99,4 @@
             });
         });
     </script>
-
 @stop

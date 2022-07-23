@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Micro;
 use App\Models\Micros;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -98,7 +99,7 @@ class MicroSeeder extends Seeder
             ]
         ];
         foreach ($data as $d) {
-            Micros::create($d);
+            Micro::create($d);
         }
         // DB::table('micros')->insert($data);
 

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChoferMicro;
+use App\Models\Duenio;
+use App\Models\Micro;
 use App\Models\Micros;
+use App\Models\PermisoLinea;
 use Illuminate\Http\Request;
 
 class MicrosController extends Controller
@@ -14,7 +18,8 @@ class MicrosController extends Controller
      */
     public function index()
     {
-        //
+        $micros = Micro::all();
+        return view('Admin.user.micros.index', compact('micros'));
     }
 
     /**
@@ -24,7 +29,8 @@ class MicrosController extends Controller
      */
     public function create()
     {
-        //
+        $duenios = Duenio::all();
+        return view('Admin.user.micros.create', compact('duenios'));
     }
 
     /**
@@ -35,7 +41,36 @@ class MicrosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'nro_interno' => 'required|numeric',
+            'placa' => 'required|string',
+            'modelo' => 'required|string',
+            'cant_asiento' => 'required|numeric',
+            //'foto.*'   =>  'image|mimes:jpg,jpeg,bmp,png|max:2048|nullable',
+            'fecha_asignacion' => 'nullable|date',
+            'fecha_baja' => 'nullable|date',
+            'duenio_id' => 'required|numeric'
+        ]);
+        $duenio = Duenio::all()->find($request->duenio_id);
+        $permiso = $duenio->permisoLineas->where('activo', false)->first();
+
+        if (isset($permiso)) {
+            $permiso = PermisoLinea::all()->find($permiso->id);
+            $micro = Micro::create([
+                'nro_interno' => $request->nro_interno,
+                'placa' => $request->placa,
+                'modelo' => $request->modelo,
+                'cant_asiento' => $request->cant_asiento,
+                'fecha_asignacion' => $request->fecha_asignacion,
+                'permiso_linea_id' => $permiso->id
+            ]);
+            $permiso->activo = true;
+            $permiso->save();
+            return redirect()->route('admin.micro.index');
+        } else {
+            return "no tiene permiso";
+        }
     }
 
     /**
@@ -67,9 +102,38 @@ class MicrosController extends Controller
      * @param  \App\Models\Micros  $micros
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Micros $micros)
+    public function asignarPermiso(Request $request, $id)
     {
-        //
+        return $request;
+    }
+    public function darBajaMicro($id)
+    {
+
+        $micro = Micro::all()->find($id);
+
+        $duenio = $micro->permisoLinea->duenio;
+
+        $micro->fecha_baja = date(now());
+        $micro->save();
+
+        $permiso = PermisoLinea::all()->find($micro->permisoLinea->id);
+        $permiso->activo = false;
+        $permiso->save();
+
+
+        $cm = $micro->choferMicros->where('fecha_baja', null)->first();
+        if (isset($cm)) {
+            $cm = ChoferMicro::all()->find($cm->id);
+            $cm->fecha_baja = date(now());
+
+            $cm->save();
+        }
+
+        return redirect()->route('admin.permiso.showOne', $duenio->id);
+    }
+
+    public function update(Request $request, $id)
+    {
     }
 
     /**

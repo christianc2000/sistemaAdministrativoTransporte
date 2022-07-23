@@ -32,7 +32,7 @@ class ChoferController extends Controller
     public function create()
     {
         $micros = Micros::all();
-        return view('admin.chofer.create', compact('micros'));
+        return view('Admin.chofer.create', compact('micros'));
     }
 
     /**
@@ -101,7 +101,7 @@ class ChoferController extends Controller
         $chofer= Chofer::where('user_id', $id)->first();
         
         $chofermicros= ChoferMicro::where('chofer_id', $chofer->id)->first();
-        return view('admin.chofer.edit', compact('users', 'micros', 'chofermicros', 'chofer'));
+        return view('Admin.chofer.edit', compact('users', 'micros', 'chofermicros', 'chofer'));
     }
 
     /**
