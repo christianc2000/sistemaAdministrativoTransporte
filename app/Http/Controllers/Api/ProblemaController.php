@@ -62,16 +62,27 @@ class ProblemaController extends Controller
      */
     public function store(Request $request)
     {
+        $chofer = Auth::user()->chofer;
         $request->validate([
             'descripcion' => 'required|string',
-            'chofer_micro_id' => 'required|integer'
         ]);
-        $problema = Problema::create($request->all());
-        return response()->json([
-            "status" => 1,
-            "msg" => "Problema registrado exitosamente!",
-            "data" => $problema
-        ]);
+        $cm = $chofer->choferMicros->where('fecha_baja', null)->first();
+        if ($cm != null) {
+            $problema = new Problema();
+            $problema->descripcion=$request->descripcion;
+            $problema->chofer_micro_id=$cm->id;
+            $problema->save();
+            return response()->json([
+                "status" => 1,
+                "msg" => "Problema registrado exitosamente!",
+                "data" => $problema
+            ]);
+        } else {
+            return response()->json([
+                "status" => 0,
+                "msg" => "Error, Chofer sin micros"
+            ]);
+        }
     }
 
     /**
@@ -141,8 +152,10 @@ class ProblemaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $problema = Problema::all()->find($id);
+
+
         if (isset($problema)) {
             $request->validate([
                 'descripcion' => 'required|string',
