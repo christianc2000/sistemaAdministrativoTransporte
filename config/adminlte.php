@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
+    'usermenu_enabled' => false,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -85,8 +85,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -263,7 +263,7 @@ return [
         */
         ['header' => 'FUNCIONES DEL SISTEMA'],
         [
-            'text'    => 'usuarios',
+            'text'    => 'Usuarios',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
@@ -306,11 +306,14 @@ return [
             'url'  => 'admin/micro',
             'icon' => 'fas fa-solid fa-bus-simple'
         ],
+        
+        /*
         [
             'text' => 'profile',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
+        */
         [
             'text' => 'Recorrido',
             'route'  => 'recorridos.index',

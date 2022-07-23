@@ -31,7 +31,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">ID Linea</label>
                         <select name="linea_id" class="form-control">
-                            <option value="">Seleccione ID Linea</option>
+                            <option value="" selected disabled>Seleccione ID Linea</option>
                             @foreach ($lineas as $linea)
                                 <option value="{{$linea->id}}">ID {{$linea->id}}</option>
                             @endforeach

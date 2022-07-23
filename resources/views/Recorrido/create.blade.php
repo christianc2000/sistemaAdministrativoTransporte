@@ -39,7 +39,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">ID Tarjeta</label>
                         <select name="id_tarjeta" class="form-control">
-                            <option value="">Seleccione ID Tarjeta</option>
+                            <option value="" selected disabled>Seleccione ID Tarjeta</option>
                             @foreach ($tarjetas as $tarjeta)
                                 <option value="{{$tarjeta->id}}">ID {{$tarjeta->id}}</option>
                             @endforeach

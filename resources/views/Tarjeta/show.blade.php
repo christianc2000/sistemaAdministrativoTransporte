@@ -20,7 +20,7 @@
             <div class="card-header"> Tarjeta </div>
             <div class="card-body">
                 <div class="form-group">
-                    <a href="/recorridos" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>
+                    <a href="javascript: history.go(-1)" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>
                 </div>
                 <div class="col-sm-8">
                     <h3 class="col-sm-20">ID Tarjeta {{$id}}</h3>
