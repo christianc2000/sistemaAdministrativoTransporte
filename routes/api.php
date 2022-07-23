@@ -63,6 +63,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::get('chofer', [ChoferController::class, 'index']);
     Route::put('chofer/{id}', [ChoferController::class, 'update']); //id del usuario que tiene
     Route::get('chofer-micros', [ChoferController::class, 'choferMicros']);
+    Route::get('micro-activo', [ChoferController::class, 'microActivo']);
     Route::get('linea-activa',[ChoferController::class,'lineaActiva']);
     /*******PROBLEMA */
     Route::get('problema',[ProblemaController::class,'index'])->name('api.v1.problema.index'); //muestra todos los problemas que tiene el chofer logueado con sus micros

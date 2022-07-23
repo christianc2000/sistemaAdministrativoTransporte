@@ -39,7 +39,8 @@
                         <form action="{{ route('chofers.destroy', $user) }}" method="POST">
                             {{-- <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Asignar rol</a> --}}
                             <a href="{{ route('chofers.edit', $user->id) }}" class="btn btn-primary">Editar</a>
-                            @csrf <!--metodo para añadir token a un formulario-->
+                            @csrf
+                            <!--metodo para añadir token a un formulario-->
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                             {{-- <a href="{{ route('users.show', $user) }}" class="btn btn-primary">Mostrar</a> --}}
@@ -55,14 +56,20 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-    <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
 @stop
 
 @section('js')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#users').DataTable({
@@ -70,6 +77,7 @@
                     [5, 10, 50, -1],
                     [5, 10, 50, "Todo"]
                 ]
+                
             });
         });
     </script>

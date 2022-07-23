@@ -10,6 +10,7 @@ use App\Models\PermisoLinea;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Expr\Cast\Array_;
 
 class ChoferController extends Controller
@@ -31,7 +32,31 @@ class ChoferController extends Controller
 
         ]);
     }
-
+    public function microActivo()
+    {
+        $chofer = Auth::user()->chofer;
+        if (isset($chofer)) {
+            $cm = $chofer->choferMicros->where('fecha_baja', null)->first();
+            if (isset($cm)) {
+                $micro = $cm->micro;
+                return response()->json([
+                    'status' => 1,
+                    'msg' => 'micro activo encontrado',
+                    'data' => $micro
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 0,
+                    'msg' => 'No se encontró micro activo',
+                ]);
+            }
+        } else {
+            return response()->json([
+                'status' => 0,
+                'msg' => 'Debe tener su chofer logueado',
+            ]);
+        }
+    }
     public function choferMicros()
     {
         $user = auth()->user();

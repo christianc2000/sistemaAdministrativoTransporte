@@ -7,6 +7,7 @@ use App\Models\ChoferMicro;
 use App\Models\Micros;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
 class ChoferController extends Controller
@@ -18,10 +19,9 @@ class ChoferController extends Controller
      */
     public function index()
     {
-        $users= User::Where('tipo', 'C')->get();
+        $users = User::Where('tipo', 'C')->get();
         // return $users;
         return view('Admin.chofer.index', compact('users'));
-
     }
 
     /**
@@ -57,13 +57,13 @@ class ChoferController extends Controller
         $users->save();
 
         $chofer = new Chofer();
-        $chofer->user_id= $users->id;
-        $chofer->direccion= $request->get('direccion');
-        $chofer->categoria_licencia= $request->get('cateLicen');
-        $chofer->activo= true;
+        $chofer->user_id = $users->id;
+        $chofer->direccion = $request->get('direccion');
+        $chofer->categoria_licencia = $request->get('cateLicen');
+        $chofer->activo = true;
         $chofer->save();
 
-        if($request->micro_id!=null){
+        if ($request->micro_id != null) {
             $chofermicro = new ChoferMicro();
             $chofermicro->chofer_id = $chofer->id;
             $chofermicro->micro_id = $request->get('micro_id');
@@ -95,12 +95,12 @@ class ChoferController extends Controller
      */
     public function edit($id)
     {
-        $users= User::find($id); 
-        $micros= Micros::all();
+        $users = User::find($id);
+        $micros = Micros::all();
         // $chofer= Chofer::all();
-        $chofer= Chofer::where('user_id', $id)->first();
-        
-        $chofermicros= ChoferMicro::where('chofer_id', $chofer->id)->first();
+        $chofer = Chofer::where('user_id', $id)->first();
+
+        $chofermicros = ChoferMicro::where('chofer_id', $chofer->id)->first();
         return view('Admin.chofer.edit', compact('users', 'micros', 'chofermicros', 'chofer'));
     }
 
@@ -113,7 +113,7 @@ class ChoferController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users= User::find($id); 
+        $users = User::find($id);
         $users->ci = $request->get('ci');
         $users->nombre = $request->get('name');
         $users->apellido = $request->get('apellido');
@@ -127,7 +127,7 @@ class ChoferController extends Controller
         // $users->foto = $request->get('foto');
         $users->save();
 
-        $chofer= Chofer::where('user_id', $id)->first();
+        $chofer = Chofer::where('user_id', $id)->first();
         $chofer->direccion = $request->get('direccion');
         $chofer->categoria_licencia = $request->get('cateLicen');
         $chofer->save();
@@ -141,8 +141,8 @@ class ChoferController extends Controller
      * @param  \App\Models\Chofer  $chofer
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy(Chofer $chofer)
     {
-        
     }
 }

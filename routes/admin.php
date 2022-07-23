@@ -11,6 +11,7 @@ use App\Http\Controllers\LineasController;
 use App\Http\Controllers\MicrosController;
 use App\Http\Controllers\PermisoLineaController;
 use App\Http\Controllers\AdministradorInstitucionController;
+use App\Http\Controllers\Api\ChoferController as ApiChoferController;
 use App\Http\Controllers\BackController;
 use App\Http\Controllers\ChoferController;
 use App\Http\Controllers\InstitucionController;
@@ -38,6 +39,7 @@ Route::post('permiso-duenio',[PermisoLineaController::class,'storeOne'])->name('
 Route::put('permiso-micro/{id}',[MicrosController::class,'asignarPermiso'])->name('admin.micro.asignarPermiso');
 Route::get('micro-baja/{id}',[MicrosController::class,'darBajaMicro'])->name('admin.micro.baja');
 Route::get('micro-chofer-baja/{id}',[MicrosController::class,'darBajaChofer'])->name('admin.micro.chofer-baja');
+Route::get('chofer-micro',[ApiChoferController::class,'choferMicro'])->name('admin.chofer.micro');
 
 Route::resource('administradors', AdministradorController::class);
 Route::resource('institucions', InstitucionController::class);

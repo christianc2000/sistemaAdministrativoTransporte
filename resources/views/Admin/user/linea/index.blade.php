@@ -96,6 +96,7 @@
     <script>
         $(document).ready(function() {
             $('#tabla').DataTable({
+                
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página',
                     zeroRecords: 'No se encontró nada - lo siento',
