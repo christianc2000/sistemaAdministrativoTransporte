@@ -20,7 +20,7 @@ class ChoferController extends Controller
     {
         $users= User::Where('tipo', 'C')->get();
         // return $users;
-        return view('Admin.chofer.index', compact('users'));
+        return view('admin.chofer.index', compact('users'));
 
     }
 
