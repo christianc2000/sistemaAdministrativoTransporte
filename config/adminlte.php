@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Sistema Administrativo',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -238,17 +238,21 @@ return [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
+        
 
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Search',
         ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        
+
+        /*
         [
             'text'        => 'pages',
             'url'         => 'admin/pages',
@@ -256,7 +260,8 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        */
+        ['header' => 'FUNCIONES DEL SISTEMA'],
         [
             'text'    => 'usuarios',
             'icon'    => 'fas fa-fw fa-share',
@@ -315,6 +320,7 @@ return [
             'route'  => 'chofertarjetas.index',
             'icon' => 'fas fa-fw fa-address-card',
         ],
+        /*
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
@@ -374,6 +380,7 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+        */
     ],
 
     /*
