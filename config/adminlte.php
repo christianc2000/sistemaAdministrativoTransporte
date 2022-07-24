@@ -265,17 +265,25 @@ return [
                     'icon' => 'fas fa-user-injured',
                     'text' => ' Administrador global',
                     'url'  => 'admin/administradors',
+                    'can'  => 'administradors.index',//can verifica si tiene un permiso(rol)
                 ],
                 [
                     'icon' => 'fas fa-user-injured',
                     'text' => ' Administrador de institucion',
                     'url'  => 'admin/administradorInstitucions',
+                    'can'  => 'administradorInstitucions.index',//can verifica si tiene un permiso(rol)
                 ],
                 [
                     'icon' => 'fas fa-user-injured',
                     'text' => ' Chofer',
                     'url'  => 'admin/chofers',
                 ],
+                [
+                    'icon' => 'fas fa-user-injured',
+                    'text' => ' Roles',
+                    'url'  => 'admin/roles',
+                ],
+
 
             ],
 

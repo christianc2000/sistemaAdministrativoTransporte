@@ -88,7 +88,7 @@
 
         <!--***************************************-->
 
-            {{-- <div class="mb-3">
+            <div class="mb-3">
                 <label class="control-label col-md-2 col-sm-3 col-xs-12">Lista de roles</label>
                 @foreach ($roles as $role)
 
@@ -107,7 +107,7 @@
                 @error('rol')
                     <small>*{{ $message }} </small>
                 @enderror
-            </div> --}}
+            </div>
 
         <!--asignar rol-->
         <a href="{{ route('administradors.index') }}" class="btn btn-secondary" tabindex="5">Cancelar</a>
