@@ -33,6 +33,7 @@ Route::get('duenio-micro/{id}',[DuenioController::class,'micros'])->name('admin.
 Route::resource('permiso',PermisoLineaController::class)->names('admin.permiso'); //en el metodo show mandará el id de la linea
 Route::get('permiso-asignar/{id}',[PermisoLineaController::class,'asignarPermiso'])->name('admin.permiso.asignarMicro');
 Route::get('permiso-duenio/{id}',[PermisoLineaController::class,'showOne'])->name('admin.permiso.showOne');
+Route::get('permiso-duenio-asignar/{id}',[PermisoLineaController::class,'asignarPermisoMicro'])->name('admin.permiso.asignarPermisoMicro');
 Route::resource('micro',MicrosController::class)->names('admin.micro');
 Route::resource('permiso',PermisoLineaController::class)->names('admin.permiso'); //en el metodo show mandará el id de la linea
 Route::post('permiso-duenio',[PermisoLineaController::class,'storeOne'])->name('admin.permiso.storeOne');

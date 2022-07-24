@@ -106,6 +106,7 @@ class MicrosController extends Controller
     {
         return $request;
     }
+
     public function darBajaMicro($id)
     {
 
@@ -115,7 +116,7 @@ class MicrosController extends Controller
 
         $micro->fecha_baja = date(now());
         $micro->save();
-
+       
         $permiso = PermisoLinea::all()->find($micro->permisoLinea->id);
         $permiso->activo = false;
         $permiso->save();
@@ -128,7 +129,7 @@ class MicrosController extends Controller
 
             $cm->save();
         }
-
+        
         return redirect()->route('admin.permiso.showOne', $duenio->id);
     }
 

@@ -60,7 +60,7 @@ class ChoferTarjetaController extends Controller
      * @param  \App\Models\RecorridoTarjeta  $recorridoTarjeta
      * @return \Illuminate\Http\Response
      */
-    public function show(RecorridoTarjeta $recorridoTarjeta)
+    public function show($id)
     {
         //
     }

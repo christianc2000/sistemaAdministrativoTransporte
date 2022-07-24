@@ -6,6 +6,7 @@ use App\Models\ChoferMicro;
 use App\Models\Duenio;
 use App\Models\Linea;
 use App\Models\Lineas;
+use App\Models\Micro;
 use App\Models\PermisoLinea;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -56,16 +57,30 @@ class PermisoLineaController extends Controller
     public function storeOne(Request $request)
     {
         $request->validate([
-            'linea_id' => 'required|numeric',
-            'duenio_id' => 'required|numeric'
+            'linea_id' => 'nullable|numeric',
+            'duenio_id' => 'nullable|numeric',
+            'permiso_id' => 'nullable|numeric',
+            'micro_id' => 'nullable|numeric'
         ]);
-
-        $pl = PermisoLinea::create([
-            'duenio_id' => $request->duenio_id,
-            'linea_id' => $request->linea_id
-        ]);
-
-        return redirect()->route('admin.permiso.showOne', $request->duenio_id);
+    
+        if ($request->linea_id && $request->duenio_id) {
+            $pl = PermisoLinea::create([
+                'duenio_id' => $request->duenio_id,
+                'linea_id' => $request->linea_id
+            ]);
+            $duenio=Duenio::all()->find($pl->duenio->id);
+        } else if ($request->permiso_id && $request->micro_id) {
+            
+            $micro=Micro::all()->find($request->micro_id);
+            $micro->fecha_baja=null;
+            $micro->permiso_linea_id=$request->permiso_id;
+            $micro->save();
+            $permiso = PermisoLinea::all()->find($request->permiso_id);
+            $permiso->activo=true;
+            $permiso->save();
+            $duenio=Duenio::all()->find($permiso->duenio->id);
+        }
+        return redirect()->route('admin.permiso.showOne', $duenio->id);
     }
     /**
      * Display the specified resource.
@@ -96,18 +111,33 @@ class PermisoLineaController extends Controller
 
 
         $permisolineas =  PermisoLinea::where('duenio_id', $duenio->id)->get();
-
         $chofer_micros = ChoferMicro::where('fecha_baja', null)->get();
-        // return $permisolineas;
+
         if ($permisolineas != null) {
             $linea = $duenio->duenioLineas->first()->linea;
         } else {
             $linea = Linea::all()->find($permisolineas[0]['linea_id']);
         }
 
-
-        return view('Admin.user.permisolineas.showDuenio', compact('linea', 'permisolineas', 'duenio', 'chofer_micros'));
+        $mic = Micro::join('permiso_lineas', 'micros.permiso_linea_id', '=', 'permiso_lineas.id')
+            ->join('lineas', 'lineas.id', 'permiso_lineas.linea_id')
+            ->where('permiso_lineas.linea_id', $linea->id)
+            ->select('micros.*')
+            ->groupBy('micros.id')
+            ->orderBy('micros.id', 'asc')
+            ->get();
+      
+        $micros=new Collection();
+        if(isset($mic)){
+            foreach($mic as $micro){
+               if($micro->fecha_baja!=null){
+                   $micros->push($micro);
+               }
+            }   
+        }
+        return view('Admin.user.permisolineas.showDuenio', compact('linea', 'permisolineas', 'duenio', 'chofer_micros','micros'));
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -134,19 +164,19 @@ class PermisoLineaController extends Controller
     {
         $permiso = PermisoLinea::all()->find($id);
         $duenio = $permiso->duenio;
-        $linea=$permiso->linea;
+        $linea = $permiso->linea;
         $permisos = $duenio->permisoLineas;
         $micros = new Collection();
 
         foreach ($permisos as $perm) {
             if ($perm->micros->first() != null) {
-               foreach ($perm->micros as $micro) {
-                   $micros->push($micro);
-               }
+                foreach ($perm->micros as $micro) {
+                    $micros->push($micro);
+                }
             }
         }
-       
-        return view('Admin.user.permisolineas.asignarMicro',compact('linea','duenio','permiso','micros'));
+
+        return view('Admin.user.permisolineas.asignarMicro', compact('linea', 'duenio', 'permiso', 'micros'));
     }
     /**
      * Remove the specified resource from storage.
