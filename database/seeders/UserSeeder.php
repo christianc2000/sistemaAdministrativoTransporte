@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                 'email' => 'chess@gmail.com',
                 'tipo' => 'A',
             ]
-        );
+        )->assignRole('AdminGlobal');
         Administrador::create([
             'user_id' => $u->id
         ]);

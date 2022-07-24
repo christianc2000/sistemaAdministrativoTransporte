@@ -15,13 +15,13 @@ use App\Http\Controllers\Api\ChoferController as ApiChoferController;
 use App\Http\Controllers\BackController;
 use App\Http\Controllers\ChoferController;
 use App\Http\Controllers\InstitucionController;
-use App\Models\PermisoLinea;
+use App\Http\Controllers\roleController;
 
 Route::get('/', function () {
-    return ("hola");
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-//Route::resource('administradors', AdministradorController::class);
+Route::resource('administradors', AdministradorController::class);
+// Route::resource('administradors', AdministradorController::class);
 Route::resource('linea',LineaController::class)->names('admin.linea');
 
 Route::resource('dueniolinea',DuenioLineaController::class)->names('admin.dueniolinea');
@@ -45,3 +45,5 @@ Route::resource('administradors', AdministradorController::class);
 Route::resource('institucions', InstitucionController::class);
 Route::resource('administradorInstitucions', AdministradorInstitucionController::class);
 Route::resource('chofers', ChoferController::class);
+
+Route::resource('roles', roleController::class);
