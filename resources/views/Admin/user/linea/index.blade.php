@@ -16,7 +16,7 @@
                 <thead>
                     <tr>
                         <th scope="col">LÍNEA</th>
-                        <th scope="col">SEDE</th>
+                        <th scope="col" style="width: 200px">SEDE</th>
                         <th scope="col">FOTO</th>
                         <th scope="col">Acciones</th>
                     </tr>
@@ -32,14 +32,24 @@
                                     height="120"></td>
                             <td>
                                 <form action="{{ route('admin.linea.destroy', $linea->id) }}" method="POST">
-                                    <a href="{{ route('admin.linea.show', $linea->id) }}"
-                                        class="btn btn-primary">Dueños</a>
-                                    <a href="{{ route('admin.linea.edit', $linea->id) }}"
-                                        class="btn btn-success">Editar</a>
-                                    @csrf
-                                    <!--metodo para añadir token a un formulario-->
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    <div class="row ">
+                                        <a href="{{ route('admin.linea.show', $linea->id) }}"
+                                            class="btn btn-primary col-sm-6 mb-2"
+                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Dueños</a>
+                                        <a href="{{ route('admin.permiso.show', $linea->id) }}"
+                                            class="btn btn-primary col-sm-6 mb-2"
+                                            style="background: #00D8C1;margin-left: 5px ;border:#00D8C1; width: 90px">Permisos</a>
+                                    </div>
+                                    <div class="row">
+                                        <a href="{{ route('admin.linea.edit', $linea->id) }}"
+                                            class="btn btn-success col-sm-6 mb-2"
+                                            style="background: #009AAC; margin-left: 5px ; border:#009AAC; width: 90px">Editar</a>
+                                        @csrf
+                                        <!--metodo para añadir token a un formulario-->
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger col-sm-6 mb-2"
+                                            style="width: 90px; margin-left: 5px ">Eliminar</button>
+                                    </div>
                                 </form>
                             </td>
                         </tr>
@@ -54,9 +64,12 @@
 @section('css')
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
     <style type="text/css">
         .container-img {
             display: flex;
@@ -83,6 +96,7 @@
     <script>
         $(document).ready(function() {
             $('#tabla').DataTable({
+                
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página',
                     zeroRecords: 'No se encontró nada - lo siento',
@@ -91,9 +105,9 @@
                     infoFiltered: '(filtrado de _MAX_ registros totales)',
                     search: "Buscar",
                 },
-                scrollY: '250px',
+                scrollY: '280px',
                 scrollCollapse: true,
-                
+
             });
         });
     </script>

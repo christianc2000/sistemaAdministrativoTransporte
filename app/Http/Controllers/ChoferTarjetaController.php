@@ -7,6 +7,7 @@ use App\Models\Tarjeta;
 use App\Models\Chofer;
 use App\Models\Micros;
 use App\Models\ChoferTarjeta;
+use Illuminate\Support\Facades\DB;
 
 class ChoferTarjetaController extends Controller
 {
@@ -29,7 +30,7 @@ class ChoferTarjetaController extends Controller
     public function create()
     {
         $micros = Micros::all();
-        $tarjetas = Tarjeta::all();
+        $tarjetas = DB::table('tarjetas')->select('id')->groupBy('id')->orderBy('id','desc')->get();
         $choferes = Chofer::all();
         return view('ChoferTarjeta.create')->with(['tarjetas'=> $tarjetas, 'choferes'=> $choferes, 'micros'=>$micros]);
     }

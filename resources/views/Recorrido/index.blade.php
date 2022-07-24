@@ -42,10 +42,12 @@
                             <td>{{$recorrido -> tarjeta_id}}</td>
                             <td>
                                 <form action="{{route ('recorridos.destroy', $recorrido -> id)}}" method="POST">
+                                
                                 <a href="/recorridos/{{$recorrido -> id}}/edit" class="btn btn-warning">Editar</a>
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Borrar</button>
+                                <a href="{{route ('recorridos.show', $recorrido -> tarjeta_id)}}" class="btn btn-info">Tarjeta</a>
                                 </form>
                             </td>
                         </tr>

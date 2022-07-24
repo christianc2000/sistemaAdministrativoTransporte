@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Sistema Administrativo',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
+    'usermenu_enabled' => false,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -85,8 +85,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -238,17 +238,21 @@ return [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
+        
 
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Search',
         ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        
+
+        /*
         [
             'text'        => 'pages',
             'url'         => 'admin/pages',
@@ -256,9 +260,10 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        */
+        ['header' => 'FUNCIONES DEL SISTEMA'],
         [
-            'text'    => 'usuario administrador',
+            'text'    => 'Usuarios',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
@@ -266,10 +271,24 @@ return [
                     'text' => ' Administrador global',
                     'url'  => 'admin/administradors',
                 ],
-                
+                [
+                    'icon' => 'fas fa-user-injured',
+                    'text' => ' Administrador de institucion',
+                    'url'  => 'admin/administradorInstitucions',
+                ],
+                [
+                    'icon' => 'fas fa-user-injured',
+                    'text' => ' Chofer',
+                    'url'  => 'admin/chofers',
+                ],
 
             ],
 
+        ],
+        [
+            'icon' => 'fas fa-user-injured',
+            'text' => 'Instituciones',
+            'url'  => 'admin/institucions',
         ],
         [
             'text' => 'Líneas',
@@ -279,13 +298,22 @@ return [
         [
             'text' => 'Dueños',
             'url'  => 'admin/duenio',
-            'icon' => 'fas fa-solid fa-users'
+            'icon' => 'fas fa-solid fa-users',
         ],
+        
+        [
+            'text' => 'Micros',
+            'url'  => 'admin/micro',
+            'icon' => 'fas fa-solid fa-bus-simple'
+        ],
+        
+        /*
         [
             'text' => 'profile',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
+        */
         [
             'text' => 'Recorrido',
             'route'  => 'recorridos.index',
@@ -301,6 +329,7 @@ return [
             'route'  => 'chofertarjetas.index',
             'icon' => 'fas fa-fw fa-address-card',
         ],
+        /*
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
@@ -360,6 +389,7 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+        */
     ],
 
     /*

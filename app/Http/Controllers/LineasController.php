@@ -41,7 +41,7 @@ class LineasController extends Controller
         $adminInstitucions = AdministradorInstitucion::join('users', 'users.id', '=', 'administrador_institucions.user_id')
             ->select('administrador_institucions.id', 'users.ci', 'users.nombre', 'administrador_institucions.institucion_id')
             ->groupBy('administrador_institucions.id', 'users.ci', 'users.nombre', 'administrador_institucions.institucion_id')
-            ->orderBy('administrador_institucions.id','asc')
+            ->orderBy('administrador_institucions.id', 'asc')
             ->get();
         $adminInstitucions = collect($adminInstitucions);
         return view('Admin.user.linea.create', compact('institucions', 'adminInstitucions'));
@@ -92,22 +92,26 @@ class LineasController extends Controller
      */
     public function show($id)
     {
-        $linea=Lineas::all()->find($id);
-       
-        if(isset($linea)){
+        $linea = Lineas::all()->find($id);
+
+        if (isset($linea)) {
             //**********aportes del duenio
-       // $dueniolineas=DuenioLinea::where('linea_id',$linea->id)->get();
-        //return $dueniolineas;
-        //*******duenios de la línea */
-        $duenios = DuenioLinea::join('duenios','duenio_lineas.duenio_id', '=', 'duenios.id')
+            $duenios = Duenio::join('duenio_lineas', 'duenios.id', '=', 'duenio_lineas.duenio_id')
+                ->join('lineas', 'lineas.id', 'duenio_lineas.linea_id')
+                ->where('duenio_lineas.linea_id', $linea->id)
+                ->select('duenios.*')
+                ->groupBy('duenios.id')
+                ->orderBy('duenios.id', 'asc')
+                ->get();
+            /*  $duenios = DuenioLinea::join('duenios','duenio_lineas.duenio_id', '=', 'duenios.id')
             ->join('lineas','lineas.id','duenio_lineas.linea_id')
             ->where('duenio_lineas.linea_id','=',$linea->id)
-            ->select('duenios.id', 'duenios.ci', 'duenios.nombre', 'duenios.apellido', 'duenios.sexo','duenios.fecha_nac','duenios.email','duenios.telefono','duenio_lineas.created_at')
-            ->groupBy('duenios.id', 'duenios.ci', 'duenios.nombre', 'duenios.apellido', 'duenios.sexo','duenios.fecha_nac','duenios.email','duenios.telefono','duenio_lineas.created_at')
+            ->select('duenios.*')
+            ->groupBy('duenios.id.*')
             ->orderBy('duenios.id','asc')
-            ->get();
-            return view('Admin.user.linea.show',compact('duenios','linea'));
-        }else{
+            ->get();*/
+            return view('Admin.user.linea.show', compact('duenios', 'linea'));
+        } else {
             return "ERROR, línea no existe en la base de datos";
         }
     }

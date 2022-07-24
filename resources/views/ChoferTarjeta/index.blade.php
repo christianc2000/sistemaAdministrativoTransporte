@@ -20,6 +20,7 @@
             <div class="card-header"> Chofer Tarjetas </div>
             <div class="card-body">
                 <a href="chofertarjetas/create" class="btn btn-primary">Crear Registro</a>
+                <a href="/tarjetas" class="btn btn-info">Ver Tarjetas</a>
                 <table id="chofertarjeta" class="table table-striped mt-4" style="width:100%">
                     <thead>
                         <tr>

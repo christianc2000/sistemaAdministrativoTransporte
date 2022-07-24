@@ -9,7 +9,7 @@ class Duenio extends Model
 {
     use HasFactory;
     protected $guarded=['id','created_at','updated_at'];
-    public function permiso_lineas(){
+    public function permisoLineas(){
         return $this->hasMany(PermisoLinea::class);
     }
     public function duenioLineas(){

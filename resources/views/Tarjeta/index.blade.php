@@ -22,7 +22,7 @@
                 <form action="{{route ('tarjetas.store')}}" method="POST">
                     @csrf
                     <input type="hidden" id="h" name="h" value="">
-                    <a href="/recorridos" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>
+                    <a href="javascript: history.go(-1)" class="btn btn-primary"><i class="fa fa-arrow-left"></i></a>
                     <button type="submit" class="btn btn-primary">Crear Tarjeta</button>
                 </form>
                 <div align='center'>
@@ -42,6 +42,7 @@
                              <!--   <a href="/tarjetas/{{$tarjeta -> id}}/edit" class="btn btn-warning">Editar</a>-->
                                 @csrf
                                 @method('delete')
+                                <a href="{{route ('tarjetas.show', $tarjeta -> id)}}" class="btn btn-info">Mostrar</a>
                                 <button type="submit" class="btn btn-danger">Borrar</button>
                                 </form>
                             </td>

@@ -19,6 +19,7 @@
                         <th scope="col">NOMBRE</th>
                         <th scope="col" style="text-align:center">SEXO</th>
                         <th scope="col" style="text-align:center">TELEFONO</th>
+                        <th scope="col">LINEA</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -30,13 +31,23 @@
                             <td scope="col">{{ $duenio->nombre }} {{ $duenio->apellido }}</td>
                             <td scope="col" style="text-align:center">{{ $duenio->sexo }}</td>
                             <td scope="col" style="text-align:center">{{ $duenio->telefono }}</td>
+                            
+                            <td scope="col">
+                                @if ($duenio->duenioLineas->first()!=null)
+                                    {{$duenio->duenioLineas->first()->linea->nrolinea}}
+                                @else
+                                    
+                                @endif
+                               
+                            </td>
                             <td>
                                 <form action="{{ route('admin.duenio.destroy', $duenio->id) }}" method="POST">
                                     <a href="{{ route('admin.duenio.show', $duenio->id) }}"
                                         class="btn btn-primary">choferes</a>
-                                    <a href="{{ route('admin.duenio.edit', $duenio->id) }}"
-                                        class="btn btn-success">Editar</a>
+                                   
                                     <a href="{{route('admin.dueniolinea.show',$duenio->id)}}" class="btn btn-warning">Aportes</a>
+
+                                    <a href="{{route('admin.permiso.showOne',$duenio->id)}}" class="btn btn-secondary">Permiso</a>
                                     @csrf
                                     <!--metodo para añadir token a un formulario-->
                                     @method('delete')
@@ -56,8 +67,12 @@
 @section('css')
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
     <style>
         .container-img {
             display: flex;

@@ -14,6 +14,6 @@ class DuenioLinea extends Model
       return $this->belongsTo(Duenio::class);
     }
     public function linea(){
-        return $this->belongsTo(Lineas::class);
+        return $this->belongsTo(Linea::class);
     }
 }

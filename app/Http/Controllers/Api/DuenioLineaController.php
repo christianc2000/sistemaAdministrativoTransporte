@@ -45,6 +45,7 @@ class DuenioLineaController extends Controller
         $request->validate([
             'aporte'=>'required',
             'fecha'=>'required|date',
+            'aporte_pagado'=>'required',
             'duenio_id'=>'required|integer',
             'linea_id'=>'required|integer',
         ]);
@@ -102,6 +103,7 @@ class DuenioLineaController extends Controller
         $request->validate([
             'aporte'=>'required',
             'fecha'=>'required|date',
+            'aporte_pagado'=>'required',
             'duenio_id'=>'nullable|integer',
             'linea_id'=>'nullable|integer'
         ]);

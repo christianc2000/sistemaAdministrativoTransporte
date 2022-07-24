@@ -27,7 +27,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Numero de interno</label>
                         <select name="nro_interno" class="form-control">
-                            <option value="">Seleccione Nro. Interno</option>
+                            <option value="" selected disabled>Seleccione Nro. Interno</option>
                             @foreach ($micros as $micro)
                                 <option value="{{$micro->nro_interno}}">Interno {{$micro->nro_interno}}</option>
                             @endforeach
@@ -40,7 +40,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">ID Chofer</label>
                         <select name="id_chofer" class="form-control">
-                            <option value="">Seleccione ID Chofer</option>
+                            <option value="" selected disabled>Seleccione ID Chofer</option>
                             @foreach ($choferes as $chofer)
                                 <option value="{{$chofer->id}}">ID {{$chofer->id}}</option>
                             @endforeach
@@ -49,9 +49,9 @@
                     <div class="mb-3">
                         <label for="" class="form-label">ID Tarjeta</label>
                         <select name="id_tarjeta" class="form-control">
-                            <option value="">Seleccione ID Tarjeta</option>
+                            <option value="" selected disabled>Seleccione ID Tarjeta</option>
                             @foreach ($tarjetas as $tarjeta)
-                                <option value="{{$tarjeta->id}}">ID {{$tarjeta->id}}</option>
+                                <option value="<?php echo strval($tarjeta->id) ?>"><?php echo strval($tarjeta->id) ?></option>
                             @endforeach
                         </select>
                     </div>

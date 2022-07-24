@@ -3,7 +3,7 @@
 @section('title', 'CREAR USUARIO')
 
 @section('content_header')
-    <h1>Crear Usuario</h1>
+    <h1>Crear Administrador</h1>
 @stop
 
 @section('content')
@@ -51,7 +51,7 @@
         <div class="mb-3">
             <label for="" class="col-form-labelel">Sexo</label>
             <div></div>
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="sexo">
                 <option selected>seleccionar sexo</option>
                 <option value="M">Masculino</option>
                 <option value="F">femenino</option>
@@ -84,6 +84,15 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="" class="col-form-labelel">Correo electronico</label>
+            <input id="email" name="email" type="email" step="any" value="" class="form-control"
+                tabindex="1" required autofocus autocomplete="email">
+            @error('email')
+                <br>
+                <small>{{ $message }} </small>
+            @enderror
+        </div>
+        {{-- <div class="mb-3">
             <label for="" class="col-form-label">Tipo deconductor</label>
             <div></div>
             <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
@@ -95,7 +104,7 @@
                 <br>
                 <small>*{{ $message }} </small>
             @enderror
-        </div>
+        </div> --}}
         <!--ERROR correo electronico-->
 
         <!--***************************************-->
