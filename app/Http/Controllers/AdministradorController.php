@@ -6,6 +6,8 @@ use App\Models\Administrador;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Return_;
+use Spatie\Permission\Models\Role;
 
 class AdministradorController extends Controller
 {
@@ -14,6 +16,16 @@ class AdministradorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('can:administradors.index')->only('index');
+        $this->middleware('can:administradors.create')->only('create', 'store');
+        $this->middleware('can:administradors.edit')->only('edit', 'update');
+        $this->middleware('can:administradors.destroy')->only('destroy');
+    }
+
+
     public function index()
     {
         $users = DB::table('users')
@@ -32,8 +44,8 @@ class AdministradorController extends Controller
         // $users = Persona::all();
 
         // $roles = Role::all();
-
-        return view('admin.user.create');
+        $roles = Role::all();
+        return view('admin.user.create', compact('roles'));
     }
 
     /**
@@ -44,6 +56,7 @@ class AdministradorController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $users = new User();
         $users->ci = $request->get('ci');
         $users->nombre = $request->get('name');
@@ -56,6 +69,7 @@ class AdministradorController extends Controller
         $users->tipo = 'A';
         // $users->foto = $request->get('foto');
         $users->save();
+        $users->assignRole($request->rol);
         // $users->assignRole($request->rol); //crear rol
         // $users->syncRoles($request->rol);//sincronizar rol
         //    return redirect()->route('users.edit', $users)->with('info', 'Se asignó los roles correctamente');
@@ -86,9 +100,11 @@ class AdministradorController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::all();
         $users = DB::table('users')
                 ->where('id', $id)->first();
-        return view('admin.user.edit', compact('users'));
+        $user = User::find($id);
+        return view('admin.user.edit', compact('users', 'roles', 'user'));
         // return view('user.edit', compact('user', 'users'));        
     }
 
@@ -101,12 +117,12 @@ class AdministradorController extends Controller
      */
     public function update(Request $request, $ci)
     {
+        // return $request;
         $user = User::find($ci);
         $user->nombre = $request->get('name');
         $user->apellido = $request->get('apellido');
         $user->email = $request->get('email');
         // $user->save();
-        // $user->syncRoles($request->rol); //sincronizar rol
         $user->ci = $request->get('ci');
         $user->nombre = $request->get('name');
         $user->apellido = $request->get('apellido');
@@ -120,6 +136,7 @@ class AdministradorController extends Controller
         $user->email = $request->get('email');
         // $users->foto = $request->get('foto');
         $user->save();
+        $user->syncRoles($request->rol); //sincronizar rol
         // $users->assignRole($request->rol); //crear rol
         // $users->syncRoles($request->rol);//sincronizar rol
         //    return redirect()->route('users.edit', $users)->with('info', 'Se asignó los roles correctamente');
