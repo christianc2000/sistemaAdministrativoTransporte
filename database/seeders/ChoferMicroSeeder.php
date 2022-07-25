@@ -73,10 +73,16 @@ class ChoferMicroSeeder extends Seeder
         'micro_id' => 4
       ],
       [
-        'fecha_asig' => '2022/05/05',
-        'chofer_id' => 5,
+        'fecha_asig' => '2022/05/01',
+        'fecha_baja' => '2022/07/01',
+        'chofer_id' => 11,
         'micro_id' => 11
       ],
+      [
+        'fecha_asig' => '2022/07/02',
+        'chofer_id' => 11,
+        'micro_id' => 12
+      ]
     ];
     foreach ($data as $d) {
       ChoferMicro::create($d);

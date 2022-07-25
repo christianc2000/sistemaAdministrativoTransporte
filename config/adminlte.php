@@ -227,8 +227,8 @@ return [
     'menu' => [
         // Navbar items:
 
-        
- 
+
+
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
@@ -238,7 +238,7 @@ return [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
-        
+
 
         // Sidebar items:
         [
@@ -250,7 +250,7 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        
+
 
         /*
         [
@@ -270,13 +270,13 @@ return [
                     'icon' => 'fas fa-user-injured',
                     'text' => ' Administrador global',
                     'url'  => 'admin/administradors',
-                    'can'  => 'administradors.index',//can verifica si tiene un permiso(rol)
+                    'can'  => 'administradors.index', //can verifica si tiene un permiso(rol)
                 ],
                 [
                     'icon' => 'fas fa-user-injured',
                     'text' => ' Administrador de institucion',
                     'url'  => 'admin/administradorInstitucions',
-                    'can'  => 'administradorInstitucions.index',//can verifica si tiene un permiso(rol)
+                    'can'  => 'administradorInstitucions.index', //can verifica si tiene un permiso(rol)
                 ],
                 [
                     'icon' => 'fas fa-user-injured',
@@ -308,13 +308,13 @@ return [
             'url'  => 'admin/duenio',
             'icon' => 'fas fa-solid fa-users',
         ],
-        
+
         [
             'text' => 'Micros',
             'url'  => 'admin/micro',
             'icon' => 'fas fa-solid fa-bus-simple'
         ],
-        
+
         /*
         [
             'text' => 'profile',
@@ -337,6 +337,11 @@ return [
             'route'  => 'chofertarjetas.index',
             'icon' => 'fas fa-fw fa-address-card',
         ],
+        [
+            'icon' => 'fas fa-solid fa-comment-dots',
+            'text' => ' Problemas',
+            'url'  => 'admin/problema',
+        ]
         /*
         [
             'text' => 'change_password',

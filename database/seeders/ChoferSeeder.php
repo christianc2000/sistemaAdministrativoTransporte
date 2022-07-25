@@ -20,7 +20,7 @@ class ChoferSeeder extends Seeder
                 'ci' => '6354790',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Pedro',
-                'apellido' => 'Aban Palma',
+                'apellido' => 'Soriocó',
                 'sexo' => 'M',
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 77214590,
@@ -125,6 +125,18 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 65913010,
                 'email' => 'felix@gmail.com',
+                'tipo' => 'C'
+            ],
+            //linea 2
+            [
+                'ci' => '99827832',
+                'password' => bcrypt('12345678'),
+                'nombre' => 'Felix',
+                'apellido' => 'Panduro',
+                'sexo' => 'M',
+                'fecha_nac' => '1980-05-04',
+                'telefono' => 65913010,
+                'email' => 'felixpanduro@gmail.com',
                 'tipo' => 'C'
             ]
         ];

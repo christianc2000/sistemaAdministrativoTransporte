@@ -133,7 +133,15 @@ class DuenioLineaSeeder extends Seeder
         'aporte_pagado' => 1570,
         'duenio_id' => 10,
         'linea_id' => 5
+      ],
+      [
+        'aporte' => 1500,
+        'fecha' => '2022/05/07',
+        'aporte_pagado' => 1500,
+        'duenio_id' => 11,
+        'linea_id' => 2
       ]
+
     ];
     foreach ($data as $d) {
       DuenioLinea::create($d);
