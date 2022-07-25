@@ -154,7 +154,7 @@ class ChoferController extends Controller
         $chofer->categoria_licencia = $request->get('cateLicen');
         $chofer->save();
 
-        $cm=$chofer->choferMicros->where('fecha_baja',null);
+        $cm=$chofer->choferMicros->where('fecha_baja',null)->first();
         $cm->fecha_baja=date(now());
         $cm->save();
 
@@ -163,7 +163,7 @@ class ChoferController extends Controller
         $cmn->chofer_id=$request->chofer_id;
         $cmn->fecha_asig=date(now());
         $cmn->save();
-        
+
         return redirect()->route('chofers.index')->with('info', 'Se editó el usuario chofer'); //redirige a la vista index de la carpeta cargo
 
     }
