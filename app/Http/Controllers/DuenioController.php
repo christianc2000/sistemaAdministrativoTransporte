@@ -20,6 +20,7 @@ class DuenioController extends Controller
      */
     public function index()
     {
+        
         $duenios = Duenio::all();
         $lineas = Lineas::all();
         return view('Admin.user.duenios.index', compact('duenios', 'lineas'));

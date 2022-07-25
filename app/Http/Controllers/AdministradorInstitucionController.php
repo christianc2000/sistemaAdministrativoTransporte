@@ -6,6 +6,7 @@ use App\Models\AdministradorInstitucion;
 use App\Models\Institucion;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class AdministradorInstitucionController extends Controller
 {
@@ -14,6 +15,16 @@ class AdministradorInstitucionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     
+    public function __construct()
+    {
+        $this->middleware('can:administradorInstitucions.index')->only('index');
+        $this->middleware('can:administradorInstitucions.create')->only('create', 'store');
+        $this->middleware('can:administradorInstitucions.edit')->only('edit', 'update');
+        $this->middleware('can:administradorInstitucions.destroy')->only('destroy');
+    }
+
     public function index()
     {
         $users= User::Where('tipo', 'I')->get();
@@ -27,8 +38,10 @@ class AdministradorInstitucionController extends Controller
      */
     public function create()
     {
+        
+        $roles = Role::all();
         $institucions = Institucion::all();
-        return view('admin.adminInstitucion.create', compact('institucions'));
+        return view('admin.adminInstitucion.create', compact('institucions', 'roles'));
     }
 
     /**
@@ -51,7 +64,7 @@ class AdministradorInstitucionController extends Controller
         $users->tipo = 'I';
         // $users->foto = $request->get('foto');
         $users->save();
-        // $users->assignRole($request->rol); //crear rol
+        $users->assignRole($request->rol); //crear rol
         // $users->syncRoles($request->rol);//sincronizar rol
         //    return redirect()->route('users.edit', $users)->with('info', 'Se asignó los roles correctamente');
 
@@ -82,10 +95,11 @@ class AdministradorInstitucionController extends Controller
      */
     public function edit($id)
     {
+        $roles = Role::all();
         $institucions = Institucion::all();
         $adminIns = AdministradorInstitucion::where('user_id', $id)->first();
         $users= User::find($id);
-        return view('admin.adminInstitucion.edit', compact('institucions', 'adminIns', 'users'));
+        return view('admin.adminInstitucion.edit', compact('institucions', 'adminIns', 'users', 'roles'));
     }
 
     /**
@@ -111,7 +125,7 @@ class AdministradorInstitucionController extends Controller
         $administradorInstitucion->tipo = 'I';
         // $users->foto = $request->get('foto');
         $administradorInstitucion->save();
-        // $users->assignRole($request->rol); //crear rol
+        $administradorInstitucion->syncRoles($request->rol); //crear rol
         // $users->syncRoles($request->rol);//sincronizar rol
         //    return redirect()->route('users.edit', $users)->with('info', 'Se asignó los roles correctamente');
 

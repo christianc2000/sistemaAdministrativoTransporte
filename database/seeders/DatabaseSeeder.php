@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory($perfil);//para eliminar la carpeta
         Storage::makeDirectory($perfil);//para crear la carpeta
         // \App\Models\User::factory(10)->create();
+        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class); //user y administrador
+        
         $this->call(InstitucionSeeder::class);
         $this->call(AdministradorInstitucionSeeder::class);
         $this->call(ChoferSeeder::class);

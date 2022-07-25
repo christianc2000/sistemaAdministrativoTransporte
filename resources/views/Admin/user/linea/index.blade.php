@@ -15,22 +15,22 @@
             <table id="tabla" class="table table-striped shadow-lg mt-4" style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col">LÍNEA</th>
+                        <th scope="col" style="width: 100px">LÍNEA</th>
                         <th scope="col" style="width: 200px">SEDE</th>
-                        <th scope="col">FOTO</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col" style="width: 250px">FOTO</th>
+                        <th scope="col" style="width: 250px">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     @foreach ($lineas as $linea)
                         <tr>
-                            <td scope="col" style="text-align:center; font-weight: 900">{{ $linea->nrolinea }}</td>
+                            <td scope="col" style="width:100px; font-weight: 900">{{ $linea->nrolinea }}</td>
 
-                            <td scope="col">{{ $linea->sede }}</td>
-                            <td scope="col"><img src="{{ asset($linea->foto) }}" alt="" width="130"
-                                    height="120"></td>
-                            <td>
+                            <td scope="col" style="width:200px">{{ $linea->sede }}</td>
+                            <td scope="col" style="width: 250px"><img src="{{ asset($linea->foto) }}" alt=""
+                                    width="130" height="120"></td>
+                            <td scope="col" style="width: 250px">
                                 <form action="{{ route('admin.linea.destroy', $linea->id) }}" method="POST">
                                     <div class="row ">
                                         <a href="{{ route('admin.linea.show', $linea->id) }}"
@@ -96,7 +96,7 @@
     <script>
         $(document).ready(function() {
             $('#tabla').DataTable({
-                
+
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página',
                     zeroRecords: 'No se encontró nada - lo siento',
@@ -105,9 +105,24 @@
                     infoFiltered: '(filtrado de _MAX_ registros totales)',
                     search: "Buscar",
                 },
-                scrollY: '280px',
-                scrollCollapse: true,
-
+                
+                columnDefs: [{
+                        width: "100px",
+                        targets: 0
+                    },
+                    {
+                        width: "200px",
+                        targets: 1
+                    },
+                    {
+                        width: "250px",
+                        targets: 2
+                    },
+                    {
+                        width: "250px",
+                        targets: 3
+                    }
+                ]
             });
         });
     </script>

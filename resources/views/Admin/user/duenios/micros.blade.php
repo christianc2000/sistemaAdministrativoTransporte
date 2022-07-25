@@ -3,7 +3,7 @@
 @section('title', 'Mostrar Linea')
 
 @section('content_header')
-    <h1>Micro - {{ $duenio->nombre }} {{ $duenio->apellido }} - Línea {{ $linea->nrolinea }}</h1>
+    <h1>Micros - {{ $duenio->nombre }} {{ $duenio->apellido }} - Línea {{ $linea->nrolinea }}</h1>
 @stop
 
 @section('content')
@@ -12,13 +12,13 @@
             <a href="{{ route('admin.micro.create') }}" class="btn btn-primary">Crear Micro</a>
         </div>
         <div class="card-body">
-            <table id="tabla" class="table table-striped shadow-lg mt-4" style="width:100%">
-                <thead>
+            <table id="tabla" class="table table-striped" style="width:100%">
+                <thead class="bg-dark text-white">
                     <tr>
-                        <th scope="col" style="text-align:center">PLACA</th>
+                        <th scope="col" style="width: 150px">PLACA</th>
                         <th scope="col">MODELO</th>
-                        <th scope="col" style="text-align:center">FECHA ASIGNACIÓN</th>
-                        <th scope="col" style="text-align:center">ESTADO</th>
+                        <th scope="col">FECHA ASIGNACIÓN</th>
+                        <th scope="col">ESTADO</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -26,12 +26,12 @@
 
                     @foreach ($micros as $micro)
                         <tr>
-                            <td scope="col" style="text-align:center; font-weight: 900">{{ $micro->placa }}</td>
+                            <td scope="col">{{ $micro->placa }}</td>
                             <td scope="col">{{ $micro->modelo }}</td>
-                            <td scope="col" style="text-align:center">{{ $micro->fecha_asignacion }}</td>
+                            <td scope="col">{{ $micro->fecha_asignacion }}</td>
 
-                            @if ($micro->fecha_baja==null)
-                                {{-- bandera es true significa que todo está en orden --}}
+                            @if ($micro->fecha_baja != null)
+                                {{-- si entra significa que el micro está inactivo --}}
                                 <td scope="col" style="text-align:center">
                                     <div style="border-radius: 4em; background: rgb(224, 128, 128)">Inactivo</div>
                                 </td>
@@ -50,7 +50,11 @@
                 </tbody>
             </table>
         </div>
-        
+        <div class="card-footer">
+            <a href="{{ route('admin.permiso.showOne', $duenio->id) }}">
+                <button class="btn btn-danger">Retroceder</button>
+            </a>
+        </div>
 
     </div>
 @stop
@@ -87,15 +91,14 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
-    <script>
-        < script src = "https://code.jquery.com/jquery-3.5.1.js" >
-    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
         $(document).ready(function() {
             $('#tabla').DataTable({
+                
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página',
                     zeroRecords: 'No se encontró nada - lo siento',
@@ -104,9 +107,7 @@
                     infoFiltered: '(filtrado de _MAX_ registros totales)',
                     search: "Buscar",
                 },
-                scrollY: '250px',
-                scrollCollapse: true,
-
+                
             });
         });
     </script>

@@ -25,11 +25,10 @@
                 </div>
 
                 <div class="col-sm-4" style="text-align: center">
-                    <a href="{{route('admin.duenio.micro',$duenio->id)}}">
-                        <button type="button" class="button"
-                        style="background: #f4511e; ">
-                        <span>Micros</span>
-                    </button>
+                    <a href="{{ route('admin.duenio.micro', $duenio->id) }}">
+                        <button type="button" class="button" style="background: #f4511e; ">
+                            <span>Micros</span>
+                        </button>
                     </a>
                 </div>
             </div>
@@ -84,24 +83,35 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">ASIGNAR PERMISO</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">ASIGNAR PERMISO A MICRO</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formulario" method="POST">
+                    <form action="{{ route('admin.permiso.storeOne') }}" method="POST">
                         @csrf
-                        @method('PUT')
                         <div class="modal-body">
                             <div class="form-group row" style="margin-left: 5px">
                                 <label for="labelPermiso" class="col-sm-4 col-form-label">Seleccionar Permiso</label>
                                 <div class="col-sm-8">
-                                    <select name="permiso_id" id="permiso_id" class="form-control">
+                                    <select name="permiso_id" id="permiso_id" class="form-control" required>
                                         <option value="" selected disabled>Seleccionar</option>
                                         @foreach ($permisolineas as $pl)
-                                            @if (!$pl->activo)
+                                            @if ($pl->activo == 0)
                                                 <option value="{{ $pl->id }}" name="{{ $pl }}">
-                                                    Permiso - {{ $pl->id }} - linea {{ $linea->nrolinea }}
+                                                    Permiso - {{ $pl->id }}
                                                 </option>
                                             @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row" style="margin-left: 5px">
+                                <label for="labelMicro" class="col-sm-4 col-form-label">Seleccionar Micro</label>
+                                <div class="col-sm-8">
+                                    <select name="micro_id" id="micro_id" class="form-control" required>
+                                        <option value="" selected disabled>Seleccionar</option>
+                                        @foreach ($micros as $micro)
+                                            <option value="{{ $micro->id }}">{{ $micro->placa }} -
+                                                {{ $micro->modelo }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -149,8 +159,8 @@
 
                             <td scope="col">
 
-                                @if ($pl->microActivo->first() != null)
-                                    {{ $pl->microActivo->first()->placa }}
+                                @if ($pl->micros->where('fecha_baja',null)->first() != null)
+                                    {{ $pl->micros->where('fecha_baja',null)->first()->placa}}
                                 @else
                                     Sin micro
                                 @endif
@@ -159,7 +169,7 @@
                             <td scope="col">
                                 @if ($pl->microActivo->first() != null)
                                     @if ($pl->microActivo->first()->choferMicros->first() != null)
-                                    {{ $pl->microActivo->first()->choferMicros->first()->chofer->user->nombre}}
+                                        {{ $pl->microActivo->first()->choferMicros->first()->chofer->user->nombre }}
                                     @else
                                         Sin Chofer
                                     @endif
@@ -175,10 +185,12 @@
                             <td>
                                 <form action="{{ route('admin.permiso.destroy', $pl->id) }}" method="POST">
                                     <div class="row ">
-                                        @if ($pl->microActivo->first()!=null)
-                                        <a href="{{ route('admin.micro.baja',$pl->microActivo->first()->id) }}" class="col-sm-4"><button type="button" class="btn btn-primary" >Dar de baja micro</button></a>
+                                        @if ($pl->microActivo->first() != null)
+                                            <a href="{{ route('admin.micro.baja', $pl->microActivo->first()->id) }}"
+                                                class="col-sm-4"><button type="button" class="btn btn-primary">Dar de
+                                                    baja micro</button></a>
                                         @endif
-                                      @csrf
+                                        @csrf
                                         <!--metodo para añadir token a un formulario-->
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger col-sm-4"
