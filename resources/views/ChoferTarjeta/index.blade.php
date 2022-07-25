@@ -27,7 +27,7 @@
                             <th>ID</th>
                             <th>Fecha</th>
                             <th>Nro. Interno</th>
-                            <th>ID Chofer</th>
+                            <th>Chofer</th>
                             <th>ID Tarjeta</th>
                             <th>Acciones</th>
                         </tr>
@@ -38,7 +38,7 @@
                             <td>{{$chofertarjeta -> id}}</td>
                             <td>{{$chofertarjeta -> fecha}}</td>
                             <td>{{$chofertarjeta -> nro_interno}}</td>
-                            <td>{{$chofertarjeta -> chofer_id}}</td>
+                            <td>{{$chofertarjeta -> nombre}} {{$chofertarjeta -> apellido}}</td>
                             <td>{{$chofertarjeta -> tarjeta_id}}</td>
                             <td>
                                 <form action="{{route ('chofertarjetas.destroy', $chofertarjeta -> id)}}" method="POST">

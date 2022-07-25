@@ -26,8 +26,15 @@
                         <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre del requisito..." value="{{$requisito->nombre}}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="" class="form-label">ID Linea</label>
-                        <input id="linea_id" name="linea_id" type="number" class="form-control" value="{{$requisito->linea_id}}" required>
+                        <label for="" class="form-label">Nro. Linea</label>
+                        <select name="linea_id" class="form-control">
+                            @foreach($nrolinea as $nro)
+                              <option value="{{$nro->id}}" selected>Linea {{$nro->nrolinea}}</option>
+                            @endforeach
+                            @foreach ($lineas as $linea)
+                                <option value="{{$linea->id}}">Linea {{$linea->nrolinea}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <a href="/requisitos" class="btn btn-secondary">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Guardar</button>

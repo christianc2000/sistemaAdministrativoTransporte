@@ -25,7 +25,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>ID Linea</th>
+                            <th>Nro. Linea</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -34,7 +34,7 @@
                         <tr>
                             <td>{{$requisito -> id}}</td>
                             <td>{{$requisito -> nombre}}</td>
-                            <td>{{$requisito -> linea_id}}</td>
+                            <td>Linea {{$requisito -> nrolinea}}</td>
                             <td>
                                 <form action="{{route ('requisitos.destroy', $requisito -> id)}}" method="POST">
                                 <a href="/requisitos/{{$requisito -> id}}/edit" class="btn btn-warning">Editar</a>
