@@ -116,6 +116,14 @@ class MicroSeeder extends Seeder
                 'fecha_baja' => '2022/07/01',
                 'permiso_linea_id' => 1
             ],
+            [
+                'nro_interno' => 98,
+                'placa' => 'QTKU23',
+                'modelo' => 'Tundra',
+                'cant_asiento' => 30,
+                'fecha_asignacion' => '2022/05/01',
+                'permiso_linea_id' => 13
+            ],
         ];
         foreach ($data as $d) {
             Micro::create($d);

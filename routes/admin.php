@@ -11,10 +11,10 @@ use App\Http\Controllers\LineasController;
 use App\Http\Controllers\MicrosController;
 use App\Http\Controllers\PermisoLineaController;
 use App\Http\Controllers\AdministradorInstitucionController;
-use App\Http\Controllers\Api\ChoferController as ApiChoferController;
 use App\Http\Controllers\BackController;
 use App\Http\Controllers\ChoferController;
 use App\Http\Controllers\InstitucionController;
+use App\Http\Controllers\ProblemaController;
 use App\Http\Controllers\roleController;
 
 Route::get('/', function () {
@@ -46,5 +46,6 @@ Route::resource('administradors', AdministradorController::class);
 Route::resource('institucions', InstitucionController::class);
 Route::resource('administradorInstitucions', AdministradorInstitucionController::class);
 Route::resource('chofers', ChoferController::class);
+Route::resource('problema',ProblemaController::class)->names('admin.problema');
 
 Route::resource('roles', roleController::class);

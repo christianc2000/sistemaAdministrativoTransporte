@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use JeroenNoten\LaravelAdminLte\View\Components\Widget\Alert;
 
 class ChoferController extends Controller
 {
@@ -32,19 +33,15 @@ class ChoferController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $mic = Micro::all();
-
-        $micros = new Collection();
-        if (isset($mic)) {
-            foreach ($mic as $micro) {
-                if ($micro->choferMicros()->where('fecha_baja', !null)) {
-                    $micros->push($micro);
-                }
+    { 
+        $micr=Micro::all();
+        $micros=new Collection();
+        foreach ($micr as $micro) {        
+            if (count($micro->choferMicros->where('fecha_baja',null))==0){
+                 $micros->push($micro);
             }
         }
-
-
+       
         return view('Admin.chofer.create', compact('micros'));
     }
 
@@ -56,6 +53,7 @@ class ChoferController extends Controller
      */
     public function store(Request $request)
     {
+        
         $users = new User();
         $users->ci = $request->get('ci');
         $users->nombre = $request->get('name');
@@ -73,8 +71,8 @@ class ChoferController extends Controller
         $chofer->user_id = $users->id;
         $chofer->direccion = $request->get('direccion');
         $chofer->categoria_licencia = $request->get('cateLicen');
-
-
+        $chofer->activo = false;
+        $chofer->save();
 
         if ($request->micro_id != null) {
             $chofermicro = new ChoferMicro();
@@ -83,10 +81,12 @@ class ChoferController extends Controller
             $chofermicro->fecha_asig = Date(now());
             $chofermicro->save();
             $chofer->activo = true;
-        } else {
-            $chofer->activo = false;
+            $chofer->save();
+            $micro=Micro::all()->find($request->micro_id);
+            
+            
         }
-        $chofer->save();
+        
 
         return redirect()->route('chofers.index')->with('info', 'Se creó un nuevo usuario chofer'); //redirige a la vista index de la carpeta cargo
 
@@ -112,7 +112,13 @@ class ChoferController extends Controller
     public function edit($id)
     {
         $users = User::find($id);
-        $micros = Micros::all();
+        $micr=Micro::all();
+        $micros=new Collection();
+        foreach ($micr as $micro) {        
+            if (count($micro->choferMicros->where('fecha_baja',null))==0){
+                 $micros->push($micro);
+            }
+        }
         // $chofer= Chofer::all();
         $chofer = Chofer::where('user_id', $id)->first();
 
@@ -147,6 +153,17 @@ class ChoferController extends Controller
         $chofer->direccion = $request->get('direccion');
         $chofer->categoria_licencia = $request->get('cateLicen');
         $chofer->save();
+
+        $cm=$chofer->choferMicros->where('fecha_baja',null);
+        $cm->fecha_baja=date(now());
+        $cm->save();
+
+        $cmn=new ChoferMicro();
+        $cmn->micro_id=$request->micro_id;
+        $cmn->chofer_id=$request->chofer_id;
+        $cmn->fecha_asig=date(now());
+        $cmn->save();
+        
         return redirect()->route('chofers.index')->with('info', 'Se editó el usuario chofer'); //redirige a la vista index de la carpeta cargo
 
     }
