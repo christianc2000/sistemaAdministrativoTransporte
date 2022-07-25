@@ -41,6 +41,13 @@ class ProblemaController extends Controller
                 "msg" => "Problemas encontrado exitosamente!",
                 "data" => $problemas,
             ]);
+        }else{
+            $problemas=Problema::all();
+            return response()->json([
+                "status" => 1,
+                "msg" => "Problemas encontrado exitosamente!",
+                "data" => $problemas,
+            ]);
         }
     }
 

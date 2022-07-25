@@ -55,6 +55,7 @@ class MicroSeeder extends Seeder
                 'modelo' => 'Toyota 2020',
                 'cant_asiento' => 25,
                 'fecha_asignacion' => '2022/05/03',
+                'fecha_baja' => '2022/05/03',
                 'permiso_linea_id' => 5
             ],
             [

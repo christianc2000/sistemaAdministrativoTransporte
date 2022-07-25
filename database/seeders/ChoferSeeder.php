@@ -129,12 +129,12 @@ class ChoferSeeder extends Seeder
             ]
         ];
         foreach ($data as $d) {
-            $u=User::create($d);
+            $u = User::create($d);
             Chofer::create([
                 'user_id' => $u->id,
                 'direccion' => 'sin direccion',
                 'activo' => 1,
-                'categoria_licencia'=>'C'
+                'categoria_licencia' => 'C'
             ]);
         }
     }

@@ -33,17 +33,18 @@ class ChoferController extends Controller
      */
     public function create()
     {
-        $mic = Micro::all()->where('fecha_baja',!null);
-        
-        $micros=new Collection();
-        if(isset($mic)){
-            foreach($mic as $micro){
-               if($micro->fecha_baja!=null){
-                   $micros->push($micro);
-               }
-            }   
+        $mic = Micro::all();
+
+        $micros = new Collection();
+        if (isset($mic)) {
+            foreach ($mic as $micro) {
+                if ($micro->choferMicros()->where('fecha_baja', !null)) {
+                    $micros->push($micro);
+                }
+            }
         }
-       // return $micros;
+
+
         return view('Admin.chofer.create', compact('micros'));
     }
 
