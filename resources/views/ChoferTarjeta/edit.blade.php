@@ -28,7 +28,7 @@
                     <div class="mb-3">
                         <label for="" class="form-label">Numero de interno</label>
                         <select name="nro_interno" class="form-control">
-                            <option value="{{$chofertarjeta->nro_interno}}">Interno {{$chofertarjeta->nro_interno}}</option>
+                            <option value="{{$chofertarjeta->nro_interno}}" selected>Interno {{$chofertarjeta->nro_interno}}</option>
                             @foreach ($micros as $micro)
                                 <option value="{{$micro->nro_interno}}">Interno {{$micro->nro_interno}}</option>
                             @endforeach
@@ -38,16 +38,18 @@
                     <div class="mb-3">
                         <label for="" class="form-label">ID Chofer</label>
                         <select name="id_chofer" class="form-control">
-                            <option value="{{$chofertarjeta->chofer_id}}">ID {{$chofertarjeta->chofer_id}}</option>
+                            @foreach($nombres as $nombre)
+                                <option value="{{$nombre->id}}" selected>Chofer - {{$nombre->nombre}} {{$nombre->apellido}}</option>
+                            @endforeach
                             @foreach ($choferes as $chofer)
-                                <option value="{{$chofer->id}}">ID {{$chofer->id}}</option>
+                                <option value="{{$chofer->id}}">Chofer - {{$chofer->nombre}} {{$chofer->apellido}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">ID Tarjeta</label>
                         <select name="id_tarjeta" class="form-control">
-                            <option value="{{$chofertarjeta->tarjeta_id}}">ID {{$chofertarjeta->tarjeta_id}}</option>
+                            <option value="{{$chofertarjeta->tarjeta_id}}" selected>ID {{$chofertarjeta->tarjeta_id}}</option>
                             @foreach ($tarjetas as $tarjeta)
                                 <option value="{{$tarjeta->id}}">ID {{$tarjeta->id}}</option>
                             @endforeach

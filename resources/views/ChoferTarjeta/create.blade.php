@@ -26,29 +26,25 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Numero de interno</label>
-                        <select name="nro_interno" class="form-control">
+                        <select name="nro_interno" class="form-control" required>
                             <option value="" selected disabled>Seleccione Nro. Interno</option>
                             @foreach ($micros as $micro)
                                 <option value="{{$micro->nro_interno}}">Interno {{$micro->nro_interno}}</option>
                             @endforeach
                         </select>
                     </div>
- <!--                   <div class="mb-3">
-                        <label for="" class="form-label">ID Tarjeta</label>
-                        <input id="nro" name="id_tarjeta" type="number" class="form-control" placeholder="ID de la tarjeta..." tabindex="4" required>
-                    </div> -->
                     <div class="mb-3">
-                        <label for="" class="form-label">ID Chofer</label>
-                        <select name="id_chofer" class="form-control">
-                            <option value="" selected disabled>Seleccione ID Chofer</option>
+                        <label for="" class="form-label">Chofer</label>
+                        <select name="id_chofer" class="form-control" required>
+                            <option value="" selected disabled>Seleccione Chofer</option>
                             @foreach ($choferes as $chofer)
-                                <option value="{{$chofer->id}}">ID {{$chofer->id}}</option>
+                                <option value="{{$chofer->id}}">Chofer - {{$chofer->nombre}} {{$chofer->apellido}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">ID Tarjeta</label>
-                        <select name="id_tarjeta" class="form-control">
+                        <select name="id_tarjeta" class="form-control" required>
                             <option value="" selected disabled>Seleccione ID Tarjeta</option>
                             @foreach ($tarjetas as $tarjeta)
                                 <option value="<?php echo strval($tarjeta->id) ?>"><?php echo strval($tarjeta->id) ?></option>
