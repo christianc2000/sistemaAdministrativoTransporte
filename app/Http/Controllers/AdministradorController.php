@@ -45,7 +45,7 @@ class AdministradorController extends Controller
 
         // $roles = Role::all();
         $roles = Role::all();
-        return view('admin.user.create', compact('roles'));
+        return view('Admin.user.create', compact('roles'));
     }
 
     /**
@@ -104,7 +104,7 @@ class AdministradorController extends Controller
         $users = DB::table('users')
                 ->where('id', $id)->first();
         $user = User::find($id);
-        return view('admin.user.edit', compact('users', 'roles', 'user'));
+        return view('Admin.user.edit', compact('users', 'roles', 'user'));
         // return view('user.edit', compact('user', 'users'));        
     }
 

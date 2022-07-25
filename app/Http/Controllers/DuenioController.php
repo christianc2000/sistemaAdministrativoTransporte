@@ -10,6 +10,7 @@ use App\Models\Micro;
 use App\Models\PermisoLinea;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DuenioController extends Controller
 {
@@ -20,7 +21,7 @@ class DuenioController extends Controller
      */
     public function index()
     {
-        
+
         $duenios = Duenio::all();
         $lineas = Lineas::all();
         return view('Admin.user.duenios.index', compact('duenios', 'lineas'));
@@ -104,23 +105,26 @@ class DuenioController extends Controller
         $duenio = Duenio::all()->find($id);
         $linea = $duenio->duenioLineas->first()->linea;
         $permisos = $duenio->permisoLineas;
-        $chofers= new Collection();
+        $chofers = new Collection();
+
         if ($permisos->first() != null) {
             foreach ($permisos as $permiso) {
                 $m = $permiso->microActivo->first();
                 $m = Micro::all()->find($m->id);
+
+                $mic = $m->choferMicros->where('fecha_baja', null)->first();
                 
-                $mic=$m->choferMicros->where('fecha_baja',null)->first();
-                
-                if ($mic != null) {
-                    $chof=$m->choferMicros->first();
-                    $chof=Chofer::all()->find($chof->id);
-                    $chofers->push($chof);   
-                } 
+                if (isset($mic)) {
+                    $chof = $m->choferMicros->first();
+                    $chof = Chofer::all()->find($mic->chofer->id);
+                   
+                    $chofers->push($chof);
+                }
             }
+            
         }
-        
-        return  view('Admin.user.duenios.chofer',compact('chofers','duenio','linea'));
+
+        return  view('Admin.user.duenios.chofer', compact('chofers', 'duenio', 'linea'));
     }
 
     /**

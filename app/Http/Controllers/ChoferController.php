@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Chofer;
 use App\Models\ChoferMicro;
+use App\Models\Micro;
 use App\Models\Micros;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
@@ -31,7 +33,17 @@ class ChoferController extends Controller
      */
     public function create()
     {
-        $micros = Micros::all();
+        $mic = Micro::all()->where('fecha_baja',!null);
+        
+        $micros=new Collection();
+        if(isset($mic)){
+            foreach($mic as $micro){
+               if($micro->fecha_baja!=null){
+                   $micros->push($micro);
+               }
+            }   
+        }
+       // return $micros;
         return view('Admin.chofer.create', compact('micros'));
     }
 
@@ -60,8 +72,8 @@ class ChoferController extends Controller
         $chofer->user_id = $users->id;
         $chofer->direccion = $request->get('direccion');
         $chofer->categoria_licencia = $request->get('cateLicen');
-        $chofer->activo = true;
-        $chofer->save();
+
+
 
         if ($request->micro_id != null) {
             $chofermicro = new ChoferMicro();
@@ -69,8 +81,11 @@ class ChoferController extends Controller
             $chofermicro->micro_id = $request->get('micro_id');
             $chofermicro->fecha_asig = Date(now());
             $chofermicro->save();
+            $chofer->activo = true;
+        } else {
+            $chofer->activo = false;
         }
-
+        $chofer->save();
 
         return redirect()->route('chofers.index')->with('info', 'Se creó un nuevo usuario chofer'); //redirige a la vista index de la carpeta cargo
 
@@ -141,7 +156,7 @@ class ChoferController extends Controller
      * @param  \App\Models\Chofer  $chofer
      * @return \Illuminate\Http\Response
      */
-    
+
     public function destroy(Chofer $chofer)
     {
     }

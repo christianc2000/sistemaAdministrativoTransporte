@@ -19,7 +19,7 @@
             </div>
 
         @endif
-        
+
         <div class="mb-3">
             <label for="" class="col-form-labelel">Seleccionar Micro</label>
             <div></div>
@@ -27,7 +27,10 @@
                 <option value="">Indefinido</option>
                 @foreach ($micros as $micro)
                     {{-- <option value="{{$user->ci}}" >{{$user}} </option> --}}
-                    <option value="{{ $micro->id }}">Placa: {{ $micro->placa }}    NRO.: {{ $micro->nro_interno }}</option>
+
+                    <option value="{{ $micro->id }}">Placa:{{ $micro->placa }} -
+                        Modelo:{{ $micro->modelo }} - Línea:{{ $micro->permisoLinea->linea->nrolinea }}
+                    </option>
                 @endforeach
             </select>
 
@@ -183,7 +186,7 @@
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
 
 @stop
 
