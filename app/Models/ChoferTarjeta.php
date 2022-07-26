@@ -9,6 +9,10 @@ class ChoferTarjeta extends Model
 {
     use HasFactory;
     protected $guarded = ['id', 'created_at', 'updated_at'];
+    //relación de 1 a muchos
+    public function choferTarjetaRecorridos(){
+        return $this->hasMany(ChoferTarjetaRecorrido::class);
+    }
     //relacion inversa de 1 a muchos
     public function chofer()
     {

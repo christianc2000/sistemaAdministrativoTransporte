@@ -17,15 +17,13 @@
                 <option value="">Indefinido</option>
                 @foreach ($micros as $micro)
                     {{-- <option value="{{$user->ci}}" >{{$user}} </option> --}}
-                    @if ($chofermicros!=null)
-                    <option value="{{ $micro->id }}" {{ $chofermicros->micro_id == $micro->id ? 'selected' : '' }}>Placa:
-                        {{ $micro->placa }} NRO.: {{ $micro->nro_interno }}</option>
-                    @else
-                    <option value="{{ $micro->id }}" > Placa: {{ $micro->placa }}  NRO.: {{ $micro->nro_interno }}</option>
-                    @endif
-                    
+
+                    <option value="{{ $micro->id }}" >Placa:{{ $micro->placa }} -
+                        Modelo:{{ $micro->modelo }} - Línea:{{ $micro->permisoLinea->linea->nrolinea }}
+                    </option>
                 @endforeach
             </select>
+
            
             @error('micro_id')
                 <br>

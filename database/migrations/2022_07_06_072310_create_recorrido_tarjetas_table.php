@@ -18,6 +18,7 @@ class CreateRecorridoTarjetasTable extends Migration
             $table->integer('nro_recorrido');
             $table->datetime('hora_partida');
             $table->datetime('hora_llegada');
+            $table->boolean('tipo_recorrido')->nullable();
 
             $table->foreignId('tarjeta_id')->references('id')->on('tarjetas');
 

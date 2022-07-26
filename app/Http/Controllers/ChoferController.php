@@ -145,6 +145,10 @@ class ChoferController extends Controller
         if ($request->password != 'xxxxxxxxx') {
             $users->password = bcrypt($request->get('password'));
         }
+        return  $cm=$users->chofer;
+        $cm->fecha_baja=date(now());
+        $cm->save();
+
         $users->email = $request->get('email');
         // $users->foto = $request->get('foto');
         $users->save();
@@ -154,10 +158,7 @@ class ChoferController extends Controller
         $chofer->categoria_licencia = $request->get('cateLicen');
         $chofer->save();
 
-        $cm=$chofer->choferMicros->where('fecha_baja',null)->first();
-        $cm->fecha_baja=date(now());
-        $cm->save();
-
+       
         $cmn=new ChoferMicro();
         $cmn->micro_id=$request->micro_id;
         $cmn->chofer_id=$request->chofer_id;

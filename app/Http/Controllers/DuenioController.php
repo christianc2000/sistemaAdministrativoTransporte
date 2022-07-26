@@ -103,12 +103,15 @@ class DuenioController extends Controller
     public function show($id)
     {
         $duenio = Duenio::all()->find($id);
+        return $duenio->duenioLineas->first();
         $linea = $duenio->duenioLineas->first()->linea;
         $permisos = $duenio->permisoLineas;
         $chofers = new Collection();
 
         if ($permisos->first() != null) {
             foreach ($permisos as $permiso) {
+                return $permiso->micros->first()->choferMicros;
+
                 $m = $permiso->microActivo->first();
                 $m = Micro::all()->find($m->id);
 
