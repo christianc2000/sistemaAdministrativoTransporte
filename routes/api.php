@@ -74,7 +74,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::delete('problema/{id}', [ProblemaController::class, 'destroy'])->name('api.v1.problema.destroy');
     /*************** */
     Route::apiResource('chofer-tarjeta-recorrido', ChoferTarjetaRecorridoController::class);
-    Route::get('chofer-tarjeta-activo',[ChoferTarjetaRecorridoController::class,'choferTarjetaActivo']);
+    Route::get('chofer-tarjeta-activo', [ChoferTarjetaRecorridoController::class, 'choferTarjetaActivo']);
+    Route::get('recorridos-chofer-tarjeta-activo', [ChoferTarjetaRecorridoController::class, 'recorridosTarjetaActivo']);
 
     Route::apiResource('linea', LineaController::class);
     Route::apiResource('institucion', InstitucionController::class);
