@@ -76,6 +76,8 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::apiResource('chofer-tarjeta-recorrido', ChoferTarjetaRecorridoController::class);
     Route::get('chofer-tarjeta-activo', [ChoferTarjetaRecorridoController::class, 'choferTarjetaActivo']);
     Route::get('recorridos-chofer-tarjeta-activo', [ChoferTarjetaRecorridoController::class, 'recorridosTarjetaActivo']);
+    Route::get('tiempo-recorridos-chofer-tarjeta-activo', [ChoferTarjetaRecorridoController::class, 'tiempoRecorridosTarjetaActivo']);
+
 
     Route::apiResource('linea', LineaController::class);
     Route::apiResource('institucion', InstitucionController::class);

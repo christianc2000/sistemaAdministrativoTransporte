@@ -55,12 +55,31 @@ class ChoferTarjetaRecorridoController extends Controller
             ]);
         }
     }
-    public function recorridosTarjetaActivo()
+    public function tiempoRecorridosTarjetaActivo()
     {
         $chofer=Auth::user()->chofer;
         if(isset($chofer)){
             $chofer_tarjeta=$chofer->choferTarjetas->where('activo',true)->first();
             $recorridos=$chofer_tarjeta->choferTarjetaRecorridos;
+            
+            return response()->json([
+                'status'=>1,
+                'msg'=>'recorridos chofer-tarjeta activo encontrado',
+                'data'=>$recorridos
+            ]);
+        }else{
+            return response()->json([
+               'status'=>0,
+               'msg'=>'Debe ser un chofer para poder ver su chofer-tarjeta activo' 
+            ]);
+        }
+    }
+    public function recorridosTarjetaActivo()
+    {
+        $chofer=Auth::user()->chofer;
+        if(isset($chofer)){
+            $chofer_tarjeta=$chofer->choferTarjetas->where('activo',true)->first();
+            $recorridos=$chofer_tarjeta->tarjeta->recorridoTarjetas;
             
             return response()->json([
                 'status'=>1,
