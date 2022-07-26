@@ -17,7 +17,7 @@ class CreateChoferTarjetasTable extends Migration
             $table->id();
             $table->date('fecha');
             $table->integer('nro_interno');
-
+            $table->boolean('activo');
             $table->foreignId('chofer_id')->references('id')->on('chofers');
             $table->foreignId('tarjeta_id')->references('id')->on('tarjetas');
             $table->timestamps();

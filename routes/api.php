@@ -17,7 +17,6 @@ use App\Http\Controllers\Api\DuenioLineaController;
 use App\Http\Controllers\Api\ProblemaController;
 use App\Http\Controllers\Api\RecorridoTarjetaController;
 use App\Http\Controllers\Api\TarjetaController;
-use App\Models\Problema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -75,7 +74,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
     Route::delete('problema/{id}', [ProblemaController::class, 'destroy'])->name('api.v1.problema.destroy');
     /*************** */
     Route::apiResource('chofer-tarjeta-recorrido', ChoferTarjetaRecorridoController::class);
-
+    Route::get('chofer-tarjeta-activo',[ChoferTarjetaRecorridoController::class,'choferTarjetaActivo']);
 
     Route::apiResource('linea', LineaController::class);
     Route::apiResource('institucion', InstitucionController::class);

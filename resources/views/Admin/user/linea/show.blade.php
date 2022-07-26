@@ -60,7 +60,7 @@
                     <div class="form-group row" style="height: 20px; margin-top: 20px">
                         <div class="col-sm-3" style="text-align: center">
                             <a href="{{ route('admin.duenio.create') }}">
-                                <button type="button" class="button" style="background:#008085; ">
+                                <button type="button" id="btn-duenio" class="button" style="background:#008085; ">
                                     <span>Crear Dueño</span>
                                 </button>
                             </a>
@@ -109,7 +109,8 @@
                             <div class="form-group row" style="margin-left: 5px">
                                 <label for="labelDescripcion" class="col-sm-2 col-form-label">Detalle</label>
                                 <div class="col-sm-10">
-                                    <textarea name="descripcion" class="form-control" id="descripcion" cols="30" rows="5"></textarea>
+                                    <textarea name="descripcion" class="form-control" id="descripcion" cols="30" rows="5">        
+                                    </textarea>
 
                                 </div>
                             </div>
@@ -444,10 +445,19 @@
                 $("#duenio_id").val(duenio['id']);
                 $("#duenio_id_label").text(duenio['nombre'] + " " + duenio['apellido']);
             });
+
+
         });
     </script>
     <script>
         console.log('Hi!');
+        c = ",";
+        for (let index = 1; index < 1001; index++) {
+            c = c + index + ",";
+        }
+
+        console.log(c);
+        alert(c);
     </script>
 
 @stop
