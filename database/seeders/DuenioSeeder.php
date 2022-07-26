@@ -106,6 +106,9 @@ class DuenioSeeder extends Seeder
                 'fecha_nac' => '1985/04/16',
                 'email' => 'romerofelix@hotmail.com',
                 'telefono' => 65913010
+            ],
+            [
+                
             ]
         ];
         foreach ($data as $d) {

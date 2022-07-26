@@ -54,6 +54,7 @@ class DuenioLineaSeeder extends Seeder
       [
         'aporte' => 1780,
         'fecha' => '2022/06/03',
+        'aporte_pagado' => 1780,
         'duenio_id' => 4,
         'linea_id' => 9
       ],

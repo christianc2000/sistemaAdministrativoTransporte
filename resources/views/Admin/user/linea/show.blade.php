@@ -450,14 +450,7 @@
         });
     </script>
     <script>
-        console.log('Hi!');
-        c = ",";
-        for (let index = 1; index < 1001; index++) {
-            c = c + index + ",";
-        }
-
-        console.log(c);
-        alert(c);
+        console.log('Hi!')
     </script>
 
 @stop
