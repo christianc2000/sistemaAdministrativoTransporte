@@ -107,9 +107,7 @@ class DuenioSeeder extends Seeder
                 'email' => 'romerofelix@hotmail.com',
                 'telefono' => 65913010
             ],
-            [
-                
-            ]
+           
         ];
         foreach ($data as $d) {
             Duenio::create($d);
