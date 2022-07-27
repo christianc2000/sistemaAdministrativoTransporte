@@ -80,7 +80,7 @@
                         en Bus o Micro en la ciudad, conocer que línea puede tomar, donde esperar y que rutas le
                         conviene seguir, utilízala y ayúdanos a almentarla con tu experiencia</p>
                     <div class="btn-group">
-                        <a href="{{asset('Apps/AppUsuario.apk')}}" class="btn btn-md btn-secondary">Descargar</a>
+                        <a href="{{asset('Apps/AppUsers.apk')}}" class="btn btn-md btn-secondary">Descargar</a>
                         {{-- <a href="#" class="btn btn-lg btn-default">Buy now!</a> --}}
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                         <span class="heading-3">Microbuses en tiempo real</span>
                     </h1>
                     <p class="inset-1">Experimenta la nueva tecnologia para el uso de localizacion de microbuses en tiempo real desde la palma de tus manos</p>
-                    <a href="{{asset('Apps/AppUsuario.apk')}}" class="btn btn-md btn-primary">Descargar App</a>
+                    <a href="{{asset('Apps/AppUsers.apk')}}" class="btn btn-md btn-primary">Descargar App</a>
                 </div>
             </section>
             <!-- END Complete fleet -->
