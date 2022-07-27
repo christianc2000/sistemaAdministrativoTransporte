@@ -28,8 +28,7 @@
                             <td scope="col" style="width:100px; font-weight: 900">{{ $linea->nrolinea }}</td>
 
                             <td scope="col" style="width:200px">{{ $linea->sede }}</td>
-                            <td scope="col" style="width: 250px"><img src="{{ asset($linea->foto) }}" alt=""
-                                    width="130" height="120"></td>
+                            <td scope="col" style="width: 250px"><img src="{{asset($linea->foto) }}" width="150" height="150" alt=""></td>
                             <td scope="col" style="width: 250px">
                                 <form action="{{ route('admin.linea.destroy', $linea->id) }}" method="POST">
                                     <div class="row ">

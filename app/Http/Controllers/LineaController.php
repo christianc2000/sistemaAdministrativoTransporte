@@ -8,6 +8,7 @@ use App\Models\Institucion;
 use App\Models\Linea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class LineaController extends Controller
 {
@@ -54,7 +55,7 @@ class LineaController extends Controller
             'telefono' => 'required|integer',
             'institucion_id' => 'required|integer',
             'administrador_institucion_id' => 'required',
-            'foto' =>  'required|mimes:jpg,jpeg,bmp,png|max:2048|nullable',
+            'foto' =>  'required|image|max:2048|nullable',
         ]);
 
         $linea = new Linea();
@@ -67,10 +68,13 @@ class LineaController extends Controller
 
         $linea->administrador_institucion_id = $array[0];
         if ($request->hasFile('foto')) {
-            $folder = "public/lineas";
-            $imagen = $request->file('foto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
-            $url = Storage::url($imagen);
-            $linea->foto = $url;
+
+            $file = $request->file('foto');
+
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('lineas/', $filename);
+            $linea->foto = 'lineas/' . $filename;
         }
         $linea->save();
         return redirect()->route('admin.linea.index');
@@ -102,7 +106,7 @@ class LineaController extends Controller
             ->groupBy('duenios.id.*')
             ->orderBy('duenios.id','asc')
             ->get();*/
-            
+
             return view('Admin.user.linea.show', compact('duenios', 'linea'));
         } else {
             return "ERROR, línea no existe en la base de datos";
@@ -143,7 +147,7 @@ class LineaController extends Controller
             'administrador_institucion_id' => 'required',
             'foto' =>  'nullable|image|max:2048',
         ]);
-        return $request->institucion_id[0];
+
         $linea = Linea::all()->find($id);
         if (isset($linea)) {
             $linea->nrolinea = $request->nrolinea;
@@ -155,16 +159,19 @@ class LineaController extends Controller
 
             $linea->administrador_institucion_id = $array[0];
             if ($request->hasFile('foto')) {
-                $folder = "public/lineas";
-                if ($linea->image != null) { //si entra es para actualizar su foto borrando la que tenía, si no tenía entonces no entra
-                    Storage::delete($linea->foto);
+                $destination = $linea->foto;
+
+                if (File::exists($destination)) {
+                    File::delete($destination);
                 }
-                $imagen = $request->file('foto')->store($folder); //Storage::disk('local')->put($folder, $request->image, 'public');
-                $url = Storage::url($imagen);
-                $linea->foto = $url;
+                $file = $request->file('foto');
+
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() . "." . $extension;
+                $file->move('lineas/', $filename);
+                $linea->foto = 'lineas/' . $filename;
             }
             $linea->save();
-            
             return redirect()->route('admin.linea.index');
         } else {
             return "FALLO, linea no existe en la base de datos";

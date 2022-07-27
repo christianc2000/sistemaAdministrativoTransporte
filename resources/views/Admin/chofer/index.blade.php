@@ -32,7 +32,7 @@
                     <td>{{ $user->ci }}</td>
                     <td>{{ $user->nombre }}</td>
                     <td>{{ $user->apellido }}</td>
-                    <td scope="col" style="width: 250px"><img src=" {{ asset('chofer/' . $user->foto) }}" alt=""
+                    <td scope="col" style="width: 250px"><img src=" {{ asset($user->foto) }}" alt=""
                             width="130" height="120"></td>
                     <td>
                         <form action="{{ route('chofers.destroy', $user) }}" method="POST">
