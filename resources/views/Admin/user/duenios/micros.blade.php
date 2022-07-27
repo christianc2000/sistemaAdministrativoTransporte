@@ -31,8 +31,9 @@
                             <td scope="col">{{ $micro->modelo }}</td>
                             <td scope="col">{{ $micro->fecha_asignacion }}</td>
                             <td scope="col">
-                                @if (count($micro->choferMicros->where('fecha_baja',null))>0)
-                                    {{$micro->choferMicros->where('fecha_baja',null)->first()->chofer->user->ci}} - {{$micro->choferMicros->where('fecha_baja',null)->first()->chofer->user->nombre}} 
+                                @if (count($micro->choferMicros->where('fecha_baja', null)) > 0)
+                                    {{ $micro->choferMicros->where('fecha_baja', null)->first()->chofer->user->ci }} -
+                                    {{ $micro->choferMicros->where('fecha_baja', null)->first()->chofer->user->nombre }}
                                 @else
                                     Sin chofer
                                 @endif
@@ -49,7 +50,18 @@
                             @endif
 
                             <td>
-                                <button class="btn btn-danger">Eliminar</button>
+                                @if ($micro->fecha_baja != null)
+                                    <a href="{{ route('admin.duenio.activarMicro', $micro->id) }}" class="btn btn-primary">
+                                        Activar Micro
+                                    </a>
+                                    <form action="{{ route('admin.duenio.eliminarMicro', $micro->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                @else
+                                    
+                                @endif
                             </td>
                         </tr>
                     @endforeach

@@ -26,6 +26,21 @@ class DuenioController extends Controller
         $lineas = Lineas::all();
         return view('Admin.user.duenios.index', compact('duenios', 'lineas'));
     }
+    public function activarMicro($id)
+    {
+        $micro = Micro::all()->find($id);
+        $micro->fecha_baja = null;
+        $micro->save();
+        $duenio = $micro->permisoLinea->duenio;
+        return redirect()->route('admin.duenio.micro', $duenio->id);
+    }
+    public function eliminarMicro($id)
+    {
+        $micro = Micro::all()->find($id);
+        $duenio=$micro->permisoLinea->duenio;
+        $micro->delete();
+        return redirect()->route('admin.duenio.micro',$duenio->id);
+    }
     public function micros($id)
     {
         $duenio = Duenio::all()->find($id);
@@ -100,43 +115,43 @@ class DuenioController extends Controller
      * @param  \App\Models\Duenio  $duenio
      * @return \Illuminate\Http\Response
      */
-    public function bajaChofer($id){
-          $chofer=Chofer::all()->find($id);
-          $cm=$chofer->choferMicros->where('fecha_baja',null)->first();
-          $duenio=$cm->micro->permisoLinea->duenio;
-          
-          $cm->fecha_baja=date(now());
-          $cm->save();
-          $chofer->activo=false;
-          $chofer->save();
-        return redirect()->route('admin.duenio.show',$duenio->id);
+    public function bajaChofer($id)
+    {
+        $chofer = Chofer::all()->find($id);
+        $cm = $chofer->choferMicros->where('fecha_baja', null)->first();
+        $duenio = $cm->micro->permisoLinea->duenio;
+
+        $cm->fecha_baja = date(now());
+        $cm->save();
+        $chofer->activo = false;
+        $chofer->save();
+        return redirect()->route('admin.duenio.show', $duenio->id);
     }
     public function show($id)
     {
         $duenio = Duenio::all()->find($id);
-      
+
         $linea = $duenio->duenioLineas->first()->linea;
-        
+
         $permisos = $duenio->permisoLineas;
- 
+
         $chofers = new Collection();
 
         if ($permisos->first() != null) {
             foreach ($permisos as $permiso) {
-               
+
                 $m = $permiso->microActivo->first();
                 $m = Micro::all()->find($m->id);
 
                 $mic = $m->choferMicros->where('fecha_baja', null)->first();
-                
+
                 if (isset($mic)) {
                     $chof = $m->choferMicros->first();
                     $chof = Chofer::all()->find($mic->chofer->id);
-                   
+
                     $chofers->push($chof);
                 }
             }
-            
         }
 
         return  view('Admin.user.duenios.chofer', compact('chofers', 'duenio', 'linea'));
@@ -173,8 +188,8 @@ class DuenioController extends Controller
      */
     public function destroy($id)
     {
-        $duenio=Duenio::all()->find($id);
-         $duenio->delete();
-         return redirect()->route('admin.duenio.index');
+        $duenio = Duenio::all()->find($id);
+        $duenio->delete();
+        return redirect()->route('admin.duenio.index');
     }
 }

@@ -30,6 +30,8 @@ Route::resource('duenio',DuenioController::class)->names('admin.duenio');
 Route::get('duenio-baja-chofer/{id}',[DuenioController::class,'bajaChofer'])->name('admin.duenio.bajaChofer');
 Route::post('dueniolinea-one',[DuenioLineaController::class,'storeOne'])->name('admin.dueniolinea.storeOne');
 Route::get('duenio-micro/{id}',[DuenioController::class,'micros'])->name('admin.duenio.micro');
+Route::get('duenio-activar-micro/{id}',[DuenioController::class,'activarMicro'])->name('admin.duenio.activarMicro');
+Route::delete('duenio-eliminar-micro/{id}',[DuenioController::class,'eliminarMicro'])->name('admin.duenio.eliminarMicro');
 
 Route::resource('permiso',PermisoLineaController::class)->names('admin.permiso'); //en el metodo show mandará el id de la linea
 Route::get('permiso-asignar/{id}',[PermisoLineaController::class,'asignarPermiso'])->name('admin.permiso.asignarMicro');
