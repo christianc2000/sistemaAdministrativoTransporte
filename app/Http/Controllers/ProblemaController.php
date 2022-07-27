@@ -14,7 +14,9 @@ class ProblemaController extends Controller
      */
     public function index()
     {
-        $problemas=Problema::all();
+        $problemas=Problema::select('problemas.*')->orderBy('id','desc')->get();
+        //$problemas=$problemas->orderBy('id', 'desc');
+        
         return view('Admin.problema.index',compact('problemas'));
     }
 
