@@ -21,8 +21,8 @@ class ChoferTarjetaController extends Controller
     {
         $chofertarjetas = ChoferTarjeta::join('chofers','chofer_tarjetas.chofer_id','=','chofers.id')
                                 ->join('users','chofers.user_id','=','users.id')
-                                ->select('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.nro_interno','chofer_tarjetas.chofer_id','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido')
-                                ->groupBy('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.nro_interno','chofer_tarjetas.chofer_id','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido')
+                                ->select('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.nro_interno','chofer_tarjetas.chofer_id','chofer_tarjetas.activo','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido')
+                                ->groupBy('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.nro_interno','chofer_tarjetas.chofer_id','chofer_tarjetas.activo','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido')
                                 ->orderBy('chofer_tarjetas.id','asc')
                                 ->get();
     //    $chofertarjetas = ChoferTarjeta::all();
@@ -55,6 +55,7 @@ class ChoferTarjetaController extends Controller
         $chofertarjeta = new ChoferTarjeta();
         $chofertarjeta->fecha = $request->get('fecha');
         $chofertarjeta->nro_interno = $request->get('nro_interno');
+        $chofertarjeta->activo = $request->get('estado');
         $chofertarjeta->chofer_id = $request->get('id_chofer');
         $chofertarjeta->tarjeta_id = $request->get('id_tarjeta');
 
@@ -107,6 +108,7 @@ class ChoferTarjetaController extends Controller
         $chofertarjeta = ChoferTarjeta::find($id);
         $chofertarjeta->fecha = $request->get('fecha');
         $chofertarjeta->nro_interno = $request->get('nro_interno');
+        $chofertarjeta->activo = $request->get('estado');
         $chofertarjeta->chofer_id = $request->get('id_chofer');
         $chofertarjeta->tarjeta_id = $request->get('id_tarjeta');
 

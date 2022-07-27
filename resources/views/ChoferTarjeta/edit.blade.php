@@ -47,6 +47,14 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="" class="col-form-labelel">Estado</label>
+                        <div></div>
+                        <select class="form-control" name="estado">
+                            <option value="1" {{ $chofertarjeta->activo == 1 ? 'selected' : '' }}>Activo</option>
+                            <option value="0" {{ $chofertarjeta->activo == 0 ? 'selected' : '' }}>Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="" class="form-label">ID Tarjeta</label>
                         <select name="id_tarjeta" class="form-control">
                             <option value="{{$chofertarjeta->tarjeta_id}}" selected>ID {{$chofertarjeta->tarjeta_id}}</option>
