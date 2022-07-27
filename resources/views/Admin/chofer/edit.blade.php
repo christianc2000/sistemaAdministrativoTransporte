@@ -6,7 +6,7 @@
     <h1>Editar usuario chofer</h1>
 @stop
 @section('content')
-    <form action="{{ route('chofers.update', $users->id) }}" method="POST">
+    <form action="{{ route('chofers.update', $users->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -80,7 +80,18 @@
                 autocomplete="email" class="form-control" tabindex="2">
         </div>
         <!--ERROR nombre-->
-
+        <div class="form-group">
+            <label for="inputImagen" class="col-sm-2 col-form-label">Foto</label>
+                <div class="col-sm-10">
+                <div class="grid grid-cols-1 mt-4 mx-7">
+                    <img id="imagenSeleccionada" style="max-height: 200px;" src="{{asset('chofer/'.$users->foto)}}">
+                </div>
+                <input class="form-control my-2" type="file" id="foto" name="foto" accept="image/*" value="{{$users->foto}}">
+                    @error('foto')
+                        <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+        </div>
         <!--***************************************-->
         <div class="mb-3">
             <label for="" class="col-form-label">Contraseña</label>
@@ -172,5 +183,22 @@
 @stop
 
 @section('js')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function(e){
+        $('#foto').change(function(){
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#imagenSeleccionada').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+    });
+</script>
 @stop

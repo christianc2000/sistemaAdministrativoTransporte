@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use JeroenNoten\LaravelAdminLte\View\Components\Widget\Alert;
+use Illuminate\Support\Facades\File;
 
 class ChoferController extends Controller
 {
@@ -55,7 +56,9 @@ class ChoferController extends Controller
      */
     public function store(Request $request)
     {
-
+        $request->validate([
+            'foto' =>  'required|image|max:2048'
+        ]);
         $users = new User();
         $users->ci = $request->get('ci');
         $users->nombre = $request->get('name');
@@ -65,6 +68,13 @@ class ChoferController extends Controller
         $users->telefono = $request->get('telefono');
         $users->password = bcrypt($request->get('password'));
         $users->email = $request->get('email');
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().".".$extension;
+            $file->move('chofer/',$filename);
+            $users->foto = $filename;
+        }
         $users->tipo = 'C';
         // $users->foto = $request->get('foto');
         $users->save();
@@ -137,7 +147,9 @@ class ChoferController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $request->validate([
+            'foto' =>  'required|image|max:2048'
+        ]);
         $users = User::find($id);
         $users->ci = $request->get('ci');
         $users->nombre = $request->get('name');
@@ -151,16 +163,30 @@ class ChoferController extends Controller
 
         $users->email = $request->get('email');
         // $users->foto = $request->get('foto');
+        if ($request->hasFile('foto')) {
+            $destination = 'chofer/'.$users->foto;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().".".$extension;
+            $file->move('chofer/',$filename);
+            $users->foto = $filename;
+        }
         $users->save();
 
         $chofer = Chofer::where('user_id', $id)->first();
         $chofer->direccion = $request->get('direccion');
         $chofer->categoria_licencia = $request->get('cateLicen');
         $chofer->save();
-        if ($request->micro_id!=null) {
-            $cm = $chofer->choferMicros->where('fecha_baja', null)->first();
-            $cm->fecha_baja = date(now());
-            $cm->save();
+        if ($request->micro_id != null) {
+            if (count($chofer->choferMicros->where('fecha_baja', null)) > 0) {
+                $cm = $chofer->choferMicros->where('fecha_baja', null)->first();
+                $cm->fecha_baja = date(now());
+                $cm->save();
+            }
+
 
             $cmn = new ChoferMicro();
             $cmn->micro_id = $request->micro_id;

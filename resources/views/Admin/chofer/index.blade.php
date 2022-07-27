@@ -22,7 +22,7 @@
                 <th scope="col">C. I.</th>
                 <th scope="col">NOMBRE</th>
                 <th scope="col">APELLIDO</th>
-                <th scope="col">EMAIL</th>
+                <th scope="col">FOTO</th>
                 <th scope="col">ACCIONES</th>
             </tr>
         </thead>
@@ -32,10 +32,9 @@
                     <td>{{ $user->ci }}</td>
                     <td>{{ $user->nombre }}</td>
                     <td>{{ $user->apellido }}</td>
-                    <td>{{ $user->email }}</td>
+                    <td scope="col" style="width: 250px"><img src=" {{ asset('chofer/' . $user->foto) }}" alt=""
+                            width="130" height="120"></td>
                     <td>
-
-
                         <form action="{{ route('chofers.destroy', $user) }}" method="POST">
                             {{-- <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">Asignar rol</a> --}}
                             <a href="{{ route('chofers.edit', $user->id) }}" class="btn btn-primary">Editar</a>
@@ -77,7 +76,7 @@
                     [5, 10, 50, -1],
                     [5, 10, 50, "Todo"]
                 ]
-                
+
             });
         });
     </script>
