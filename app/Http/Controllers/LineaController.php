@@ -141,15 +141,15 @@ class LineaController extends Controller
             'telefono' => 'required|integer',
             'institucion_id' => 'required|integer',
             'administrador_institucion_id' => 'required',
-            'foto' =>  'mimes:jpg,jpeg,bmp,png|max:2048|nullable',
+            'foto' =>  'nullable|image|max:2048',
         ]);
-
+        return $request->institucion_id[0];
         $linea = Linea::all()->find($id);
         if (isset($linea)) {
             $linea->nrolinea = $request->nrolinea;
             $linea->telefono = $request->telefono;
             $linea->sede = $request->sede;
-            $linea->institucion_id = $request->institucion_id;
+            $linea->institucion_id = $request->institucion_id[0];
 
             $array = $request->administrador_institucion_id;
 
@@ -164,6 +164,7 @@ class LineaController extends Controller
                 $linea->foto = $url;
             }
             $linea->save();
+            
             return redirect()->route('admin.linea.index');
         } else {
             return "FALLO, linea no existe en la base de datos";
