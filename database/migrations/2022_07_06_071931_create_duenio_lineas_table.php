@@ -20,7 +20,7 @@ class CreateDuenioLineasTable extends Migration
             $table->date('fecha');
             $table->text('descripcion_aporte')->nullable();
             $table->decimal('aporte_pagado')->default(0);
-            $table->foreignId('duenio_id')->references('id')->on('duenios');
+            $table->foreignId('duenio_id')->references('id')->on('duenios')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('linea_id')->references('id')->on('lineas');
 
             $table->timestamps();

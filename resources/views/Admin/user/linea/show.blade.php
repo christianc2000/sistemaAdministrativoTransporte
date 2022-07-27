@@ -254,7 +254,7 @@
             </table>
         </div>
         <div class="card-footer">
-            <a href="{{ route('admin.linea.index') }}" class="btn btn-primary">Volver</a>
+            <a href="{{ route('admin.linea.index') }}" class="btn btn-primary" style="background: #009AAC">Volver</a>
         </div>
     </div>
 @stop

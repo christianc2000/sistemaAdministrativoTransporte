@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Micro;
 use App\Models\Micros;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class MicroController extends Controller
      */
     public function index()
     {
-        $micros = Micros::all();
+        $micros = Micro::all();
         return response()->json([
             'status' => 1,
             'msg' => "Lista de Micros registrados",
@@ -52,7 +53,7 @@ class MicroController extends Controller
             'permiso_linea_id' => 'required'
         ]);
 
-        $micro = Micros::create($request->all());
+        $micro = Micro::create($request->all());
         return response()->json([
             "status" => 1,
             "msg" => "Micro registrado exitosamente!",
@@ -68,7 +69,7 @@ class MicroController extends Controller
      */
     public function show($id)
     {
-        $micro = Micros::all()->find($id);
+        $micro = Micro::all()->find($id);
         // $chofer = Chofer::FindOrFail($id);
         //return $chofer;
        
@@ -119,7 +120,7 @@ class MicroController extends Controller
             'permiso_linea_id' => 'required|integer'
         ]);
 
-        $micro = Micros::all()->find($id);
+        $micro = Micro::all()->find($id);
         if (isset($micro)) {
             $micro->update($request->all());
             return response()->json([
@@ -143,7 +144,7 @@ class MicroController extends Controller
      */
     public function destroy($id)
     {
-        $micro = Micros::all()->find($id);
+        $micro = Micro::all()->find($id);
         if (isset($micro)) {
             $micro->delete();
             return response()->json([

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chofer;
 use App\Models\ChoferMicro;
 use App\Models\Duenio;
 use App\Models\Micro;
@@ -79,7 +80,7 @@ class MicrosController extends Controller
      * @param  \App\Models\Micros  $micros
      * @return \Illuminate\Http\Response
      */
-    public function show(Micros $micros)
+    public function show($id)
     {
         //
     }
@@ -90,7 +91,7 @@ class MicrosController extends Controller
      * @param  \App\Models\Micros  $micros
      * @return \Illuminate\Http\Response
      */
-    public function edit(Micros $micros)
+    public function edit($id)
     {
         //
     }
@@ -106,7 +107,18 @@ class MicrosController extends Controller
     {
         return $request;
     }
+    public function bajaChofer($id)
+    {
+        $chofer = Chofer::all()->find($id);
+        $cm = $chofer->choferMicros->where('fecha_baja', null)->first();
+        $duenio = $cm->micro->permisoLinea->duenio;
 
+        $cm->fecha_baja = date(now());
+        $cm->save();
+        $chofer->activo = false;
+        $chofer->save();
+        return redirect()->route('admin.permiso.showOne', $duenio->id);
+    }
     public function darBajaMicro($id)
     {
 
@@ -116,7 +128,7 @@ class MicrosController extends Controller
 
         $micro->fecha_baja = date(now());
         $micro->save();
-       
+
         $permiso = PermisoLinea::all()->find($micro->permisoLinea->id);
         $permiso->activo = false;
         $permiso->save();
@@ -129,7 +141,7 @@ class MicrosController extends Controller
 
             $cm->save();
         }
-        
+
         return redirect()->route('admin.permiso.showOne', $duenio->id);
     }
 
@@ -143,8 +155,22 @@ class MicrosController extends Controller
      * @param  \App\Models\Micros  $micros
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Micros $micros)
+    public function destroy($id)
     {
-        //
+         $micro=Micro::all()->find($id);
+         if ($micro->fecha_baja==null){
+              $permiso=$micro->permisoLinea;
+              $permiso->activo=false;
+              $permiso->save();
+              if(count($micro->choferMicros->where('fecha_baja',null))>0){
+                $cm=$micro->choferMicros->where('fecha_baja',null)->first();
+                $cm->fecha_baja=date(now());
+                $cm->save();
+              }
+              $micro->fecha_baja=date(now());
+              $micro->save();
+         }
+         $micro->delete();
+         return redirect()->route('admin.micro.index');
     }
 }

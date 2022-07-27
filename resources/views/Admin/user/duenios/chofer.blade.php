@@ -31,8 +31,11 @@
 
                            
                             <td>
-                                <button class="btn btn-danger">Eliminar</button>
-                            </td>
+                                <form action="{{route('admin.duenio.bajaChofer',$chofer->id)}}" method="GET">
+
+                                    <button type="submit" class="btn btn-danger">Dar de baja</button>
+                                </form>
+                                </td>
                         </tr>
                     @endforeach
 

@@ -100,18 +100,30 @@ class DuenioController extends Controller
      * @param  \App\Models\Duenio  $duenio
      * @return \Illuminate\Http\Response
      */
+    public function bajaChofer($id){
+          $chofer=Chofer::all()->find($id);
+          $cm=$chofer->choferMicros->where('fecha_baja',null)->first();
+          $duenio=$cm->micro->permisoLinea->duenio;
+          
+          $cm->fecha_baja=date(now());
+          $cm->save();
+          $chofer->activo=false;
+          $chofer->save();
+        return redirect()->route('admin.duenio.show',$duenio->id);
+    }
     public function show($id)
     {
         $duenio = Duenio::all()->find($id);
-        return $duenio->duenioLineas->first();
+      
         $linea = $duenio->duenioLineas->first()->linea;
+        
         $permisos = $duenio->permisoLineas;
+ 
         $chofers = new Collection();
 
         if ($permisos->first() != null) {
             foreach ($permisos as $permiso) {
-                return $permiso->micros->first()->choferMicros;
-
+               
                 $m = $permiso->microActivo->first();
                 $m = Micro::all()->find($m->id);
 
@@ -159,8 +171,10 @@ class DuenioController extends Controller
      * @param  \App\Models\Duenio  $duenio
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Duenio $duenio)
+    public function destroy($id)
     {
-        //
+        $duenio=Duenio::all()->find($id);
+         $duenio->delete();
+         return redirect()->route('admin.duenio.index');
     }
 }

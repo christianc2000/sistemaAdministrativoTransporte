@@ -20,7 +20,7 @@ class CreatePermisoLineasTable extends Migration
             $table->foreignId('linea_id')->references('id')->on('lineas');
            // $table->foreignId('duenio_id')->references('id')->on('duenios');
             $table->unsignedBigInteger('duenio_id')->nullable();
-            $table->foreign('duenio_id')->references('id')->on('duenios');
+            $table->foreign('duenio_id')->references('id')->on('duenios')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

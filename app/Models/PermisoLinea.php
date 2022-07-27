@@ -19,7 +19,7 @@ class PermisoLinea extends Model
     }
 
     public function micros(){
-        return $this->hasMany(Micros::class);
+        return $this->hasMany(Micro::class);
     }
 
     public function microActivo(){

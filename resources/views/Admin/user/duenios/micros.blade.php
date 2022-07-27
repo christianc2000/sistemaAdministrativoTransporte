@@ -18,6 +18,7 @@
                         <th scope="col" style="width: 150px">PLACA</th>
                         <th scope="col">MODELO</th>
                         <th scope="col">FECHA ASIGNACIÓN</th>
+                        <th scope="col">CHOFER</th>
                         <th scope="col">ESTADO</th>
                         <th scope="col">Acciones</th>
                     </tr>
@@ -29,7 +30,13 @@
                             <td scope="col">{{ $micro->placa }}</td>
                             <td scope="col">{{ $micro->modelo }}</td>
                             <td scope="col">{{ $micro->fecha_asignacion }}</td>
-
+                            <td scope="col">
+                                @if (count($micro->choferMicros->where('fecha_baja',null))>0)
+                                    {{$micro->choferMicros->where('fecha_baja',null)->first()->chofer->user->ci}} - {{$micro->choferMicros->where('fecha_baja',null)->first()->chofer->user->nombre}} 
+                                @else
+                                    Sin chofer
+                                @endif
+                            </td>
                             @if ($micro->fecha_baja != null)
                                 {{-- si entra significa que el micro está inactivo --}}
                                 <td scope="col" style="text-align:center">
@@ -52,7 +59,7 @@
         </div>
         <div class="card-footer">
             <a href="{{ route('admin.permiso.showOne', $duenio->id) }}">
-                <button class="btn btn-danger">Retroceder</button>
+                <button class="btn btn-primary" style="background: #009AAC">Retroceder</button>
             </a>
         </div>
 
@@ -98,7 +105,7 @@
     <script>
         $(document).ready(function() {
             $('#tabla').DataTable({
-                
+
                 language: {
                     lengthMenu: 'Mostrar _MENU_ registros por página',
                     zeroRecords: 'No se encontró nada - lo siento',
@@ -107,7 +114,7 @@
                     infoFiltered: '(filtrado de _MAX_ registros totales)',
                     search: "Buscar",
                 },
-                
+
             });
         });
     </script>

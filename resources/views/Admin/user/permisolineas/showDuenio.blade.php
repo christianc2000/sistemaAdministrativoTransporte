@@ -127,8 +127,8 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="tabla" class="table table-striped shadow-lg mt-4" style="width:100%">
-                <thead>
+            <table id="tabla" class="table table-striped" style="width:100%">
+                <thead class="bg-dark text-white">
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">FECHA</th>
@@ -159,22 +159,29 @@
 
                             <td scope="col">
 
-                                @if ($pl->micros->where('fecha_baja',null)->first() != null)
-                                    {{ $pl->micros->where('fecha_baja',null)->first()->placa}}
+                                @if ($pl->micros->where('fecha_baja', null)->first() != null)
+                                    {{ $pl->micros->where('fecha_baja', null)->first()->placa }}
                                 @else
                                     Sin micro
                                 @endif
 
                             </td>
                             <td scope="col">
-                                @if ($pl->microActivo->first() != null)
-                                    @if ($pl->microActivo->first()->choferMicros->first() != null)
-                                        {{ $pl->microActivo->first()->choferMicros->first()->chofer->user->nombre }}
+                                @if (count($pl->micros) > 0)
+                                    @if (count($pl->micros->where('fecha_baja', null)) > 0)
+                                        @if (count(
+                                            $pl->micros->where('fecha_baja', null)->first()->choferMicros->where('fecha_baja', null)) > 0)
+                                            {{ $pl->micros->where('fecha_baja', null)->first()->choferMicros->where('fecha_baja', null)->first()->chofer->user->ci }}
+                                            -
+                                            {{ $pl->micros->where('fecha_baja', null)->first()->choferMicros->where('fecha_baja', null)->first()->chofer->user->nombre }}
+                                        @else
+                                            Sin chofer
+                                        @endif
                                     @else
-                                        Sin Chofer
+                                        Sin chofer
                                     @endif
                                 @else
-                                    Sin Chofer
+                                    Sin chofer
                                 @endif
 
                                 {{-- @if ($pl->microActivo->first()->choferMicros != null)
@@ -189,7 +196,16 @@
                                             <a href="{{ route('admin.micro.baja', $pl->microActivo->first()->id) }}"
                                                 class="col-sm-4"><button type="button" class="btn btn-primary">Dar de
                                                     baja micro</button></a>
+                                            @if (count($pl->microActivo->first()->choferMicros->where('fecha_baja', null)) > 0)
+                                                <a class="col-sm-4"
+                                                    href="{{ route('admin.micro.bajaChofer',$pl->microActivo->first()->choferMicros->where('fecha_baja', null)->first()->chofer->id) }}">
+                                                    <button class="btn btn-warning" type="button">
+                                                        Dar de baja chofer
+                                                    </button>
+                                                </a>
+                                            @endif
                                         @endif
+
                                         @csrf
                                         <!--metodo para añadir token a un formulario-->
                                         @method('delete')
@@ -203,6 +219,13 @@
 
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer">
+            <a href="{{ route('admin.linea.show', $linea->id) }}">
+                <button class="btn btn-primary" type="button" style="background: #009AAC">
+                    Retroceder
+                </button>
+            </a>
         </div>
     </div>
 @stop
@@ -290,19 +313,14 @@
 
     <script>
         $(document).ready(function() {
-            $('#tabla').DataTable({
-                language: {
-                    lengthMenu: 'Mostrar _MENU_ registros por página',
-                    zeroRecords: 'No se encontró nada - lo siento',
-                    info: 'Mostrando la página _PAGE_ de _PAGES_',
-                    infoEmpty: 'No hay registros disponibles',
-                    infoFiltered: '(filtrado de _MAX_ registros totales)',
-                    search: "Buscar",
-                },
-                scrollY: '280px',
-                scrollCollapse: true,
 
+            $('#tabla').DataTable({
+                "lengthMenu": [
+                    [5, 10, 50, -1],
+                    [5, 10, 50, "Todo"]
+                ]
             });
+
         });
     </script>
 

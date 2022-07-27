@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Chofer;
 use App\Models\ChoferMicro;
+use App\Models\Micro;
 use App\Models\Micros;
 use App\Models\PermisoLinea;
 use App\Models\User;
@@ -101,7 +102,7 @@ class ChoferController extends Controller
         $cm = $chofer->choferMicros->where('fecha_baja', null)->first();
 
         if (isset($cm)) {
-            $micro = Micros::all()->find($cm->micro_id);
+            $micro = Micro::all()->find($cm->micro_id);
             $permiso = PermisoLinea::all()->find($micro->permiso_linea_id);
 
             return response()->json([
