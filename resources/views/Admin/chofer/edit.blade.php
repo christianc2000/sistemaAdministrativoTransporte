@@ -29,6 +29,13 @@
                 <br>
                 <small>{{ $message }} </small>
             @enderror
+            @if (count($users->chofer->choferMicros->where('fecha_baja',null))>0)
+            <div>
+                <label for="" class="form-control">Micro Actual=> placa:{{$users->chofer->choferMicros->where('fecha_baja',null)->first()->micro->placa}} - modelo: {{$users->chofer->choferMicros->where('fecha_baja',null)->first()->micro->modelo}} - Línea: {{$users->chofer->choferMicros->where('fecha_baja',null)->first()->micro->permisoLinea->linea->nrolinea}}</label>
+            </div>
+            @endif
+            
+            
         </div>
 
         <div class="mb-3">
