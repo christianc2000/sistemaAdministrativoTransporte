@@ -48,7 +48,7 @@ class ChoferTarjetaController extends Controller
         $request->validate([
             'fecha' => 'required|date',
             'nro_interno' => 'required|integer',
-
+            'activo' => 'required|boolean',
             'tarjeta_id' => 'required|integer'
         ]);
         $user = auth()->user();
@@ -58,6 +58,7 @@ class ChoferTarjetaController extends Controller
         $choferTarjeta = new ChoferTarjeta();
         $choferTarjeta->fecha = $request->fecha;
         $choferTarjeta->nro_interno = $request->nro_interno;
+        $choferTarjeta->activo=$request->activo;
         $choferTarjeta->chofer_id = $chofer->id;
         $choferTarjeta->tarjeta_id = $request->tarjeta_id;
         $choferTarjeta->save();
@@ -115,6 +116,7 @@ class ChoferTarjetaController extends Controller
         $request->validate([
             'fecha' => 'required|date',
             'nro_interno' => 'required|integer',
+            'activo'=>'required|boolean',
             'tarjeta_id' => 'nullable|integer'
         ]);
 
@@ -128,6 +130,7 @@ class ChoferTarjetaController extends Controller
 
             $choferTarjeta->fecha = $request->fecha;
             $choferTarjeta->nro_interno = $request->nro_interno;
+            $choferTarjeta->activo=$request->activo;
             $choferTarjeta->chofer_id = $chofer->id;
             $choferTarjeta->tarjeta_id = $request->tarjeta_id;
             $choferTarjeta->save();

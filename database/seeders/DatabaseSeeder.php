@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ChoferTarjetaSeeder::class);
         $this->call(RecorridoTarjetaSeeder::class);
         $this->call(ProblemaSeeder::class);
+        $this->call(ChoferTarjetaRecorridoSeeder::class);
         /*   $this->call([AdministradorSeeder::class, 
                     DuenioSeeder::class, x
                     ChoferSeeder::class, x

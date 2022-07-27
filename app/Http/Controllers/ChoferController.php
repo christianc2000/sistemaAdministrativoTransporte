@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Chofer;
 use App\Models\ChoferMicro;
+use App\Models\Micro;
 use App\Models\Micros;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use JeroenNoten\LaravelAdminLte\View\Components\Widget\Alert;
+use Illuminate\Support\Facades\File;
 
 class ChoferController extends Controller
 {
@@ -31,7 +35,16 @@ class ChoferController extends Controller
      */
     public function create()
     {
-        $micros = Micros::all();
+        $micr = Micro::all();
+        $micros = new Collection();
+        foreach ($micr as $micro) {
+            if ($micro->fecha_baja == null) {
+                if (count($micro->choferMicros->where('fecha_baja', null)) == 0) {
+                    $micros->push($micro);
+                }
+            }
+        }
+
         return view('Admin.chofer.create', compact('micros'));
     }
 
@@ -43,6 +56,9 @@ class ChoferController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'foto' =>  'required|image|max:2048'
+        ]);
         $users = new User();
         $users->ci = $request->get('ci');
         $users->nombre = $request->get('name');
@@ -52,6 +68,13 @@ class ChoferController extends Controller
         $users->telefono = $request->get('telefono');
         $users->password = bcrypt($request->get('password'));
         $users->email = $request->get('email');
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().".".$extension;
+            $file->move('chofer/',$filename);
+            $users->foto = $filename;
+        }
         $users->tipo = 'C';
         // $users->foto = $request->get('foto');
         $users->save();
@@ -60,7 +83,7 @@ class ChoferController extends Controller
         $chofer->user_id = $users->id;
         $chofer->direccion = $request->get('direccion');
         $chofer->categoria_licencia = $request->get('cateLicen');
-        $chofer->activo = true;
+        $chofer->activo = false;
         $chofer->save();
 
         if ($request->micro_id != null) {
@@ -69,6 +92,9 @@ class ChoferController extends Controller
             $chofermicro->micro_id = $request->get('micro_id');
             $chofermicro->fecha_asig = Date(now());
             $chofermicro->save();
+            $chofer->activo = true;
+            $chofer->save();
+            $micro = Micro::all()->find($request->micro_id);
         }
 
 
@@ -96,7 +122,15 @@ class ChoferController extends Controller
     public function edit($id)
     {
         $users = User::find($id);
-        $micros = Micros::all();
+        $micr = Micro::all();
+        $micros = new Collection();
+        foreach ($micr as $micro) {
+            if ($micro->fecha_baja == null) {
+                if (count($micro->choferMicros->where('fecha_baja', null)) == 0) {
+                    $micros->push($micro);
+                }
+            }
+        }
         // $chofer= Chofer::all();
         $chofer = Chofer::where('user_id', $id)->first();
 
@@ -113,6 +147,9 @@ class ChoferController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'foto' =>  'required|image|max:2048'
+        ]);
         $users = User::find($id);
         $users->ci = $request->get('ci');
         $users->nombre = $request->get('name');
@@ -123,14 +160,40 @@ class ChoferController extends Controller
         if ($request->password != 'xxxxxxxxx') {
             $users->password = bcrypt($request->get('password'));
         }
+
         $users->email = $request->get('email');
         // $users->foto = $request->get('foto');
+        if ($request->hasFile('foto')) {
+            $destination = 'chofer/'.$users->foto;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().".".$extension;
+            $file->move('chofer/',$filename);
+            $users->foto = $filename;
+        }
         $users->save();
 
         $chofer = Chofer::where('user_id', $id)->first();
         $chofer->direccion = $request->get('direccion');
         $chofer->categoria_licencia = $request->get('cateLicen');
         $chofer->save();
+        if ($request->micro_id != null) {
+            if (count($chofer->choferMicros->where('fecha_baja', null)) > 0) {
+                $cm = $chofer->choferMicros->where('fecha_baja', null)->first();
+                $cm->fecha_baja = date(now());
+                $cm->save();
+            }
+
+
+            $cmn = new ChoferMicro();
+            $cmn->micro_id = $request->micro_id;
+            $cmn->chofer_id = $chofer->id;
+            $cmn->fecha_asig = date(now());
+            $cmn->save();
+        }
         return redirect()->route('chofers.index')->with('info', 'Se editó el usuario chofer'); //redirige a la vista index de la carpeta cargo
 
     }
@@ -141,7 +204,7 @@ class ChoferController extends Controller
      * @param  \App\Models\Chofer  $chofer
      * @return \Illuminate\Http\Response
      */
-    
+
     public function destroy(Chofer $chofer)
     {
     }

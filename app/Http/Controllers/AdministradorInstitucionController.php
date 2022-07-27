@@ -41,7 +41,7 @@ class AdministradorInstitucionController extends Controller
         
         $roles = Role::all();
         $institucions = Institucion::all();
-        return view('admin.adminInstitucion.create', compact('institucions', 'roles'));
+        return view('Admin.adminInstitucion.create', compact('institucions', 'roles'));
     }
 
     /**
@@ -99,7 +99,7 @@ class AdministradorInstitucionController extends Controller
         $institucions = Institucion::all();
         $adminIns = AdministradorInstitucion::where('user_id', $id)->first();
         $users= User::find($id);
-        return view('admin.adminInstitucion.edit', compact('institucions', 'adminIns', 'users', 'roles'));
+        return view('Admin.adminInstitucion.edit', compact('institucions', 'adminIns', 'users', 'roles'));
     }
 
     /**

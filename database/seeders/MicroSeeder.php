@@ -96,25 +96,7 @@ class MicroSeeder extends Seeder
                 'cant_asiento' => 20,
                 'fecha_asignacion' => '2022/05/01',
                 'permiso_linea_id' => 10
-            ],
-            [
-                'nro_interno' => 16,
-                'placa' => 'QUESO23',
-                'modelo' => 'Toyota 2017',
-                'cant_asiento' => 20,
-                'fecha_asignacion' => '2022/05/01',
-                'fecha_baja' => '2022/06/01',
-                'permiso_linea_id' => 1
-            ],
-            [
-                'nro_interno' => 17,
-                'placa' => 'QBEW23',
-                'modelo' => 'Toyota 2019',
-                'cant_asiento' => 20,
-                'fecha_asignacion' => '2022/05/01',
-                'fecha_baja' => '2022/07/01',
-                'permiso_linea_id' => 1
-            ],
+            ]
         ];
         foreach ($data as $d) {
             Micro::create($d);

@@ -15,7 +15,10 @@ class RequisitosController extends Controller
      */
     public function index()
     {
-        $requisitos = Requisitos::all();
+        $requisitos = Requisitos::join('lineas', 'requisitos.linea_id','=','lineas.id')
+                                    ->select('requisitos.id','requisitos.nombre','lineas.nrolinea')
+                                    ->get();
+    //    $requisitos = Requisitos::all();
         return view('Requisito.index')->with('requisitos', $requisitos);
     }
 
@@ -67,7 +70,12 @@ class RequisitosController extends Controller
     public function edit($id)
     {
         $requisito = Requisitos::find($id);
-        return view('Requisito.edit')->with('requisito', $requisito);
+        $nrolinea = Requisitos::join('lineas', 'requisitos.id','=','lineas.id')
+                                ->select('lineas.id','lineas.nrolinea')
+                                ->where('lineas.id',$requisito->linea_id)
+                                ->get();
+        $lineas = Lineas::all();
+        return view('Requisito.edit')->with(['requisito'=> $requisito, 'nrolinea'=>$nrolinea, 'lineas'=>$lineas]);
     }
 
     /**

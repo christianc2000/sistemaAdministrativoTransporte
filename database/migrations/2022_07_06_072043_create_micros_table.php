@@ -22,7 +22,7 @@ class CreateMicrosTable extends Migration
             $table->date('fecha_asignacion')->nullable();
             $table->date('fecha_baja')->nullable();
             $table->unsignedBigInteger('permiso_linea_id')->nullable();
-            $table->foreign('permiso_linea_id')->references('id')->on('permiso_lineas');
+            $table->foreign('permiso_linea_id')->references('id')->on('permiso_lineas')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

@@ -65,7 +65,7 @@ class InstitucionController extends Controller
      */
     public function edit(Institucion $institucion)
     {
-        return view('admin.institucion.edit', compact('institucion'));
+        return view('Admin.institucion.edit', compact('institucion'));
     }
 
     /**

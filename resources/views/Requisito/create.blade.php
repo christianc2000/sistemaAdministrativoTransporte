@@ -29,11 +29,11 @@
                         <input id="linea_id" name="linea_id" type="number" class="form-control" tabindex="2" required>
                     </div> -->
                     <div class="mb-3">
-                        <label for="" class="form-label">ID Linea</label>
+                        <label for="" class="form-label">Nro. Linea</label>
                         <select name="linea_id" class="form-control">
-                            <option value="" selected disabled>Seleccione ID Linea</option>
+                            <option value="" selected disabled>Seleccione Nro. de linea</option>
                             @foreach ($lineas as $linea)
-                                <option value="{{$linea->id}}">ID {{$linea->id}}</option>
+                                <option value="{{$linea->id}}">Linea {{$linea->nrolinea}}</option>
                             @endforeach
                         </select>
                     </div>

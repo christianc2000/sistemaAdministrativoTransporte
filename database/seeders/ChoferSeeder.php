@@ -20,7 +20,7 @@ class ChoferSeeder extends Seeder
                 'ci' => '6354790',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Pedro',
-                'apellido' => 'Aban Palma',
+                'apellido' => 'Soriocó',
                 'sexo' => 'M',
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 77214590,
@@ -126,15 +126,27 @@ class ChoferSeeder extends Seeder
                 'telefono' => 65913010,
                 'email' => 'felix@gmail.com',
                 'tipo' => 'C'
+            ],
+            //linea 2
+            [
+                'ci' => '99827832',
+                'password' => bcrypt('12345678'),
+                'nombre' => 'Felix',
+                'apellido' => 'Panduro',
+                'sexo' => 'M',
+                'fecha_nac' => '1980-05-04',
+                'telefono' => 65913010,
+                'email' => 'felixpanduro@gmail.com',
+                'tipo' => 'C'
             ]
         ];
         foreach ($data as $d) {
-            $u=User::create($d);
+            $u = User::create($d);
             Chofer::create([
                 'user_id' => $u->id,
                 'direccion' => 'sin direccion',
                 'activo' => 1,
-                'categoria_licencia'=>'C'
+                'categoria_licencia' => 'C'
             ]);
         }
     }

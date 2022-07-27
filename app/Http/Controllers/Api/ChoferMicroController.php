@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Chofer;
 use App\Models\ChoferMicro;
+use App\Models\Micro;
 use App\Models\Micros;
 use App\Models\PermisoLinea;
 use App\Models\User;
@@ -76,7 +77,7 @@ public function lineasUsers(){
         $choferMicro->micro_id = $request->micro_id;
         $choferMicro->save();
 
-        $micro=Micros::all()->find($request->micro_id);
+        $micro=Micro::all()->find($request->micro_id);
         $permiso=PermisoLinea::all()->find($micro->permiso_linea_id);
         $permiso->activo=true;
         $permiso->save();

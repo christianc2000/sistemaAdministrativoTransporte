@@ -42,12 +42,16 @@ class RecorridoTarjetaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nro_recorrido'=>'required|integer',
-            'hora_partida'=>'required',
-            'hora_llegada'=>'required',
-            'tarjeta_id'=>'required|integer'
+            'nro_recorrido' => 'required|integer',
+            'hora_partida' => 'required',
+            'hora_llegada' => 'required',
+            'tarjeta_id' => 'required|integer',
+            'tipo_recorrido' => 'nullable'
         ]);
+
         $recorrido = RecorridoTarjeta::create($request->all());
+        $recorrido->tipo_recorrido = $request->tipo_recorrido;
+        $recorrido->save();
         return response()->json([
             "status" => 1,
             "msg" => "Recorrido registrado exitosamente!",
@@ -100,14 +104,17 @@ class RecorridoTarjetaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nro_recorrido'=>'required|integer',
-            'hora_partida'=>'required',
-            'hora_llegada'=>'required',
-            'tarjeta_id'=>'required|integer'
+            'nro_recorrido' => 'required|integer',
+            'hora_partida' => 'required',
+            'hora_llegada' => 'required',
+            'tarjeta_id' => 'required|integer',
+            'tipo_recorrido'=>'nullable',
         ]);
         $recorrido = RecorridoTarjeta::all()->find($id);
         if (isset($recorrido)) {
             $recorrido->update($request->all());
+            $recorrido->tipo_recorrido = $request->tipo_recorrido;
+            $recorrido->save();
             return response()->json([
                 "status" => 1,
                 "msg" => "Recorrido actualizado exitosamente!",

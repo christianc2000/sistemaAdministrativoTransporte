@@ -31,8 +31,11 @@
 
                            
                             <td>
-                                <button class="btn btn-danger">Eliminar</button>
-                            </td>
+                                <form action="{{route('admin.duenio.bajaChofer',$chofer->id)}}" method="GET">
+
+                                    <button type="submit" class="btn btn-danger">Dar de baja</button>
+                                </form>
+                                </td>
                         </tr>
                     @endforeach
 
@@ -75,10 +78,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-
-    <script>
-        < script src = "https://code.jquery.com/jquery-3.5.1.js" >
-    </script>
+    <script src = "https://code.jquery.com/jquery-3.5.1.js" ></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
