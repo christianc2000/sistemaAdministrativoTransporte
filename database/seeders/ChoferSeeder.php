@@ -16,7 +16,7 @@ class ChoferSeeder extends Seeder
     public function run()
     {
         $data = [
-            [
+            [/* linea 10 */
                 'ci' => '6354790',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Pedro',
@@ -105,7 +105,7 @@ class ChoferSeeder extends Seeder
                 'email' => 'julio@gmail.com',
                 'tipo' => 'C'
             ],
-            [
+            [/* linea 11 */
                 'ci' => '9034760',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Roberto Gabriel',
@@ -116,7 +116,7 @@ class ChoferSeeder extends Seeder
                 'email' => 'roberto@gmail.com',
                 'tipo' => 'C'
             ],
-            [
+            [/* linea 9 */
                 'ci' => '4693060',
                 'password' => bcrypt('12345678'),
                 'nombre' => 'Felix',
