@@ -33,6 +33,7 @@
                             <td>
                                 <form action="{{route ('chofertarjetas.destroy', $chofertarjeta -> id)}}" method="POST">
                                 <a href="/chofertarjetas/{{$chofertarjeta -> id}}/edit" class="btn btn-warning">Editar</a>
+                               
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Borrar</button>

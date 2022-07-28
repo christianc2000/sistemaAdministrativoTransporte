@@ -43,7 +43,7 @@ class ChoferTarjetaController extends Controller
                             ->get();
         return view('ChoferTarjeta.create')->with(['tarjetas'=> $tarjetas, 'choferes'=> $choferes, 'micros'=>$micros]);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
