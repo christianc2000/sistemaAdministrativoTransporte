@@ -43,6 +43,15 @@
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label for="" class="col-form-labelel">Seleccionar Estado</label>
+                    <div></div>
+                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="estado">
+                            {{-- <option selected>seleccionar sexo</option> --}}
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="" class="form-label">ID Tarjeta</label>
                         <select name="id_tarjeta" class="form-control" required>
                             <option value="" selected disabled>Seleccione ID Tarjeta</option>
