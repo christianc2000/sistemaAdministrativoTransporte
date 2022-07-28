@@ -41,7 +41,7 @@
                             <td>
                                 <form action="{{route ('chofertarjetas.destroy', $chofertarjeta -> id)}}" method="POST">
                                 <a href="/chofertarjetas/{{$chofertarjeta -> id}}/edit" class="btn btn-warning">Editar</a>
-                               
+                                <a href="{{route('admin.choferTarjetaRecorrido',$chofertarjeta->id)}}" class="btn btn-primary">Recorridos Tarjeta</a>
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Borrar</button>

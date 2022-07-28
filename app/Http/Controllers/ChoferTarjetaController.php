@@ -7,6 +7,7 @@ use App\Models\Tarjeta;
 use App\Models\Chofer;
 use App\Models\Micros;
 use App\Models\ChoferTarjeta;
+use App\Models\ChoferTarjetaRecorrido;
 use App\Models\Micro;
 use Illuminate\Support\Facades\DB;
 
@@ -43,7 +44,11 @@ class ChoferTarjetaController extends Controller
                             ->get();
         return view('ChoferTarjeta.create')->with(['tarjetas'=> $tarjetas, 'choferes'=> $choferes, 'micros'=>$micros]);
     }
-    
+    public function recorridosTarjeta($id){
+        $choferTarjeta=ChoferTarjeta::all()->find($id);
+        $choferTarjetaRecorridos=$choferTarjeta->choferTarjetaRecorridos;
+        return $choferTarjetaRecorridos;
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -60,7 +65,16 @@ class ChoferTarjetaController extends Controller
         $chofertarjeta->tarjeta_id = $request->get('id_tarjeta');
 
         $chofertarjeta->save();
-
+        
+        $tarjeta=$chofertarjeta->tarjeta;
+        foreach ($tarjeta->recorridoTarjetas as $recorrido) {
+            ChoferTarjetaRecorrido::create([             
+                'hora_finalizado'=>'00:00:00',
+                'chofer_tarjeta_id'=>$chofertarjeta->id,
+                'recorrido_tarjeta_id'=>$recorrido->id
+            ]);
+        }
+       
         return redirect('/chofertarjetas');
     }
 
