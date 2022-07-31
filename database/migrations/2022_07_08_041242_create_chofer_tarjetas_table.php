@@ -16,7 +16,6 @@ class CreateChoferTarjetasTable extends Migration
         Schema::create('chofer_tarjetas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->integer('nro_interno');
             $table->boolean('activo');
             $table->foreignId('chofer_id')->references('id')->on('chofers');
             $table->foreignId('tarjeta_id')->references('id')->on('tarjetas');
