@@ -55,13 +55,19 @@ class ChoferTarjetaRecorridoController extends Controller
             ]);
         }
     }
+   
     public function tiempoRecorridosTarjetaActivo()
     {
         $chofer=Auth::user()->chofer;
         if(isset($chofer)){
             $chofer_tarjeta=$chofer->choferTarjetas->where('activo',true)->first();
             $recorridos=$chofer_tarjeta->choferTarjetaRecorridos;
-            
+            $recorridosTarjeta=new Collection();
+            foreach ($recorridos as $recorrido) {
+                $recorrido->recorridoTarjeta;
+                $recorridosTarjeta->push($recorrido);
+            }
+            return $recorridosTarjeta;
             return response()->json([
                 'status'=>1,
                 'msg'=>'recorridos chofer-tarjeta activo encontrado',
