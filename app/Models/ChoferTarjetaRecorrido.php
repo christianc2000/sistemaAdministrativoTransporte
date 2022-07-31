@@ -11,9 +11,10 @@ class ChoferTarjetaRecorrido extends Model
     protected $guarded=['id','created_at','updated_at'];
 
     //relación inversa de 1 a mucho
-    public function recorrido(){
+    public function recorridoTarjeta(){
         return $this->belongsTo(RecorridoTarjeta::class);
     }
+
     public function choferTarjeta(){
         return $this->belongsTo(ChoferTarjeta::class);
     }

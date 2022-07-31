@@ -15,4 +15,5 @@ class RecorridoTarjeta extends Model
     public function choferTarjetaRecorridos(){
         return $this->hasMany(ChoferTarjetaRecorrido::class);
     }
+   
 }

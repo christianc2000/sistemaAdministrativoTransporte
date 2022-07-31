@@ -48,7 +48,9 @@ Route::get('micro-chofer-baja/{id}',[MicrosController::class,'bajaChofer'])->nam
 Route::get('chofer-micro',[ApiChoferController::class,'choferMicro'])->name('admin.chofer.micro');
 //chofer-tarjeta
 Route::get('chofer-tarjeta-recorridos/{id}',[ChoferTarjetaController::class,'recorridosTarjeta'])->name('admin.choferTarjetaRecorrido');
-
+Route::put('recorrido-tarjeta/{id}',[ChoferTarjetaController::class,'updateRecorridosTarjeta'])->name('admin.updatechoferTarjetaRecorrido');
+Route::post('recorrido-tarjeta',[ChoferTarjetaController::class,'storeRecorridosTarjeta'])->name('admin.storechoferTarjetaRecorrido');
+Route::get('finalizar-tarjeta/{id}',[ChoferTarjetaController::class,'finalizarTarjeta'])->name('admin.tarjetaFinalizar');
 //************
 Route::resource('administradors', AdministradorController::class);
 Route::resource('institucions', InstitucionController::class);
