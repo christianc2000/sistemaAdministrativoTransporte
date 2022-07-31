@@ -62,7 +62,7 @@ class ChoferTarjetaSeeder extends Seeder
                 'fecha' => '2022/07/07',
                 'activo' => true, 
                 'chofer_id' => 5,
-                'tarjeta_id' => 2
+                'tarjeta_id' => 8
             ],
             [
                 'fecha' => '2022/07/07',

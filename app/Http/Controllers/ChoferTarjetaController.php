@@ -87,12 +87,17 @@ class ChoferTarjetaController extends Controller
         $ct = ChoferTarjeta::all()->find($id);
         $ct->activo = false;
         $ct->save();
-        $chofertarjetas = ChoferTarjeta::join('chofers', 'chofer_tarjetas.chofer_id', '=', 'chofers.id')
-            ->join('users', 'chofers.user_id', '=', 'users.id')
-            ->select('chofer_tarjetas.id', 'chofer_tarjetas.fecha', 'chofer_tarjetas.nro_interno', 'chofer_tarjetas.chofer_id', 'chofer_tarjetas.activo', 'chofer_tarjetas.tarjeta_id', 'users.nombre', 'users.apellido')
-            ->groupBy('chofer_tarjetas.id', 'chofer_tarjetas.fecha', 'chofer_tarjetas.nro_interno', 'chofer_tarjetas.chofer_id', 'chofer_tarjetas.activo', 'chofer_tarjetas.tarjeta_id', 'users.nombre', 'users.apellido')
-            ->orderBy('chofer_tarjetas.id', 'asc')
-            ->get();
+        
+        $chofertarjetas = ChoferTarjeta::join('chofers','chofer_tarjetas.chofer_id','=','chofers.id')
+                                ->join('users','chofers.user_id','=','users.id')
+                                ->join('chofer_micros','chofers.id','=','chofer_micros.chofer_id')
+                                ->join('micros','chofer_micros.micro_id','=','micros.id')
+                                ->join('permiso_lineas','micros.permiso_linea_id','=','permiso_lineas.id')
+                                ->join('lineas','permiso_lineas.linea_id','=','lineas.id')
+                                ->select('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.chofer_id','chofer_tarjetas.activo','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido','micros.nro_interno','lineas.nrolinea')
+                                ->groupBy('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.chofer_id','chofer_tarjetas.activo','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido','micros.nro_interno','lineas.nrolinea')
+                                ->orderBy('chofer_tarjetas.id','asc')
+                                ->get();
         //    $chofertarjetas = ChoferTarjeta::all();
         return view('ChoferTarjeta.index')->with('chofertarjetas', $chofertarjetas);
     }

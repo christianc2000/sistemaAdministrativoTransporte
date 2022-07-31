@@ -16,8 +16,8 @@ class CreateRecorridoTarjetasTable extends Migration
         Schema::create('recorrido_tarjetas', function (Blueprint $table) {
             $table->id();
             $table->integer('nro_recorrido');
-            $table->datetime('hora_partida');
-            $table->datetime('hora_llegada');
+            $table->time('hora_partida');
+            $table->time('hora_llegada');
             $table->boolean('tipo_recorrido')->nullable();//0 cuando es de ida, 1 cuando es de vuelta
 
             $table->foreignId('tarjeta_id')->references('id')->on('tarjetas');
