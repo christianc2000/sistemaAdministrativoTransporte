@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Chofer;
+use App\Models\ChoferTarjeta;
 use App\Models\RecorridoTarjeta;
 use App\Models\Tarjeta;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -43,12 +46,12 @@ class RecorridoTarjetaController extends Controller
         $recorrido->nro_recorrido = $request->get('nro');
         $recorrido->hora_partida = $request->get('partida');
         $recorrido->hora_llegada = $request->get('llegada');
-        
+
         $recorrido->tarjeta_id = $request->get('id_tarjeta');
 
         $recorrido->save();
 
-        return redirect('/recorridos');
+        return redirect()->route('recorridos.index');
     }
 
     /**
@@ -59,10 +62,20 @@ class RecorridoTarjetaController extends Controller
      */
     public function show($tarjeta_id)
     {
-        $recorridos = DB::table('recorrido_tarjetas')->select('id','nro_recorrido','hora_partida','hora_llegada')->where('tarjeta_id', $tarjeta_id)->get();
-        $chofers = DB::table('chofer_tarjetas')->select('nro_interno')->where('tarjeta_id', $tarjeta_id)->get();
 
-        return view('Recorrido.show')->with(['recorridos' => $recorridos, 'tarjeta_id'=>$tarjeta_id, 'chofers'=>$chofers]);
+        $recorridos = DB::table('recorrido_tarjetas')->select('id', 'nro_recorrido', 'hora_partida', 'hora_llegada')->where('tarjeta_id', $tarjeta_id)->get();
+
+
+        $choferes = DB::table('chofer_tarjetas')->select('chofer_tarjetas.*')->where('tarjeta_id', $tarjeta_id)->get();
+        $chofers = new Collection();
+        foreach ($choferes as $chofere) {
+            $chofertarjeta=ChoferTarjeta::all()->find($chofere->id);
+            //return $chofertarjeta->chofer->choferMicros->where('fecha_baja',null)->first();
+            $chofers->push($chofertarjeta->chofer->choferMicros->where('fecha_baja',null)->first()->micro);
+        }
+
+       // return $chofers;
+        return view('Recorrido.show')->with(['recorridos' => $recorridos, 'tarjeta_id' => $tarjeta_id, 'chofers' => $chofers]);
     }
 
     /**
@@ -75,7 +88,7 @@ class RecorridoTarjetaController extends Controller
     {
         $tarjetas = Tarjeta::all();
         $recorrido = RecorridoTarjeta::find($id);
-        return view('Recorrido.edit')->with(['recorrido'=> $recorrido, 'tarjetas'=>$tarjetas]);
+        return view('Recorrido.edit')->with(['recorrido' => $recorrido, 'tarjetas' => $tarjetas]);
     }
 
     /**
@@ -95,7 +108,7 @@ class RecorridoTarjetaController extends Controller
 
         $recorrido->save();
 
-        return redirect('/recorridos');
+        return redirect()->route('recorridos.index');
     }
 
     /**

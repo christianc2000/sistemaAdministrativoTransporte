@@ -88,7 +88,7 @@ class ChoferTarjetaController extends Controller
         $ct->activo = false;
         $ct->save();
 
-        $chofertarjetas = ChoferTarjeta::join('chofers', 'chofer_tarjetas.chofer_id', '=', 'chofers.id')
+      /*  $chofertarjetas = ChoferTarjeta::join('chofers', 'chofer_tarjetas.chofer_id', '=', 'chofers.id')
             ->join('users', 'chofers.user_id', '=', 'users.id')
             ->join('chofer_micros', 'chofers.id', '=', 'chofer_micros.chofer_id')
             ->join('micros', 'chofer_micros.micro_id', '=', 'micros.id')
@@ -99,7 +99,8 @@ class ChoferTarjetaController extends Controller
             ->orderBy('chofer_tarjetas.id', 'asc')
             ->get();
         //    $chofertarjetas = ChoferTarjeta::all();
-        return view('ChoferTarjeta.index')->with('chofertarjetas', $chofertarjetas);
+        return view('ChoferTarjeta.index')->with('chofertarjetas', $chofertarjetas);*/
+        return redirect()->route('chofertarjetas.index');
     }
     /**
      * Store a newly created resource in storage.
@@ -126,7 +127,7 @@ class ChoferTarjetaController extends Controller
             ]);
         }
 
-        return redirect('/chofertarjetas');
+        return redirect()->route('chofertarjetas.index');
     }
 
     /**
@@ -179,6 +180,7 @@ class ChoferTarjetaController extends Controller
 
     public function update(Request $request, $id)
     {
+       
         $chofertarjeta = ChoferTarjeta::find($id);
         $chofertarjeta->fecha = $request->get('fecha');
         $chofertarjeta->activo = $request->get('estado');
@@ -187,7 +189,7 @@ class ChoferTarjetaController extends Controller
 
         $chofertarjeta->save();
 
-        return redirect('/chofertarjetas');
+        return redirect()->route('chofertarjetas.index');
     }
 
     /**
@@ -199,8 +201,9 @@ class ChoferTarjetaController extends Controller
     public function destroy($id)
     {
         $chofertarjeta = ChoferTarjeta::find($id);
+       
         $chofertarjeta->delete();
 
-        return redirect('/chofertarjetas');
+        return redirect('/admin/chofertarjetas');
     }
 }

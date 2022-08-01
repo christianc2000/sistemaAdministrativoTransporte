@@ -8,8 +8,8 @@
 @section('content')
        <div class="card">
             <div class="card-header">
-                <a href="recorridos/create" class="btn btn-primary">Crear Recorrido</a>
-                <a href="/tarjetas" class="btn btn-info">Ver Tarjetas</a>
+                <a href="{{route('recorridos.create')}}" class="btn btn-primary">Crear Recorrido</a>
+                <a href="{{route('tarjetas.index')}}" class="btn btn-info">Ver Tarjetas</a>
             </div>
             <div class="card-body">
                 <table id="recorridos" class="table table-striped shadow-lg mt-4" style="width:100%">
@@ -34,11 +34,11 @@
                             <td>
                                 <form action="{{route ('recorridos.destroy', $recorrido -> id)}}" method="POST">
                                 
-                                <a href="/recorridos/{{$recorrido -> id}}/edit" class="btn btn-warning">Editar</a>
+                                <a href="{{route('recorridos.edit',$recorrido -> id)}}" class="btn btn-warning">Editar</a>
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Borrar</button>
-                                <a href="{{route ('recorridos.show', $recorrido -> tarjeta_id)}}" class="btn btn-info">Tarjeta</a>
+                                <a href="{{route ('recorridos.show', $recorrido ->tarjeta_id)}}" class="btn btn-info">Tarjeta</a>
                                 </form>
                             </td>
                         </tr>

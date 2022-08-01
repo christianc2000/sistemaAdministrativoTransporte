@@ -9,7 +9,7 @@
        <div class="card">
             <div class="card-header"> 
                 <a href="chofertarjetas/create" class="btn btn-primary">Crear Registro</a>
-                <a href="/tarjetas" class="btn btn-info">Ver Tarjetas</a> </div>
+                <a href="tarjetas" class="btn btn-info">Ver Tarjetas</a> </div>
             <div class="card-body">
                 <table id="chofertarjeta" class="table table-striped shadow-lg mt-4" style="width:100%">
                     <thead>
@@ -40,7 +40,7 @@
                             <td style="text-align:center">{{$chofertarjeta -> tarjeta_id}}</td>
                             <td>
                                 <form action="{{route ('chofertarjetas.destroy', $chofertarjeta -> id)}}" method="POST">
-                                <a href="/chofertarjetas/{{$chofertarjeta -> id}}/edit" class="btn btn-warning">Editar</a>
+                                <a href="/admin/chofertarjetas/{{$chofertarjeta -> id}}/edit" class="btn btn-warning">Editar</a>
                                 <a href="{{route('admin.choferTarjetaRecorrido',$chofertarjeta->id)}}" class="btn btn-primary">Recorridos Tarjeta</a>
                                 @csrf
                                 @method('delete')

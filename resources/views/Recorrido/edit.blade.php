@@ -18,7 +18,7 @@
             <div class="card-header"> Recorridos </div>
             <div class="card-body">
                 <h2>Editar Registro</h2>
-                <form action="/recorridos/{{$recorrido->id}}" method="POST">
+                <form action="{{route('recorridos.update',$recorrido->id)}}" method="POST">
                 @csrf
                 @method('PUT')
                     <div class="mb-3">
@@ -27,11 +27,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Hora Partida</label>
-                        <input type="datetime-local" name="partida" step="1" class="form-control" value="{{$recorrido->hora_partida}}">
+                        <input type="time" name="partida" step="1" class="form-control" value="{{$recorrido->hora_partida}}">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Hora Llegada</label>
-                        <input type="datetime-local" name="llegada" step="1" class="form-control" value="{{$recorrido->hora_llegada}}">
+                        <input type="time" name="llegada" step="1" class="form-control" value="{{$recorrido->hora_llegada}}">
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">ID Tarjeta</label>
@@ -42,7 +42,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <a href="/recorridos" class="btn btn-secondary" tabindex="3">Cancelar</a>
+                    <a href="{{route('recorridos.index')}}" class="btn btn-secondary" tabindex="3">Cancelar</a>
                     <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
                 </form>
             </div>

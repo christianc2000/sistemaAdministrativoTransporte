@@ -18,7 +18,7 @@
             <div class="card-header"> Recorridos </div>
             <div class="card-body">
                 <h2>Crear Registro</h2>
-                <form action="/recorridos" method="POST">
+                <form action="{{route('recorridos.store')}}" method="POST">
                 @csrf
                     <div class="mb-3">
                         <label for="" class="form-label">Número de recorrido</label>
@@ -26,11 +26,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Hora Partida</label>
-                        <input type="datetime-local" name="partida" step="1" class="form-control" tabindex="2" required>
+                        <input type="time" name="partida" step="1" class="form-control" tabindex="2" required>
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Hora Llegada</label>
-                        <input type="datetime-local" name="llegada" step="1" class="form-control" tabindex="3" required>
+                        <input type="time" name="llegada" step="1" class="form-control" tabindex="3" required>
                     </div>
  <!--                   <div class="mb-3">
                         <label for="" class="form-label">ID Tarjeta</label>
@@ -45,7 +45,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <a href="/recorridos" class="btn btn-secondary" tabindex="3">Cancelar</a>
+                    <a href="{{route('recorridos.index')}}" class="btn btn-secondary" tabindex="3">Cancelar</a>
                     <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
                 </form>
             </div>

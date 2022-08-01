@@ -60,14 +60,17 @@
             </table>
         </div>
         <div class="card-footer">
-            <a href="/chofertarjetas">
-                <button type="button" class="btn btn-danger">Retroceder</button>
-            </a>
-            @if ($choferTarjeta->activo == true)
-                <form action="{{ route('admin.tarjetaFinalizar', $choferTarjeta->id) }}" method="get">
-                    <button type="submit" class="btn btn-info">Finalizar Tarjeta</button>
-                </form>
-            @endif
+            <div class="row">
+                <a href="{{ route('chofertarjetas.index') }}" class="col-2">
+                    <button type="button" class="btn btn-danger form-control " >Retroceder</button>
+                </a>
+                @if ($choferTarjeta->activo == true)
+                    <form action="{{ route('admin.tarjetaFinalizar', $choferTarjeta->id) }}" class="col-sm-3"
+                        method="get">
+                        <button type="submit" class="btn btn-info">Finalizar Tarjeta</button>
+                    </form>
+                @endif
+            </div>
         </div>
     </div>
     <!-- Modal ADD RECORRIDO-ONE -->

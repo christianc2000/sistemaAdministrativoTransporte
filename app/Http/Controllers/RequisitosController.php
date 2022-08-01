@@ -47,7 +47,7 @@ class RequisitosController extends Controller
 
         $requisitos->save();
 
-        return redirect('/requisitos');
+        return redirect()->route('requisitos.index');
     }
 
     /**
@@ -93,7 +93,7 @@ class RequisitosController extends Controller
 
         $requisito->save();
 
-        return redirect('/requisitos');
+        return redirect()->route('requisitos.index');
     }
 
     /**
@@ -107,6 +107,6 @@ class RequisitosController extends Controller
         $requisito = Requisitos::find($id);
         $requisito->delete();
 
-        return redirect('/requisitos');
+        return redirect()->route('requisitos.index');
     }
 }

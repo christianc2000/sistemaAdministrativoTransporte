@@ -57,5 +57,12 @@ Route::resource('institucions', InstitucionController::class);
 Route::resource('administradorInstitucions', AdministradorInstitucionController::class);
 Route::resource('chofers', ChoferController::class);
 Route::resource('problema',ProblemaController::class)->names('admin.problema');
+//RUTAS CRISTIAN NINA
+Route::resource('requisitos', 'App\Http\Controllers\RequisitosController')->names('requisitos');
+Route::resource('tarjetas', 'App\Http\Controllers\TarjetaController')->names('tarjetas');
+Route::resource('recorridos', 'App\Http\Controllers\RecorridoTarjetaController')->names('recorridos');
+Route::resource('chofertarjetas', 'App\Http\Controllers\ChoferTarjetaController')->names('chofertarjetas');
+
 
 Route::resource('roles', roleController::class);
+

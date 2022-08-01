@@ -18,7 +18,7 @@
             <div class="card-header"> Chofer Tarjeta </div>
             <div class="card-body">
                 <h2>Crear Registro</h2>
-                <form action="/chofertarjetas" method="POST">
+                <form action="{{route('chofertarjetas.store')}}" method="POST">
                 @csrf
                     <div class="mb-3">
                         <label for="" class="form-label">Fecha</label>
@@ -50,7 +50,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <a href="/chofertarjetas" class="btn btn-secondary" tabindex="3">Cancelar</a>
+                    <a href="/admin/chofertarjetas" class="btn btn-secondary" tabindex="3">Cancelar</a>
                     <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
                 </form>
             </div>

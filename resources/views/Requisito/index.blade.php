@@ -8,7 +8,7 @@
 @section('content')
        <div class="card">
             <div class="card-header">
-                <a href="requisitos/create" class="btn btn-primary">Crear Requisito</a>
+                <a href="{{route('requisitos.create')}}" class="btn btn-primary">Crear Requisito</a>
             </div>
             <div class="card-body">
                 <table id="requisitos" class="table table-striped shadow-lg mt-4" style="width:100%">
@@ -28,7 +28,7 @@
                             <td>Linea {{$requisito -> nrolinea}}</td>
                             <td>
                                 <form action="{{route ('requisitos.destroy', $requisito -> id)}}" method="POST">
-                                <a href="/requisitos/{{$requisito -> id}}/edit" class="btn btn-warning">Editar</a>
+                                <a href="{{route('requisitos.edit',$requisito -> id)}}" class="btn btn-warning">Editar</a>
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Borrar</button>

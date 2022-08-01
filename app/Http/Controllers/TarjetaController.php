@@ -41,7 +41,7 @@ class TarjetaController extends Controller
 
         $tarjeta->save();
 
-        return redirect('/tarjetas');
+        return redirect('/admin/tarjetas');
     }
 
     /**
@@ -89,8 +89,9 @@ class TarjetaController extends Controller
     public function destroy($id)
     {
         $tarjeta = Tarjeta::find($id);
+       
         $tarjeta->delete();
-
-        return redirect('/tarjetas');
+        
+        return redirect('/admin/tarjetas');
     }
 }

@@ -18,7 +18,7 @@
             <div class="card-header"> Requisitos </div>
             <div class="card-body">
                 <h2>Crear Registro</h2>
-                <form action="/requisitos" method="POST">
+                <form action="{{route('requisitos.store')}}" method="POST">
                 @csrf
                     <div class="mb-3">
                         <label for="" class="form-label">Nombre</label>
@@ -37,7 +37,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <a href="/requisitos" class="btn btn-secondary" tabindex="3">Cancelar</a>
+                    <a href="{{route('requisitos.index')}}" class="btn btn-secondary" tabindex="3">Cancelar</a>
                     <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
                 </form>
             </div>

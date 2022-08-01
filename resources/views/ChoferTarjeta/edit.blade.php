@@ -18,7 +18,7 @@
             <div class="card-header"> Chofer Tarjeta </div>
             <div class="card-body">
                 <h2>Editar Registro</h2>
-                <form action="/chofertarjetas/{{$chofertarjeta->id}}" method="POST">
+                <form action="{{route('chofertarjetas.update',$chofertarjeta->id)}}" method="POST">
                 @csrf
                 @method('PUT')
                     <div class="mb-3">
