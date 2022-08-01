@@ -16,6 +16,7 @@ class ChoferSeeder extends Seeder
     public function run()
     {
         $data = [
+            
             [/* linea 10 */
                 'ci' => '6354790',
                 'password' => bcrypt('12345678'),
@@ -138,7 +139,18 @@ class ChoferSeeder extends Seeder
                 'telefono' => 65913010,
                 'email' => 'felixpanduro@gmail.com',
                 'tipo' => 'C'
-            ]
+            ],
+            [/* linea 9 */
+                'ci' => '13354790',
+                'password' => bcrypt('12345678'),
+                'nombre' => 'Juanito',
+                'apellido' => 'Betancurd',
+                'sexo' => 'M',
+                'fecha_nac' => '1996-05-04',
+                'telefono' => 67237233,
+                'email' => 'juanito@gmail.com',
+                'tipo' => 'C'
+            ],
         ];
         foreach ($data as $d) {
             $u = User::create($d);

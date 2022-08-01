@@ -16,6 +16,7 @@ class CreateChoferTarjetaRecorridosTable extends Migration
         Schema::create('chofer_tarjeta_recorridos', function (Blueprint $table) {
             $table->id();
             $table->time('hora_finalizado')->nullable();
+            $table->string('gps')->nullable();
             $table->foreignId('chofer_tarjeta_id')->references('id')->on('chofer_tarjetas')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('recorrido_tarjeta_id')->references('id')->on('recorrido_tarjetas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

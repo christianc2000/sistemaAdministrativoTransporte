@@ -76,6 +76,12 @@ class ChoferTarjetaSeeder extends Seeder
                 'chofer_id' => 6,
                 'tarjeta_id' => 10
             ],
+            [
+                'fecha' => '2022/08/01',
+                'activo' => true, 
+                'chofer_id' => 12,
+                'tarjeta_id' => 1
+            ],
            
         ];
         foreach ($data as $d) {

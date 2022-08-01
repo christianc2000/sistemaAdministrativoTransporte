@@ -119,6 +119,7 @@ class ChoferTarjetaRecorridoController extends Controller
     {
         $request->validate([
             'hora_finalizado' => 'required',
+            'gps'=>'required|string',
             'recorrido_tarjeta_id' => 'required|integer'
         ]);
         $chofer = Auth::user()->chofer;
@@ -132,6 +133,7 @@ class ChoferTarjetaRecorridoController extends Controller
                 if (isset($recorrido)) {
                     $ctp = new ChoferTarjetaRecorrido();
                     $ctp->hora_finalizado = $request->hora_finalizado;
+                    $ctp->gps=$request->gps;
                     $ctp->chofer_tarjeta_id = $chofer_tarjeta->id;
                     $ctp->recorrido_tarjeta_id = $request->recorrido_tarjeta_id;
                     $ctp->save();
@@ -207,9 +209,11 @@ class ChoferTarjetaRecorridoController extends Controller
         if (isset($ctr)) {
             $request->validate([
                 'hora_finalizado' => 'required',
+                'gps' => 'required|string',
                 'recorrido_tarjeta_id' => 'required|integer'
             ]);
             $ctr->hora_finalizado = $request->hora_finalizado;
+            $ctr->gps=$request->gps;
             $ctr->recorrido_tarjeta_id = $request->recorrido_tarjeta_id;
             $ctr->save();
             return response()->json([

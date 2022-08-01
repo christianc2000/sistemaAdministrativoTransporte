@@ -70,6 +70,11 @@ class PermisoLineaSeeder extends Seeder
         'activo' => 0,
         'linea_id' => 2,
         'duenio_id' => 11
+      ],
+      [
+        'activo' => 1,
+        'linea_id' => 5,
+        'duenio_id' => 10
       ]
     ];
     foreach ($data as $d) {

@@ -96,6 +96,14 @@ class MicroSeeder extends Seeder
                 'cant_asiento' => 20,
                 'fecha_asignacion' => '2022/05/01',
                 'permiso_linea_id' => 10
+            ],
+            [
+                'nro_interno' => 25,
+                'placa' => 'microbus329',
+                'modelo' => 'Toyota Coaster',
+                'cant_asiento' => 20,
+                'fecha_asignacion' => '2022/05/01',
+                'permiso_linea_id' => 12
             ]
         ];
         foreach ($data as $d) {
