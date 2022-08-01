@@ -94,6 +94,14 @@ class LineaSeeder extends Seeder
                 'institucion_id' => 2,
                 'administrador_institucion_id' => 3,
                 'foto' => 'lineas/linea18.png',
+            ],
+            [
+                'nrolinea' => 91,
+                'telefono' => 71316500,
+                'sede' => '4to Anillo sobre la Av. Busch y Calle 5',
+                'institucion_id' => 3,
+                'administrador_institucion_id' => 2,
+                'foto' => 'lineas/linea9.png',
             ]
         ];
         foreach ($data as $d) {

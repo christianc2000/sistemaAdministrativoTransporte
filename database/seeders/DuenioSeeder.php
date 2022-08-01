@@ -115,6 +115,15 @@ class DuenioSeeder extends Seeder
                 'fecha_nac' => '2001/10/23',
                 'email' => 'marisol@hotmail.com',
                 'telefono' => 65913013
+            ],
+            [
+                'ci' => '33344422',
+                'nombre' => 'Juan',
+                'apellido' => 'Melgar',
+                'sexo' => 'F',
+                'fecha_nac' => '2001/10/23',
+                'email' => 'juanito@hotmail.com',
+                'telefono' => 65913013
             ]
            
         ];
