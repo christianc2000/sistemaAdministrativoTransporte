@@ -20,7 +20,7 @@ class CreateRecorridoTarjetasTable extends Migration
             $table->time('hora_llegada');
             $table->boolean('tipo_recorrido')->nullable();//0 cuando es de ida, 1 cuando es de vuelta
 
-            $table->foreignId('tarjeta_id')->references('id')->on('tarjetas');
+            $table->foreignId('tarjeta_id')->references('id')->on('tarjetas')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
 

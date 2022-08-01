@@ -92,6 +92,6 @@ class TarjetaController extends Controller
        
         $tarjeta->delete();
         
-        return redirect('/admin/tarjetas');
+        return redirect()->route('tarjetas.index');
     }
 }

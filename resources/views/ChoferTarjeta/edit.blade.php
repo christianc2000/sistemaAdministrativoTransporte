@@ -53,7 +53,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <a href="/chofertarjetas" class="btn btn-secondary">Cancelar</a>
+                    <a href="{{route('chofertarjetas.index')}}" class="btn btn-secondary">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
             </div>
