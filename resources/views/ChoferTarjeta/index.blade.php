@@ -16,9 +16,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Fecha</th>
-                            <th>Nro. Interno</th>
                             <th>Chofer</th>
-                            <th>ID Tarjeta</th>
+                            <th style="text-align:center">Estado</th>
+                            <th style="text-align:center">ID Tarjeta</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -27,12 +27,19 @@
                         <tr>
                             <td>{{$chofertarjeta -> id}}</td>
                             <td>{{$chofertarjeta -> fecha}}</td>
-                            <td>{{$chofertarjeta -> nro_interno}}</td>
-                            <td>{{$chofertarjeta -> nombre}} {{$chofertarjeta -> apellido}}</td>
-                            <td>{{$chofertarjeta -> tarjeta_id}}</td>
+                            <td>{{$chofertarjeta -> nombre}} {{$chofertarjeta -> apellido}} - Interno {{$chofertarjeta -> nro_interno}} - Linea {{$chofertarjeta -> nrolinea}}</td>
+                            <td scope="col" style="text-align:center">
+                                @if ($chofertarjeta -> activo == 0)
+                                        <div style="border-radius: 4em; background: rgb(224, 128, 128);">Inactivo</div>
+                                    @elseif ($chofertarjeta->activo == 1)   
+                                        <div style="border-radius: 4em; background: rgb(151, 245, 182);">Activo</div>
+                                @endif
+                            </td>
+                            <td style="text-align:center">{{$chofertarjeta -> tarjeta_id}}</td>
                             <td>
                                 <form action="{{route ('chofertarjetas.destroy', $chofertarjeta -> id)}}" method="POST">
                                 <a href="/chofertarjetas/{{$chofertarjeta -> id}}/edit" class="btn btn-warning">Editar</a>
+                                <a href="{{route('admin.choferTarjetaRecorrido',$chofertarjeta->id)}}" class="btn btn-primary">Recorridos Tarjeta</a>
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Borrar</button>

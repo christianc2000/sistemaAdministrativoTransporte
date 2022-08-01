@@ -29,6 +29,13 @@
                 <br>
                 <small>{{ $message }} </small>
             @enderror
+            @if (count($users->chofer->choferMicros->where('fecha_baja',null))>0)
+            <div>
+                <label for="" class="form-control">Micro Actual=> placa:{{$users->chofer->choferMicros->where('fecha_baja',null)->first()->micro->placa}} - modelo: {{$users->chofer->choferMicros->where('fecha_baja',null)->first()->micro->modelo}} - Línea: {{$users->chofer->choferMicros->where('fecha_baja',null)->first()->micro->permisoLinea->linea->nrolinea}}</label>
+            </div>
+            @endif
+            
+            
         </div>
 
         <div class="mb-3">
@@ -84,7 +91,7 @@
             <label for="inputImagen" class="col-sm-2 col-form-label">Foto</label>
                 <div class="col-sm-10">
                 <div class="grid grid-cols-1 mt-4 mx-7">
-                    <img id="imagenSeleccionada" style="max-height: 200px;" src="{{asset('chofer/'.$users->foto)}}">
+                    <img id="imagenSeleccionada" style="max-height: 200px;" src="{{asset($users->foto)}}">
                 </div>
                 <input class="form-control my-2" type="file" id="foto" name="foto" accept="image/*" value="{{$users->foto}}">
                     @error('foto')

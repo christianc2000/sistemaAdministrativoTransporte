@@ -184,8 +184,11 @@ class PermisoLineaController extends Controller
      * @param  \App\Models\PermisoLinea  $permisoLinea
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PermisoLinea $permisoLinea)
+    public function destroy($id)
     {
-        //
+        $permiso=PermisoLinea::all()->find($id);
+        $linea=$permiso->linea;
+        $permiso->delete();
+        return redirect()->route('admin.permiso.show', $linea->id);
     }
 }

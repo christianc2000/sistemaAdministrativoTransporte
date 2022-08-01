@@ -93,20 +93,24 @@
 
                                 </td>
                             @endif
-                            
-                            <td scope="col">{{$pl->duenio->nombre}} {{$pl->duenio->apellido}}</td>
+
+                            <td scope="col">{{ $pl->duenio->nombre }} {{ $pl->duenio->apellido }}</td>
                             <td>
                                 <form action="{{ route('admin.permiso.destroy', $pl->id) }}" method="POST">
                                     <div class="row ">
-                                        <a href="{{ route('admin.permiso.asignarMicro', $pl->id) }}"
+                                        <a href="{{ route('admin.permiso.showOne', $pl->duenio->id) }}"
                                             class="btn btn-primary col-sm-6 mb-2"
-                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Asignar Micro</a>
+                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Ir a dueño</a>
 
                                         @csrf
                                         <!--metodo para añadir token a un formulario-->
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger col-sm-6 mb-2"
-                                            style="width: 90px; margin-left: 5px ">Eliminar</button>
+                                        @if ($pl->activo == 0)
+                                            <button type="submit" class="btn btn-danger col-sm-6 mb-2"
+                                                style="width: 90px; margin-left: 5px ">Eliminar Permiso</button>
+                                        @endif
+
+
                                     </div>
                                 </form>
                             </td>

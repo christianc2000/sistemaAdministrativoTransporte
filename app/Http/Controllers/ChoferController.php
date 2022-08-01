@@ -73,7 +73,7 @@ class ChoferController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time().".".$extension;
             $file->move('chofer/',$filename);
-            $users->foto = $filename;
+            $users->foto = 'chofer/'.$filename;
         }
         $users->tipo = 'C';
         // $users->foto = $request->get('foto');
@@ -164,7 +164,7 @@ class ChoferController extends Controller
         $users->email = $request->get('email');
         // $users->foto = $request->get('foto');
         if ($request->hasFile('foto')) {
-            $destination = 'chofer/'.$users->foto;
+            $destination = $users->foto;
             if(File::exists($destination)){
                 File::delete($destination);
             }
@@ -172,7 +172,7 @@ class ChoferController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time().".".$extension;
             $file->move('chofer/',$filename);
-            $users->foto = $filename;
+            $users->foto = 'chofer/'.$filename;
         }
         $users->save();
 

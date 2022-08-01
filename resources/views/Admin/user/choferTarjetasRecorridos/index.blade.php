@@ -48,7 +48,7 @@
 
                                 <a href="{{ route('admin.permiso.showOne', $duenio->id) }}"
                                     class="btn btn-secondary">Permiso</a>
-                                <button type="button" id="btnEliminar" name="{{ $duenio}}" class="button btnElim"
+                                <button type="button" id="btnEliminar" name="{{ $duenio }}" class="button btnElim"
                                     data-bs-toggle="modal" data-bs-target="#mEliminar">
                                     <span>Eliminar</span>
                                 </button>
@@ -110,6 +110,7 @@
             border: 3px solid #acacac;
             border-radius: 4%;
         }
+
         .button {
             display: inline-block;
             border-radius: 4px;
@@ -160,7 +161,8 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
     {{-- cdn modal --}}
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     {{--  --}}
 
@@ -178,14 +180,6 @@
                 scrollY: '250px',
                 scrollCollapse: true,
 
-            });
-            $('.btnElim').on('click', function(){
-                vid=$(this).attr('name');
-                vid=JSON.parse(vid);
-                console.log(vid);
-                c='No se podrá recuperar nada del dueño con carnet '+vid['ci']+' y nombre '+vid['nombre']+" "+vid['apellido'];
-                $('#parrafoModal').text(c);
-                $('#formulario').attr('action', "{{url('/admin/duenio')}}/"+vid['id']);
             });
         });
     </script>

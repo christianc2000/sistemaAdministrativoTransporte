@@ -26,24 +26,22 @@
                         <input type="date" name="fecha" step="1" class="form-control" value="{{$chofertarjeta->fecha}}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="" class="form-label">Numero de interno</label>
-                        <select name="nro_interno" class="form-control">
-                            <option value="{{$chofertarjeta->nro_interno}}" selected>Interno {{$chofertarjeta->nro_interno}}</option>
-                            @foreach ($micros as $micro)
-                                <option value="{{$micro->nro_interno}}">Interno {{$micro->nro_interno}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
                         <label for="" class="form-label">ID Chofer</label>
                         <select name="id_chofer" class="form-control">
                             @foreach($nombres as $nombre)
-                                <option value="{{$nombre->id}}" selected>Chofer - {{$nombre->nombre}} {{$nombre->apellido}}</option>
+                                <option value="{{$nombre->id}}" selected>Chofer - {{$nombre->nombre}} {{$nombre->apellido}} - Interno {{$nombre->nro_interno}} - Linea {{$nombre->nrolinea}}</option>
                             @endforeach
                             @foreach ($choferes as $chofer)
-                                <option value="{{$chofer->id}}">Chofer - {{$chofer->nombre}} {{$chofer->apellido}}</option>
+                                <option value="{{$chofer->id}}">Chofer - {{$chofer->nombre}} {{$chofer->apellido}} - Interno {{$chofer->nro_interno}} - Linea {{$chofer->nrolinea}}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="col-form-labelel">Estado</label>
+                        <div></div>
+                        <select class="form-control" name="estado">
+                            <option value="1" {{ $chofertarjeta->activo == 1 ? 'selected' : '' }}>Activo</option>
+                            <option value="0" {{ $chofertarjeta->activo == 0 ? 'selected' : '' }}>Inactivo</option>
                         </select>
                     </div>
                     <div class="mb-3">

@@ -9,7 +9,9 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            
+            <a href="{{route('admin.duenio.index')}}">
+                <button class="btn btn-primary" type="button" style="background:#009AAC">Retroceder</button>
+            </a>
         </div>
         <div class="card-body">
             <table id="tabla" class="table table-striped shadow-lg mt-4" style="width:100%">
@@ -42,7 +44,6 @@
                 </tbody>
             </table>
         </div>
-        
 
     </div>
 @stop
