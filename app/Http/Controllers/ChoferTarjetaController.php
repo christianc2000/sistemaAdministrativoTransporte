@@ -21,17 +21,17 @@ class ChoferTarjetaController extends Controller
      */
     public function index()
     {
-        $chofertarjetas = ChoferTarjeta::join('chofers','chofer_tarjetas.chofer_id','=','chofers.id')
-                                ->join('users','chofers.user_id','=','users.id')
-                                ->join('chofer_micros','chofers.id','=','chofer_micros.chofer_id')
-                                ->join('micros','chofer_micros.micro_id','=','micros.id')
-                                ->join('permiso_lineas','micros.permiso_linea_id','=','permiso_lineas.id')
-                                ->join('lineas','permiso_lineas.linea_id','=','lineas.id')
-                                ->select('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.chofer_id','chofer_tarjetas.activo','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido','micros.nro_interno','lineas.nrolinea')
-                                ->groupBy('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.chofer_id','chofer_tarjetas.activo','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido','micros.nro_interno','lineas.nrolinea')
-                                ->orderBy('chofer_tarjetas.id','asc')
-                                ->get();
-    //    $chofertarjetas = ChoferTarjeta::all();
+        $chofertarjetas = ChoferTarjeta::join('chofers', 'chofer_tarjetas.chofer_id', '=', 'chofers.id')
+            ->join('users', 'chofers.user_id', '=', 'users.id')
+            ->join('chofer_micros', 'chofers.id', '=', 'chofer_micros.chofer_id')
+            ->join('micros', 'chofer_micros.micro_id', '=', 'micros.id')
+            ->join('permiso_lineas', 'micros.permiso_linea_id', '=', 'permiso_lineas.id')
+            ->join('lineas', 'permiso_lineas.linea_id', '=', 'lineas.id')
+            ->select('chofer_tarjetas.id', 'chofer_tarjetas.fecha', 'chofer_tarjetas.chofer_id', 'chofer_tarjetas.activo', 'chofer_tarjetas.tarjeta_id', 'users.nombre', 'users.apellido', 'micros.nro_interno', 'lineas.nrolinea')
+            ->groupBy('chofer_tarjetas.id', 'chofer_tarjetas.fecha', 'chofer_tarjetas.chofer_id', 'chofer_tarjetas.activo', 'chofer_tarjetas.tarjeta_id', 'users.nombre', 'users.apellido', 'micros.nro_interno', 'lineas.nrolinea')
+            ->orderBy('chofer_tarjetas.id', 'asc')
+            ->get();
+        //    $chofertarjetas = ChoferTarjeta::all();
         return view('ChoferTarjeta.index')->with('chofertarjetas', $chofertarjetas);
     }
 
@@ -42,15 +42,15 @@ class ChoferTarjetaController extends Controller
      */
     public function create()
     {
-        $tarjetas = DB::table('tarjetas')->select('id')->groupBy('id')->orderBy('id','desc')->get();
-        $choferes = Chofer::join('users','chofers.user_id','=','users.id')
-                            ->join('chofer_micros', 'chofers.id','=','chofer_micros.chofer_id')
-                            ->join('micros','chofer_micros.micro_id','=','micros.id')
-                            ->join('permiso_lineas','micros.permiso_linea_id','=','permiso_lineas.id')
-                            ->join('lineas','permiso_lineas.linea_id','=','lineas.id')
-                            ->select('chofers.id','users.nombre','users.apellido','micros.nro_interno','lineas.nrolinea')
-                            ->get();
-        return view('ChoferTarjeta.create')->with(['tarjetas'=> $tarjetas, 'choferes'=> $choferes]);
+        $tarjetas = DB::table('tarjetas')->select('id')->groupBy('id')->orderBy('id', 'desc')->get();
+        $choferes = Chofer::join('users', 'chofers.user_id', '=', 'users.id')
+            ->join('chofer_micros', 'chofers.id', '=', 'chofer_micros.chofer_id')
+            ->join('micros', 'chofer_micros.micro_id', '=', 'micros.id')
+            ->join('permiso_lineas', 'micros.permiso_linea_id', '=', 'permiso_lineas.id')
+            ->join('lineas', 'permiso_lineas.linea_id', '=', 'lineas.id')
+            ->select('chofers.id', 'users.nombre', 'users.apellido', 'micros.nro_interno', 'lineas.nrolinea')
+            ->get();
+        return view('ChoferTarjeta.create')->with(['tarjetas' => $tarjetas, 'choferes' => $choferes]);
     }
     public function recorridosTarjeta($id)
     {
@@ -87,17 +87,17 @@ class ChoferTarjetaController extends Controller
         $ct = ChoferTarjeta::all()->find($id);
         $ct->activo = false;
         $ct->save();
-        
-        $chofertarjetas = ChoferTarjeta::join('chofers','chofer_tarjetas.chofer_id','=','chofers.id')
-                                ->join('users','chofers.user_id','=','users.id')
-                                ->join('chofer_micros','chofers.id','=','chofer_micros.chofer_id')
-                                ->join('micros','chofer_micros.micro_id','=','micros.id')
-                                ->join('permiso_lineas','micros.permiso_linea_id','=','permiso_lineas.id')
-                                ->join('lineas','permiso_lineas.linea_id','=','lineas.id')
-                                ->select('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.chofer_id','chofer_tarjetas.activo','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido','micros.nro_interno','lineas.nrolinea')
-                                ->groupBy('chofer_tarjetas.id','chofer_tarjetas.fecha','chofer_tarjetas.chofer_id','chofer_tarjetas.activo','chofer_tarjetas.tarjeta_id','users.nombre','users.apellido','micros.nro_interno','lineas.nrolinea')
-                                ->orderBy('chofer_tarjetas.id','asc')
-                                ->get();
+
+        $chofertarjetas = ChoferTarjeta::join('chofers', 'chofer_tarjetas.chofer_id', '=', 'chofers.id')
+            ->join('users', 'chofers.user_id', '=', 'users.id')
+            ->join('chofer_micros', 'chofers.id', '=', 'chofer_micros.chofer_id')
+            ->join('micros', 'chofer_micros.micro_id', '=', 'micros.id')
+            ->join('permiso_lineas', 'micros.permiso_linea_id', '=', 'permiso_lineas.id')
+            ->join('lineas', 'permiso_lineas.linea_id', '=', 'lineas.id')
+            ->select('chofer_tarjetas.id', 'chofer_tarjetas.fecha', 'chofer_tarjetas.chofer_id', 'chofer_tarjetas.activo', 'chofer_tarjetas.tarjeta_id', 'users.nombre', 'users.apellido', 'micros.nro_interno', 'lineas.nrolinea')
+            ->groupBy('chofer_tarjetas.id', 'chofer_tarjetas.fecha', 'chofer_tarjetas.chofer_id', 'chofer_tarjetas.activo', 'chofer_tarjetas.tarjeta_id', 'users.nombre', 'users.apellido', 'micros.nro_interno', 'lineas.nrolinea')
+            ->orderBy('chofer_tarjetas.id', 'asc')
+            ->get();
         //    $chofertarjetas = ChoferTarjeta::all();
         return view('ChoferTarjeta.index')->with('chofertarjetas', $chofertarjetas);
     }
@@ -120,7 +120,7 @@ class ChoferTarjetaController extends Controller
         $tarjeta = $chofertarjeta->tarjeta;
         foreach ($tarjeta->recorridoTarjetas as $recorrido) {
             ChoferTarjetaRecorrido::create([
-                'hora_finalizado' => '00:00:00',
+
                 'chofer_tarjeta_id' => $chofertarjeta->id,
                 'recorrido_tarjeta_id' => $recorrido->id
             ]);
@@ -149,24 +149,24 @@ class ChoferTarjetaController extends Controller
     public function edit($id)
     {
         $tarjetas = Tarjeta::all();
-        $choferes = Chofer::join('users','chofers.user_id','=','users.id')
-                            ->join('chofer_micros', 'chofers.id','=','chofer_micros.chofer_id')
-                            ->join('micros','chofer_micros.micro_id','=','micros.id')
-                            ->join('permiso_lineas','micros.permiso_linea_id','=','permiso_lineas.id')
-                            ->join('lineas','permiso_lineas.linea_id','=','lineas.id')
-                            ->select('chofers.id','users.nombre','users.apellido','micros.nro_interno','lineas.nrolinea')
-                            ->get();
+        $choferes = Chofer::join('users', 'chofers.user_id', '=', 'users.id')
+            ->join('chofer_micros', 'chofers.id', '=', 'chofer_micros.chofer_id')
+            ->join('micros', 'chofer_micros.micro_id', '=', 'micros.id')
+            ->join('permiso_lineas', 'micros.permiso_linea_id', '=', 'permiso_lineas.id')
+            ->join('lineas', 'permiso_lineas.linea_id', '=', 'lineas.id')
+            ->select('chofers.id', 'users.nombre', 'users.apellido', 'micros.nro_interno', 'lineas.nrolinea')
+            ->get();
         $chofertarjeta = ChoferTarjeta::find($id);
-        $nombres = Chofer::join('users','chofers.user_id','=','users.id')
-                            ->join('chofer_micros', 'chofers.id','=','chofer_micros.chofer_id')
-                            ->join('micros','chofer_micros.micro_id','=','micros.id')
-                            ->join('permiso_lineas','micros.permiso_linea_id','=','permiso_lineas.id')
-                            ->join('lineas','permiso_lineas.linea_id','=','lineas.id')
-                            ->select('chofers.id','users.nombre','users.apellido','micros.nro_interno','lineas.nrolinea')
-                            ->where('chofers.id', $chofertarjeta->chofer_id)
-                            ->get();
+        $nombres = Chofer::join('users', 'chofers.user_id', '=', 'users.id')
+            ->join('chofer_micros', 'chofers.id', '=', 'chofer_micros.chofer_id')
+            ->join('micros', 'chofer_micros.micro_id', '=', 'micros.id')
+            ->join('permiso_lineas', 'micros.permiso_linea_id', '=', 'permiso_lineas.id')
+            ->join('lineas', 'permiso_lineas.linea_id', '=', 'lineas.id')
+            ->select('chofers.id', 'users.nombre', 'users.apellido', 'micros.nro_interno', 'lineas.nrolinea')
+            ->where('chofers.id', $chofertarjeta->chofer_id)
+            ->get();
 
-        return view('ChoferTarjeta.edit')->with(['chofertarjeta'=> $chofertarjeta, 'tarjetas'=> $tarjetas, 'choferes'=> $choferes, 'nombres'=>$nombres]);
+        return view('ChoferTarjeta.edit')->with(['chofertarjeta' => $chofertarjeta, 'tarjetas' => $tarjetas, 'choferes' => $choferes, 'nombres' => $nombres]);
     }
 
     /**

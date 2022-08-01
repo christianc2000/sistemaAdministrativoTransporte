@@ -16,6 +16,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Fecha</th>
+                            <th>CI</th>
                             <th>Chofer</th>
                             <th style="text-align:center">Estado</th>
                             <th style="text-align:center">ID Tarjeta</th>
@@ -27,6 +28,7 @@
                         <tr>
                             <td>{{$chofertarjeta -> id}}</td>
                             <td>{{$chofertarjeta -> fecha}}</td>
+                            <td>{{$chofertarjeta-> ci}}</td>
                             <td>{{$chofertarjeta -> nombre}} {{$chofertarjeta -> apellido}} - Interno {{$chofertarjeta -> nro_interno}} - Linea {{$chofertarjeta -> nrolinea}}</td>
                             <td scope="col" style="text-align:center">
                                 @if ($chofertarjeta -> activo == 0)
