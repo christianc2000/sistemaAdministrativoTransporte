@@ -122,6 +122,6 @@ class RecorridoTarjetaController extends Controller
         $recorrido = RecorridoTarjeta::find($id);
         $recorrido->delete();
 
-        return redirect('/recorridos');
+        return redirect()->route('recorridos.index');
     }
 }
