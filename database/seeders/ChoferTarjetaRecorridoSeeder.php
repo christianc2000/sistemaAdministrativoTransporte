@@ -17,11 +17,12 @@ class ChoferTarjetaRecorridoSeeder extends Seeder
         $data = [
             //RECORRIDOS TARJETA 1
             [
-
+              //  'gps'=>'-17.80188,-63.18723',
                 'chofer_tarjeta_id' => 1,
                 'recorrido_tarjeta_id' => 1,
             ],
             [
+              //  'gps'=>'-17.73567,-63.1387',
                 'chofer_tarjeta_id' => 1,
                 'recorrido_tarjeta_id' => 2,
             ],

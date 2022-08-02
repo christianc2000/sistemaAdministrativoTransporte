@@ -27,6 +27,7 @@
                         <th scope="col">HORA PARTIDA</th>
                         <th scope="col">HORA LLEGADA</th>
                         <th scope="col">FINALIZADO</th>
+                        <th scope="col">GPS</th>
                         <th scope="col">ACCIONES</th>
                     </tr>
                 </thead>
@@ -41,15 +42,24 @@
                                     Ida
                                 @endif
                             </td>
-                            <td>{{ $ctr->recorridoTarjeta->hora_partida }}</td>
-                            <td scope="col" style="width: 250px">{{ $ctr->recorridoTarjeta->hora_llegada }}</td>
+                            <td scope="col" style="width: 100px">{{ $ctr->recorridoTarjeta->hora_partida }}</td>
+                            <td scope="col" style="width: 100px">{{ $ctr->recorridoTarjeta->hora_llegada }}</td>
                             <td>{{ $ctr->hora_finalizado }}</td>
+                            <td>{{ $ctr->gps }}</td>
                             <td>
                                 @if ($choferTarjeta->activo == true)
                                     @if ($ctr->hora_finalizado == null || $ctr->hora_finalizado == '00:00:00')
-                                        <button type="button" class="btn btn-primary btn-form" id="{{ $ctr }}"
-                                            data-bs-toggle="modal" data-bs-target="#modalFinalizar">
+                                        <button type="button" class="btn btn-primary btn-form m-sm-1"
+                                            id="{{ $ctr }}" data-bs-toggle="modal"
+                                            data-bs-target="#modalFinalizar">
                                             <span>Hora Finalizado</span>
+                                        </button>
+                                    @endif
+                                    @if ($ctr->gps != null)
+                                        <button type="button" class="btn btn-secondary btn-gps m-sm-1"
+                                            id="{{ $ctr->gps }}" data-bs-toggle="modal"
+                                            data-bs-target="#modalUbicacion">
+                                            <i class="fa-solid fa-location-dot"></i> <span> Ubicación</span>
                                         </button>
                                     @endif
                                 @endif
@@ -62,7 +72,7 @@
         <div class="card-footer">
             <div class="row">
                 <a href="{{ route('chofertarjetas.index') }}" class="col-2">
-                    <button type="button" class="btn btn-danger form-control " >Retroceder</button>
+                    <button type="button" class="btn btn-danger form-control ">Retroceder</button>
                 </a>
                 @if ($choferTarjeta->activo == true)
                     <form action="{{ route('admin.tarjetaFinalizar', $choferTarjeta->id) }}" class="col-sm-3"
@@ -123,6 +133,38 @@
             </div>
         </div>
     </div>
+    <!-- Modal GPS-->
+    <div class="modal fade" id="modalUbicacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ubicación Finalizado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+
+                        <div class="col-lg-12 mb-4">
+                            <div class="cat container-img"
+                                style="height: 100%;width: 100%; overflow: hidden; border: 3px solid; color: darkgrey">
+                                <div id="map" style="height:400px; width: 100%;" class="form-control rounded">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </div>
+            </div>
+        </div>
+
+        </form>
+    </div>
     <!-- Modal Tiempo-finalizado -->
     <div class="modal fade" id="modalFinalizar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -179,6 +221,14 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+
+    {{-- GPS --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
     <style>
         .container-img {
             display: flex;
@@ -205,7 +255,56 @@
         integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-    {{--  --}}
+    {{-- GPS --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl8DaopxOLYwyY0gJV2fUky4_X99ZFwJY&callback=initMap" async
+        defer></script>
+    <script>
+        let map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+
+                center: {
+                    lat: -17.7847635,
+                    lng: -63.1757515
+                },
+                center: {
+                    lat: {{ -17.7847635 }},
+                    lng: {{ -63.1757515 }}
+                },
+                zoom: 15,
+                scrollwheel: true,
+            });
+
+            /*google.maps.event.addListener(marker, 'position_changed',
+                function() {
+                    let lat = marker.position.lat()
+                    let lng = marker.position.lng()
+                    //$('#gps').val(lat + "," + lng)
+
+                })
+            google.maps.event.addListener(map, 'click',
+                function(event) {
+                    pos = event.latLng
+                    marker.setPosition(pos)
+                })*/
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -214,6 +313,36 @@
                     [5, 10, 50, -1],
                     [5, 10, 50, "Todo"]
                 ]
+            });
+            $(".btn-gps").on('click', function() {
+
+                ctr = $(this).attr('id');
+                console.log(ctr);
+                i = ctr.indexOf(',');
+
+                lati = parseFloat(ctr.substr(1, i));
+                console.log(lati);
+                longi = parseFloat(ctr.substr(i + 2, ctr.length));
+                console.log(longi);
+
+                const uluru = {
+                    lat: -lati,
+                    lng: -longi
+                };
+                map.setCenter(uluru);
+                var icon = {
+                    url: 'https://cdn-icons.flaticon.com/png/512/1048/premium/1048333.png?token=exp=1659403592~hmac=aa5236aa42736a10449787fe075299c1', // url
+                    scaledSize: new google.maps.Size(30, 30), // scaled size
+                    origin: new google.maps.Point(0, 0), // origin
+                    anchor: new google.maps.Point(0, 0) // anchor
+                };
+                let marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map,
+                    icon: icon,
+                    draggable: false,
+                    width: 20
+                });
             });
             $(".btn-form").on('click', function() {
                 ctr = $(this).attr('id');
