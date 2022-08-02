@@ -26,11 +26,6 @@ class TarjetaSeeder extends Seeder
             [],
             [],
             [],
-            [],
-            [],
-            [],
-            [],
-            [],
           ];
          foreach ($data as $d) {
             Tarjeta::create($d);
