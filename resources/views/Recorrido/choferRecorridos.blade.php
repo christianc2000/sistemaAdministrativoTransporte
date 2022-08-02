@@ -328,7 +328,7 @@
                 };
                 map.setCenter(uluru);
                 var icon = {
-                    url: 'http://ec2-18-228-190-183.sa-east-1.compute.amazonaws.com/lineas/1048333.png', // url
+                    url: 'http://ec2-18-228-190-183.sa-east-1.compute.amazonaws.com/iconAdmin/1048333.png', // url
                     scaledSize: new google.maps.Size(30, 30), // scaled size
                     origin: new google.maps.Point(0, 0), // origin
                     anchor: new google.maps.Point(0, 0) // anchor
