@@ -156,10 +156,7 @@
                     </div>
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Crear</button>
-                </div>
+
             </div>
         </div>
 
@@ -287,7 +284,7 @@
                     lat: {{ -17.7847635 }},
                     lng: {{ -63.1757515 }}
                 },
-                zoom: 15,
+                zoom: 18,
                 scrollwheel: true,
             });
 
