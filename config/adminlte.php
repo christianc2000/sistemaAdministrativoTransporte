@@ -304,7 +304,7 @@ return [
             'icon' => 'fas fa-solid fa-bus'
         ],
         [
-            'text' => 'Dueños',
+            'text' => 'Socios',
             'url'  => 'admin/duenio',
             'icon' => 'fas fa-solid fa-users',
         ],

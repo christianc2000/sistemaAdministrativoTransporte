@@ -6,53 +6,72 @@
 @stop
 
 @section('content')
-       <div class="card">
-            <div class="card-header"> 
-                <a href="chofertarjetas/create" class="btn btn-primary">Crear Registro</a>
-                <a href="tarjetas" class="btn btn-info">Ver Tarjetas</a> </div>
-            <div class="card-body">
-                <table id="chofertarjeta" class="table table-striped shadow-lg mt-4" style="width:100%">
-                    <thead>
+    <div class="card">
+        <div class="card-header">
+            <a href="chofertarjetas/create" class="btn btn-primary">Crear Registro</a>
+            <a href="tarjetas" class="btn btn-info">Ver Tarjetas</a>
+        </div>
+        <div class="card-body">
+            <table id="chofertarjeta" class="table table-striped shadow-lg mt-4" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>FECHA</th>
+                        <th>CI</th>
+                        <th>CHOFER</th>
+                        <th>LINEA</th>
+                        <th style="text-align:center">ESTADO</th>
+                        <th style="text-align:center">Tarjeta</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($chofertarjetas as $chofertarjeta)
                         <tr>
-                            <th>ID</th>
-                            <th>Fecha</th>
-                            <th>CI</th>
-                            <th>Chofer</th>
-                            <th style="text-align:center">Estado</th>
-                            <th style="text-align:center">ID Tarjeta</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($chofertarjetas as $chofertarjeta)
-                        <tr>
-                            <td>{{$chofertarjeta -> id}}</td>
-                            <td>{{$chofertarjeta -> fecha}}</td>
-                            <td>{{$chofertarjeta-> ci}}</td>
-                            <td>{{$chofertarjeta -> nombre}} {{$chofertarjeta -> apellido}} - Interno {{$chofertarjeta -> nro_interno}} - Linea {{$chofertarjeta -> nrolinea}}</td>
-                            <td scope="col" style="text-align:center">
-                                @if ($chofertarjeta -> activo == 0)
-                                        <div style="border-radius: 4em; background: rgb(224, 128, 128);">Inactivo</div>
-                                    @elseif ($chofertarjeta->activo == 1)   
-                                        <div style="border-radius: 4em; background: rgb(151, 245, 182);">Activo</div>
+                            <td>{{ $chofertarjeta->id }}</td>
+                            <td>{{ $chofertarjeta->fecha }}</td>
+                            <td>{{ $chofertarjeta->ci }}</td>
+                            <td style="width: 100px">{{ $chofertarjeta->nombre }} {{ $chofertarjeta->apellido }} - Interno
+                                {{ $chofertarjeta->nro_interno }}</td>
+                            <td>
+                                @if ($chofertarjeta->nrolinea == 91)
+                                    9
+                                @else
+                                    {{ $chofertarjeta->nrolinea }}
                                 @endif
                             </td>
-                            <td style="text-align:center">{{$chofertarjeta -> tarjeta_id}}</td>
-                            <td>
-                                <form action="{{route ('chofertarjetas.destroy', $chofertarjeta -> id)}}" method="POST">
-                                <a href="/admin/chofertarjetas/{{$chofertarjeta -> id}}/edit" class="btn btn-warning">Editar</a>
-                                <a href="{{route('admin.choferTarjetaRecorrido',$chofertarjeta->id)}}" class="btn btn-primary">Recorridos Tarjeta</a>
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-danger">Borrar</button>
+                            <td scope="col" style="text-align:center">
+                                @if ($chofertarjeta->activo == 0)
+                                    <div style="border-radius: 4em; background: rgb(224, 128, 128);">Inactivo</div>
+                                @elseif ($chofertarjeta->activo == 1)
+                                    <div style="border-radius: 4em; background: rgb(151, 245, 182);">Activo</div>
+                                @endif
+                            </td>
+                            <td style="text-align:center">{{ $chofertarjeta->tarjeta_id }}</td>
+                            <td style="width: 150px">
+                                <form action="{{ route('chofertarjetas.destroy', $chofertarjeta->id) }}" method="POST">
+                                    <div class="row col-12">
+                                        <div>
+                                            <a href="/admin/chofertarjetas/{{ $chofertarjeta->id }}/edit"
+                                                class="btn btn-warning" style="width: 100%;margin:2px">Editar</a>
+
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger" style="width: 100%;margin: 2px">Borrar</button>
+                                            <a href="{{ route('admin.choferTarjetaRecorrido', $chofertarjeta->id) }}"
+                                                class="btn btn-primary"  style="width: 100%;margin: 2px">Recorridos Tarjeta</a>
+                                        </div>
+                                    </div>
+            
+
                                 </form>
                             </td>
                         </tr>
                     @endforeach
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
+    </div>
 @stop
 @section('css')
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}

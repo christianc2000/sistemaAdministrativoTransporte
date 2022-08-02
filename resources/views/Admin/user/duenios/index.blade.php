@@ -3,13 +3,13 @@
 @section('title', 'Mostrar Linea')
 
 @section('content_header')
-    <h1>Dueños</h1>
+    <h1>Socios</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('admin.duenio.create') }}" class="btn btn-primary">Crear Dueño</a>
+            <a href="{{ route('admin.duenio.create') }}" class="btn btn-primary">Crear Socio</a>
         </div>
         <div class="card-body">
             <table id="tabla" class="table table-striped shadow-lg mt-4" style="width:100%">
@@ -76,7 +76,7 @@
                     <!--metodo para añadir token a un formulario-->
                     @method('delete')
                     <div class="modal-body">
-                        <h5> ¿Estás seguro de eliminar al dueño? </h5>
+                        <h5> ¿Estás seguro de eliminar al Socio? </h5>
                         <p id="parrafoModal"></p>
                     </div>
                     <div class="modal-footer">
@@ -183,7 +183,7 @@
                 vid=$(this).attr('name');
                 vid=JSON.parse(vid);
                 console.log(vid);
-                c='No se podrá recuperar nada del dueño con carnet '+vid['ci']+' y nombre '+vid['nombre']+" "+vid['apellido'];
+                c='No se podrá recuperar nada del Socio con carnet '+vid['ci']+' y nombre '+vid['nombre']+" "+vid['apellido'];
                 $('#parrafoModal').text(c);
                 $('#formulario').attr('action', "{{url('/admin/duenio')}}/"+vid['id']);
             });

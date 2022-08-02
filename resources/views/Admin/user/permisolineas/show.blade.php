@@ -33,7 +33,7 @@
                         @csrf
                         <div class="modal-body">
                             <div class="form-group row" style="margin-left: 5px">
-                                <label for="labelAporte" class="col-sm-2 col-form-label">Dueño</label>
+                                <label for="labelAporte" class="col-sm-2 col-form-label">Socio</label>
                                 <div class="col-sm-10">
                                     <select name="duenio_id" id="duenio_id" class="form-control">
                                         <option value="" selected disabled>Seleccionar</option>
@@ -71,7 +71,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">ACTIVO</th>
-                        <th scope="col">DUEÑO</th>
+                        <th scope="col">SOCIO</th>
                         <th scope="col">ACCIONES</th>
                     </tr>
                 </thead>
@@ -100,7 +100,7 @@
                                     <div class="row ">
                                         <a href="{{ route('admin.permiso.showOne', $pl->duenio->id) }}"
                                             class="btn btn-primary col-sm-6 mb-2"
-                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Ir a dueño</a>
+                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Ir a Socio</a>
 
                                         @csrf
                                         <!--metodo para añadir token a un formulario-->

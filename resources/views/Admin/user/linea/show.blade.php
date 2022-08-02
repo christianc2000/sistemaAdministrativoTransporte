@@ -3,7 +3,11 @@
 @section('title', 'Mostrar Linea')
 
 @section('content_header')
-    <h1>Dueños línea {{ $linea->nrolinea }}</h1>
+    <h1>Socios línea @if ($linea->nrolinea ==91)
+        9
+    @else
+    {{ $linea->nrolinea }}
+    @endif</h1>
 @stop
 
 @section('content')
@@ -32,7 +36,11 @@
                         <label for="labelLinea" class="col-sm-2 col-form-label">Linea</label>
                         <div class="col-sm-10">
                             <label for="linea" class="col-form-label"
-                                style="font-weight: normal">{{ $linea->nrolinea }}</label>
+                                style="font-weight: normal">@if ($linea->nrolinea ==91)
+                                9
+                            @else
+                            {{ $linea->nrolinea }}
+                            @endif</h1></label>
                         </div>
                     </div>
                     <div class="form-group row" style="margin-left: 5px">
@@ -50,7 +58,7 @@
                         </div>
                     </div>
                     <div class="form-group row" style="margin-left: 5px">
-                        <label for="labelduenio" class="col-sm-2 col-form-label">Dueños</label>
+                        <label for="labelduenio" class="col-sm-2 col-form-label">Socios</label>
                         <div class="col-sm-10">
                             <label for="duenio" class="col-form-label"
                                 style="font-weight: normal">{{ $duenios->count() }}</label>
@@ -61,7 +69,7 @@
                         <div class="col-sm-3" style="text-align: center">
                             <a href="{{ route('admin.duenio.create') }}">
                                 <button type="button" id="btn-duenio" class="button" style="background:#008085; ">
-                                    <span>Crear Dueño</span>
+                                    <span>Crear Socios</span>
                                 </button>
                             </a>
                         </div>
@@ -165,7 +173,7 @@
 
                             </div>
                             <div class="form-group row" style="margin-left: 5px">
-                                <label for="labelLinea" class="col-sm-2 col-form-label">Dueño</label>
+                                <label for="labelLinea" class="col-sm-2 col-form-label">Socios</label>
                                 <div class="col-sm-10">
                                     <input name="duenio_id" type="numeric" class="form-control" id="duenio_id"
                                         value="" readonly hidden>

@@ -3,7 +3,7 @@
 @section('title', 'Línea')
 
 @section('content_header')
-    <h1>LISTA DE PERMISOS DEL DUENIO </h1>
+    <h1>LISTA DE PERMISOS DEL SOCIO</h1>
     <h2>{{ $duenio->nombre }} {{ $duenio->apellido }} - Línea {{ $linea->nrolinea }}</h2>
 @stop
 
@@ -47,7 +47,7 @@
                         @csrf
                         <div class="modal-body">
                             <div class="form-group row" style="margin-left: 5px">
-                                <label for="labelLinea" class="col-sm-2 col-form-label">Duenio</label>
+                                <label for="labelLinea" class="col-sm-2 col-form-label">Socio</label>
                                 <div class="col-sm-10">
                                     <label for="labelDuenio" class="col-sm-12 col-form-label"
                                         style="font-weight: normal">{{ $duenio->nombre }}

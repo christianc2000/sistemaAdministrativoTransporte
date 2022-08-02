@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Dueños')
+@section('title', 'Socios')
 
 @section('content_header')
-    <h1>CREAR DUEÑO</h1>
+    <h1>CREAR Socio</h1>
 @stop
 
 @section('content')
@@ -27,7 +27,7 @@
                     <label for="inputNOMBRE" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
                         <input name="nombre" type="text" class="form-control" id="nombre"
-                            placeholder="Nombre del dueño" value="{{ old('nombre') }}">
+                            placeholder="Nombre del Socio" value="{{ old('nombre') }}">
                         @error('nombre')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -38,7 +38,7 @@
                     <label for="inputAPELLIDO" class="col-sm-2 col-form-label">Apellido</label>
                     <div class="col-sm-10">
                         <input name="apellido" type="text" class="form-control" id="apellido"
-                            placeholder="Apellido del dueño" value="{{ old('apellido') }}">
+                            placeholder="Apellido del Socio" value="{{ old('apellido') }}">
                         @error('apellido')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror

@@ -25,7 +25,11 @@
 
                     @foreach ($lineas as $linea)
                         <tr>
-                            <td scope="col" style="width:100px; font-weight: 900">{{ $linea->nrolinea }}</td>
+                            <td scope="col" style="width:100px; font-weight: 900">@if ($linea->nrolinea ==91)
+                                9
+                            @else
+                            {{ $linea->nrolinea }}
+                            @endif</td>
 
                             <td scope="col" style="width:200px">{{ $linea->sede }}</td>
                             <td scope="col" style="width: 250px"><img src="{{asset($linea->foto) }}" width="150" height="150" alt=""></td>

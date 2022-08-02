@@ -38,7 +38,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 75112550,
                 'email' => 'carlos@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer2.png'
             ],
             [/* linea 18 */
                 'ci' => '7979979',
@@ -49,7 +50,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 69508461,
                 'email' => 'cristianp@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer3.png'
             ],
             [/* linea 8 */
                 'ci' => '7547260',
@@ -60,7 +62,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 77095110,
                 'email' => 'efrain@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer4.png'
             ],
             [/* linea 16 */
                 'ci' => '7210778',
@@ -71,7 +74,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 70105561,
                 'email' => 'jose@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer5.png'
             ],
             [/* linea 5 */
                 'ci' => '9058074',
@@ -82,7 +86,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 70881451,
                 'email' => 'misael@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer6.png'
             ],
             [/* linea 16 */
                 'ci' => '9628204',
@@ -93,7 +98,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 60803310,
                 'email' => 'jhonatan@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer7.png'
             ],
             [/* linea 17 */
                 'ci' => '12599786',
@@ -104,7 +110,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 77354123,
                 'email' => 'julio@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer8.png'
             ],
             [/* linea 11 */
                 'ci' => '9034760',
@@ -115,7 +122,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 66111145,
                 'email' => 'roberto@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer9.png'                
             ],
             [/* linea 9 */
                 'ci' => '4693060',
@@ -126,7 +134,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1990-05-04',
                 'telefono' => 65913010,
                 'email' => 'felix@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer10.png'
             ],
             //linea 2
             [
@@ -138,7 +147,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1980-05-04',
                 'telefono' => 65913010,
                 'email' => 'felixpanduro@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer11.png'
             ],
             [/* linea 9 */
                 'ci' => '13354790',
@@ -149,7 +159,8 @@ class ChoferSeeder extends Seeder
                 'fecha_nac' => '1996-05-04',
                 'telefono' => 67237233,
                 'email' => 'juanito@gmail.com',
-                'tipo' => 'C'
+                'tipo' => 'C',
+                'foto' => 'chofer\chofer12.png'
             ],
         ];
         foreach ($data as $d) {
