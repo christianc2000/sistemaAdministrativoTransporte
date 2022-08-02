@@ -38,7 +38,7 @@
                                     <div class="row ">
                                         <a href="{{ route('admin.linea.show', $linea->id) }}"
                                             class="btn btn-primary col-sm-6 mb-2"
-                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Dueños</a>
+                                            style="background: #1A75F0;margin-left: 5px ; border:#1A75F0; width: 90px">Socios</a>
                                         <a href="{{ route('admin.permiso.show', $linea->id) }}"
                                             class="btn btn-primary col-sm-6 mb-2"
                                             style="background: #00D8C1;margin-left: 5px ;border:#00D8C1; width: 90px">Permisos</a>
